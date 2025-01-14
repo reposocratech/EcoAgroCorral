@@ -6,11 +6,10 @@ import logger from 'morgan';
 import {fileURLToPath} from 'url';
 import cors from 'cors';
 
+import userRouter from "./modules/user/user.routes.js";
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-
-//var indexRouter = require('./routes/index');
-//var usersRouter = require('./routes/users');
 
 const app = express();
 
@@ -22,7 +21,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // app.use('/', indexRouter);
-// app.use('/users', usersRouter);
+app.use('/user', userRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
