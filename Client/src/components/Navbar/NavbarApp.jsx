@@ -1,5 +1,5 @@
 
-export const Navbar = () => {
+export const NavbarApp = () => {
   return (
     <div>Navbar</div>
   )
