@@ -80,7 +80,7 @@ export const NavbarApp = () => {
                   <Button onClick={() => navigate("/register")}>
                     Register
                   </Button>
-                  <Button onClick={() => navigate("login")}>Login</Button>
+                  <Button className="btn" onClick={() => navigate("login")}>Login</Button>
                 </div>
               ) : (
                 <div>

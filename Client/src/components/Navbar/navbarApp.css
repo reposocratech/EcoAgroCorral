@@ -39,4 +39,11 @@
   .nav-link {
     margin-left: 1.5rem;
   }
+
+  @media(width <= 988px){
+    .btnLogin{
+      margin-right: 0;
+    }
+  }
+
 }
