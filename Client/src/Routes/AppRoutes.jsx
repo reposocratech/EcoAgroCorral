@@ -4,8 +4,10 @@ import { NavbarApp } from "../components/Navbar/NavbarApp";
 import { Footer } from "../components/Footer/Footer";
 import { AboutUs } from "../pages/Dashboard/AboutUs/AboutUs";
 
+
 export const AppRoutes = () => {
   return (
+
     <BrowserRouter>
       <header>
         <NavbarApp />
@@ -20,5 +22,6 @@ export const AppRoutes = () => {
         <Footer />
       </footer>
     </BrowserRouter>
+
   )
 }

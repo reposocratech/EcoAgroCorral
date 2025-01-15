@@ -1,9 +1,11 @@
+
 import { useContext } from "react";
 import { Navbar, Container, Nav, Button } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { AgroContext } from "../../context/ContextProvider";
 import "./navbarApp.css";
 import logoAgro from "../../../public/assets/images/navbar/LogoAgro.png";
+
 
 export const NavbarApp = () => {
   const { user, setUser, setToken } = useContext(AgroContext);
@@ -16,6 +18,7 @@ export const NavbarApp = () => {
   };
 
   return (
+
       <Navbar expand="lg" className="navbar">
         <Container fluid>
           <Navbar.Brand as={Link} to="/">
@@ -92,3 +95,4 @@ export const NavbarApp = () => {
       </Navbar>
   );
 };
+
