@@ -66,7 +66,7 @@ export const NavbarApp = () => {
               <Nav.Link as={Link} className="item" to="/sobreNosotros">
                 Sobre Nosotros
               </Nav.Link>
-              <Nav.Link as={Link} className="item" to="/">
+              <Nav.Link as={Link} className="item" to="/experiencias">
                 Experiencias rurales
               </Nav.Link>
               <Nav.Link as={Link} className="item" to="/">
