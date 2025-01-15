@@ -18,7 +18,9 @@
     font-family: "Merriweather", serif;
   }
 
-
+  .div-1{
+    height: 500px;
+  }
 
   /* Tamaños de pantalla para móviles (hasta 480px) */
   @media (max-width: 480px) {

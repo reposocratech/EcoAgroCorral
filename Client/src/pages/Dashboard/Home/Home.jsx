@@ -7,8 +7,12 @@ export const Home = () => {
         <Container fluid>
           <Row>
             <Col>
-              <h2 className="subtitulo">Agroturismo</h2>
-              <h1 className="titulo">ECOAGROCORRAL</h1>
+              <div className="div-1 d-flex flex-col justify-content-center align-items-center">
+                <div className="text-center g-1">
+                  <h2 className="subtitulo">Agroturismo</h2>
+                  <h1 className="titulo">ECOAGROCORRAL</h1>
+                </div>
+              </div>
             </Col>
           </Row>
         </Container>
