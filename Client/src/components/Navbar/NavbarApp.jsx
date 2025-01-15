@@ -19,7 +19,7 @@ export const NavbarApp = () => {
 
   return (
 
-      <Navbar expand="lg" className="navbar">
+      <Navbar expand="lg" className="navbar fixed-top">
         <Container fluid>
           <Navbar.Brand as={Link} to="/">
             <img src={logoAgro} alt="EcoAgroCorral" className="logo" />
