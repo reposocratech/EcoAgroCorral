@@ -1,3 +1,5 @@
 main{
-  min-height: calc(100vh - 333px);
+  min-height: calc(100vh - 399px);
+  margin-top: 66px;
+  background-color: rgb(255 252 241);
 }
