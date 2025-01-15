@@ -8,33 +8,17 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+
   height: 500px;
   color: white;
-  gap: 4rem;
-  .titulo {
-    font-size: 3rem;
-    font-weight: 700;
-    font-family: "Merriweather", serif;
-  }
+ 
   .titulo {
     font-size: 3rem;
     font-weight: 700;
     font-family: "Merriweather", serif;
   }
 
-  /* 
-@media (max-width: 768px) {
-    .titulo {
-        font-size: 2rem;
-    }
-    .subtitulo {
-        font-size: 1.75rem;
-    }
-} */
+
 
   /* Tamaños de pantalla para móviles (hasta 480px) */
   @media (max-width: 480px) {
@@ -132,10 +116,11 @@
 }
 
 .section-5 {
-  position: relative;
-  display: flex;
-  flex-direction: column; 
-  margin: 0;
+ 
+  .div-1{
+    position: relative;
+  }
+  
   margin-block: 4rem;
   .image-row {
     display: flex;
@@ -153,6 +138,7 @@
     height: 400px;
     object-fit: cover;
   }
+  
   .overlay {
     position: absolute;
     top: 0;
@@ -182,4 +168,10 @@
       font-family: 'Merriweather';
     }
   }
+}
+.flexDiv{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
 }

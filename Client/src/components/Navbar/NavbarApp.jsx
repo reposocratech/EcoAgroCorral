@@ -1,6 +1,7 @@
+import { Row, Col } from "react-bootstrap"
 
 export const NavbarApp = () => {
   return (
-    <div>Navbar</div>
+    <Row><Col>Navbar</Col></Row>
   )
 }

@@ -1,6 +1,7 @@
+import { Row,Col } from "react-bootstrap"
 
 export const Footer = () => {
   return (
-    <div>Footer</div>
+    <Row><Col>Footer</Col></Row>
   )
 }
