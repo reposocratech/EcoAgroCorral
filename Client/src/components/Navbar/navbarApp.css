@@ -1,11 +1,11 @@
-.navbar{
+.navbar {
   background-color: #f2ece2;
   font-weight: bold;
   box-shadow: 0 3px 8px rgb(0, 0, 0, 25%);
   color: black;
   overflow-x: hidden;
 
-  .logo{
+  .logo {
     height: 40px;
     width: auto;
   }
@@ -22,17 +22,17 @@
     border-top: 3px solid #3a1a1d;
   }
 
-  Button{
-    background-color: #3A1A1D;
+  Button {
+    background-color: #3a1a1d;
     border: none;
-    color: #F2ECE2;
+    color: #f2ece2;
     transition: background-color 0.3s ease, color 0.3s ease;
     margin-right: 1.5rem;
   }
 
   Button:hover {
-    background-color: #5A2A2D;
-    color: #FFFFFF;
+    background-color: #5a2a2d;
+    color: #ffffff;
   }
 
   .logo,
@@ -40,10 +40,15 @@
     margin-left: 1.5rem;
   }
 
-  @media(width <= 988px){
-    .btnLogin{
-      margin-right: 0;
+  @media (width <= 988px) {
+    Button {
+      .btnRegister{
+        margin-right: 1rem;
+      }
+
+      .btnLogin {
+        margin-right: 10rem;
+      }
     }
   }
-
 }
