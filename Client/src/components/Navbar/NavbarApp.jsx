@@ -16,7 +16,7 @@ export const NavbarApp = () => {
   };
 
   return (
-    <Row>
+    
       <Navbar expand="lg" className="navbar">
         <Container fluid>
           <Navbar.Brand as={Link} to="/">
@@ -91,6 +91,6 @@ export const NavbarApp = () => {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-    </Row>
+    
   );
 };
