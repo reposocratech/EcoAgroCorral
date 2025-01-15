@@ -16,7 +16,6 @@ export const NavbarApp = () => {
   };
 
   return (
-    <Row>
       <Navbar expand="lg" className="navbar">
         <Container fluid>
           <Navbar.Brand as={Link} to="/">
@@ -80,7 +79,7 @@ export const NavbarApp = () => {
                   <Button onClick={() => navigate("/register")}>
                     Register
                   </Button>
-                  <Button className="btn" onClick={() => navigate("login")}>Login</Button>
+                  <Button className="btnLogin" onClick={() => navigate("login")}>Login</Button>
                 </div>
               ) : (
                 <div>
@@ -91,6 +90,5 @@ export const NavbarApp = () => {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-    </Row>
   );
 };
