@@ -1,17 +1,43 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
+import {Container, Row} from "react-bootstrap";
+import { fetchData } from '../../../helpers/axiosHelper.js';
+import { ExperiencePresentationCard } from '../../../components/ExperiencePresentationCard/ExperiencePresentationCard.jsx';
 
 export const AllExperiences = () => {
   const [experiences, setExperiences] = useState([]);
+  
 
   useEffect(() => {
-    first
+    const getExperiences = async () => {
+      try {
+        const res = await fetchData("api/experience/getAllExperiences", "get");
+        console.log(res);
+        setExperiences(res);
+      } catch (error) {
+        console.log(error);
+      }
+    } 
   
-    return () => {
-      second
-    }
-  }, [third])
+    getExperiences();
+  }, []);
   
   return (
-    <div>AllExperiences</div>
+    <>
+      <section className='mt-2'>
+        <Container xxl className='pt-5'>
+         { experiences.map((elem, index) => {
+            return(
+              <Row
+                key={elem.experience_id}
+                className='mt-2'
+              >
+                <ExperiencePresentationCard experience={elem} index={index}/>
+              </Row>
+            )
+          }
+          )}
+        </Container>
+      </section>
+    </>
   )
 }
