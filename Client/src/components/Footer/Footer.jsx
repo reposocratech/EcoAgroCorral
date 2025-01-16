@@ -1,6 +1,6 @@
 
 import {Container, Row, Col} from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import whatsappIcon from "../../../public/assets/icons/whatsapp-icon.svg";
 import mailIcon from "../../../public/assets/icons/mail.svg";
 import facebookIcon from "../../../public/assets/icons/facebook.svg";
@@ -11,8 +11,6 @@ import logo from "../../../public/assets/images/LogoAgro.png";
 import "./footer.css";
 
 export const Footer = () => {
-  const navigate = useNavigate();
-
   return (
     <Container fluid className="footer-cont">
       <Row className="px-5 pt-5">
