@@ -3,7 +3,7 @@ import { Button, Container, Row, Col } from "react-bootstrap";
 export const Home = () => {
   return (
     <>
-      <section className="section-1">
+      <section className="section-1 mt">
         <Container fluid>
           <Row>
             <Col>

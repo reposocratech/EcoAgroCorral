@@ -8,6 +8,7 @@ import cors from 'cors';
 
 import userRouter from "./modules/user/user.routes.js";
 import experienceRouter from "./modules/experience/experience.routes.js";
+import hikeRouter from './modules/hike/hike.routes.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -23,7 +24,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // app.use('/', indexRouter);
 app.use('/api/user', userRouter);
+app.use('/api/hike', hikeRouter);
+
+
+
+
 app.use('/api/experience', experienceRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -38,7 +45,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.json({error: err.message});
 });
 
 export default app;
