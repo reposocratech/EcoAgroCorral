@@ -18,7 +18,7 @@ CREATE TABLE user (
 	user_is_disabled BOOLEAN NOT NULL DEFAULT 0
 );
 
-ALTER TABLE `ecoagrocorral`.`user` 
+ALTER TABLE `ecoagrocorral`.`user`
 ADD COLUMN `user_birthdate` DATE NOT NULL AFTER `user_is_disabled`;
 
 CREATE TABLE experience (
@@ -47,8 +47,6 @@ INSERT INTO experience (experience_title, experience_description, experience_pri
     30.00);
     
 SELECT * FROM experience;
-    
-
 
 CREATE TABLE experience_pictures (
 experience_pictures_id MEDIUMINT UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
