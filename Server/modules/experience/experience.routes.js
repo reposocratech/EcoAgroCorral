@@ -5,4 +5,6 @@ const router = express.Router();
 
 router.get("/getAllExperiences", experienceController.getAllExperiences);
 
+router.get("/getOneExperience/:id", experienceController.getOneExperience);
+
 export default router;
