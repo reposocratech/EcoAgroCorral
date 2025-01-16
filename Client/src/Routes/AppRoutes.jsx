@@ -7,6 +7,7 @@ import { AboutUs } from "../pages/Dashboard/AboutUs/AboutUs";
 import { Login } from "../pages/Auth/Login/Login";
 
 import { AllExperiences } from "../pages/Experiences/AllExperiences/AllExperiences";
+import { RecoverPassword } from "../pages/Auth/RecoverPassword/RecoverPassword";
 
 
 
@@ -21,11 +22,9 @@ export const AppRoutes = () => {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/sobreNosotros' element={<AboutUs />} />
-
-          <Route path='/login' element={<Login />} />
-
+          <Route path='/user/login' element={<Login />} />
+          <Route path='/user/recoverPassword' element={<RecoverPassword />} />
           <Route path='/experiencias' element={<AllExperiences />} />
-
         </Routes>
       </main>
       <footer>

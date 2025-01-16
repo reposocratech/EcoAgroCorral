@@ -24,3 +24,7 @@ export const loginSchema = z.object({
       "Contraseña no válida"
     ),
 });
+
+export const recoverPassSchema = z.object({
+  user_email: z.string().email("El email no es válido"),
+});
