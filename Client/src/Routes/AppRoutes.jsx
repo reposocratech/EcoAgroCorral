@@ -7,6 +7,7 @@ import { Login } from "../pages/Auth/Login/Login";
 import { AllExperiences } from "../pages/Experiences/AllExperiences/AllExperiences";
 import { Register } from "../pages/Auth/Register/Register";
 import { VerifyEmail } from "../pages/Auth/VerifyEmail/VerifyEmail";
+import { OneHike } from "../pages/Hikes/OneHike.jsx";
 
 
 
@@ -24,6 +25,7 @@ export const AppRoutes = () => {
           <Route path='/sobreNosotros' element={<AboutUs />} />
           <Route path='/login' element={<Login />} />
           <Route path='/experiencias' element={<AllExperiences />} />
+          <Route path="/paseo/:id" element={<OneHike/>}/>
           <Route path='/confirmarEmail/:token' element={<VerifyEmail/>}/>
         </Routes>
       </main>
