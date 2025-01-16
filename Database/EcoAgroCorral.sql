@@ -18,6 +18,9 @@ CREATE TABLE user (
 	user_is_disabled BOOLEAN NOT NULL DEFAULT 0
 );
 
+ALTER TABLE `ecoagrocorral`.`user` 
+ADD COLUMN `user_birthdate` DATE NOT NULL AFTER `user_is_disabled`;
+
 CREATE TABLE experience (
 	experience_id SMALLINT UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
 	experience_title VARCHAR (150) NOT NULL,
