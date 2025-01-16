@@ -1,6 +1,6 @@
 .pictures{
   .first-sec{
-    background-image: linear-gradient(rgba(0, 0, 0, 0.50), rgba(0, 0, 0, 0.50)), url('../../../../public/assets/images/about/fondo1.png');
+    background-image: linear-gradient(rgba(0, 0, 0, 0.50), rgba(0, 0, 0, 0.30)), url('../../../../public/assets/images/about/fondo1.png');
     background-position: center;
     background-size: cover;
     height: 45vh;
@@ -30,7 +30,7 @@
   }
   
   .agro{
-    background-image: linear-gradient(rgba(0, 0, 0, 0.50), rgba(0, 0, 0, 0.50)), url('../../../../public/assets/images/about/fondo2.jpeg');
+    background-image: linear-gradient(rgba(0, 0, 0, 0.50), rgba(0, 0, 0, 0.30)), url('../../../../public/assets/images/about/fondo2.jpeg');
     background-position: center;
     background-size: cover;
     height: 45vh;
@@ -50,7 +50,7 @@
   }
   
   .tree{
-    background-image: linear-gradient(rgba(0, 0, 0, 0.50), rgba(0, 0, 0, 0.50)), url('../../../../public/assets/images/about/fondo3.png');
+    background-image: linear-gradient(rgba(0, 0, 0, 0.50), rgba(0, 0, 0, 0.30)), url('../../../../public/assets/images/about/fondo3.png');
     background-position: center;
     background-size: cover;
     height: 45vh;
