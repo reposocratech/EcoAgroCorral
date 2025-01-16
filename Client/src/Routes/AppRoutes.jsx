@@ -4,6 +4,7 @@ import { NavbarApp } from "../components/Navbar/NavbarApp";
 import { Footer } from "../components/Footer/Footer";
 import { AboutUs } from "../pages/Dashboard/AboutUs/AboutUs";
 import { AllExperiences } from "../pages/Experiences/AllExperiences/AllExperiences";
+import { OneExperience } from "../pages/Experiences/OneExperience/OneExperience";
 
 
 export const AppRoutes = () => {
@@ -18,6 +19,7 @@ export const AppRoutes = () => {
           <Route path='/' element={<Home />} />
           <Route path='/sobreNosotros' element={<AboutUs />} />
           <Route path='/experiencias' element={<AllExperiences />} />
+          <Route path='/experiencias/:id' element={<OneExperience />} />
         </Routes>
       </main>
       <footer>

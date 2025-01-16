@@ -24,7 +24,7 @@ export const AllExperiences = () => {
   return (
     <>
       <section className='mt-2'>
-        <Container xxl className='pt-5'>
+        <Container xxl="true" className='pt-5'>
          { experiences.map((elem, index) => {
             return(
               <Row

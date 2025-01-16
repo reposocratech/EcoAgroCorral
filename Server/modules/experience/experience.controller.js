@@ -12,6 +12,17 @@ class ExperienceController {
       }
     }
 
+    getOneExperience = async (req, res) => {
+      const {id} = req.params;
+      try {
+        let response = await experienceDal.getOneExperience(id);
+        res.status(200).json(response);
+      } catch (error) {
+        console.log(error);
+        res.status(500).json(error);
+      }
+    }
+
 
 }
 
