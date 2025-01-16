@@ -1,4 +1,5 @@
 import { z } from "zod";
+
 export const registerSchema = z.object({
   user_email: z.string().email("El email no es válido"),
   user_password: z
