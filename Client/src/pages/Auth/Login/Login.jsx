@@ -6,7 +6,7 @@ import { fetchData } from '../../../helpers/axiosHelper'
 import { ZodError } from 'zod'
 import { loginSchema } from '../../../../schemas/registerSchema'
 import './login.css'
-import logo from '../../../../public/assets/images/LogoAgro.png'
+
 
 
 const initialValue = {
@@ -68,8 +68,8 @@ export const Login = () => {
       <Container xxl="true">
         <Row className='justify-content-center p-2'>
           <Col lg={4} md={6} className='d-flex flex-column login shadow my-5'>
-            <div className='divisor'></div>
-          <Form className="p-4 ">
+            <div className='divisor mt-4'></div>
+          <Form className="px-4 pt-4">
              <Form.Group className="mb-3" controlId="formBasicEmail">
                <Form.Label>Email </Form.Label>
                <Form.Control 
@@ -108,12 +108,12 @@ export const Login = () => {
                  Cancelar
                </Button>
              </div>
-
-             <p className='text-center pt-2'>No estás registrado?<Link to="/register" className='link'>Regístrate aquí</Link></p>
+              <p className='text-center pt-2'><Link to="/user/recoverPassword" className='link'>¿Olvidaste tu contraseña?</Link></p>
            </Form>
+           <div className='divisor mb-4'></div>
+             <p className='text-center'>¿No estás registrado?<Link to="/user/register" className='link'>Regístrate aquí</Link></p>
           </Col>
         </Row>
-
       </Container>
     </section>
     </>
