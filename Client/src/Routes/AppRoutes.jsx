@@ -3,11 +3,14 @@ import { Home } from "../pages/Dashboard/Home/Home";
 import { NavbarApp } from "../components/Navbar/NavbarApp";
 import { Footer } from "../components/Footer/Footer";
 import { AboutUs } from "../pages/Dashboard/AboutUs/AboutUs";
-
 import { Login } from "../pages/Auth/Login/Login";
-
 import { AllExperiences } from "../pages/Experiences/AllExperiences/AllExperiences";
+
 import { RecoverPassword } from "../pages/Auth/RecoverPassword/RecoverPassword";
+
+import { Register } from "../pages/Auth/Register/Register";
+import { VerifyEmail } from "../pages/Auth/VerifyEmail/VerifyEmail";
+
 
 
 
@@ -21,10 +24,16 @@ export const AppRoutes = () => {
       <main>
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/sobreNosotros' element={<AboutUs />} />
+          <Route path='/register' element={<Register/>} />
+
           <Route path='/user/login' element={<Login />} />
           <Route path='/user/recoverPassword' element={<RecoverPassword />} />
           <Route path='/experiencias' element={<AllExperiences />} />
+
+          <Route path='/login' element={<Login />} />
+          <Route path='/experiencias' element={<AllExperiences />} />
+          <Route path='/confirmarEmail/:token' element={<VerifyEmail/>}/>
+
         </Routes>
       </main>
       <footer>
