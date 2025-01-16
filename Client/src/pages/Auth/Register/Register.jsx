@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Row, Button, Col, Form } from "react-bootstrap";
+import { Row, Button, Col, Form, Container } from "react-bootstrap";
 import { fetchData } from "../../../helpers/axiosHelper.js";
 import { registerSchema } from "../../../schemas/registerSchema.js";
 import { ZodError } from "zod";
-import "./Register.css"
+import "./Register.css";
+import logoAgro from "../../../../public/assets/images/LogoAgro.png";
 
 const initialValue = {
   user_name: "",
@@ -20,17 +21,28 @@ const initialValue = {
 
 export const Register = () => {
   const [register, setRegister] = useState(initialValue);
+  const [day, setDay] = useState("");
+  const [month, setMonth] = useState("");
+  const [year, setYear] = useState("");
   const [msg, setMsg] = useState("");
-  const [valErrors, setValErrors] = useState({})
+  const [valErrors, setValErrors] = useState({});
   const navigate = useNavigate();
 
-  const validateField = (name, value) => {
-    try {
-      registerSchema.pick({ [name]: true }).parse({ [name]: value }); 
-      setValErrors({ ...valErrors, [name]: "" });
-    } 
-    catch (error) {
-      setValErrors({ ...valErrors, [name]: error.errors[0]?.message });
+ const validateField = (name, value) => {
+  try {
+    registerSchema.pick({ [name]: true }).parse({ [name]: value });
+    setValErrors({ ...valErrors, [name]: "" });
+  } catch (error) {
+    const errorMessage = error.errors?.[0]?.message;
+    setValErrors({ ...valErrors, [name]: errorMessage });
+  }
+};
+
+  const handleDateChange = () => {
+    if (day && month && year) {
+      const birthdate = `${year}-${month}-${day}`;
+      setRegister({ ...register, user_birthdate: birthdate });
+      validateField("user_birthdate", birthdate);
     }
   };
 
@@ -41,21 +53,24 @@ export const Register = () => {
   };
 
   const onSubmit = async () => {
+    console.log("onSubmit se ha ejecutado")
     try {
       registerSchema.parse(register);
+      console.log("Validación del schema exitosa");
 
       if (register.user_password !== register.repPassword) {
-        setValErrors({...valErrors,repPassword: "Las contraseñas deben coincidir"});
+        setValErrors({
+          ...valErrors,
+          repPassword: "Las contraseñas deben coincidir",
+        });
         return;
       }
-      console.log("***** DATOS VÁLIDOS *****");
 
       const res = await fetchData("api/user/register", "post", register);
-      console.log(res);
+      console.log("Respuesta del servidor:", res);
       navigate("/");
-
-    } 
-    catch (error) {
+    } catch (error) {
+      console.error("Error en onSubmit:", error);
       if (error instanceof ZodError) {
         const fieldErrors = {};
         error.errors.forEach((err) => {
@@ -66,7 +81,7 @@ export const Register = () => {
         console.error("Error en el servidor:", error);
       }
     }
-        
+
     if (
       !register.user_name ||
       !register.user_lastname ||
@@ -79,120 +94,208 @@ export const Register = () => {
       !register.repPassword
     ) {
       setMsg("No puede haber ningún campo vacío");
-
-    } 
-    else if (register.user_password !== register.repPassword) {
+    } else if (register.user_password !== register.repPassword) {
       setMsg("Las contraseñas deben coincidir");
-    } 
+    }
   };
 
   return (
-    <Row className="d-flex justify-content-center">
-      <Col md={5} lg={4}>
-        <Form>
-          <h2>Formulario de Registro</h2>
-          <Form.Group className="mb-3" controlId="formBasicName">
-            <Form.Label>Nombre</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Introduce tu nombre"
-              value={register.user_name}
-              onChange={handleChange}
-              name="user_name"
-            />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicLastname">
-            <Form.Label>Apellidos</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Introduce tu apellido"
-              value={register.user_lastname}
-              onChange={handleChange}
-              name="user_lastname"
-            />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicBirthday">
-            <Form.Label>Fecha de nacimiento</Form.Label>
-            <Form.Control
-              type="date"
-              placeholder="Introduce tu fecha de nacimiento"
-              value={register.user_birthdate}
-              onChange={handleChange}
-              name="user_birthdate"
-            />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Email</Form.Label>
-            <Form.Control
-              type="email"
-              placeholder="Introduce el email"
-              value={register.user_email}
-              onChange={handleChange}
-              name="user_email"
-            />
-          {valErrors.user_email && <p style={{ color: "red" }}>{valErrors.user_email}</p>}
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicAddress">
-            <Form.Label>Dirección</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Introduce la dirección"
-              value={register.user_address}
-              onChange={handleChange}
-              name="user_address"
-            />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicPhone">
-            <Form.Label>Número de teléfono</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Introduce tu teléfono"
-              value={register.user_phone}
-              onChange={handleChange}
-              name="user_phone"
-            />
-            {valErrors.user_phone && <p style={{ color: "red" }}>{valErrors.user_phone}</p>}
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicDni">
-            <Form.Label>NIF</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Introduce tu NIF"
-              value={register.user_dni}
-              onChange={handleChange}
-              name="user_dni"
-            />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label>Contraseña</Form.Label>
-            <Form.Control
-              type="password"
-              placeholder="Contraseña"
-              value={register.user_password}
-              onChange={handleChange}
-              name="user_password"
-            />
-            {valErrors.user_password && <p style={{color:"red"}} >{valErrors.user_password}</p>}
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicRepPassword">
-            <Form.Label>Repite contraseña</Form.Label>
-            <Form.Control
-              type="password"
-              placeholder="Repite contraseña"
-              value={register.repPassword}
-              onChange={handleChange}
-              name="repPassword"
-            />
-          </Form.Group>
-          <p style={{ color: "red" }}>{msg}</p>
-          <Button variant="primary" onClick={onSubmit}>
-            Registrar
-          </Button>
-          <Link to="/" className="ms-2">
-            ¿Ya tienes una cuenta?
-          </Link>
-        </Form>
-      </Col>
-    </Row>
+    <section>
+      <Container xxl="true">
+        <Row className="d-flex justify-content-center">
+          <Col
+            lg={4}
+            md={6}
+            className="d-flex flex-column shadow my-5 register"
+          >
+            <img src={logoAgro} alt="LogoAgro" className="mx-auto" />
+            <h2 className="text-center mt-2 fw-bold">CREA UNA CUENTA</h2>
+            <div className="separator"></div>
+            <Form className="px-4 pt-4">
+              <Form.Group className="mb-1">
+                <div className="d-flex gap-3">
+                  <Form.Control
+                    type="text"
+                    placeholder="Nombre"
+                    value={register.user_name}
+                    onChange={handleChange}
+                    name="user_name"
+                    id="formBasicName"
+                  />
+                  <Form.Control
+                    type="text"
+                    placeholder="Apellido"
+                    value={register.user_lastname}
+                    onChange={handleChange}
+                    name="user_lastname"
+                    id="formBasicLastname"
+                  />
+                </div>
+                <div className="d-flex justify-content-between">
+                  {valErrors.user_name && <span>{valErrors.user_name}</span>}
+                  {valErrors.user_lastname && (
+                    <span>{valErrors.user_lastname}</span>
+                  )}
+                </div>
+              </Form.Group>
+
+              <Form.Group className="mb-3">
+                <Form.Label>Fecha de nacimiento</Form.Label>
+                <div className="d-flex gap-2">
+                  <Form.Select
+                    value={day}
+                    onChange={(e) => {
+                      setDay(e.target.value);
+                      handleDateChange();
+                    }}
+                    id="formBasicDay"
+                  >
+                    <option value="">Día</option>
+                    {Array.from({ length: 31 }, (_, i) => (
+                      <option
+                        key={i + 1}
+                        value={String(i + 1).padStart(2, "0")}
+                      >
+                        {i + 1}
+                      </option>
+                    ))}
+                  </Form.Select>
+                  <Form.Select
+                    value={month}
+                    onChange={(e) => {
+                      setMonth(e.target.value);
+                      handleDateChange();
+                    }}
+                    id="formBasicMonth"
+                  >
+                    <option value="">Mes</option>
+                    {Array.from({ length: 12 }, (_, i) => (
+                      <option
+                        key={i + 1}
+                        value={String(i + 1).padStart(2, "0")}
+                      >
+                        {i + 1}
+                      </option>
+                    ))}
+                  </Form.Select>
+                  <Form.Select
+                    value={year}
+                    onChange={(e) => {
+                      setYear(e.target.value);
+                      handleDateChange();
+                    }}
+                    id="formBasicYear"
+                  >
+                    <option value="">Año</option>
+                    {Array.from({ length: 83 }, (_, i) => {
+                      const currentYear = new Date().getFullYear();
+                      const youngestYear = currentYear - 18;
+                      const oldestYear = currentYear - 100;
+                      return youngestYear - i >= oldestYear
+                        ? youngestYear - i
+                        : null;
+                    }).map(
+                      (year) =>
+                        year && (
+                          <option key={year} value={year}>
+                            {year}
+                          </option>
+                        )
+                    )}
+                  </Form.Select>
+                </div>
+                {valErrors.user_birthdate && (
+                  <span>{valErrors.user_birthdate}</span>
+                )}
+              </Form.Group>
+
+              <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Control
+                  type="email"
+                  placeholder="Introduce el email"
+                  value={register.user_email}
+                  onChange={handleChange}
+                  name="user_email"
+                />
+                {valErrors.user_email && <span>{valErrors.user_email}</span>}
+              </Form.Group>
+
+              <Form.Group className="mb-3" controlId="formBasicAddress">
+                <Form.Control
+                  type="text"
+                  placeholder="Introduce la dirección"
+                  value={register.user_address}
+                  onChange={handleChange}
+                  name="user_address"
+                />
+                {valErrors.user_address && (
+                  <span>{valErrors.user_address}</span>
+                )}
+              </Form.Group>
+
+              <Form.Group className="mb-3" controlId="formBasicPhone">
+                <Form.Control
+                  type="text"
+                  placeholder="Introduce tu teléfono"
+                  value={register.user_phone}
+                  onChange={handleChange}
+                  name="user_phone"
+                />
+                {valErrors.user_phone && <span>{valErrors.user_phone}</span>}
+              </Form.Group>
+
+              <Form.Group className="mb-3" controlId="formBasicDni">
+                <Form.Control
+                  type="text"
+                  placeholder="Introduce tu NIF"
+                  value={register.user_dni}
+                  onChange={handleChange}
+                  name="user_dni"
+                />
+                {valErrors.user_dni && <span>{valErrors.user_dni}</span>}
+              </Form.Group>
+
+              <Form.Group className="mb-3" controlId="formBasicPassword">
+                <Form.Control
+                  type="password"
+                  placeholder="Contraseña"
+                  value={register.user_password}
+                  onChange={handleChange}
+                  name="user_password"
+                />
+                {valErrors.user_password && (
+                  <span>{valErrors.user_password}</span>
+                )}
+              </Form.Group>
+
+              <Form.Group className="mb-3" controlId="formBasicRepPassword">
+                <Form.Control
+                  type="password"
+                  placeholder="Repite contraseña"
+                  value={register.repPassword}
+                  onChange={handleChange}
+                  name="repPassword"
+                />
+                {valErrors.repPassword && <span>{valErrors.repPassword}</span>}
+              </Form.Group>
+              <span>{msg}</span>
+              <div className="p-2 d-flex justify-content-center">
+                <Button className="btn mb-3" onClick={onSubmit}>
+                  Registrar
+                </Button>
+              </div>
+            </Form>
+
+            <div className="separator mb-4"></div>
+            <p className="text-center pt-2 mb-4">
+              ¿Ya tienes una cuenta?
+              <Link to="/user/login" className="ms-2 link">
+                Logueate aquí
+              </Link>
+            </p>
+          </Col>
+        </Row>
+      </Container>
+    </section>
   );
 };

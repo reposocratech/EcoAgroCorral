@@ -8,6 +8,7 @@ const router = express.Router();
 
 router.post('/register', userController.register);
 router.get('/confirmarEmail/:emailToken', userController.verifyEmail);
+router.post('/resendVerification', userController.resendVerification);
 router.get('/verificar/:token', userController.confirmEmail)
 router.post('/login', userController.login);
 router.get('/findUserById',tokenVerify, userController.findUserById)
