@@ -10,7 +10,7 @@ export const VerifyEmail = () => {
   useEffect(() => {
     const confirmEmail = async () => {
       try {
-        const res = await fetchData(`user/verificar/${token}`, "get");
+        const res = await fetchData(`api/user/verificar/${token}`, "get");
         setMessage(res.msg);
         setVerEmail(true);
         
