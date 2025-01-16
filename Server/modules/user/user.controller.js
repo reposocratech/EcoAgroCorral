@@ -102,7 +102,7 @@ class UserController {
     const {user_email, user_password} = req.body;
     
     try {
-      const result = await userDal.findUserByEmail(user_email);
+      const result = await UserDal.findUserByEmail(user_email);
       if(result.length === 0){
         res.status(401).json({message:"El usuario no existe"});
       }else{
@@ -118,14 +118,15 @@ class UserController {
         }
       }
     } catch (error) {
-      res.status(500).json({message:"Error de server"});
+      res.status(500).json({message:"Error de server controller"});
     }
+  }
 
   findUserById = async (req,res) =>{
     const user_id = getIdFromToken(req.token)
 
     try {
-      const resultUser = await userDal.getUserById(user_id);
+      const resultUser = await UserDal.getUserById(user_id);
       res.status(200).json(resultUser[0])
     } catch (error) {
       res.status(500).json({message:"Error de server"});

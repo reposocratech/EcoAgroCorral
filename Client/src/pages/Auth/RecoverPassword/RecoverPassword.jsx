@@ -27,8 +27,8 @@ export const RecoverPassword = () => {
      validateField(name, value); 
   }
 
-  const onSubmit = ()=>{
-
+  const onSubmit = async ()=>{
+    
   }
 
   return (
