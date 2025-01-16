@@ -10,6 +10,7 @@ import { RecoverPassword } from "../pages/Auth/RecoverPassword/RecoverPassword";
 
 import { Register } from "../pages/Auth/Register/Register";
 import { VerifyEmail } from "../pages/Auth/VerifyEmail/VerifyEmail";
+import { OneHike } from "../pages/Hikes/OneHike.jsx";
 
 
 
@@ -32,6 +33,7 @@ export const AppRoutes = () => {
 
           <Route path='/login' element={<Login />} />
           <Route path='/experiencias' element={<AllExperiences />} />
+          <Route path="/paseo/:id" element={<OneHike/>}/>
           <Route path='/confirmarEmail/:token' element={<VerifyEmail/>}/>
 
         </Routes>
