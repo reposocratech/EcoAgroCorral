@@ -50,7 +50,7 @@ export const Register = () => {
       }
       console.log("***** DATOS VÁLIDOS *****");
 
-      const res = await fetchData("user/register", "post", register);
+      const res = await fetchData("api/user/register", "post", register);
       console.log(res);
       navigate("/");
 
