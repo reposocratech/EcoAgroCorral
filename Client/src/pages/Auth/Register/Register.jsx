@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Row, Button, Col, Form, Container } from "react-bootstrap";
 import { fetchData } from "../../../helpers/axiosHelper.js";
@@ -28,23 +28,30 @@ export const Register = () => {
   const [valErrors, setValErrors] = useState({});
   const navigate = useNavigate();
 
- const validateField = (name, value) => {
-  try {
-    registerSchema.pick({ [name]: true }).parse({ [name]: value });
-    setValErrors({ ...valErrors, [name]: "" });
-  } catch (error) {
-    const errorMessage = error.errors?.[0]?.message;
-    setValErrors({ ...valErrors, [name]: errorMessage });
-  }
-};
+  const validateField = (name, value) => {
+    try {
+      registerSchema.pick({ [name]: true }).parse({ [name]: value });
+      setValErrors({ ...valErrors, [name]: "" });
+    } catch (error) {
+      const errorMessage = error.errors?.[0]?.message;
+      setValErrors({ ...valErrors, [name]: errorMessage });
+    }
+  };
 
   const handleDateChange = () => {
     if (day && month && year) {
-      const birthdate = `${year}-${month}-${day}`;
-      setRegister({ ...register, user_birthdate: birthdate });
+      const formattedDay = String(day).padStart(2, "0");
+      const formattedMonth = String(month).padStart(2, "0");
+      const birthdate = `${year}-${formattedMonth}-${formattedDay}`;
+      console.log("Fecha construida:", birthdate);
+      setRegister((prev) => ({ ...prev, user_birthdate: birthdate }));
       validateField("user_birthdate", birthdate);
     }
   };
+
+  useEffect(() => {
+    handleDateChange();
+  }, [day, month, year]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -53,10 +60,10 @@ export const Register = () => {
   };
 
   const onSubmit = async () => {
-    console.log("onSubmit se ha ejecutado")
+    console.log("Fecha de nacimiento:", register.user_birthdate);
     try {
       registerSchema.parse(register);
-      console.log("Validación del schema exitosa");
+      console.log("Pasa por el parseo de schema");
 
       if (register.user_password !== register.repPassword) {
         setValErrors({
@@ -146,7 +153,7 @@ export const Register = () => {
                     value={day}
                     onChange={(e) => {
                       setDay(e.target.value);
-                      handleDateChange();
+                      console.log("Día:", e.target.value);
                     }}
                     id="formBasicDay"
                   >
@@ -160,11 +167,12 @@ export const Register = () => {
                       </option>
                     ))}
                   </Form.Select>
+
                   <Form.Select
                     value={month}
                     onChange={(e) => {
                       setMonth(e.target.value);
-                      handleDateChange();
+                      console.log("Mes:", e.target.value);
                     }}
                     id="formBasicMonth"
                   >
@@ -178,21 +186,22 @@ export const Register = () => {
                       </option>
                     ))}
                   </Form.Select>
+
                   <Form.Select
                     value={year}
                     onChange={(e) => {
                       setYear(e.target.value);
-                      handleDateChange();
+                      console.log("Año:", e.target.value);
                     }}
                     id="formBasicYear"
                   >
                     <option value="">Año</option>
                     {Array.from({ length: 83 }, (_, i) => {
-                      const currentYear = new Date().getFullYear();
-                      const youngestYear = currentYear - 18;
-                      const oldestYear = currentYear - 100;
-                      return youngestYear - i >= oldestYear
-                        ? youngestYear - i
+                      const actualYear = new Date().getFullYear();
+                      const menorEdad = actualYear - 18;
+                      const maxYear = actualYear - 100;
+                      return menorEdad - i >= maxYear
+                        ? menorEdad - i
                         : null;
                     }).map(
                       (year) =>
