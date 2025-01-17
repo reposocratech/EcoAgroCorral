@@ -13,6 +13,7 @@ import { Register } from "../pages/Auth/Register/Register";
 import { VerifyEmail } from "../pages/Auth/VerifyEmail/VerifyEmail";
 import { OneHike } from "../pages/Hikes/OneHike.jsx";
 import { ChangePassword } from "../pages/Auth/RecoverPassword/ChangePassword.jsx";
+import { Profile } from "../pages/User/Profile/Profile.jsx";
 
 
 
@@ -27,8 +28,11 @@ export const AppRoutes = () => {
       <main>
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/user/register' element={<Register/>} />
-
+          <Route path='/sobreNosotros' element={<AboutUs />} />
+          
+          <Route path='/user/perfil' element={<Profile />} />
+         
+         <Route path='/user/register' element={<Register/>} />
           <Route path='/user/login' element={<Login />} />
           <Route path='/user/recoverPassword' element={<RecoverPassword />} />
           <Route path='/user/restablecerPass/:token' element={<ChangePassword />} />
