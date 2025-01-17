@@ -17,13 +17,15 @@ export const Footer = () => {
         <Col md={4} className="px-5">
           <div className="d-flex flex-column align-items-center div-height">
             <p>Contactanos:</p>
-            <div className="d-flex gap-2 align-items-end">
-              <img className="icon-size" src={whatsappIcon} alt="Icon of Whatsapp" />
-              <p>+34 644 80 30 31</p>
-            </div>
-            <div className="d-flex gap-2 align-items-end">
-              <img className="icon-size" src={mailIcon} alt="Email icon" />
-              <p>+34 644 80 30 31</p>
+            <div className="d-flex flex-column">
+              <div className="d-flex gap-2 align-items-end">
+                <img className="icon-size" src={whatsappIcon} alt="Icon of Whatsapp" />
+                <p>+34 644 80 30 31</p>
+              </div>
+              <div className="d-flex gap-2 align-items-end">
+                <img className="icon-size" src={mailIcon} alt="Email icon" />
+                <p>ecoagrocorral@gmail.com</p>
+              </div>
             </div>
           </div>
         </Col>

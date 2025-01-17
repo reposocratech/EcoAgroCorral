@@ -23,8 +23,8 @@ export const AllExperiences = () => {
   
   return (
     <>
-      <section className='mt-2'>
-        <Container xxl="true" className='pt-5'>
+      <section>
+        <Container xxl="true">
          { experiences.map((elem, index) => {
             return(
               <Row
