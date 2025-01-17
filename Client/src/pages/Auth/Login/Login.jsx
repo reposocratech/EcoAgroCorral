@@ -48,7 +48,7 @@ export const Login = () => {
 
       setUser(userResult);
       setToken(token);
-      navigate('/');
+      navigate('/user/perfil');
     } catch (error) {
       const fieldErrors = {};
       if(error instanceof ZodError){
@@ -111,7 +111,7 @@ export const Login = () => {
               <p className='text-center pt-2'><Link to="/user/recoverPassword" className='link'>¿Olvidaste tu contraseña?</Link></p>
            </Form>
            <div className='divisor mb-4'></div>
-             <p className='text-center'>¿No estás registrado?<Link to="/user/register" className='link'>Regístrate aquí</Link></p>
+             <p className='text-center'>¿No estás registrado?<Link to="/user/register" className='link ms-2'>Regístrate aquí</Link></p>
           </Col>
         </Row>
       </Container>
