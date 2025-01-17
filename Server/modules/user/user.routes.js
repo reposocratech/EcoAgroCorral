@@ -15,6 +15,10 @@ router.get('/findUserById',tokenVerify, userController.findUserById)
 router.post('/recoverPassword', userController.recoverPass)
 router.get('/confirm/:token', userController.confirmToken)
 router.put('/changePassword/:user_id',userController.changePassword)
+
+router.get('/getReservations/:user_id', userController.getReservations)
+
 router.put('/editUser', multerSingle("users"), userController.editUser);
+
 
 export default router;
