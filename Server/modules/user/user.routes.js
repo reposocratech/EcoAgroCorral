@@ -12,5 +12,8 @@ router.post('/resendVerification', userController.resendVerification);
 router.get('/verificar/:token', userController.confirmEmail)
 router.post('/login', userController.login);
 router.get('/findUserById',tokenVerify, userController.findUserById)
+router.post('/recoverPassword', userController.recoverPass)
+router.get('/confirm/:token', userController.confirmToken)
+router.put('/changePassword/:user_id',userController.changePassword)
 
 export default router;

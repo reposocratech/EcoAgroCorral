@@ -44,6 +44,21 @@ class UserDal {
       throw error;
     }
   }
+
+  changePassword = async (hash, user_id)=>{
+    console.log("passss new", hash);
+    
+    try {
+      let sql = 'UPDATE user SET user_password = ? WHERE user_id = ? AND user_is_deleted = 0 AND user_is_disabled = 0 AND user_is_verified = 1';
+      const result = await executeQuery(sql, [hash, user_id]);
+      return result;
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+    
+    
+  }
 }
 
 export default new UserDal();
