@@ -67,6 +67,31 @@ CONSTRAINT fk_experience_2 FOREIGN KEY (feature_experience_id)
 	REFERENCES experience(experience_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
+UPDATE feature
+SET feature_icon = "heart.png"
+WHERE feature_id = 3;
+
+UPDATE feature
+SET feature_icon = "heart.png"
+WHERE feature_id = 7;
+
+UPDATE feature
+SET feature_icon = "heart.png"
+WHERE feature_id = 11;
+
+UPDATE feature
+SET feature_icon = "hat.png"
+WHERE feature_id = 1;
+
+UPDATE feature
+SET feature_icon = "hat.png"
+WHERE feature_id = 5;
+
+UPDATE feature
+SET feature_icon = "hat.png"
+WHERE feature_id = 10;
+
+
 INSERT INTO feature (feature_experience_id, feature_name, feature_description) VALUES
 	(1, "Cultura y tradición", "Aprende sobre las tradiciones y la historia de los pastores de ovejas, valorando la rica herencia de la cultura rural"),
     (1, "Gastronomía", "Disfruta de productos frescos y caseros, elaborados de forma casera, recién hecha con ingredientes de alta calidad, de proximidad, km 0 Recetas de nuestras abuelas recuperadas. Nuestras magdalenas, tortas de tajadas y longanizas,..."),
@@ -93,9 +118,14 @@ hike_is_deleted BOOLEAN NOT NULL DEFAULT 0
 );
 
 ALTER TABLE `ecoagrocorral`.`hike` 
+CHANGE COLUMN `hike_intinerary` `hike_itinerary` TEXT NOT NULL ;
+
+ALTER TABLE `ecoagrocorral`.`hike` 
 ADD COLUMN `hike_title` VARCHAR(100) NOT NULL AFTER `hike_is_deleted`;
 
-INSERT INTO hike (hike_title, hike_description, hike_distance, hike_duration, hike_intinerary) VALUES 
+select * from hike;
+
+INSERT INTO hike (hike_title, hike_description, hike_distance, hike_duration, hike_itinerary) VALUES 
 	("Corral del Cura",
     "Corral que perteneció a nuestra familia. Nuestros abuelos eran pastores de ovejas, sin relevo generacional, dejaron sus huellas en los corrales. Edificaciones de gran valor etnográfico, construidas con materiales nobles como piedra, madera y cañizo. Situado en medio del altiplano de Barracas, paraje de gran belleza rodeado de campos de cereal.",
     10.5,
@@ -337,14 +367,3 @@ CREATE TABLE post_picture (
 	CONSTRAINT fk_post_1 FOREIGN KEY (post_picture_post_id)
 		REFERENCES post(post_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
-
-
-SELECT experience.experience_id, experience.experience_title, experience.experience_description, experience_pictures.experience_pictures_file,
-		hike_experience.hike_id,
-		hike.hike_id, hike.hike_title, hike.hike_description, hike.hike_distance, hike.hike_duration, hike.hike_intinerary, hike_pictures.hike_pictures_file
-FROM experience 
-	LEFT JOIN experience_pictures ON experience_pictures.experience_pictures_experience_id = experience.experience_id
-    LEFT JOIN hike_experience ON hike_experience.experience_id = experience.experience_id
-	LEFT JOIN hike ON hike.hike_id = hike_experience.hike_id AND hike.hike_is_deleted = 0
-    LEFT JOIN hike_pictures ON hike.hike_id = hike_pictures.hike_pictures_hike_id AND hike_pictures.is_main = 1
-WHERE experience.experience_is_deleted = 0 and experience.experience_id = 1;

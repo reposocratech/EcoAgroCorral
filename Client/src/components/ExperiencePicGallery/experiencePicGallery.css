@@ -1,0 +1,19 @@
+.pic-gallery{
+  padding-block: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.pic-cols{
+  padding: 0.5rem;
+  
+  img{
+    border-radius: 20px;
+    width: 100%;
+  }
+
+  &:hover{
+    padding: 0;
+  }
+}

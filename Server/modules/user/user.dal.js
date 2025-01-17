@@ -78,9 +78,43 @@ class UserDal {
     } catch (error) {
       console.log(error);
       throw error;
+
     }
 
+    }  
+
   }
+
+  editUser = async (data, file) => {
+    const { user_name, user_lastname, user_address, user_phone, user_birthdate, user_id } = data;
+    
+    console.log("Datos para actualizar en el DAL:", { user_name, user_lastname, user_address, user_phone, user_birthdate, user_id });
+
+    try {
+        let sql = `
+            UPDATE user 
+            SET user_name = ?, user_lastname = ?, user_address = ?, user_phone = ?, user_birthdate = ?
+            WHERE user_id = ?
+        `;
+        let values = [user_name, user_lastname, user_address, user_phone, user_birthdate, user_id];
+
+        if (file) {
+            sql = `
+                UPDATE user 
+                SET user_name = ?, user_lastname = ?, user_address = ?, user_phone = ?, user_birthdate = ?, user_avatar = ?
+                WHERE user_id = ?
+            `;
+            values = [user_name, user_lastname, user_address, user_phone, user_birthdate, file.filename, user_id];
+        }
+
+        const result = await executeQuery(sql, values);
+        console.log("Resultado de la consulta en DAL:", result);
+        return result;
+    } catch (error) {
+        console.error("Error en el DAL editUser:", error);
+        throw error;
+    }
+  };  
 }
 
 export default new UserDal();
