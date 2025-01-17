@@ -6,13 +6,12 @@ import { AboutUs } from "../pages/Dashboard/AboutUs/AboutUs";
 import { Login } from "../pages/Auth/Login/Login";
 import { AllExperiences } from "../pages/Experiences/AllExperiences/AllExperiences";
 import { OneExperience } from "../pages/Experiences/OneExperience/OneExperience";
-
 import { RecoverPassword } from "../pages/Auth/RecoverPassword/RecoverPassword";
-
 import { Register } from "../pages/Auth/Register/Register";
 import { VerifyEmail } from "../pages/Auth/VerifyEmail/VerifyEmail";
 import { OneHike } from "../pages/Hikes/OneHike.jsx";
 import { ChangePassword } from "../pages/Auth/RecoverPassword/ChangePassword.jsx";
+import { EditUser } from "../pages/User/EditUser/EditUser.jsx";
 
 
 
@@ -28,17 +27,15 @@ export const AppRoutes = () => {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/user/register' element={<Register/>} />
-
           <Route path='/user/login' element={<Login />} />
           <Route path='/user/recoverPassword' element={<RecoverPassword />} />
           <Route path='/user/restablecerPass/:token' element={<ChangePassword />} />
-
-          <Route path='/experiencias' element={<AllExperiences />} />
-
+          <Route path='/sobreNosotros' element={<AboutUs />} />
           <Route path='/experiencias' element={<AllExperiences />} />
           <Route path='/experiencias/:id' element={<OneExperience />} />
           <Route path="/paseo/:id" element={<OneHike/>}/>
           <Route path='/confirmarEmail/:token' element={<VerifyEmail/>}/>
+          <Route path='/user/perfil/editUser' element={<EditUser/>}/>
         </Routes>
       </main>
       <footer>
