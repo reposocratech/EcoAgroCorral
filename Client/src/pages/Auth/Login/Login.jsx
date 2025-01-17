@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { AgroContext } from '../../../context/ContextProvider'
 import { fetchData } from '../../../helpers/axiosHelper'
 import { ZodError } from 'zod'
-import { loginSchema } from '../../../../schemas/registerSchema'
+import { loginSchema } from '../../../schemas/loginSchema.js'
 import './login.css'
 
 
@@ -57,7 +57,7 @@ export const Login = () => {
           })
           setValErrors(fieldErrors)      
       }else{
-        setMsg(error.response.data.message)
+         setMsg(error.response.data.message)
       }
     }
   }

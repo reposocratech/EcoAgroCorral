@@ -132,6 +132,70 @@ class UserController {
       res.status(500).json({message:"Error de server"});
     }
   }
+
+  recoverPass = async (req,res) =>{
+    const {user_email} = req.body;
+    try {
+      if(!user_email){
+        res.status(401).json({message:"Debe cumplimentar el campo"});
+      }else{
+        const userResult = await UserDal.findUserByEmail(user_email);
+        if(userResult.length === 0){
+          res.status(401).json({message:"El usuario no existe"});
+        } else{
+          const emailToken = jwt.sign({user_email}, process.env.TOKEN_KEY, {expiresIn: "1h"})
+          sendMail(
+            user_email, 
+            "Cambia tu contraseña",
+            `Hola ${userResult[0].user_name}, puedes restablecer tu contraseña a traves del siguiente enlace: ${process.env.URLFRONT}/user/restablecerPass/${emailToken}`
+          )
+          res.status(200).json({ message: "Email enviado" });
+        }
+      }
+    } catch (error) {
+      res.status(500).json({message:"Error de server recoverPass"});
+    }
+  }
+
+  confirmToken = async (req, res) =>{
+    const { token } = req.params;
+    try {
+      const decode = jwt.verify(token, process.env.TOKEN_KEY);
+      const user_email = decode.user_email;
+      const user = await UserDal.findUserByEmail(user_email);
+      if (user.length === 0) {
+        return res.status(400).json({ message: "Usuario no encontrado o no válido" });
+      }
+      res.status(200).json(user)
+    } catch (error) {
+      res.status(400).json({ message: "Token inválido o expirado" });
+    }
+    
+  }
+
+  changePassword = async (req, res) =>{
+    const {user_id} = req.params;
+    const {user_password, user_repPassword} = req.body;
+    try {
+      if(!user_password || !user_repPassword){
+        res.status(401).json({message:"Debe cumplimentar todos los campos"});
+      }else if (user_password !== user_repPassword){
+        res.status(401).json({message:"Las contraseñas no coinciden"});
+      }else{
+        const hash = await hashPassword(user_password);
+        const result = await UserDal.changePassword(hash, user_id);
+        if (result.changedRows == 0){
+          res.status(401).json({message:"Usuario no válido"});
+        }else{
+          res.status(200).json({ message: "Su contraseña fue restablecida"});
+        }
+      }
+      
+    } catch (error) {
+      res.status(500).json({message:"Error de server al intentar guardar la contraseña"});
+    }
+    
+  }
 }
 
 export default new UserController();
