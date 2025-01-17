@@ -132,6 +132,36 @@ class UserController {
       res.status(500).json({message:"Error de server"});
     }
   }
+
+  resendVerification = async (req, res) => {
+    const { user_email } = req.body;
+  
+    try {
+      const user = await UserDal.findUserByEmail(user_email);
+  
+      if (user.length === 0) {
+        return res.status(400).json({ msg: "Usuario no encontrado" });
+      }
+  
+      if (user[0].user_is_verified) {
+        return res.status(400).json({ msg: "El usuario ya está verificado" });
+      }
+  
+      const emailToken = jwt.sign({ user_email }, process.env.TOKEN_KEY, { expiresIn: "1h" });
+  
+      sendMail(
+        user_email,
+        "Reenvío de verificación",
+        `Hola, haz clic en el siguiente enlace para verificar tu cuenta: ${process.env.URLFRONT}/confirmarEmail/${emailToken}`
+      );
+  
+      res.status(200).json({ msg: "Se ha enviado un nuevo correo de verificación" });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ msg: "Error al reenviar la verificación" });
+    }
+  };
+  
 }
 
 export default new UserController();

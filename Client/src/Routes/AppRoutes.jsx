@@ -32,7 +32,6 @@ export const AppRoutes = () => {
           <Route path='/user/recoverPassword' element={<RecoverPassword />} />
           <Route path='/experiencias' element={<AllExperiences />} />
 
-          <Route path='/login' element={<Login />} />
           <Route path='/experiencias' element={<AllExperiences />} />
           <Route path='/experiencias/:id' element={<OneExperience />} />
           <Route path="/paseo/:id" element={<OneHike/>}/>
