@@ -5,6 +5,7 @@ import { Footer } from "../components/Footer/Footer";
 import { AboutUs } from "../pages/Dashboard/AboutUs/AboutUs";
 import { Login } from "../pages/Auth/Login/Login";
 import { AllExperiences } from "../pages/Experiences/AllExperiences/AllExperiences";
+import { OneExperience } from "../pages/Experiences/OneExperience/OneExperience";
 
 import { RecoverPassword } from "../pages/Auth/RecoverPassword/RecoverPassword";
 
@@ -26,7 +27,7 @@ export const AppRoutes = () => {
       <main>
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/register' element={<Register/>} />
+          <Route path='/user/register' element={<Register/>} />
 
           <Route path='/user/login' element={<Login />} />
           <Route path='/user/recoverPassword' element={<RecoverPassword />} />
@@ -34,11 +35,10 @@ export const AppRoutes = () => {
 
           <Route path='/experiencias' element={<AllExperiences />} />
 
-          <Route path='/login' element={<Login />} />
           <Route path='/experiencias' element={<AllExperiences />} />
+          <Route path='/experiencias/:id' element={<OneExperience />} />
           <Route path="/paseo/:id" element={<OneHike/>}/>
           <Route path='/confirmarEmail/:token' element={<VerifyEmail/>}/>
-
         </Routes>
       </main>
       <footer>
