@@ -102,9 +102,9 @@ class UserController {
     const {user_email, user_password} = req.body;
     
     try {
-      const result = await UserDal.findUserByEmail(user_email);
+      const result = await UserDal.findUserByEmailLogin(user_email);
       if(result.length === 0){
-        res.status(401).json({message:"El usuario no existe"});
+        res.status(401).json({message:"El usuario no existe o no está verificado."});
       }else{
         const user = result[0];
         const match = await comparePassword(user_password, user.user_password);
@@ -225,6 +225,16 @@ class UserController {
       res.status(500).json({message:"Error de server al intentar guardar la contraseña"});
     }
     
+  }
+
+  getReservations = async (req,res)=>{
+    const {user_id} = req.params;
+    try {
+      const result = await UserDal.getReservations(user_id);
+      res.status(200).json(result);
+    } catch (error) {
+      res.status(500).json({message:"Error de server al intentar obtener las reservas"});
+    }
   }
 }
 
