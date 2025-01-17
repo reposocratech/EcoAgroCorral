@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from "react"
 import { fetchData } from "../helpers/axiosHelper";
+<<<<<<< HEAD
 
 export const AgroContext = createContext(); 
 
@@ -7,6 +8,12 @@ export const ContextProvider = ({children}) => {
   const [user, setUser] = useState();
   const [token, setToken] = useState();
 
+=======
+export const AgroContext = createContext();
+export const ContextProvider = ({children}) => {
+  const [user, setUser] = useState();
+  const [token, setToken] = useState();
+>>>>>>> 717e3a86530afddbd304ecda94fd5621a2659a3f
   useEffect(()=>{
     const fetchUser = async (token)  =>{
       try {
@@ -22,8 +29,11 @@ export const ContextProvider = ({children}) => {
       setToken(tokenLocal)
     }
   }, [])
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 717e3a86530afddbd304ecda94fd5621a2659a3f
   return (
     <AgroContext.Provider value={{user, setUser, token, setToken}}>
       {children}

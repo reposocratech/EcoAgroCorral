@@ -161,7 +161,6 @@ class UserController {
       res.status(500).json({ msg: "Error al reenviar la verificación" });
     }
   };
-  
 
   recoverPass = async (req,res) =>{
     const {user_email} = req.body;
@@ -200,7 +199,6 @@ class UserController {
     } catch (error) {
       res.status(400).json({ message: "Token inválido o expirado" });
     }
-    
   }
 
   changePassword = async (req, res) =>{
@@ -224,8 +222,8 @@ class UserController {
     } catch (error) {
       res.status(500).json({message:"Error de server al intentar guardar la contraseña"});
     }
-    
   }
+
 
   getReservations = async (req,res)=>{
     const {user_id} = req.params;
@@ -236,6 +234,29 @@ class UserController {
       res.status(500).json({message:"Error de server al intentar obtener las reservas"});
     }
   }
+
+  editUser = async (req, res) => {
+    try {
+        const data = JSON.parse(req.body.edit);
+        const file = req.file;
+        
+        console.log("Datos parseados en el controlador:", data);
+        console.log("Archivo recibido en el controlador:", file);
+
+        const result = await UserDal.editUser(data, file);
+
+        let img = null;
+        if (file) {
+            img = file.filename;
+        }
+        res.status(200).json({ msg: "Usuario actualizado correctamente", img });
+
+    } catch (error) {
+        console.error("Error en el controlador editUser:", error);
+        res.status(500).json({ msg: "Error interno del servidor" });
+    }
+  };
+
 }
 
 export default new UserController();

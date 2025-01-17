@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { ZodError } from "zod";
 import { Row, Button, Col, Form, Container } from "react-bootstrap";
 import { fetchData } from "../../../helpers/axiosHelper.js";
 import { registerSchema } from "../../../schemas/registerSchema.js";
-import { ZodError } from "zod";
-import "./Register.css";
 import logoAgro from "../../../../public/assets/images/LogoAgro.png";
+import "./Register.css";
 
 const initialValue = {
   user_name: "",
@@ -26,7 +26,7 @@ export const Register = () => {
   const [year, setYear] = useState("");
   const [msg, setMsg] = useState("");
   const [valErrors, setValErrors] = useState({});
-  const navigate = useNavigate();
+  const [emailSent, setEmailSent] = useState(false);
 
   const validateField = (name, value) => {
     try {
@@ -62,6 +62,9 @@ export const Register = () => {
   const onSubmit = async () => {
     console.log("Fecha de nacimiento:", register.user_birthdate);
     try {
+      setMsg("");
+      setEmailSent(false);
+
       registerSchema.parse(register);
       console.log("Pasa por el parseo de schema");
 
@@ -75,9 +78,19 @@ export const Register = () => {
 
       const res = await fetchData("api/user/register", "post", register);
       console.log("Respuesta del servidor:", res);
-      navigate("/");
-    } catch (error) {
+
+      setEmailSent(true);
+      setMsg(
+        `Hemos enviado un enlace a ${register.user_email} para que puedas verificar tu cuenta.`
+      );
+      setRegister(initialValue);
+      setDay("");
+      setMonth("");
+      setYear("");
+    } 
+    catch (error) {
       console.error("Error en onSubmit:", error);
+
       if (error instanceof ZodError) {
         const fieldErrors = {};
         error.errors.forEach((err) => {
@@ -118,6 +131,9 @@ export const Register = () => {
             <img src={logoAgro} alt="LogoAgro" className="mx-auto" />
             <h2 className="text-center mt-2 fw-bold">CREA UNA CUENTA</h2>
             <div className="separator"></div>
+            {emailSent ? (
+              <p className="text-center p-4 mt-3 fw-bold">{msg}</p>
+            ) : (
             <Form className="px-4 pt-4">
               <Form.Group className="mb-1">
                 <div className="d-flex gap-3">
@@ -140,9 +156,7 @@ export const Register = () => {
                 </div>
                 <div className="d-flex justify-content-between">
                   {valErrors.user_name && <span>{valErrors.user_name}</span>}
-                  {valErrors.user_lastname && (
-                    <span>{valErrors.user_lastname}</span>
-                  )}
+                  {valErrors.user_lastname && <span>{valErrors.user_lastname}</span>}
                 </div>
               </Form.Group>
 
@@ -213,9 +227,7 @@ export const Register = () => {
                     )}
                   </Form.Select>
                 </div>
-                {valErrors.user_birthdate && (
-                  <span>{valErrors.user_birthdate}</span>
-                )}
+                {valErrors.user_birthdate && <span>{valErrors.user_birthdate}</span>}
               </Form.Group>
 
               <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -237,9 +249,7 @@ export const Register = () => {
                   onChange={handleChange}
                   name="user_address"
                 />
-                {valErrors.user_address && (
-                  <span>{valErrors.user_address}</span>
-                )}
+                {valErrors.user_address && <span>{valErrors.user_address}</span>}
               </Form.Group>
 
               <Form.Group className="mb-3" controlId="formBasicPhone">
@@ -294,7 +304,7 @@ export const Register = () => {
                 </Button>
               </div>
             </Form>
-
+            )}
             <div className="separator mb-4"></div>
             <p className="text-center pt-2 mb-4">
               ¿Ya tienes una cuenta?
