@@ -158,7 +158,7 @@ export const Register = () => {
                     id="formBasicDay"
                   >
                     <option value="">Día</option>
-                    {Array.from({ length: 31 }, (_, i) => (
+                    {Array.from({ length: 31 }, (value, i) => (
                       <option
                         key={i + 1}
                         value={String(i + 1).padStart(2, "0")}
@@ -177,7 +177,7 @@ export const Register = () => {
                     id="formBasicMonth"
                   >
                     <option value="">Mes</option>
-                    {Array.from({ length: 12 }, (_, i) => (
+                    {Array.from({ length: 12 }, (value, i) => (
                       <option
                         key={i + 1}
                         value={String(i + 1).padStart(2, "0")}
@@ -196,7 +196,7 @@ export const Register = () => {
                     id="formBasicYear"
                   >
                     <option value="">Año</option>
-                    {Array.from({ length: 83 }, (_, i) => {
+                    {Array.from({ length: 83 }, (value, i) => {
                       const actualYear = new Date().getFullYear();
                       const menorEdad = actualYear - 18;
                       const maxYear = actualYear - 100;
