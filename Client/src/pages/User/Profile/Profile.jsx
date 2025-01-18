@@ -69,7 +69,7 @@ export const Profile = () => {
           })}
           </Col>:
           <Col>
-            <p>No has hecho ninguna reserva. Reserva ahora <Link> aquí </Link> </p>
+            <p>No has hecho ninguna reserva. Reserva ahora <Link to={'/user/reserva'}> aquí </Link> </p>
           </Col>}
         </Row>
       </Container>
