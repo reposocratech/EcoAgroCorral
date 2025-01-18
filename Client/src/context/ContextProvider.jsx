@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState } from "react"
 import { fetchData } from "../helpers/axiosHelper";
 
-export const AgroContext = createContext(); 
+export const AgroContext = createContext();
 
 export const ContextProvider = ({children}) => {
   const [user, setUser] = useState();

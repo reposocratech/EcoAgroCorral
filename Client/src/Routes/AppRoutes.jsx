@@ -16,9 +16,6 @@ import { EditUser } from "../pages/User/EditUser/EditUser.jsx";
 import { Reservation } from "../pages/User/Reservation/Reservation.jsx";
 
 
-
-
-
 export const AppRoutes = () => {
   return (
 
