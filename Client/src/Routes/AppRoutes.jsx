@@ -13,8 +13,7 @@ import { OneHike } from "../pages/Hikes/OneHike.jsx";
 import { ChangePassword } from "../pages/Auth/RecoverPassword/ChangePassword.jsx";
 import { Profile } from "../pages/User/Profile/Profile.jsx";
 import { EditUser } from "../pages/User/EditUser/EditUser.jsx";
-
-
+import { Reservation } from "../pages/User/Reservation/Reservation.jsx";
 
 
 export const AppRoutes = () => {
@@ -38,6 +37,7 @@ export const AppRoutes = () => {
           <Route path="/paseo/:id" element={<OneHike/>}/>
           <Route path='/confirmarEmail/:token' element={<VerifyEmail/>}/>
           <Route path='/user/perfil/editUser' element={<EditUser/>}/>
+          <Route path='/user/reserva' element={<Reservation/>}/>
         </Routes>
       </main>
       <footer>

@@ -6,6 +6,7 @@ export const AgroContext = createContext();
 export const ContextProvider = ({children}) => {
   const [user, setUser] = useState();
   const [token, setToken] = useState();
+
   useEffect(()=>{
     const fetchUser = async (token)  =>{
       try {

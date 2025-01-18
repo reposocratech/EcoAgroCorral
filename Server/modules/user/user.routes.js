@@ -19,6 +19,8 @@ router.put('/changePassword/:user_id',userController.changePassword)
 router.get('/getReservations/:user_id', userController.getReservations)
 
 router.put('/editUser', multerSingle("users"), userController.editUser);
+router.get('/getExperience', userController.getExperience);
+router.post('/createReservation', userController.createReservation);
 
 
 export default router;
