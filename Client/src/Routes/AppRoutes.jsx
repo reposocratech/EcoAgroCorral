@@ -14,6 +14,7 @@ import { ChangePassword } from "../pages/Auth/RecoverPassword/ChangePassword.jsx
 import { Profile } from "../pages/User/Profile/Profile.jsx";
 import { EditUser } from "../pages/User/EditUser/EditUser.jsx";
 import { Reservation } from "../pages/User/Reservation/Reservation.jsx";
+import { ContactUs } from "../pages/ContactUs/ContactUs.jsx";
 
 
 export const AppRoutes = () => {
@@ -32,6 +33,7 @@ export const AppRoutes = () => {
           <Route path='/user/recoverPassword' element={<RecoverPassword />} />
           <Route path='/user/restablecerPass/:token' element={<ChangePassword />} />
           <Route path='/sobreNosotros' element={<AboutUs />} />
+          <Route path='/contacto' element={<ContactUs/>} />
           <Route path='/experiencias' element={<AllExperiences />} />
           <Route path='/experiencias/:id' element={<OneExperience />} />
           <Route path="/paseo/:id" element={<OneHike/>}/>

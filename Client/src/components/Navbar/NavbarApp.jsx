@@ -72,8 +72,8 @@ export const NavbarApp = () => {
               <Nav.Link as={Link} className="item" to="/">
                 Blog
               </Nav.Link>
-              <Nav.Link as={Link} className="item" to="/">
-                Contáctanos
+              <Nav.Link as={Link} className="item" to="/contacto">
+                Contacto
               </Nav.Link>
             </Nav>
             <div className="d-flex justify-content-center align-items-center">
