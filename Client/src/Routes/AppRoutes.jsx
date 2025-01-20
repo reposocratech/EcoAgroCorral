@@ -10,10 +10,10 @@ import { RecoverPassword } from "../pages/Auth/RecoverPassword/RecoverPassword";
 
 import { Register } from "../pages/Auth/Register/Register";
 import { VerifyEmail } from "../pages/Auth/VerifyEmail/VerifyEmail";
-import { OneHike } from "../pages/Hikes/OneHike.jsx";
-
-
-
+import { OneHike } from "../pages/Hikes/OneHike/OneHike.jsx";
+import { CreateHike } from "../pages/Hikes/NewHike/NewHike";
+import { EditHike } from "../pages/Hikes/EditHike/EditHike";
+import {DeletedHikes} from "../pages/Hikes/RestoreHikes/DeletedHikes";
 
 export const AppRoutes = () => {
   return (
@@ -34,8 +34,10 @@ export const AppRoutes = () => {
           <Route path='/login' element={<Login />} />
           <Route path='/experiencias' element={<AllExperiences />} />
           <Route path="/paseo/:id" element={<OneHike/>}/>
+          <Route path="/paseo/nuevoPaseo" element={<CreateHike />} />          
+          <Route path="/paseo/editar/:hikeId" element={<EditHike />} />
           <Route path='/confirmarEmail/:token' element={<VerifyEmail/>}/>
-
+          <Route path="/paseo/borrados" element={<DeletedHikes/>} />
         </Routes>
       </main>
       <footer>
