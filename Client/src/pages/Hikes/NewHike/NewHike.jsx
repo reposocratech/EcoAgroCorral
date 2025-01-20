@@ -10,7 +10,7 @@ export const CreateHike = () => {
         hike_description: '',
         hike_distance: '',
         hike_duration: '',
-        hike_intinerary: '',
+        hike_itinerary: '',
         mainImage: null,
         secondaryImages: [],
     });
@@ -51,7 +51,7 @@ export const CreateHike = () => {
         data.append('hike_description', formData.hike_description);
         data.append('hike_distance', formData.hike_distance);
         data.append('hike_duration', formData.hike_duration);
-        data.append('hike_intinerary', formData.hike_intinerary);
+        data.append('hike_itinerary', formData.hike_itinerary);
 
         if (formData.mainImage) {
             data.append('file', formData.mainImage);
@@ -132,8 +132,8 @@ export const CreateHike = () => {
                         <Form.Label>Itinerario</Form.Label>
                         <Form.Control className="textarea"
                             as="textarea"
-                            name="hike_intinerary"
-                            value={formData.hike_intinerary}
+                            name="hike_itinerary"
+                            value={formData.hike_itinerary}
                             onChange={handleChange}
                             required
                         />

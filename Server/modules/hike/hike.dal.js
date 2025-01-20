@@ -7,7 +7,7 @@ class HikeDal {
       hike_description,
       hike_distance,
       hike_duration,
-      hike_intinerary,
+      hike_itinerary,
       files
     } = data;
     console.log("DATA", data);
@@ -16,14 +16,14 @@ class HikeDal {
     try {
         await connection.beginTransaction();
 
-        const sql = `INSERT INTO hike (hike_title, hike_description, hike_distance, hike_duration, hike_intinerary) 
+        const sql = `INSERT INTO hike (hike_title, hike_description, hike_distance, hike_duration, hike_itinerary) 
                       VALUES (?, ?, ?, ?, ?)`;
         const [result] = await connection.execute(sql, [
             hike_title,
             hike_description,
             hike_distance,
             hike_duration,
-            hike_intinerary
+            hike_itinerary
         ]);
 
         const hikeId = result.insertId;
@@ -109,7 +109,7 @@ getHikeById = async (hikeId) => {
   };
 
   updateHike = async (hikeId, data) => {
-    const { hike_title, hike_description, hike_distance, hike_duration, hike_intinerary } = data;
+    const { hike_title, hike_description, hike_distance, hike_duration, hike_itinerary } = data;
     const connection = await dbPool.getConnection();
     try {
         await connection.beginTransaction();
@@ -119,7 +119,7 @@ getHikeById = async (hikeId) => {
                         hike_description = ?, 
                         hike_distance = ?, 
                         hike_duration = ?, 
-                        hike_intinerary = ? 
+                        hike_itinerary = ? 
                       WHERE hike_id = ? AND hike_is_deleted = 0`;
 
         const [result] = await connection.execute(sql, [
@@ -127,7 +127,7 @@ getHikeById = async (hikeId) => {
             hike_description,
             hike_distance,
             hike_duration,
-            hike_intinerary,
+            hike_itinerary,
             hikeId
         ]);
 

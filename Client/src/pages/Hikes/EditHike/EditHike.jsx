@@ -12,7 +12,7 @@ export const EditHike = () => {
     hike_description: "",
     hike_distance: "",
     hike_duration: "",
-    hike_intinerary: "",
+    hike_itinerary: "",
     mainImage: null,
     secondaryImages: [],
     imageUrls: [],
@@ -33,7 +33,7 @@ export const EditHike = () => {
         hike_description: response.hike_description,
         hike_distance: response.hike_distance,
         hike_duration: response.hike_duration,
-        hike_intinerary: response.hike_intinerary,
+        hike_itinerary: response.hike_itinerary,
         mainImage: response.images.find((img) => img.is_main) || null,
         secondaryImages: response.images.slice(1),
         imageUrls: response.images
@@ -160,7 +160,7 @@ export const EditHike = () => {
       "hike_description",
       "hike_distance",
       "hike_duration",
-      "hike_intinerary",
+      "hike_itinerary",
     ];
 
     // Comprobar si algún campo obligatorio está vacío
@@ -304,10 +304,10 @@ export const EditHike = () => {
               <Form.Control
                 as="textarea"
                 rows={3}
-                name="hike_intinerary"
-                value={formData.hike_intinerary}
+                name="hike_itinerary"
+                value={formData.hike_itinerary}
                 onChange={(e) =>
-                  setFormData({ ...formData, hike_intinerary: e.target.value })
+                  setFormData({ ...formData, hike_itinerary: e.target.value })
                 }
                 className="textarea"
                 required

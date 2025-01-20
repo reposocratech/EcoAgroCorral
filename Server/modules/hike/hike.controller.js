@@ -6,7 +6,7 @@ class HikeController {
       console.log('Body:', req.body);
     console.log('File:', req.files);
     
-    const { hike_title, hike_description, hike_distance, hike_duration, hike_intinerary } = req.body;
+    const { hike_title, hike_description, hike_distance, hike_duration, hike_itinerary } = req.body;
     const files = req.files; 
     console.log('Archivos recibidos:', files);
     console.log(files.length);
@@ -18,7 +18,7 @@ class HikeController {
         hike_description,
         hike_distance,
         hike_duration,
-        hike_intinerary,
+        hike_itinerary,
         files
       };
 
@@ -27,7 +27,7 @@ class HikeController {
         !hike_description ||
         !hike_distance ||
         !hike_duration ||
-        !hike_intinerary
+        !hike_itinerary
       ) {
         throw new Error("All text fields must be filled");
       }
@@ -129,12 +129,12 @@ updateHike = async (req, res) => {
     try {
         console.log('Updating hike with ID:', req.params.id);
         const { id } = req.params;
-        const { hike_title, hike_description, hike_distance, hike_duration, hike_intinerary } = req.body;
+        const { hike_title, hike_description, hike_distance, hike_duration, hike_itinerary } = req.body;
         const files = req.files; 
-        if (!hike_title || !hike_description || !hike_distance || !hike_duration || !hike_intinerary) {
+        if (!hike_title || !hike_description || !hike_distance || !hike_duration || !hike_itinerary) {
             throw new Error("All fields must be filled");
         }
-        const dataToDal = { hike_title, hike_description, hike_distance, hike_duration, hike_intinerary, files };
+        const dataToDal = { hike_title, hike_description, hike_distance, hike_duration, hike_itinerary, files };
         await HikeDal.updateHike(id, dataToDal);
         console.log('Hike updated successfully:', id);
         res.status(200).json({ message: "Hike updated successfully" });

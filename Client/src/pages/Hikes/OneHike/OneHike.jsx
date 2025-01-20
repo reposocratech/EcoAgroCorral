@@ -168,7 +168,7 @@ export const OneHike = () => {
               <div className="max-width text-start">
                 <h3 className="text-center">Itinerario</h3>
                 <p>
-                {hike.hike_intinerary}
+                {hike.hike_itinerary}
                 </p>
               </div>
           </div>
