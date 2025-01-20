@@ -6,7 +6,7 @@ class HikeController {
       console.log('Body:', req.body);
     console.log('File:', req.files);
     
-    const { hike_title, hike_description, hike_distance, hike_duration, hike_intinerary } = req.body;
+    const { hike_title, hike_description, hike_distance, hike_duration, hike_itinerary } = req.body;
     const files = req.files; 
     console.log('Archivos recibidos:', files);
     console.log(files.length);
@@ -18,7 +18,7 @@ class HikeController {
         hike_description,
         hike_distance,
         hike_duration,
-        hike_intinerary,
+        hike_itinerary,
         files
       };
 
@@ -27,7 +27,7 @@ class HikeController {
         !hike_description ||
         !hike_distance ||
         !hike_duration ||
-        !hike_intinerary
+        !hike_itinerary
       ) {
         throw new Error("All text fields must be filled");
       }
@@ -36,8 +36,9 @@ class HikeController {
      
 
       const result = await HikeDal.createHikeWithImages(dataToDal);
-
-      res.status(200).json({ message: "Hike created successfully" });
+      console.log('Resultado:', result);
+      
+      res.status(200).json({ message: "Hike created successfully" , hikeId: result.hikeId});
     } catch (error) {
       console.error(error);
       res.status(400).json({ error: error.message });
@@ -81,47 +82,80 @@ class HikeController {
     }
   };
 
-  updateHike = async (req, res) => {
+  addHikeImages = async (req, res) => {
     try {
+        const { id } = req.params;
+        const files = req.files;
+        if (!files || files.length === 0) {
+            throw new Error("At least one image must be uploaded");
+        }
+        await HikeDal.addHikeImages(id, files);
+        console.log('Images added to hike with ID:', id);
+        res.status(200).json({ message: "Images added successfully" });
+    } catch (error) {
+        console.error('Error adding images:', error);
+        res.status(400).json({ error: error.message });
+    }
+};
+addHikeMainImage = async (req, res) => {
+  try {
       const { id } = req.params;
-      const { hike_title, hike_description, hike_distance, hike_duration, hike_intinerary } = req.body;
-      const files = req.files;  // Obtenemos los archivos subidos
-      console.log('Archivos recibidos:', files); 
-      // Validamos que todos los campos de texto estén completos
-      if (
-        !hike_title ||
-        !hike_description ||
-        !hike_distance ||
-        !hike_duration ||
-        !hike_intinerary
-      ) {
-        throw new Error("All fields must be filled");
+      const files = req.files;
+      if (!files || files.length === 0) {
+          throw new Error("At least one image must be uploaded");
       }
-  
-      // Si hay archivos (imágenes) subidos, los incluimos en los datos
-      const dataToDal = {
-        hike_title,
-        hike_description,
-        hike_distance,
-        hike_duration,
-        hike_intinerary,
-        files // Incluimos los archivos para la gestión de las imágenes
-      };
-  
-      // Actualizamos el hike con los nuevos datos y las imágenes
-      const result = await HikeDal.updateHike(id, dataToDal);
-  
-      res.status(200).json({ message: "Hike updated successfully" });
+      await HikeDal.addHikeMainImage(id, files);
+      console.log('Images added to hike with ID:', id);
+      res.status(200).json({ message: "Images added successfully" });
+  } catch (error) {
+      console.error('Error adding images:', error);
+      res.status(400).json({ error: error.message });
+  }
+};
+
+deleteHikeImageById = async (req, res) => {
+    try {
+        const { imageId } = req.params;
+        await HikeDal.deleteHikeImageById(imageId);
+        console.log('Image deleted with ID:', imageId);
+        res.json({ message: "Image deleted successfully" });
+    } catch (error) {
+        console.error('Error deleting image:', error);
+        res.status(500).json({ error: error.message });
+    }
+};
+
+updateHike = async (req, res) => {
+    try {
+        console.log('Updating hike with ID:', req.params.id);
+        const { id } = req.params;
+        const { hike_title, hike_description, hike_distance, hike_duration, hike_itinerary } = req.body;
+        const files = req.files; 
+        if (!hike_title || !hike_description || !hike_distance || !hike_duration || !hike_itinerary) {
+            throw new Error("All fields must be filled");
+        }
+        const dataToDal = { hike_title, hike_description, hike_distance, hike_duration, hike_itinerary, files };
+        await HikeDal.updateHike(id, dataToDal);
+        console.log('Hike updated successfully:', id);
+        res.status(200).json({ message: "Hike updated successfully" });
+    } catch (error) {
+        console.error('Error updating hike:', error);
+        res.status(400).json({ error: error.message });
+    }
+};
+
+  getAllHikes = async (req, res) => {
+    try {
+      const hikes = await HikeDal.getAllHikes();
+      res.status(200).json(hikes);
     } catch (error) {
       console.error(error);
       res.status(400).json({ error: error.message });
     }
   };
-  
-
-  getAllHikes = async (req, res) => {
+  getAllDelHikes = async (req, res) => {
     try {
-      const hikes = await HikeDal.getAllHikes();
+      const hikes = await HikeDal.getAllDelHikes();
       res.status(200).json(hikes);
     } catch (error) {
       console.error(error);
