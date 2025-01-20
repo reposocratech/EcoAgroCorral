@@ -72,17 +72,17 @@ export const NavbarApp = () => {
               <Nav.Link as={Link} className="item" to="/">
                 Blog
               </Nav.Link>
-              <Nav.Link as={Link} className="item" to="/">
-                Contáctanos
+              <Nav.Link as={Link} className="item" to="/contacto">
+                Contacto
               </Nav.Link>
             </Nav>
             <div className="d-flex justify-content-center align-items-center">
               {!user ? (
                 <div className="d-flex">
-                  <Button onClick={() => navigate("/register")}>
+                  <Button onClick={() => navigate("user/register")}>
                     Register
                   </Button>
-                  <Button className="btnLogin" onClick={() => navigate("login")}>Login</Button>
+                  <Button className="btnLogin" onClick={() => navigate("user/login")}>Login</Button>
                 </div>
               ) : (
                 <div>

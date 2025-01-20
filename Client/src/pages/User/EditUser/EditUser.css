@@ -1,0 +1,48 @@
+.edit{
+  background-color: rgb(225, 221, 221);
+  border-radius: 20px;
+
+  img{
+    width: 100px;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  span{
+    color: red;
+  }
+
+  .separator{
+    width: 100%;
+    height: 2px;
+    background-color: white;
+  } 
+
+  .btnAcept{
+    background-color: #324001;
+    border: none;
+    color: #f2ece2;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .btnAcept:hover {
+    background-color: #283618;
+    color: #ffffff;
+  }
+
+  .btnCancel{
+    background-color: #b41c2b;
+    border: none;
+    color: #f2ece2;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .btnCancel:hover {
+    background-color: #7e1017;
+    color: #ffffff;
+  }
+
+  .link{
+    color: #5a2a2d;
+  }
+}

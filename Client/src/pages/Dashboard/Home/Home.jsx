@@ -19,7 +19,7 @@ export const Home = () => {
       </section>
 
       <section className="section-2 ">
-        <Container xxl>
+        <Container xxl="true">
           <Row>
             <Col>
               <div className="flexDiv">
@@ -41,7 +41,7 @@ export const Home = () => {
       </section>
 
       <section className="section-3">
-        <Container xxl>
+        <Container xxl="true">
           <Row>
             <Col>
               <div className="flexDiv">

@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { AgroContext } from '../../../context/ContextProvider'
 import { fetchData } from '../../../helpers/axiosHelper'
 import { ZodError } from 'zod'
-import { loginSchema } from '../../../../schemas/registerSchema'
+import { loginSchema } from '../../../schemas/loginSchema.js'
 import './login.css'
 
 
@@ -48,7 +48,7 @@ export const Login = () => {
 
       setUser(userResult);
       setToken(token);
-      navigate('/');
+      navigate('/user/perfil');
     } catch (error) {
       const fieldErrors = {};
       if(error instanceof ZodError){
@@ -57,7 +57,7 @@ export const Login = () => {
           })
           setValErrors(fieldErrors)      
       }else{
-        setMsg(error.response.data.message)
+         setMsg(error.response.data.message)
       }
     }
   }
@@ -111,7 +111,7 @@ export const Login = () => {
               <p className='text-center pt-2'><Link to="/user/recoverPassword" className='link'>¿Olvidaste tu contraseña?</Link></p>
            </Form>
            <div className='divisor mb-4'></div>
-             <p className='text-center'>¿No estás registrado?<Link to="/user/register" className='link'>Regístrate aquí</Link></p>
+             <p className='text-center'>¿No estás registrado?<Link to="/user/register" className='link ms-2'>Regístrate aquí</Link></p>
           </Col>
         </Row>
       </Container>
