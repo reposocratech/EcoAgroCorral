@@ -1,0 +1,121 @@
+.pictures{
+  .first-sec{
+    background-image: linear-gradient(rgba(0, 0, 0, 0.50), rgba(0, 0, 0, 0.30)), url('../../../../public/assets/images/about/fondo1.png');
+    background-position: center;
+    background-size: cover;
+    height: 45vh;
+  }
+
+  h2{
+    background-color: black;
+    color: rgb(248, 238, 225);
+    width: fit-content;
+    padding: 1rem;
+    position: absolute;
+    border-radius: 10px;
+  }
+
+  article{
+    margin-top: 20%;
+  }
+  @media(width <= 400px){
+    article{
+      margin-top: 5%;
+    }
+  }
+  
+  .about{
+    margin-top: 41vh;
+    margin-left: 20vw;
+  }
+  
+  .agro{
+    background-image: linear-gradient(rgba(0, 0, 0, 0.50), rgba(0, 0, 0, 0.30)), url('../../../../public/assets/images/about/fondo2.jpeg');
+    background-position: center;
+    background-size: cover;
+    height: 45vh;
+    
+    h2{
+      margin-top: 41vh;
+      margin-left: 40vw;
+    } 
+  }
+
+  .text{
+    background-color: rgb(40 54 24) ;
+    color: rgb(254 250 224);
+    padding: 1rem;
+    box-shadow: 1px 1px 4px 1px rgb(254 250 224);
+    border-radius: 10px; 
+  }
+  
+  .tree{
+    background-image: linear-gradient(rgba(0, 0, 0, 0.50), rgba(0, 0, 0, 0.30)), url('../../../../public/assets/images/about/fondo3.png');
+    background-position: center;
+    background-size: cover;
+    height: 45vh;
+    
+  }
+}
+
+.aboutMe {
+  background-color: rgb(255 252 241);
+  padding-block: 4rem;
+
+
+  h2 {
+    background-color: black;
+    color: rgb(248, 238, 225);
+    width: fit-content;
+    padding: 1rem;
+    position: absolute;
+    border-radius: 10px;
+    margin-top: -3vh;
+    margin-left: 30vw;
+  }
+  article {
+    background-color: #9CAF87;
+    border-radius: 10px;
+    padding: 1rem;
+  }
+
+  @media(width <= 770px){
+    article{
+      display: flex;
+      flex-direction: column;
+
+      .perfil{
+        margin-top: 2rem;
+      }
+    }
+    h2{
+      margin-left: 0;
+    }
+  }
+  .perfil {
+    margin-top: -2rem;
+    height: clamp(10rem, 30vh, 20rem); 
+    width: auto; 
+    border-radius: 20px;
+  }
+
+  .tradition-img{
+    margin-top: -2rem;
+    height: clamp(10rem, 40vh, 24rem); 
+    width: auto; 
+    border-radius: 20px;
+  }
+
+  p{
+    color: rgb(248, 238, 225);
+  }
+  .tradition{
+    margin-left: -30rem;
+  }
+
+  @media(width <= 990px){
+    .tradition{
+      margin-left: 0;
+    }
+  }
+}

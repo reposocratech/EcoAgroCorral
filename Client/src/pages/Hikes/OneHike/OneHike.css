@@ -1,0 +1,133 @@
+.img {
+  width: 400px;
+  height: 250px;
+  border-radius: 10px;
+}
+.features {
+  padding: 40px 0;
+
+  img {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+.feature-item {
+  padding: 20px;
+  max-width: 500px;
+}
+
+
+
+.feature-item h3 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.feature-item p {
+  color: #666;
+}
+
+/* Sección con Flexbox */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Alineación alterna izquierda/derecha */
+.feature-item-left {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.feature-item-right {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  margin-bottom: 20px;
+}
+button.button {
+  background-color: #3a1a1d; 
+  color: white;
+  border: none ;
+  padding: 10px 20px;
+}
+button.button:hover {
+  background-color: #5a2a2d ;
+  color: #ffffff;
+}
+/* Asegura que las tarjetas se alineen en forma de columna */
+@media (max-width: 768px) {
+  .feature-item-left,
+  .feature-item-right {
+    justify-content: center; /* En pantallas pequeñas, centrar todas las tarjetas */
+  }
+}
+/* Estilo para el botón "Crear un nuevo Paseo" */
+button.button-nuevo-paseo {
+  background-color: #28a745; /* Verde para "Crear" */
+  color: white;
+  border: none;
+ 
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button.button-nuevo-paseo:hover {
+  background-color: #218838; 
+}
+
+/* Estilo para el botón "Modificar Paseo" */
+button.button-modificar-paseo {
+  background-color: #0077ff; /* Azul para "Modificar" */
+  color: white;
+  border: none;
+ 
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button.button-modificar-paseo:hover {
+  background-color: #2f59f3; 
+}
+.icon-hike{
+  width: 100px;
+  height: 100px;
+
+}
+.datos{
+  border: 1px solid black;
+}
+/* Estilo para el botón "Eliminar Paseo" */
+button.button-eliminar-paseo {
+  background-color: #c1271b;
+    color: white;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+button.button-eliminar-paseo:hover {
+  background-color: #841f10;
+}
+button.button-eliminar-paseo2 {
+  background-color: #c11b50;
+    color: white;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+button.button-eliminar-paseo2:hover {
+  background-color: #581121;
+}
+.max-width {
+  max-width: 300px;
+  
+}
