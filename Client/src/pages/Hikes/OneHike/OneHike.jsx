@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Container,  Button, Row, Alert } from "react-bootstrap";
-import "./style.css";
+import "./OneHike.css";
 export const OneHike = () => {
   const { id } = useParams();
   const [hike, setHike] = useState(null);
@@ -58,8 +58,8 @@ export const OneHike = () => {
   if (!hike) return <p>No se encontró el paseo.</p>;
 
   return (
-    <Container className="my-5">
-      <div className="hike-details mt-3">
+    <Container className="pb-3">
+      <div className="hike-details mt-3 mb-3">
         <section
           style={{
             backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${
@@ -163,7 +163,7 @@ export const OneHike = () => {
               <img
                 src={`/assets/images/hike/itinerario.png`} 
                 
-                className="icon"
+                className="icon-hike"
               />
               <div className="max-width text-start">
                 <h3 className="text-center">Itinerario</h3>
@@ -176,7 +176,7 @@ export const OneHike = () => {
               <img
                 src={`/assets/images/hike/datos.png`} 
                 
-                className="icon datos"
+                className="icon-hike datos"
               />
               <div className="max-width text-start">
               <h3 className="text-center">Datos</h3>

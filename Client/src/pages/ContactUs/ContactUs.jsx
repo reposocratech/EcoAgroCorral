@@ -32,7 +32,7 @@ export const ContactUs = () => {
       </section>
 
       <section className="icon">
-        <Container fluid>
+        <Container fluid="xxl">
           <Row className="row-gap-3 pb-5">
             <Col className="pt-4 flex-column d-flex">
               <div className="fs-1 align-items-center justify-content-center flex-column m-auto">

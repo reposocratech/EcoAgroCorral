@@ -33,7 +33,7 @@ export const Profile = () => {
   return (
     <>
     <section className='profile'>
-      <Container xxl="true">
+      <Container fluid="xxl">
         <Row className='info-profile mx-1'>
           <Col md={12} className='text-center p-4'>
           <img className='logo' src={logo} alt="" />
@@ -55,7 +55,7 @@ export const Profile = () => {
       </Container>
     </section>
     <section className='py-4'>
-      <Container xxl="true">
+      <Container fluid="xxl">
         <Row className='d-flex flex-column'>
           <Col className='text-center py-3'>
           <h3>Mis reservas</h3>

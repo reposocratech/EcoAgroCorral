@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Form, Button, Container, Row, Col, Image } from 'react-bootstrap';
-import './style.css';
+import './NewHike.css';
 
 export const CreateHike = () => {
     const navigate = useNavigate();
@@ -80,7 +80,7 @@ export const CreateHike = () => {
 
     return (
         <Container
-            fluid
+            fluid="xxl"
             className="d-flex justify-content-center align-items-center min-vh-100"
         >
             <div className="shadow p-4 form-new" >

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { fetchData } from "../../../helpers/axiosHelper";
 import { useNavigate, useParams } from "react-router-dom";
 import { Button, Form, Image, Container, Row, Col, Alert } from "react-bootstrap";
-import './style.css';
+import './EditHike.css';
 export const EditHike = () => {
   const { hikeId } = useParams();
   const navigate = useNavigate();
@@ -214,7 +214,7 @@ export const EditHike = () => {
   };
 
   return (
-    <Container>
+    <Container fluid="xxl">
       
       {showAlert && (
         <Alert variant="danger" onClose={() => setShowAlert(false)} dismissible>
@@ -232,7 +232,7 @@ export const EditHike = () => {
         </Alert>
       )}
       <div className="d-flex flex-column align-items-center">
-        <Form className="form" onSubmit={handleSubmit}>
+        <Form className="form-edit-hike" onSubmit={handleSubmit}>
         <h3 className="text-center">Modificar Paseo</h3>
         <div className="divisor mb-3 mt-3"></div>
           <Row className="mb-3">
