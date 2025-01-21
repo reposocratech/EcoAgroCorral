@@ -1,0 +1,50 @@
+.reservation{
+  background-color: rgb(202, 194, 194);
+  border-radius: 10px;
+  box-shadow: 2px 2px 4px 2px rgb(190, 187, 187);
+
+  img{
+    width: 370px;
+    border-radius: 20px;
+    box-shadow: 2px 2px 4px 2px grey;
+  }
+
+  .price{
+    border: 1px solid white;
+    padding-inline: 2rem;
+    border-radius: 10px;
+    box-shadow: 1px 1px 3px 1px rgb(157, 152, 152);
+
+  }
+
+  .btn{
+    background-color: #3a1a1d;
+    border: none;
+    color: #f2ece2;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .btn:hover {
+    background-color: #5a2a2d;
+    color: #ffffff;
+  }
+
+
+  .input-date{
+    border-radius: 5px;
+    border: none;
+    
+    width: 100%;
+  }
+}
+
+.message{
+  padding-top: 5rem;
+
+  p{
+    background-color: rgb(222, 219, 219);
+    width: fit-content;
+    border-radius: 10px;
+    box-shadow: 1px 1px 3px 1px rgb(157, 152, 152);
+  }
+}

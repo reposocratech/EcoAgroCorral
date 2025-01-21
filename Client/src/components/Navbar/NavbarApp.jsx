@@ -59,34 +59,38 @@ export const NavbarApp = () => {
             ></span>
           </Navbar.Toggle>
           <Navbar.Collapse id="navbarScroll">
-            <Nav className="me-auto my-2 my-lg-0 text-center" navbarScroll>
-              <Nav.Link as={Link} className="item" to="/">
+            <Nav className="me-auto my-2 my-lg-0 text-center gap-4" navbarScroll>
+              <Nav.Link as={Link} className="item m-0" to="/">
                 Inicio
               </Nav.Link>
-              <Nav.Link as={Link} className="item" to="/sobreNosotros">
+              <Nav.Link as={Link} className="item m-0" to="/sobreNosotros">
                 Sobre Nosotros
               </Nav.Link>
-              <Nav.Link as={Link} className="item" to="/experiencias">
+              <Nav.Link as={Link} className="item m-0" to="/experiencias">
                 Experiencias rurales
               </Nav.Link>
-              <Nav.Link as={Link} className="item" to="/">
+              <Nav.Link as={Link} className="item m-0" to="/">
                 Blog
               </Nav.Link>
-              <Nav.Link as={Link} className="item" to="/contacto">
+              <Nav.Link as={Link} className="item m-0" to="/contacto">
                 Contacto
               </Nav.Link>
+              {user?.user_type === 1 && <Nav.Link as={Link} className="item m-0" to="/admin/perfil">
+                Admin</Nav.Link>}
+              {user?.user_type === 0 && <Nav.Link as={Link} className="item m-0" to="/user/perfil">
+                Perfil</Nav.Link>}
             </Nav>
             <div className="d-flex justify-content-center align-items-center">
               {!user ? (
-                <div className="d-flex">
+                <div className="d-flex gap-2">
                   <Button onClick={() => navigate("user/register")}>
-                    Register
+                    Regístrate
                   </Button>
-                  <Button className="btnLogin" onClick={() => navigate("user/login")}>Login</Button>
+                  <Button className="btnLogin" onClick={() => navigate("user/login")}>Iniciar sesión</Button>
                 </div>
               ) : (
                 <div>
-                  <Button onClick={logOut}>Logout</Button>
+                  <Button onClick={logOut}>Cerrar sesión</Button>
                 </div>
               )}
             </div>

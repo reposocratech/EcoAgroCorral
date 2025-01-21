@@ -10,7 +10,7 @@ export const FeatureCardJustifyRight = ({feature}) => {
         <p>{description}</p>
       </div>
       <div>
-        <img className='feature-icon' src={`/assets/icons/features/${icon}`} alt=" Icon of the characteristic" />
+        <img className='feature-icon' src={`${import.meta.env.VITE_SERVER_URL}images/features/${icon}`} alt=" Icon of the characteristic" />
       </div>
 
     </div>
