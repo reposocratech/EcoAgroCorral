@@ -293,26 +293,51 @@ class HikeDal {
       throw new Error("Failed to fetch experiences");
     }
   };
-
-  // Eliminar todas las experiencias de un hike
-  removeExperiencesByHikeId = async (hikeId) => {
-    const query = `DELETE FROM hike_experience WHERE hike_id = ?`;
+  getUnassignedExperiencesByHikeId = async (hikeId) => {
+    const query = `
+      SELECT e.experience_id, e.experience_title, e.experience_description, 
+             e.experience_price_child, e.experience_price_adult
+      FROM experience e
+      WHERE e.experience_is_deleted = 0
+      AND NOT EXISTS (
+        SELECT 1 FROM hike_experience he 
+        WHERE he.experience_id = e.experience_id AND he.hike_id = ?
+      )
+    `;
     try {
-      console.log(`Removing all experiences for hike ID: ${hikeId}`);
-      const result = await executeQuery(query, [hikeId]);
-      if (result.affectedRows === 0) {
-        console.warn(`No experiences found for hike ID ${hikeId} to remove.`);
-        return { message: "No experiences found to remove" };
-      }
-      return { message: "Experiences removed successfully" };
+      return await executeQuery(query, [hikeId]);
     } catch (error) {
-      console.error(
-        `Error removing experiences for hike ID ${hikeId}:`,
-        error.message
-      );
-      throw new Error("Failed to remove experiences");
+      console.error(`Error fetching unassigned experiences for hike ID ${hikeId}:`, error);
+      throw new Error("Failed to fetch unassigned experiences");
     }
   };
+
+  async removeExperiencesFromHike(hikeId, experienceIds) {
+    try {
+      if (!Array.isArray(experienceIds) || experienceIds.length === 0) {
+        throw new Error("Invalid experience IDs");
+      }
+
+      // Generar los placeholders de la consulta
+      const placeholders = experienceIds.map(() => '?').join(', ');
+
+      // Consulta para eliminar experiencias del hike
+      const query = `DELETE FROM hike_experience WHERE hike_id = ? AND experience_id IN (${placeholders})`;
+
+      // Ejecutar la consulta con executeQuery
+      const result = await executeQuery(query, [hikeId, ...experienceIds]);
+
+      // Retornar el resultado, si se eliminaron filas
+      if (result.affectedRows > 0) {
+        return { affectedRows: result.affectedRows };
+      } else {
+        return { message: "No experiences found to remove" };
+      }
+    } catch (error) {
+      console.error("Error while removing experiences:", error);
+      throw new Error("Failed to remove experiences");
+    }
+  }
 
   // Asignar nuevas experiencias a un hike
   assignExperienceToHike = async (hikeId, experienceId) => {
@@ -367,6 +392,8 @@ class HikeDal {
       throw new Error("Failed to assign experiences");
     }
   };
+  
+  
 }
 
 export default new HikeDal();

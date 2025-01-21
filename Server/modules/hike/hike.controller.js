@@ -284,6 +284,50 @@ class HikeController {
       res.status(500).json({ error: "Failed to assign experiences" });
     }
   };
+  deleteExperiencesFromHike = async (req, res) => {
+    const { hikeId } = req.params;
+    const { experienceIds } = req.body; // Esperamos un array de IDs de experiencias a eliminar
+
+    console.log("Body:", req.body);
+    console.log("Removing experiences from hike with ID:", hikeId);
+
+    // Verificar que 'experienceIds' sea un array
+    if (!Array.isArray(experienceIds)) {
+      return res.status(400).json({ error: "experienceIds must be an array" });
+    }
+
+    try {
+      // Llamar al DAL para eliminar las experiencias del hike
+      const result = await HikeDal.removeExperiencesFromHike(
+        hikeId,
+        experienceIds
+      );
+
+      // Si el DAL devuelve algo que indica que no se eliminaron experiencias
+      if (!result) {
+        return res.status(404).json({ error: "No experiences found to remove" });
+      }
+
+      // Devolver la respuesta si la eliminación fue exitosa
+      res.status(200).json({ message: "Experiences removed successfully", removedExperiences: result });
+    } catch (error) {
+      console.error(
+        "Error in controller while removing experiences from hike:",
+        error
+      );
+      res.status(500).json({ error: "Failed to remove experiences" });
+    }
+};
+getExperiencesUnassigned = async (req, res) => {
+  const { hikeId } = req.params; // `hikeId` también viene de los parámetros de la ruta
+  try {
+    const unassignedExperiences = await HikeDal.getUnassignedExperiencesByHikeId(hikeId);
+    res.status(200).json(unassignedExperiences);
+  } catch (error) {
+    console.error("Error fetching unassigned experiences:", error);
+    res.status(500).json({ error: "Failed to fetch unassigned experiences" });
+  }
+};
 }
 
 export default new HikeController();

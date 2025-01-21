@@ -21,6 +21,23 @@
     background-color: #5a2a2d;
     color: #ffffff;
   }
+  .button-danger{
+    background-color: #c1271b;
+    color: white;
+    border: none;
+    transition: background-color 0.3s ease;
+  }
+  .button-danger:hover {
+    background-color: #841f10;
+  }
+  .button-primary{
+    background-color: #3c8be4; 
+  color: white;
+  border: none;
+  }
+  .button-primary:hover {
+    background-color: #2f59f3; 
+  }
 }
 .textarea{
   resize: none;

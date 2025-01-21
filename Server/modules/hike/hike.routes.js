@@ -18,6 +18,7 @@ router.delete('/deleteHikeImage/:imageId', HikeController.deleteHikeImageById);
 router.get("/:hikeId/experiences", HikeController.getExperiencesByHike);
 router.post("/:hikeId/experiences/:experienceId", HikeController.assignExperienceToHike);
 router.post("/:hikeId/experiences", HikeController.assignExperiencesToHike);
+router.delete("/:hikeId/experiences", HikeController.deleteExperiencesFromHike);
 router.delete("/:hikeId/experiences/:experienceId", HikeController.removeExperienceFromHike);
-
+router.get("/:hikeId/unassigned-experiences", HikeController.getExperiencesUnassigned);
 export default router;
