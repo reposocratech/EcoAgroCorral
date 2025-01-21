@@ -46,6 +46,7 @@ INSERT INTO experience (experience_title, experience_description, experience_pri
     12.00,
     30.00);
     
+DELETE FROM experience WHERE experience_id = 13;
 SELECT * FROM experience;
 
 CREATE TABLE experience_pictures (
@@ -56,6 +57,8 @@ is_main BOOLEAN NOT NULL DEFAULT 0,
 CONSTRAINT fk_experience_1 FOREIGN KEY (experience_pictures_experience_id)
 	REFERENCES experience(experience_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+SELECT * FROM experience_pictures;
 
 CREATE TABLE feature (
 feature_id SMALLINT UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -89,6 +92,30 @@ WHERE feature_id = 5;
 
 UPDATE feature
 SET feature_icon = "hat.png"
+WHERE feature_id = 9;
+
+UPDATE feature
+SET feature_icon = "picnic.png"
+WHERE feature_id = 4;
+
+UPDATE feature
+SET feature_icon = "picnic.png"
+WHERE feature_id = 8;
+
+UPDATE feature
+SET feature_icon = "picnic.png"
+WHERE feature_id = 12;
+
+UPDATE feature
+SET feature_icon = "restaurant.png"
+WHERE feature_id = 2;
+
+UPDATE feature
+SET feature_icon = "restaurant.png"
+WHERE feature_id = 6;
+
+UPDATE feature
+SET feature_icon = "restaurant.png"
 WHERE feature_id = 10;
 
 

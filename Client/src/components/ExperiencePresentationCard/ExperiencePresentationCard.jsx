@@ -8,10 +8,10 @@ export const ExperiencePresentationCard = ({experience, index}) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    backgroundRef1.current.style.backgroundImage = "linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url(" + `/assets/images/experiences/${experience.experience_picture_file}` + ")";
-    //console.log(experience);
-    //console.log(backgroundRef1.current.style.backgroundImage);
-  }, []);
+    backgroundRef1.current.style.backgroundImage = "linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url(" + `${import.meta.env.VITE_SERVER_URL}images/experiences/${experience.experience_pictures_file}` + ")";
+    console.log(experience);
+    console.log(backgroundRef1.current.style.backgroundImage);
+  }, [experience]);
   
 
   return (

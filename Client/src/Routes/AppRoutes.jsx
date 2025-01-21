@@ -13,6 +13,7 @@ import { Register } from "../pages/Auth/Register/Register";
 import { VerifyEmail } from "../pages/Auth/VerifyEmail/VerifyEmail";
 import { OneHike } from "../pages/Hikes/OneHike.jsx";
 import { ChangePassword } from "../pages/Auth/RecoverPassword/ChangePassword.jsx";
+import { CreateExperience } from "../pages/Admin/CreateExperience.jsx";
 
 
 
@@ -33,10 +34,12 @@ export const AppRoutes = () => {
           <Route path='/user/recoverPassword' element={<RecoverPassword />} />
           <Route path='/user/restablecerPass/:token' element={<ChangePassword />} />
 
-          <Route path='/experiencias' element={<AllExperiences />} />
+          <Route path='/sobreNosotros' element={<AboutUs />} />
 
           <Route path='/experiencias' element={<AllExperiences />} />
           <Route path='/experiencias/:id' element={<OneExperience />} />
+          <Route path='/experiencias/createExperience' element={<CreateExperience />} />
+
           <Route path="/paseo/:id" element={<OneHike/>}/>
           <Route path='/confirmarEmail/:token' element={<VerifyEmail/>}/>
         </Routes>

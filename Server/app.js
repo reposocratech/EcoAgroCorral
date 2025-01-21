@@ -25,10 +25,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 // app.use('/', indexRouter);
 app.use('/api/user', userRouter);
 app.use('/api/hike', hikeRouter);
-
-
-
-
 app.use('/api/experience', experienceRouter);
 
 
