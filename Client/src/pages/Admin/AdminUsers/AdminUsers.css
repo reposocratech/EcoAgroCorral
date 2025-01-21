@@ -1,0 +1,21 @@
+.AdminUsers{
+  height: auto;
+  table {
+    border-radius: 10px;
+    overflow: hidden;
+    width: 100%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  th.headTable {
+    background-color: #C3AC76;
+    color: black;
+    text-align: center;
+    font-weight: bold;
+    padding: 10px;
+  }
+
+  th, td {
+    border: 1px solid #000000;
+  }
+}

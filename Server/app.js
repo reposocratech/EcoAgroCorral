@@ -5,10 +5,10 @@ import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import {fileURLToPath} from 'url';
 import cors from 'cors';
-
 import userRouter from "./modules/user/user.routes.js";
 import experienceRouter from "./modules/experience/experience.routes.js";
 import hikeRouter from './modules/hike/hike.routes.js';
+import adminRouter from './modules/admin/admin.routes.js';
 import reservationRouter from './modules/reservation/reservation.routes.js'
 
 const __filename = fileURLToPath(import.meta.url);
@@ -27,6 +27,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api/user', userRouter);
 app.use('/api/hike', hikeRouter);
 app.use('/api/experience', experienceRouter);
+app.use('/api/admin', adminRouter);
 app.use('/api/reservation', reservationRouter);
 
 
