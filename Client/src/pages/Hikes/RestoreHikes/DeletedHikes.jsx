@@ -37,9 +37,10 @@ export const DeletedHikes = () => {
       }
       const updatedHike = await response.json();
       setHikes(hikes.filter((hike) => hike.hike_id !== id)); // Eliminar el hike recuperado de la lista
-      alert(`Hike ${updatedHike.hike_title} recuperado con éxito`);
+      
     } catch (error) {
-      alert(`Error al recuperar el hike: ${error.message}`);
+      console.log("Error al recuperar el hike:", error);
+      
     }
   };
 

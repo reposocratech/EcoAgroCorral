@@ -58,11 +58,11 @@ export const OneHike = () => {
   if (!hike) return <p>No se encontró el paseo.</p>;
 
   return (
-    <Container className="pb-3">
-      <div className="hike-details mt-3 mb-3">
+    <Container fluid="xxl" className="pb-3 pt-1">
+      <div className="hike-details mt-5 mb-3">
         <section
           style={{
-            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${
+            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url(${
               import.meta.env.VITE_SERVER_URL
             }images/hikes/${
               hike.images.find((img) => img.is_main === 1)?.hike_pictures_file
@@ -196,7 +196,7 @@ export const OneHike = () => {
         </div>
       </div>
 
-      <div className="mt-4 d-flex justify-content-between flex-wrap gap-1">
+      <div className="mt-4 d-flex justify-content-center flex-wrap gap-1">
         <Button
           className="button-nuevo-paseo"
           onClick={() => navigate("/paseo/nuevoPaseo")}
