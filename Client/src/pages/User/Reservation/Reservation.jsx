@@ -1,8 +1,14 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { fetchData } from "../../../helpers/axiosHelper.js";
 import { AgroContext } from "../../../context/ContextProvider.jsx";
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from "react-router-dom";
+import reservationImg from "../../../../public/assets/images/reservation/reservation.png";
+import "./reservation.css";
+import DatePicker, { registerLocale } from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import es from "date-fns/locale/es";
+
 
 const initialValue = {
   reservation_experience_id: null,
@@ -21,12 +27,16 @@ export const Reservation = () => {
   const [reservation, setReservation] = useState(initialValue);
   const [msg, setMsg] = useState("");
   const [msgReserv, setMsgReserv] = useState(false);
+  const [dates, setDates] = useState([]);
   const { user } = useContext(AgroContext);
   const navigate = useNavigate();
+  
+
+  const convertDate = dates.map((date) => new Date(date));
 
   const numAdult = Array.from({ length: 20 }, (value, i) => i + 1);
   const numChildren = Array.from(
-    { length: 19 - reservation?.reservation_adult },
+    { length: 21 - reservation?.reservation_adult },
     (value, i) => i
   );
 
@@ -36,10 +46,23 @@ export const Reservation = () => {
   );
 
   useEffect(() => {
+
+    registerLocale("es", es);
     const fetchExperience = async () => {
       try {
         const result = await fetchData("api/user/getExperience", "get");
         setData(result);
+
+        const reservationsDate = await fetchData(
+          "api/reservation/getDates",
+          "get"
+        );
+
+        if (dates.length == 0) {
+          for (let elem of reservationsDate) {
+            dates.push(elem.reservation_date);
+          }
+        }
 
         for (let elem of result) {
           experiences.push({
@@ -68,33 +91,39 @@ export const Reservation = () => {
     setReservation({ ...reservation, [name]: value });
   };
 
+
   const onSubmit = async () => {
     try {
-      if(!reservation.reservation_experience_id ||
+      if (
+        !reservation.reservation_experience_id ||
         !reservation.reservation_hike_id ||
         !reservation.reservation_date ||
         !reservation.reservation_time
-        ){
-          setMsg("Debes cumplimentar todos los campos")
-        } else if(reservation.reservation_adult + reservation.reservation_children < 2){
-          setMsg("La reserva debe ser de un mínimo de dos personas.")
-        }else{
-
-          const data = [
-            {
-              ...reservation,
-              reservation_total_price:
-                hikes[0]?.experience_price_adult * reservation.reservation_adult +
-                hikes[0]?.experience_price_child * reservation.reservation_children,
-              reservation_user_id: user.user_id,
-            },
-            
-          ];
-          const result = await fetchData('api/user/createReservation', 'post', data);
-          setMsgReserv(true);
-        }
-      
-      
+      ) {
+        setMsg("Debes cumplimentar todos los campos");
+      } else if (
+        reservation.reservation_adult + reservation.reservation_children <
+        2
+      ) {
+        setMsg("La reserva debe ser de un mínimo de dos personas.");
+      } else {
+        const data = [
+          {
+            ...reservation,
+            reservation_total_price:
+              hikes[0]?.experience_price_adult * reservation.reservation_adult +
+              hikes[0]?.experience_price_child *
+                reservation.reservation_children,
+            reservation_user_id: user.user_id,
+          },
+        ];
+        const result = await fetchData(
+          "api/user/createReservation",
+          "post",
+          data
+        );
+        setMsgReserv(true);
+      }
     } catch (error) {
       setMsg(error.response.data.message);
     }
@@ -102,167 +131,220 @@ export const Reservation = () => {
 
   return (
     <>
-    {!msgReserv ?
-    <section>
-      <Container>
-        <Row>
-          <Col>
-            <h2>Reserva tu experiencia</h2>
-
-            <Form className="px-4 pt-4">
-              <Form.Group className="mb-3">
-                <Form.Label>Experiencia</Form.Label>
-                <Form.Select
-                  name="reservation_experience_id"
-                  value={reservation.reservation_experience_id}
-                  onChange={handleChange}
-                  id="formBasicExperience"
-                >
-                  <option>Selecciona una experiencia</option>
-                  {experiences.map((elem, index) => {
-                    return (
-                      <option key={index} value={elem.id}>
-                        {elem.title}
-                      </option>
-                    );
-                  })}
-                </Form.Select>
-              </Form.Group>
-
-              <Form.Group className="mb-3">
-                <Form.Label>Ruta</Form.Label>
-
-                <Form.Select
-                  value={reservation.reservation_hike_id}
-                  name="reservation_hike_id"
-                  onChange={handleChange}
-                  id="formBasicHike"
-                  disabled={!reservation.reservation_experience_id}
-                >
-                  <option value="">Selecciona una ruta</option>
-                  {hikes?.map((elem, index) => {
-                    return (
-                      <option key={index} value={elem.hike_id}>
-                        {elem.hike_title}
-                      </option>
-                    );
-                  })}
-                </Form.Select>
-              </Form.Group>
-
-              <Form.Group className="mb-3">
-                <Form.Label>Número de adultos</Form.Label>
-
-                <Form.Select
-                  value={reservation.reservation_adult}
-                  name="reservation_adult"
-                  onChange={handleChange}
-                  id="formBasicAdult"
-                >
-                  <option value="">Selecciona el número de adultos</option>
-                  {numAdult.map((elem) => {
-                    return <option key={elem}> {elem}</option>;
-                  })}
-                </Form.Select>
-              </Form.Group>
-
-              <Form.Group className="mb-3">
-                <Form.Label>Número de niños</Form.Label>
-
-                <Form.Select
-                  value={reservation.reservation_children}
-                  name="reservation_children"
-                  onChange={handleChange}
-                  id="formBasicChild"
-                >
-                  <option value="">Selecciona el número de niños</option>
-                  {numChildren.map((elem) => {
-                    return <option key={elem}> {elem}</option>;
-                  })}
-                </Form.Select>
-              </Form.Group>
-
-              <Form.Group className="mb-3" id="formBasicDate">
-                <Form.Label>Fecha</Form.Label>
-                <Form.Control
-                  type="date"
-                  name="reservation_date"
-                  value={reservation.reservation_date}
-                  onChange={handleChange}
-                  min={
-                    new Date(Date.now() + 86400000).toISOString().split("T")[0]
-                  }
-                />
-              </Form.Group>
-
-              <Form.Group className="mb-3">
-                <Form.Label>Hora de inicio</Form.Label>
-
-                <Form.Select
-                  value={reservation.reservation_time}
-                  name="reservation_time"
-                  onChange={handleChange}
-                  id="formBasicTime"
-                >
-                  <option value="">Selecciona la hora</option>
-                  {reservTime.map((elem) => {
-                    return <option key={elem}> {elem}</option>;
-                  })}
-                </Form.Select>
-              </Form.Group>
-
-              <Form.Group className="mb-3">
-                <Form.Label>
-                  Introduzca algún extra o requerimiento que le pueda interesar
-                  (intolerancias, peticiones,alimentos por encargo...).
-                </Form.Label>
-                <Form.Control
-                  as="textarea"
-                  rows={3}
-                  value={reservation.reservation_text}
-                  name="reservation_text"
-                  onChange={handleChange}
-                  id="formBasicText"
-                />
-              </Form.Group>
-              <div>
-                <p>Precio por adulto: {hikes[0]?.experience_price_adult} €</p>
-                <p>Precio por niño: {hikes[0]?.experience_price_child} €</p>
-                <p>
-                  Total:{isNaN(hikes[0]?.experience_price_adult *
-                    reservation.reservation_adult +
-                    hikes[0]?.experience_price_child *
-                      reservation.reservation_children) ? " 0 " : hikes[0]?.experience_price_adult *
+      {!msgReserv ? (
+        <section>
+          <Container fluid="xxl" className="py-5">
+            <Row className="reservation mx-1">
+              <Col xs={12}>
+                <h2 className="text-center pb-2 pt-4">
+                  Reserva tu experiencia
+                </h2>
+                <div className="divisor mb-4"></div>
+              </Col>
+              <Col lg={6} className="d-flex flex-column align-items-center">
+                <img src={reservationImg} alt="" />
+                <div className="pt-4 fw-bold text-center price mt-4">
+                  <p>
+                    Precio por adulto:{" "}
+                    {hikes[0]?.experience_price_adult
+                      ? hikes[0]?.experience_price_adult
+                      : "0"}{" "}
+                    €
+                  </p>
+                  <p>
+                    Precio por niño:{" "}
+                    {hikes[0]?.experience_price_child
+                      ? hikes[0]?.experience_price_child
+                      : "0"}{" "}
+                    €
+                  </p>
+                  <p>
+                    Total:
+                    {isNaN(
+                      hikes[0]?.experience_price_adult *
                         reservation.reservation_adult +
+                        hikes[0]?.experience_price_child *
+                          reservation.reservation_children
+                    )
+                      ? " 0 "
+                      : hikes[0]?.experience_price_adult *
+                          reservation.reservation_adult +
                         hikes[0]?.experience_price_child *
                           reservation.reservation_children}
                     €
+                  </p>
+                </div>
+              </Col>
+
+              <Col lg={6}>
+                <Form className="px-4">
+                  <Form.Group className="mb-3">
+                    <Form.Label>Experiencia</Form.Label>
+                    <Form.Select
+                      name="reservation_experience_id"
+                      value={reservation.reservation_experience_id}
+                      onChange={handleChange}
+                      id="formBasicExperience"
+                    >
+                      <option>Selecciona una experiencia</option>
+                      {experiences.map((elem, index) => {
+                        return (
+                          <option key={index} value={elem.id}>
+                            {elem.title}
+                          </option>
+                        );
+                      })}
+                    </Form.Select>
+                  </Form.Group>
+
+                  <Form.Group className="mb-3">
+                    <Form.Label>Ruta</Form.Label>
+
+                    <Form.Select
+                      value={reservation.reservation_hike_id}
+                      name="reservation_hike_id"
+                      onChange={handleChange}
+                      id="formBasicHike"
+                      disabled={!reservation.reservation_experience_id}
+                    >
+                      <option value="">Selecciona una ruta</option>
+                      {hikes?.map((elem, index) => {
+                        return (
+                          <option key={index} value={elem.hike_id}>
+                            {elem.hike_title}
+                          </option>
+                        );
+                      })}
+                    </Form.Select>
+                  </Form.Group>
+
+                  <Form.Group className="mb-3">
+                    <Form.Label>Número de adultos</Form.Label>
+
+                    <Form.Select
+                      value={reservation.reservation_adult}
+                      name="reservation_adult"
+                      onChange={handleChange}
+                      id="formBasicAdult"
+                    >
+                      <option value="">Selecciona el número de adultos</option>
+                      {numAdult.map((elem) => {
+                        return <option key={elem}> {elem}</option>;
+                      })}
+                    </Form.Select>
+                  </Form.Group>
+
+                  <Form.Group className="mb-3">
+                    <Form.Label>Número de niños</Form.Label>
+
+                    <Form.Select
+                      value={reservation.reservation_children}
+                      name="reservation_children"
+                      onChange={handleChange}
+                      id="formBasicChild"
+                    >
+                      <option value="">Selecciona el número de niños</option>
+                      {numChildren.map((elem) => {
+                        return <option key={elem}> {elem}</option>;
+                      })}
+                    </Form.Select>
+                  </Form.Group>
+
+                  <div className="d-flex flex-column">
+                    <Form.Label>Fecha</Form.Label>
+
+                    <DatePicker
+                      className="input-date mb-3 p-2"
+                      name="reservation_date"
+                      value={reservation.reservation_date}
+                      onChange={(date) =>
+                        setReservation({
+                          ...reservation,
+                          reservation_date: date.toISOString().split("T")[0],
+                        })
+                      }
+                      minDate={
+                        new Date(Date.now() + 86400000)
+                          .toISOString()
+                          .split("T")[0]
+                      }
+                      excludeDates={convertDate}
+                      selected={reservation.reservation_date}
+                      placeholderText="Selecciona una fecha"
+                      locale="es"
+                      
+                      
+                    />
+                  </div>
+
+                  <Form.Group className="mb-3">
+                    <Form.Label>Hora de inicio</Form.Label>
+
+                    <Form.Select
+                      value={reservation.reservation_time}
+                      name="reservation_time"
+                      onChange={handleChange}
+                      id="formBasicTime"
+                    >
+                      <option value="">Selecciona la hora</option>
+                      {reservTime.map((elem) => {
+                        return <option key={elem}> {elem}</option>;
+                      })}
+                    </Form.Select>
+                  </Form.Group>
+
+                  <Form.Group className="mb-3">
+                    <Form.Label>
+                      Introduzca algún extra o requerimiento que le pueda
+                      interesar (intolerancias, peticiones,alimentos por
+                      encargo...).
+                    </Form.Label>
+                    <Form.Control
+                      as="textarea"
+                      rows={3}
+                      value={reservation.reservation_text}
+                      name="reservation_text"
+                      onChange={handleChange}
+                      id="formBasicText"
+                    />
+                  </Form.Group>
+
+                  <span>{msg}</span>
+                </Form>
+              </Col>
+              <Col xs={12}>
+                <div className="p-3 d-flex justify-content-center gap-4">
+                  <Button className="btn mb-3" onClick={onSubmit}>
+                    Reservar
+                  </Button>
+                  <Button
+                    className="btn mb-3"
+                    onClick={() => navigate("/user/perfil")}
+                  >
+                    Cancelar
+                  </Button>
+                </div>
+              </Col>
+            </Row>
+          </Container>
+        </section>
+      ) : (
+        <section className="message">
+          <Container>
+            <Row>
+              <Col className="d-flex justify-content-center">
+                <p className="fw-bold p-4">
+                  Su reserva se realizó correctamente. Puedes ver todas tus
+                  reservas{" "}
+                  <Link className="link" to={"/user/perfil"}>
+                    aquí.
+                  </Link>{" "}
                 </p>
-              </div>
-              <span>{msg}</span>
-              <div className="p-2 d-flex justify-content-center">
-                <Button className="btn mb-3" onClick={onSubmit}>
-                  Reservar
-                </Button>
-                <Button className="btn mb-3" onClick={()=> navigate('/user/perfil')}>Cancelar</Button>
-              </div>
-            </Form>
-          </Col>
-        </Row>
-      </Container>
-    </section> :
-    <section>
-      <Container>
-        <Row>
-          <Col>
-          <p>Su reserva se realizó correctamente. Puedes ver todas tus reservas <Link to={'/user/perfil'} >aquí.</Link> </p>
-          </Col>
-        </Row>
-      </Container>
-
-    </section>}
-
-
+              </Col>
+            </Row>
+          </Container>
+        </section>
+      )}
     </>
   );
 };

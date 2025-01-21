@@ -9,7 +9,11 @@ import { OneExperience } from "../pages/Experiences/OneExperience/OneExperience"
 import { RecoverPassword } from "../pages/Auth/RecoverPassword/RecoverPassword";
 import { Register } from "../pages/Auth/Register/Register";
 import { VerifyEmail } from "../pages/Auth/VerifyEmail/VerifyEmail";
-import { OneHike } from "../pages/Hikes/OneHike.jsx";
+import { CreateExperience } from "../pages/Admin/CreateExperience.jsx";
+import { OneHike } from "../pages/Hikes/OneHike/OneHike.jsx";
+import { CreateHike } from "../pages/Hikes/NewHike/NewHike";
+import { EditHike } from "../pages/Hikes/EditHike/EditHike";
+import {DeletedHikes} from "../pages/Hikes/RestoreHikes/DeletedHikes";
 import { ChangePassword } from "../pages/Auth/RecoverPassword/ChangePassword.jsx";
 import { Profile } from "../pages/User/Profile/Profile.jsx";
 import { EditUser } from "../pages/User/EditUser/EditUser.jsx";
@@ -20,6 +24,7 @@ import { AdminDashboard } from "../pages/Admin/AdminDashboard/AdminDashboard.jsx
 import { AdminUsers } from "../pages/Admin/AdminUsers/AdminUsers.jsx";
 import { PendingReservations } from "../pages/Admin/AdminReservation/PendingReservations.jsx";
 import { ReservationHistory } from "../pages/Admin/AdminReservation/ReservationHistory.jsx";
+import { CancelReservation } from "../pages/User/CancelReservation/CancelReservation.jsx";
 
 
 export const AppRoutes = () => {
@@ -41,8 +46,12 @@ export const AppRoutes = () => {
           <Route path='/contacto' element={<ContactUs/>} />
           <Route path='/experiencias' element={<AllExperiences />} />
           <Route path='/experiencias/:id' element={<OneExperience />} />
+          <Route path='/experiencias/createExperience' element={<CreateExperience />} />
           <Route path="/paseo/:id" element={<OneHike/>}/>
+          <Route path="/paseo/nuevoPaseo" element={<CreateHike />} />          
+          <Route path="/paseo/editar/:hikeId" element={<EditHike />} />
           <Route path='/confirmarEmail/:token' element={<VerifyEmail/>}/>
+          <Route path="/paseo/borrados" element={<DeletedHikes/>} />
           <Route path='/user/perfil/editUser' element={<EditUser/>}/>
           <Route path='/user/reserva' element={<Reservation/>}/>
           <Route path='/admin/perfil' element={<AdminDashboard/>}/>
@@ -50,6 +59,7 @@ export const AppRoutes = () => {
           <Route path="/admin/reservas-pendientes" element={<PendingReservations />} />
           <Route path="/admin/historial-reservas" element={<ReservationHistory />} />
           <Route path='*' element={<ErrorPage />}/>
+          <Route path='/reserva/cancelarReserva/:reservation_id' element={<CancelReservation/>}/>
         </Routes>
       </main>
       <footer>

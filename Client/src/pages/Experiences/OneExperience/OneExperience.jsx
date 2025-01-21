@@ -32,7 +32,7 @@ export const OneExperience = () => {
   return (
     <>
       <section className='pt-5'>
-        <Container xxl="true" >
+        <Container fluid="xxl" >
           <div className="text-center px-5 text-experience">
             <h1>{experienceInfo?.experience?.title}</h1>
             <p>{experienceInfo?.experience?.description}</p>
@@ -40,7 +40,7 @@ export const OneExperience = () => {
         </Container>
       </section>
       <section className='my-5 py-5 gray-bg'>
-        <Container xxl="true">
+        <Container fluid="xxl">
           <h2 className='text-experience'>Paseos disponibles:</h2>
           <Row>
             <div className="d-flex justify-content-around flex-wrap">
@@ -56,7 +56,7 @@ export const OneExperience = () => {
         </Container>
       </section>
       <section className='my-5 text-experience'>
-        <Container xxl="true">
+        <Container fluid="xxl">
               {experienceInfo?.features?.map((elem, index) => {
                 return((index+1) %2 === 1? 
                 <Row key={elem.feature_id} className='d-flex justify-content-start'>
@@ -75,7 +75,7 @@ export const OneExperience = () => {
         </Container>
       </section>
       <section className='mt-5 gray-bg'>
-        <Container xxl="true">
+        <Container fluid="xxl">
           <Row>
             <div className="d-flex justify-content-around flex-wrap">
               <ExperiencePicGallery pictures={experienceInfo?.experiencePictures} />
