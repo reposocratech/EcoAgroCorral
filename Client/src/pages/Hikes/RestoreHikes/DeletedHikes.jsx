@@ -1,6 +1,6 @@
 import  { useEffect, useState } from "react";
 import { Table, Button, Alert } from "react-bootstrap";
-import './style.css';
+import './DeletedHikes.css';
 export const DeletedHikes = () => {
   const [hikes, setHikes] = useState([]);
   const [error, setError] = useState(null);

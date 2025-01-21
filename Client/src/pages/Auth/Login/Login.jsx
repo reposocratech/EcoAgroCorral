@@ -65,7 +65,7 @@ export const Login = () => {
   return (
     <>
     <section className='mt-5'>
-      <Container xxl="true">
+      <Container fluid="xxl">
         <Row className='justify-content-center p-2'>
           <Col lg={4} md={6} className='d-flex flex-column login shadow my-5'>
             <div className='divisor mt-4'></div>

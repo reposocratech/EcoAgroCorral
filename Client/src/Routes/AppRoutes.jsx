@@ -13,6 +13,7 @@ import { OneHike } from "../pages/Hikes/OneHike/OneHike.jsx";
 import { CreateHike } from "../pages/Hikes/NewHike/NewHike";
 import { EditHike } from "../pages/Hikes/EditHike/EditHike";
 import {DeletedHikes} from "../pages/Hikes/RestoreHikes/DeletedHikes";
+
 import { ChangePassword } from "../pages/Auth/RecoverPassword/ChangePassword.jsx";
 import { Profile } from "../pages/User/Profile/Profile.jsx";
 import { EditUser } from "../pages/User/EditUser/EditUser.jsx";

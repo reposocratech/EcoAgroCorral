@@ -85,7 +85,7 @@ button.button-nuevo-paseo:hover {
 
 /* Estilo para el botón "Modificar Paseo" */
 button.button-modificar-paseo {
-  background-color: #0077ff; /* Azul para "Modificar" */
+  background-color: #3c8be4;
   color: white;
   border: none;
  
@@ -98,7 +98,7 @@ button.button-modificar-paseo {
 button.button-modificar-paseo:hover {
   background-color: #2f59f3; 
 }
-.icon{
+.icon-hike{
   width: 100px;
   height: 100px;
 

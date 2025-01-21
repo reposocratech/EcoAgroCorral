@@ -1,8 +1,19 @@
 import { useEffect, useState } from "react";
 import { fetchData } from "../../../helpers/axiosHelper";
 import { useNavigate, useParams } from "react-router-dom";
-import { Button, Form, Image, Container, Row, Col, Alert } from "react-bootstrap";
-import './style.css';
+import {
+  Button,
+  Form,
+  Image,
+  Container,
+  Row,
+  Col,
+  Alert,
+} from "react-bootstrap";
+import "./EditHike.css";
+import {HikeExperiences} from "../../../components/AsingExperienceToHike/EditHikeExperience";
+("../../../components/AsingExperienceToHike/EditHikeExperience");
+
 export const EditHike = () => {
   const { hikeId } = useParams();
   const navigate = useNavigate();
@@ -188,7 +199,11 @@ export const EditHike = () => {
 
     // Agregar datos del formulario al FormData
     for (const key in formData) {
-      if (key !== "mainImage" && key !== "secondaryImages" && key !== "removedImages") {
+      if (
+        key !== "mainImage" &&
+        key !== "secondaryImages" &&
+        key !== "removedImages"
+      ) {
         data.append(key, formData[key]);
       }
     }
@@ -196,7 +211,7 @@ export const EditHike = () => {
     // Enviar la solicitud
     try {
       const response = await fetch(url, {
-        method: 'PUT',
+        method: "PUT",
         body: data,
       });
 
@@ -214,27 +229,36 @@ export const EditHike = () => {
   };
 
   return (
-    <Container>
-      
+    <Container fluid="xxl">
       {showAlert && (
         <Alert variant="danger" onClose={() => setShowAlert(false)} dismissible>
-          Hubo un problema al cargar las imágenes. Por favor, intenta nuevamente.
+          Hubo un problema al cargar las imágenes. Por favor, intenta
+          nuevamente.
         </Alert>
       )}
       {mainImageMissing && (
-        <Alert variant="warning" onClose={() => setMainImageMissing(false)} dismissible>
+        <Alert
+          variant="warning"
+          onClose={() => setMainImageMissing(false)}
+          dismissible
+        >
           Debes seleccionar una imagen principal.
         </Alert>
       )}
       {formIncomplete && (
-        <Alert variant="warning" onClose={() => setFormIncomplete(false)} dismissible>
-          Todos los campos del formulario son obligatorios. Por favor, rellena todos los campos.
+        <Alert
+          variant="warning"
+          onClose={() => setFormIncomplete(false)}
+          dismissible
+        >
+          Todos los campos del formulario son obligatorios. Por favor, rellena
+          todos los campos.
         </Alert>
       )}
       <div className="d-flex flex-column align-items-center">
-        <Form className="form" onSubmit={handleSubmit}>
-        <h3 className="text-center">Modificar Paseo</h3>
-        <div className="divisor mb-3 mt-3"></div>
+        <Form className="form-edit-hike" onSubmit={handleSubmit}>
+          <h3 className="text-center">Modificar Paseo</h3>
+          <div className="divisor mb-3 mt-3"></div>
           <Row className="mb-3">
             {/* Título */}
             <Form.Group as={Col}>
@@ -319,15 +343,14 @@ export const EditHike = () => {
             <Form.Group as={Col}>
               <Form.Label>Imagen Principal</Form.Label>
               {!formData.mainImage && (
-                <Form.Control
-                  type="file"
-                  onChange={handleMainImageSelect}
-                />
+                <Form.Control type="file" onChange={handleMainImageSelect} />
               )}
               {formData.mainImage && (
                 <div className="d-flex flex-column align-items-center">
                   <Image
-                    src={`${import.meta.env.VITE_SERVER_URL}images/hikes/${formData.mainImage.hike_pictures_file}`}
+                    src={`${import.meta.env.VITE_SERVER_URL}images/hikes/${
+                      formData.mainImage.hike_pictures_file
+                    }`}
                     alt="Main"
                     fluid
                     rounded
@@ -335,7 +358,9 @@ export const EditHike = () => {
                   />
                   <Button
                     variant="danger"
-                    onClick={() => deleteImage(formData.mainImage.hike_pictures_id)}
+                    onClick={() =>
+                      deleteImage(formData.mainImage.hike_pictures_id)
+                    }
                     className="delete mt-2"
                   >
                     Eliminar Imagen Principal
@@ -372,21 +397,24 @@ export const EditHike = () => {
                         rounded
                       />
                       <Button
-                        variant="danger"
+                        
                         className="delete"
                         onClick={() => deleteImage(elem.hike_pictures_id)}
                       >
                         Borrar
                       </Button>
-                      <br/>
+                      <br />
                     </div>
                   </div>
                 )
             )}
           </div>
+          <div>
+            <HikeExperiences hikeId={hikeId} />
+          </div>
           {/* Botón de envío */}
           <div className="d-flex justify-content-center">
-            <Button  className="button mt-4" type="submit">
+            <Button className="button mt-4" type="submit">
               Actualizar Paseo
             </Button>
           </div>
