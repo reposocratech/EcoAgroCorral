@@ -71,6 +71,7 @@ export const OneHike = () => {
             backgroundPosition: "center",
             padding: "50px 0",
             color: "white",
+            borderRadius: "20px",
           }}
         >
           <div className="container text-center">

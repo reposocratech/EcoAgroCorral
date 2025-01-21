@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Form, Button, Container, Row, Col, Image } from 'react-bootstrap';
 import './NewHike.css';
@@ -16,6 +16,25 @@ export const CreateHike = () => {
     });
     const [mainImagePreview, setMainImagePreview] = useState(null);
     const [secondaryImagePreviews, setSecondaryImagePreviews] = useState([]);
+    const [experiences, setExperiences] = useState([]);
+    const [unassignedExperiences, setUnassignedExperiences] = useState([]);
+    const [assignedExperiences, setAssignedExperiences] = useState([]);
+
+    // Cargar las experiencias desde la API
+    useEffect(() => {
+        const fetchExperiences = async () => {
+            try {
+                const response = await fetch(`${import.meta.env.VITE_SERVER_URL}api/experience/getAllExperiences`);
+                const data = await response.json();
+                setExperiences(data);
+                setUnassignedExperiences(data); // Inicialmente todas las experiencias están no asignadas
+            } catch (error) {
+                console.error('Error fetching experiences:', error);
+            }
+        };
+
+        fetchExperiences();
+    }, []);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -43,48 +62,90 @@ export const CreateHike = () => {
         setSecondaryImagePreviews(files.map((file) => URL.createObjectURL(file)));
     };
 
+    const handleAddExperience = (experience) => {
+        setUnassignedExperiences((prev) =>
+            prev.filter((exp) => exp.experience_id !== experience.experience_id)
+        );
+        setAssignedExperiences((prev) => [...prev, experience]);
+    };
+
+    const handleRemoveExperience = (experience) => {
+        setAssignedExperiences((prev) =>
+            prev.filter((exp) => exp.experience_id !== experience.experience_id)
+        );
+        setUnassignedExperiences((prev) => [...prev, experience]);
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+    
         const data = new FormData();
         data.append('hike_title', formData.hike_title);
         data.append('hike_description', formData.hike_description);
         data.append('hike_distance', formData.hike_distance);
         data.append('hike_duration', formData.hike_duration);
         data.append('hike_itinerary', formData.hike_itinerary);
-
+    
         if (formData.mainImage) {
             data.append('file', formData.mainImage);
         }
-
+    
         formData.secondaryImages.forEach((file) => {
             data.append('file', file);
         });
-
+    
+        // Añadir experiencias asignadas al FormData
+        assignedExperiences.forEach((experience) => {
+            data.append('experiences[]', experience.experience_id);
+        });
+    
         try {
+            // Paso 1: Crear el paseo
             const response = await fetch(`${import.meta.env.VITE_SERVER_URL}api/hike/createHike`, {
                 method: 'POST',
                 body: data,
             });
-
+    
             if (!response.ok) {
                 throw new Error(`Error: ${response.status}`);
             }
-
+    
             const result = await response.json();
-            navigate(`/paseo/${result.hikeId}`);
+            const hikeId = result.hikeId; // Asumiendo que el resultado tiene un `hikeId`
+    
+            // Paso 2: Asignar las experiencias al paseo recién creado
+            const experienceIds = assignedExperiences.map((experience) => experience.experience_id);
+    
+            const assignExperiencesResponse = await fetch(`${import.meta.env.VITE_SERVER_URL}api/hike/${hikeId}/experiences`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ experienceIds }),
+            });
+    
+            if (!assignExperiencesResponse.ok) {
+                throw new Error('Error assigning experiences to hike');
+            }
+    
+            const assignResult = await assignExperiencesResponse.json();
+            console.log('Experiences assigned successfully:', assignResult);
+    
+            // Redirigir al detalle del paseo
+            navigate(`/paseo/${hikeId}`);
+    
         } catch (error) {
             console.error('Error creando el paseo:', error);
         }
     };
+    
 
     return (
         <Container
             fluid="xxl"
             className="d-flex justify-content-center align-items-center min-vh-100"
         >
-            <div className="shadow p-4 form-new" >
-                
+            <div className="shadow p-4 form-new">
                 <h3 className="mb-3 text-center">Crear un nuevo Paseo</h3>
                 <div className="divisor mb-3"></div>
                 <Form onSubmit={handleSubmit}>
@@ -100,7 +161,8 @@ export const CreateHike = () => {
                     </Form.Group>
                     <Form.Group className="mb-3">
                         <Form.Label>Descripción</Form.Label>
-                        <Form.Control  className="textarea"
+                        <Form.Control
+                            className="textarea"
                             as="textarea"
                             name="hike_description"
                             value={formData.hike_description}
@@ -130,7 +192,8 @@ export const CreateHike = () => {
                     </Form.Group>
                     <Form.Group className="mb-3">
                         <Form.Label>Itinerario</Form.Label>
-                        <Form.Control className="textarea"
+                        <Form.Control
+                            className="textarea"
                             as="textarea"
                             name="hike_itinerary"
                             value={formData.hike_itinerary}
@@ -180,8 +243,68 @@ export const CreateHike = () => {
                             </Row>
                         )}
                     </Form.Group>
+
+                    {/* Selector de Experiencias */}
+                    <Row className="mb-3">
+                        {/* Experiencias no asignadas */}
+                        <Col md={5}>
+                            <Form.Label>Experiencias No Asignadas</Form.Label>
+                            <Form.Control
+                                as="select"
+                                size="lg"
+                                multiple
+                            >
+                                {unassignedExperiences.map((experience) => (
+                                    <option key={experience.experience_id} value={experience.experience_id}>
+                                        {experience.experience_title}
+                                    </option>
+                                ))}
+                            </Form.Control>
+                            <Button
+                                className="mt-2"
+                                onClick={(e) => {
+                                    const selectedExperienceId = e.target.previousElementSibling.value;
+                                    const experience = unassignedExperiences.find(
+                                        (exp) => exp.experience_id === parseInt(selectedExperienceId)
+                                    );
+                                    handleAddExperience(experience);
+                                }}
+                            >
+                                Añadir
+                            </Button>
+                        </Col>
+
+                        {/* Experiencias asignadas */}
+                        <Col md={5}>
+                            <Form.Label>Experiencias Asignadas</Form.Label>
+                            <Form.Control
+                                as="select"
+                                size="lg"
+                                multiple
+                            >
+                                {assignedExperiences.map((experience) => (
+                                    <option key={experience.experience_id} value={experience.experience_id}>
+                                        {experience.experience_title}
+                                    </option>
+                                ))}
+                            </Form.Control>
+                            <Button
+                                className="mt-2"
+                                onClick={(e) => {
+                                    const selectedExperienceId = e.target.previousElementSibling.value;
+                                    const experience = assignedExperiences.find(
+                                        (exp) => exp.experience_id === parseInt(selectedExperienceId)
+                                    );
+                                    handleRemoveExperience(experience);
+                                }}
+                            >
+                                Quitar
+                            </Button>
+                        </Col>
+                    </Row>
+
                     <div className="d-flex align-items-center justify-content-center mt-4">
-                        <Button type="submit"  className="button text-center">
+                        <Button type="submit" className="button text-center">
                             Crear Paseo
                         </Button>
                     </div>
