@@ -65,7 +65,7 @@ export const ChangePassword = () => {
 
   return (
     <section>
-      <Container xxl="true">
+      <Container fluid="xxl">
         <Row className='justify-content-center'>
           <Col lg={5} className='my-5'>
             {!verifToken && <p> {msg} . <Link to="/user/recoverPassword">Inténtalo de nuevo aquí</Link></p>}

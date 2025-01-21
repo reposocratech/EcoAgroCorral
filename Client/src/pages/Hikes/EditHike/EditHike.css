@@ -1,5 +1,6 @@
-.form {
-  background-color: #e1dddd;
+.form-edit-hike {
+   background-color: #e1dddd; 
+ 
   padding-block: 2rem;
   border-radius: 20px;
   padding-inline: 1rem;
@@ -35,6 +36,23 @@
   }
   .delete:hover {
     background-color: #841f10; /* Un tono de rojo más oscuro cuando el usuario pasa el ratón */
+  }
+  .button-danger{
+    background-color: #c1271b;
+    color: white;
+    border: none;
+    transition: background-color 0.3s ease;
+  }
+  .button-danger:hover {
+    background-color: #841f10;
+  }
+  .button-primary{
+    background-color: #3c8be4; 
+  color: white;
+  border: none;
+  }
+  .button-primary:hover {
+    background-color: #2f59f3; 
   }
 }
 .textarea {

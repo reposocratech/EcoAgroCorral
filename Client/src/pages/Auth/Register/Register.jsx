@@ -121,7 +121,7 @@ export const Register = () => {
 
   return (
     <section>
-      <Container xxl="true">
+      <Container fluid="xxl">
         <Row className="d-flex justify-content-center">
           <Col
             lg={4}

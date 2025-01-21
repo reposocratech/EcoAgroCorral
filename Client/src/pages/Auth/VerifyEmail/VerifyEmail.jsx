@@ -47,7 +47,7 @@ export const VerifyEmail = () => {
       {verEmail === true && (
         <>
           <section className="mt-5">
-            <Container xxl="true">
+            <Container fluid="xxl">
               <Row className="justify-content-center p-2">
                 <Col
                   lg={4}
@@ -72,7 +72,7 @@ export const VerifyEmail = () => {
       {verEmail === false && (
         <>
           <section className="mt-5">
-            <Container xxl="true">
+            <Container fluid="xxl">
               <Row className="justify-content-center p-2">
                 <Col
                   lg={4}

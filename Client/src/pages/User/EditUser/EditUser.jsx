@@ -66,7 +66,7 @@ export const EditUser = () => {
 
   return (
     <section>
-    <Container xxl="true">
+    <Container fluid="xxl">
       <Row className="d-flex justify-content-center">
         <Col md={4} lg={6} className="d-flex flex-column shadow my-5 edit">
           <img src={logoAgro} alt="LogoAgro" className="mx-auto" />

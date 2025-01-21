@@ -61,7 +61,7 @@ export const RecoverPassword = () => {
   return (
     <>
     <section>
-      <Container xxl="true">
+      <Container fluid="xxl">
         <Row className='justify-content-center'>
           <Col lg={4} className='my-5' >
           <Form className="px-4 pt-4 form shadow my-5 p-4">
