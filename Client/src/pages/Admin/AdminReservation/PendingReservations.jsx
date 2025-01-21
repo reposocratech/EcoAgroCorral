@@ -60,8 +60,8 @@ export const PendingReservations = () => {
   return (
     <section className="PendingReservations">
       <Container>
-        <h2 className="pt-4 text-center mb-4">Reservas Pendientes</h2>
-        <Table bordered hover>
+        <h2 className="pt-5 text-center mb-3">Reservas Pendientes</h2>
+        <Table bordered hover className="mb-5">
           <thead>
             <tr className="text-center">
               <th className="headTable">USUARIO</th>

@@ -18,7 +18,7 @@ export const ContactUs = () => {
           <Row className="bgPhoto d-flex flex-column justify-content-center align-items-center text-center">
             <Col xs={12} md={8} lg={6}>
               <div className="container">
-                <h2 className="mb-3">CONTÁCTANOS</h2>
+                <h2 className="mb-2">CONTÁCTANOS</h2>
                 <div className="separator"></div>
                 <p>
                   Si tienes cualquier duda escríbenos. Estoy encantada de hablar
@@ -30,12 +30,12 @@ export const ContactUs = () => {
         </Container>
       </section>
 
-      <section className="icon-contacUs">
+      <section className="icon-contactUs">
         <Container fluid="xxl">
-          <Row className="row-gap-3 pb-5">
-            <Col xs={12} md={6} lg={3} className="pt-4 flex-column d-flex">
-              <div className="fs-1 align-items-center justify-content-center flex-column m-auto">
-                <FaHome className="home mt-5" />
+          <Row className="row-gap-3 pb-5 pt-5">
+            <Col xs={12} md={6} lg={3} className="flex-column d-flex">
+              <div className="icon-contactUs-icon">
+                <FaHome />
               </div>
               <div>
                 <p className="fw-bold mb-1 mx-4 align-items-center justify-content-center d-flex flex-column mt-2 fs-4">
@@ -58,9 +58,9 @@ export const ContactUs = () => {
                 </p>
               </div>
             </Col>
-            <Col xs={12} md={6} lg={3} className="pt-4 flex-column d-flex">
-              <div className="fs-1 align-items-center justify-content-center flex-column m-auto">
-                <FaWhatsapp className="whatsapp mt-5" />
+            <Col xs={12} md={6} lg={3} className="flex-column d-flex">
+              <div className="icon-contactUs-icon">
+                <FaWhatsapp />
               </div>
               <div>
                 <p className="fw-bold mb-1 mx-4 align-items-center justify-content-center d-flex flex-column mt-2 fs-4">
@@ -72,18 +72,15 @@ export const ContactUs = () => {
                   un WhatsApp. ¡Estaré encantada de atenderos!
                 </p>
                 <p className="text-center mb-5 fw-bold text">
-                  <a
-                    href="#"
-                    className="text-decoration-none text-dark text"
-                  >
+                  <a href="#" className="text-decoration-none text-dark text">
                     +34 644 80 30 31 - Raquel
                   </a>
                 </p>
               </div>
             </Col>
-            <Col xs={12} md={6} lg={3} className="pt-4 flex-column d-flex">
-              <div className="fs-1 align-items-center justify-content-center flex-column m-auto">
-                <FaMailBulk className="home mt-5" />
+            <Col xs={12} md={6} lg={3} className="flex-column d-flex">
+              <div className="icon-contactUs-icon">
+                <FaMailBulk />
               </div>
               <div>
                 <p className="fw-bold mb-1 mx-4 align-items-center justify-content-center d-flex flex-column mt-2 fs-4">
@@ -104,18 +101,16 @@ export const ContactUs = () => {
                 </p>
               </div>
             </Col>
-            <Col xs={12} md={6} lg={3} className="pt-4 flex-column d-flex">
-              <div className="fs-1 align-items-center justify-content-center flex-column m-auto">
-                <FaShareAlt className="home mt-5" />
+            <Col xs={12} md={6} lg={3} className="flex-column d-flex">
+              <div className="icon-contactUs-icon">
+                <FaShareAlt />
               </div>
               <div>
                 <p className="fw-bold mb-1 mx-4 align-items-center justify-content-center d-flex flex-column mt-2 fs-4">
                   Sígueme
                 </p>
                 <p className="mx-4 m-0 align-items-center justify-content-center d-flex flex-column text-center mt-2 mb-3">
-                  ¡No te pierdas nada! Sígueme en las redes sociales y mantente
-                  al día con novedades, ideas y contenido exclusivo. ¡Únete a
-                  nuestra comunidad!
+                Síguenos en redes sociales para descubrir novedades, contenido exclusivo, ideas y consejos. Únete a nuestra comunidad y comparte esta experiencia única con nosotros.
                 </p>
                 <p className="text-center mb-5">
                   <a
