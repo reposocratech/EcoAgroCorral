@@ -269,6 +269,9 @@ CONSTRAINT fk_hike_3 FOREIGN KEY (reservation_hike_id)
 	REFERENCES hike(hike_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
+ALTER TABLE ecoagrocorral.reservation 
+ADD COLUMN reservation_total_price DECIMAL(5,2) NULL DEFAULT NULL AFTER reservation_children;
+
 CREATE TABLE category (
     category_id MEDIUMINT UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
     category_name VARCHAR(150) UNIQUE NOT NULL

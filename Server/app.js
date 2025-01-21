@@ -9,6 +9,7 @@ import cors from 'cors';
 import userRouter from "./modules/user/user.routes.js";
 import experienceRouter from "./modules/experience/experience.routes.js";
 import hikeRouter from './modules/hike/hike.routes.js';
+import reservationRouter from './modules/reservation/reservation.routes.js'
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -26,6 +27,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api/user', userRouter);
 app.use('/api/hike', hikeRouter);
 app.use('/api/experience', experienceRouter);
+app.use('/api/reservation', reservationRouter);
 
 
 // catch 404 and forward to error handler

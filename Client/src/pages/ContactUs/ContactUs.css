@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Montserrat:wght@400;500;700&display=swap');
+
+.contactUs {
+  .bgPhoto {
+    background-image: linear-gradient(
+        rgba(0, 0, 0, 0.5),
+        rgba(0, 0, 0, 0.3)
+      ),
+      url('../../../../public/assets/images/contactUs/amapolas.jpg');
+    background-position: center;
+    background-size: cover;
+    min-height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 5px rgba(0, 0, 0, 0.2);
+  }
+
+  .separator {
+    width: 100px;
+    height: 2px;
+    background-color: white;
+    margin: 10px auto;
+  }
+
+  .container {
+    border: 2px solid black;
+    border-radius: 2rem;
+    background: linear-gradient(
+      rgba(232, 146, 146, 0.5),
+      rgba(223, 125, 125, 0.3)
+    );
+    padding: 30px;
+    color: white;
+    box-shadow: 40px 40px 0 rgba(0, 0, 0, 0.5);
+  }
+
+  h2,
+  p {
+    font-family: 'Merriweather';
+    color: white;
+  }
+
+}
+
+.icon{
+  .home,
+  .whatsapp{
+    color: #837363;
+    font-size: 4rem;
+  }
+  .logo{
+    text-decoration: none;
+    color: inherit;
+  }
+}
