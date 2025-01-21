@@ -52,15 +52,15 @@ export const Footer = () => {
         </Col>
         <Col md={4}>
           <div className="d-flex gap-2 align-items-end justify-content-center div-height">
-            <Link to="https://www.tiktok.com/@ecoagrocorral_">
-              <img className="icon-size" src={tiktokIcon} alt="Email icon" />
-            </Link>
-            <Link to="https://www.instagram.com/ecoagrocorral/">
-              <img className="icon-size" src={instagramIcon} alt="Email icon" />
-            </Link>
-            <Link to="https://www.facebook.com/people/Ecoagrocorral/61561636066521/">
-              <img className="icon-size" src={facebookIcon} alt="Email icon" />
-            </Link>
+            <a href="https://www.tiktok.com/@ecoagrocorral_" target="_blank" rel="noreferrer">
+              <img className="icon-size" src={tiktokIcon} alt="Tiktok icon" />
+            </a>
+            <a href="https://www.instagram.com/ecoagrocorral/" target="_blank" rel="noreferrer">
+              <img className="icon-size" src={instagramIcon} alt="Instagram Icon" />
+            </a>
+            <a href="https://www.facebook.com/people/Ecoagrocorral/61561636066521/" target="_blank" rel="noreferrer">
+              <img className="icon-size" src={facebookIcon} alt="Facebook icon" />
+            </a>
           </div>
         </Col>
         <Col md={4} className="px-5">
