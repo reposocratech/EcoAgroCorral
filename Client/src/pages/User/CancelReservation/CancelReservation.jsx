@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Button, Col, Container, Row } from 'react-bootstrap'
 import { fetchData } from '../../../helpers/axiosHelper'
 import { Link, useParams } from 'react-router-dom'
@@ -6,6 +6,7 @@ import './cancelReservation.css'
 import DatePicker, { registerLocale } from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css";
 import es from "date-fns/locale/es";
+import { AgroContext } from '../../../context/ContextProvider'
 
 export const CancelReservation = () => {
   const {reservation_id} = useParams()
@@ -14,9 +15,8 @@ export const CancelReservation = () => {
   const [dates, setDates] = useState([]);
   const [delReservation, setDelReservation] = useState(false);
   const [modReservation, setModReservation] = useState(false);
-  const [msg, setMsg] = useState("")
-
-   const convertDate = dates.map((date) => new Date(date));
+  const [msg, setMsg] = useState("");
+  const {user} = useContext(AgroContext);
 
 
   useEffect(()=>{
@@ -44,11 +44,11 @@ export const CancelReservation = () => {
     }
     fetchReservation();
   },[dates])
-  console.log(newDate);
+ 
   
   const onSubmitDelete = async ()=>{
     try {
-      const result = await fetchData(`api/reservation/deleteReservation/${reservation.reservation_id}`, 'delete');
+      const result = await fetchData('api/reservation/deleteReservation', 'delete', {user, reservation});
       setDelReservation(true);
     } catch (error) {
       console.log(error);
@@ -60,7 +60,7 @@ export const CancelReservation = () => {
       if(!newDate){
         setMsg("Debes elegir una nueva fecha")
       }
-      const result = await fetchData(`api/reservation/modifyReservation/${reservation.reservation_id}`, 'put', {newDate});
+      const result = await fetchData('api/reservation/modifyReservation', 'put', {newDate, user, reservation});
       setModReservation(true);
     } catch (error) {
       console.log(error);

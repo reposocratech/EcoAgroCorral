@@ -57,7 +57,7 @@ export const EditUser = () => {
       const res = await fetchData("api/user/editUser", "put", formData);
 
       setUser({ ...edit, user_avatar: res.img });
-      navigate("/");
+      navigate("/user/perfil")
     } catch (error) {
       console.error("Error en la edición del usuario:", error);
       setMsg("Error al guardar los cambios. Inténtalo de nuevo más tarde.");

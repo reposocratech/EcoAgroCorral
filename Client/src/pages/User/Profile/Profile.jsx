@@ -28,7 +28,7 @@ export const Profile = () => {
     fetchReservation();
   },[user]);
 
-  console.log(reservations);
+
     
   return (
     <>
@@ -55,7 +55,7 @@ export const Profile = () => {
       </Container>
     </section>
 
-    <section className='py-4'>
+    <section className='py-4 mt-4 reservation-section'>
       <Container fluid="xxl">
 
         <Row className='d-flex flex-column'>
@@ -69,6 +69,9 @@ export const Profile = () => {
               <ReservationCard key={elem.reservation_id} reservation={elem} />
             )
           })}
+          <Col xs={12} className='d-flex justify-content-center mt-3'>
+           <Button className='btn-new' onClick={()=> navigate('/user/reserva')}>Nueva Reserva</Button>
+          </Col>
           </Col>:
           <Col>
             <p>No has hecho ninguna reserva aun. Reserva ahora <Link className='link fw-bold' to={'/user/reserva'}> aquí. </Link> </p>
