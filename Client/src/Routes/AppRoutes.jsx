@@ -15,6 +15,11 @@ import { Profile } from "../pages/User/Profile/Profile.jsx";
 import { EditUser } from "../pages/User/EditUser/EditUser.jsx";
 import { Reservation } from "../pages/User/Reservation/Reservation.jsx";
 import { ContactUs } from "../pages/ContactUs/ContactUs.jsx";
+import { ErrorPage } from "../pages/ErrorPage/ErrorPage.jsx";
+import { AdminDashboard } from "../pages/Admin/AdminDashboard/AdminDashboard.jsx";
+import { AdminUsers } from "../pages/Admin/AdminUsers/AdminUsers.jsx";
+import { PendingReservations } from "../pages/Admin/AdminReservation/PendingReservations.jsx";
+import { ReservationHistory } from "../pages/Admin/AdminReservation/ReservationHistory.jsx";
 
 
 export const AppRoutes = () => {
@@ -40,6 +45,11 @@ export const AppRoutes = () => {
           <Route path='/confirmarEmail/:token' element={<VerifyEmail/>}/>
           <Route path='/user/perfil/editUser' element={<EditUser/>}/>
           <Route path='/user/reserva' element={<Reservation/>}/>
+          <Route path='/admin/perfil' element={<AdminDashboard/>}/>
+          <Route path='/admin/usuarios' element={<AdminUsers />} />
+          <Route path="/admin/reservas-pendientes" element={<PendingReservations />} />
+          <Route path="/admin/historial-reservas" element={<ReservationHistory />} />
+          <Route path='*' element={<ErrorPage />}/>
         </Routes>
       </main>
       <footer>
