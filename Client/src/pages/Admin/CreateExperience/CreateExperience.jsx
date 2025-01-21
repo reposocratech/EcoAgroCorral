@@ -2,11 +2,13 @@ import { useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 
 import logoAgro from "/assets/images/LogoAgro.png";
-import { fetchData } from "../../helpers/axiosHelper";
-import { CreateFeatureModal } from "../../components/CreateFeatureModal/CreateFeatureModal";
-import { CreateFeatureList } from "../../components/CreateFeatureList/CreateFeatureList";
-import { CreateExperienceMainImgList } from "../../components/CreateExperienceMainImgList/CreateExperienceImgList";
-import { CreateExperienceImgList } from "../../components/CreateExperienceImgList/CreateExperienceImgList";
+import { fetchData } from "../../../helpers/axiosHelper";
+import { CreateFeatureModal } from "../../../components/CreateFeatureModal/CreateFeatureModal";
+import { CreateFeatureList } from "../../../components/CreateFeatureList/CreateFeatureList";
+import { CreateExperienceMainImgList } from "../../../components/CreateExperienceMainImgList/CreateExperienceImgList";
+import { CreateExperienceImgList } from "../../../components/CreateExperienceImgList/CreateExperienceImgList";
+
+import "./createExperience.css";
 
 const initialValue = {
   experience_title: "",
@@ -91,12 +93,12 @@ export const CreateExperience = () => {
   
   return (
     <section>
-      <Container xxl="true">
+      <Container fluid="xxl">
         <Row className="d-flex justify-content-center">
           <Col
             lg={4}
             md={6}
-            className="d-flex flex-column shadow my-5 register"
+            className="d-flex flex-column shadow my-5 create-experience"
           >
             <img src={logoAgro} alt="LogoAgro" className="mx-auto" />
             <h2 className="text-center mt-2 fw-bold">CREA UNA NUEVA EXPERIENCIA</h2>

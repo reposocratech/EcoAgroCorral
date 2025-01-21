@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchData } from '../../../helpers/axiosHelper';
 import { Col, Container, Row } from 'react-bootstrap';
@@ -8,11 +8,13 @@ import "./oneExperience.css";
 import { FeatureCardJustifyLeft } from '../../../components/FeatureCardJustifyLeft/FeatureCardJustifyLeft.jsx';
 import { FeatureCardJustifyRight } from '../../../components/FeatureCardJustifyRight/FeatureCardJustifyRight.jsx';
 import { ExperiencePicGallery } from '../../../components/ExperiencePicGallery/ExperiencePicGallery.jsx';
+import { AgroContext } from '../../../context/ContextProvider.jsx';
 
 export const OneExperience = () => {
+  const {user} = useContext(AgroContext);
   const [experienceInfo, setExperienceInfo] = useState({});
   const {id} = useParams();
-
+  console.log(user);
   console.log(experienceInfo);
 
    useEffect(() => {
@@ -42,6 +44,7 @@ export const OneExperience = () => {
       <section className='my-5 py-5 gray-bg'>
         <Container fluid="xxl">
           <h2 className='text-experience'>Paseos disponibles:</h2>
+
           <Row>
             <div className="d-flex justify-content-around flex-wrap">
               {experienceInfo?.hikes?.map((elem) => {

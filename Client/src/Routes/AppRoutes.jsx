@@ -9,7 +9,7 @@ import { OneExperience } from "../pages/Experiences/OneExperience/OneExperience"
 import { RecoverPassword } from "../pages/Auth/RecoverPassword/RecoverPassword";
 import { Register } from "../pages/Auth/Register/Register";
 import { VerifyEmail } from "../pages/Auth/VerifyEmail/VerifyEmail";
-import { CreateExperience } from "../pages/Admin/CreateExperience.jsx";
+import { CreateExperience } from "../pages/Admin/CreateExperience/CreateExperience.jsx";
 import { OneHike } from "../pages/Hikes/OneHike/OneHike.jsx";
 import { CreateHike } from "../pages/Hikes/NewHike/NewHike";
 import { EditHike } from "../pages/Hikes/EditHike/EditHike";
