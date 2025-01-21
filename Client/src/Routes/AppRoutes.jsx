@@ -9,11 +9,11 @@ import { OneExperience } from "../pages/Experiences/OneExperience/OneExperience"
 import { RecoverPassword } from "../pages/Auth/RecoverPassword/RecoverPassword";
 import { Register } from "../pages/Auth/Register/Register";
 import { VerifyEmail } from "../pages/Auth/VerifyEmail/VerifyEmail";
+import { CreateExperience } from "../pages/Admin/CreateExperience.jsx";
 import { OneHike } from "../pages/Hikes/OneHike/OneHike.jsx";
 import { CreateHike } from "../pages/Hikes/NewHike/NewHike";
 import { EditHike } from "../pages/Hikes/EditHike/EditHike";
 import {DeletedHikes} from "../pages/Hikes/RestoreHikes/DeletedHikes";
-
 import { ChangePassword } from "../pages/Auth/RecoverPassword/ChangePassword.jsx";
 import { Profile } from "../pages/User/Profile/Profile.jsx";
 import { EditUser } from "../pages/User/EditUser/EditUser.jsx";
@@ -41,6 +41,8 @@ export const AppRoutes = () => {
           <Route path='/contacto' element={<ContactUs/>} />
           <Route path='/experiencias' element={<AllExperiences />} />
           <Route path='/experiencias/:id' element={<OneExperience />} />
+          <Route path='/experiencias/createExperience' element={<CreateExperience />} />
+
           <Route path="/paseo/:id" element={<OneHike/>}/>
           <Route path="/paseo/nuevoPaseo" element={<CreateHike />} />          
           <Route path="/paseo/editar/:hikeId" element={<EditHike />} />

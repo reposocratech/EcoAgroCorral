@@ -6,7 +6,7 @@ export const FeatureCardJustifyLeft = ({feature}) => {
   return (
     <div className='d-flex align-items-center gap-2'>
       <div>
-        <img className='feature-icon' src={`/assets/icons/features/${icon}`} alt=" Icon of the characteristic" />
+        <img className='feature-icon' src={`${import.meta.env.VITE_SERVER_URL}images/features/${icon}`} alt=" Icon of the characteristic" />
       </div>
       <div>
         <h4>{name}</h4>
