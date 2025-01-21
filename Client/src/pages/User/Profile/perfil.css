@@ -56,6 +56,20 @@
   .link{
     color:  #ffffff;
   }
+
+  .btn-new{
+    background-color: #3a1a1d;
+    border: none;
+    color: #f2ece2;
+    transition: background-color 0.3s, color 0.3s ease;
+    
+  }
+
+  .btn-new:hover {
+    background-color: #5a2a2d;
+    color: #ffffff;
+  }
+
 }
 
 .reservation-title{
