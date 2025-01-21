@@ -19,7 +19,7 @@ export const Home = () => {
       </section>
 
       <section className="section-2 ">
-        <Container xxl="true">
+        <Container fluid="xxl">
           <Row>
             <Col>
               <div className="flexDiv">

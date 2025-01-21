@@ -9,20 +9,16 @@ import { OneExperience } from "../pages/Experiences/OneExperience/OneExperience"
 import { RecoverPassword } from "../pages/Auth/RecoverPassword/RecoverPassword";
 import { Register } from "../pages/Auth/Register/Register";
 import { VerifyEmail } from "../pages/Auth/VerifyEmail/VerifyEmail";
-
 import { OneHike } from "../pages/Hikes/OneHike/OneHike.jsx";
 import { CreateHike } from "../pages/Hikes/NewHike/NewHike";
 import { EditHike } from "../pages/Hikes/EditHike/EditHike";
 import {DeletedHikes} from "../pages/Hikes/RestoreHikes/DeletedHikes";
-
-import { OneHike } from "../pages/Hikes/OneHike.jsx";
 import { ChangePassword } from "../pages/Auth/RecoverPassword/ChangePassword.jsx";
 import { Profile } from "../pages/User/Profile/Profile.jsx";
 import { EditUser } from "../pages/User/EditUser/EditUser.jsx";
 import { Reservation } from "../pages/User/Reservation/Reservation.jsx";
 import { ContactUs } from "../pages/ContactUs/ContactUs.jsx";
 import { CancelReservation } from "../pages/User/CancelReservation/CancelReservation.jsx";
-
 
 
 export const AppRoutes = () => {
