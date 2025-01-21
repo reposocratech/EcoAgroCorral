@@ -78,7 +78,8 @@ class UserDal {
       AND reservation.reservation_hike_id = hike_pictures.hike_pictures_hike_id 
       AND hike_pictures.is_main = 1 
       AND reservation.reservation_hike_id = hike.hike_id 
-      AND reservation.reservation_experience_id = experience.experience_id`;
+      AND reservation.reservation_experience_id = experience.experience_id
+      ORDER BY reservation.reservation_date`;
       const result = await executeQuery(sql, [user_id]);
       return result;
     } catch (error) {

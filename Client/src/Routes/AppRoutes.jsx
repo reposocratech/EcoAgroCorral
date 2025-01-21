@@ -21,6 +21,7 @@ import { Profile } from "../pages/User/Profile/Profile.jsx";
 import { EditUser } from "../pages/User/EditUser/EditUser.jsx";
 import { Reservation } from "../pages/User/Reservation/Reservation.jsx";
 import { ContactUs } from "../pages/ContactUs/ContactUs.jsx";
+import { CancelReservation } from "../pages/User/CancelReservation/CancelReservation.jsx";
 
 
 
@@ -50,6 +51,7 @@ export const AppRoutes = () => {
           <Route path="/paseo/borrados" element={<DeletedHikes/>} />
           <Route path='/user/perfil/editUser' element={<EditUser/>}/>
           <Route path='/user/reserva' element={<Reservation/>}/>
+          <Route path='/reserva/cancelarReserva/:reservation_id' element={<CancelReservation/>}/>
         </Routes>
       </main>
       <footer>
