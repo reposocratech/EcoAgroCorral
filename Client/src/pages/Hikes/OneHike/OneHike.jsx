@@ -220,7 +220,7 @@ export const OneHike = () => {
 
         <Button
           className="button-eliminar-paseo2"
-          onClick={() => navigate("/paseo/borrados")}
+          onClick={() => navigate("/admin/perfil")}
         >
           Ver paseos eliminados
         </Button>
