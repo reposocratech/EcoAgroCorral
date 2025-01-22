@@ -37,7 +37,7 @@ export const AdminDashboard = () => {
             </Col>
           </Row>
           <Row className="text-center">
-            <Col xs={12} md={6} lg={4}>
+            <Col xs={12} md={6} lg={6}>
               <Card className="mb-4 shadow-sm">
                 <Card.Body>
                   <Card.Title>Gestión de Usuarios</Card.Title>
@@ -50,21 +50,7 @@ export const AdminDashboard = () => {
                 </Card.Body>
               </Card>
             </Col>
-            <Col xs={12} md={6} lg={4}>
-              <Card className="mb-4 shadow-sm">
-                <Card.Body>
-                  <Card.Title>Gestión de Experiencias y Rutas</Card.Title>
-                  <Card.Text>
-                    Crea, modifica o elimina experiencias o rutas para ofrecer a los
-                    usuarios.
-                  </Card.Text>
-                  <Button onClick={() => navigate("/experiencias")}>
-                    Ir a Experiencias
-                  </Button>
-                </Card.Body>
-              </Card>
-            </Col>
-            <Col xs={12} md={12} lg={4}>
+            <Col xs={12} md={6} lg={6}>
               <Card className="mb-4 shadow-sm">
                 <Card.Body>
                   <Card.Title>Gestión de Reservas</Card.Title>
@@ -82,6 +68,34 @@ export const AdminDashboard = () => {
                       Ver Reservas Pendientes
                     </Button>
                   </div>
+                </Card.Body>
+              </Card>
+            </Col>
+            <Col xs={12} md={6} lg={6}>
+              <Card className="mb-4 shadow-sm">
+                <Card.Body>
+                  <Card.Title>Gestión de Experiencias</Card.Title>
+                  <Card.Text>
+                    Crea, modifica o elimina experiencias para ofrecer a los
+                    usuarios.
+                  </Card.Text>
+                  <Button onClick={() => navigate("/experiencias/createExperience")}>
+                    Ir a Crear nueva Experiencia
+                  </Button>
+                </Card.Body>
+              </Card>
+            </Col>
+            <Col xs={12} md={6} lg={6}>
+              <Card className="mb-4 shadow-sm">
+                <Card.Body>
+                  <Card.Title>Gestión de Rutas</Card.Title>
+                  <Card.Text>
+                    Crea, modifica o elimina rutas para ofrecer a los
+                    usuarios.
+                  </Card.Text>
+                  <Button onClick={() => navigate("/paseo/nuevoPaseo")}>
+                    Ir a Crear nueva Ruta
+                  </Button>
                 </Card.Body>
               </Card>
             </Col>

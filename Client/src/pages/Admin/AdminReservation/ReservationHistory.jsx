@@ -26,8 +26,8 @@ export const ReservationHistory = () => {
   return (
     <section className="ReservationHistory">
       <Container>
-        <h2 className="pt-4 text-center mb-4">Historial de Reservas</h2>
-        <Table bordered hover>
+        <h2 className="pt-5 text-center mb-3">Historial de Reservas</h2>
+        <Table bordered hover responsive className="mb-5">
           <thead>
             <tr className="text-center">
               <th className="headTable">Usuario</th>
@@ -44,7 +44,9 @@ export const ReservationHistory = () => {
           <tbody>
             {reservations.map((reservation) => (
               <tr key={reservation.reservation_id} className="text-center">
-                <td>{`${reservation.user_name} ${reservation.user_lastname}`}</td>
+                <td className="text-truncate" title={`${reservation.user_name} ${reservation.user_lastname}`}>
+  {`${reservation.user_name} ${reservation.user_lastname}`}
+</td>
                 <td>{reservation.experience_title}</td>
                 <td>{reservation.hike_title}</td>
                 <td>{reservation.reservation_date}</td>

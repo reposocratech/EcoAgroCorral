@@ -9,7 +9,7 @@
       url('../../../../public/assets/images/contactUs/amapolas.jpg');
     background-position: center;
     background-size: cover;
-    min-height: 50vh;
+    min-height: 45vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -51,14 +51,20 @@
 
 }
 
-.icon-contacUs{
-  .home,
-  .whatsapp{
+
+.icon-contactUs {
+  .icon-contactUs-icon {
     color: #837363;
     font-size: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem; /* Centra y añade espacio inferior */
+    height: 80px; /* Altura uniforme */
+    width: 80px; /* Anchura uniforme */
   }
 
-  .logo{
+  .logo {
     text-decoration: none;
     color: inherit;
   }
@@ -70,7 +76,7 @@
     display: inline-block;
     transition: transform 0.3s, color 0.3s;
   }
-  
+
   a.text:hover,
   .logo:hover {
     transform: scale(1.2);

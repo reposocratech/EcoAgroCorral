@@ -48,7 +48,12 @@ export const Login = () => {
 
       setUser(userResult);
       setToken(token);
-      navigate('/user/perfil');
+      if (userResult.user_type === 1) {
+        navigate("/admin/perfil");
+      } 
+      else {
+        navigate("/user/perfil");
+      }
     } catch (error) {
       const fieldErrors = {};
       if(error instanceof ZodError){

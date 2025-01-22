@@ -14,7 +14,7 @@ const initialValue = {
   reservation_experience_id: null,
   reservation_hike_id: "",
   reservation_text: "",
-  reservation_date: "",
+  reservation_date: null,
   reservation_time: "",
   reservation_adult: "1",
   reservation_children: "0",
