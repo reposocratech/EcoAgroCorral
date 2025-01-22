@@ -16,7 +16,7 @@ export const CreateExperienceImgList = ({files, setFiles}) => {
         return(
           <div key={index} className="feature-list-elem">
             {/* <p><img src={elem.icon} alt="" /></p> */}
-            <p>{elem.name}</p>
+            <p className="element-name">{elem.name}</p>
             <img src={trash} onClick={()=>deleteFile(index)} alt="trash Icon" />
             {/* <button type="button" onClick={()=>deleteFeatures(index)}>borrar</button> */}
           </div>

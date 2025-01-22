@@ -8,21 +8,26 @@ class ExperienceController {
     //console.log("feature_icon", req.files.feature_icon);
     //console.log("Bodyyyy", req.body);
 
-    const {
-      experience_title,
-      experience_description,
-      experience_price_child,
-      experience_price_adult,
-      features
-    } = JSON.parse(req.body.data);
-    let data = [experience_title, experience_description, experience_price_adult, experience_price_child];
-    const {singleFile, multipleFiles, feature_icon} = req.files;
-
-    let images = [...singleFile, ...multipleFiles];
-    //console.log(images);
-    
-
-    experienceDal.addExperience(data, images, feature_icon, features);
+    try {
+      const {
+        experience_title,
+        experience_description,
+        experience_price_child,
+        experience_price_adult,
+        features
+      } = JSON.parse(req.body.data);
+      let data = [experience_title, experience_description, experience_price_adult, experience_price_child];
+      const {singleFile, multipleFiles, feature_icon} = req.files;
+  
+      let images = [...singleFile, ...multipleFiles];
+      
+  
+      await experienceDal.addExperience(data, images, feature_icon, features);
+      res.status(200).json("response");
+    } catch (error) {
+      console.log(error);
+      res.status(500).json(error);
+    }
   }
 
   /* addFeatures = async (req, res) => {
