@@ -78,9 +78,9 @@ export const CreateFeatureModal = ({show, handleClose, features, setFeatures}) =
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
-            Close
+            Cerrar
           </Button>
-          <Button variant="primary" onClick={onSubmitFeature}>Submit</Button>
+          <Button variant="primary" onClick={onSubmitFeature}>Guardar</Button>
         </Modal.Footer>
       </Modal>
   )

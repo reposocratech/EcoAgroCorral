@@ -47,14 +47,14 @@ export const OneExperience = () => {
         <Container fluid="xxl">
           <div className="d-flex gap-3">
             <h2 className='text-experience'>Paseos disponibles:</h2>
-            {user?.user_type === 1 ? <button className='addexp-btn' onClick={()=>navigate("/paseo/nuevoPaseo")}>Anadir Paseo</button>: null}
+            {user?.user_type === 1 ? <button className='addexp-btn' onClick={()=>navigate("/paseo/nuevoPaseo")}>Añadir Paseo</button>: null}
           </div>
           
           <Row>
             <div className="d-flex justify-content-around flex-wrap">
               {experienceInfo?.hikes?.map((elem) => {
                 return(
-                  <Col key={elem.hike_id} xs={12} md={6} xl={4} className='card-cols'>
+                  <Col key={elem.hike_id} xs={12} md={6} xl={4} className='card-cols mt-3'>
                     <HikeCard hike={elem}/>
                   </Col>
                 );
