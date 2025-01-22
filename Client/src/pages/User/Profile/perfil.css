@@ -34,7 +34,7 @@
   background-size: cover;
   border-radius: 20px;
   text-shadow: 1px 1px 1px black;
-  min-height: 263px;
+  min-height: 300px;
 
   .btn{
     background-color: rgb(221, 162, 94);
@@ -54,7 +54,7 @@
   background-color: rgba(221, 162, 94, 0.742);
 
   .link{
-    color:  #ffffff;
+    color:  #f4f0e9;
   }
 
   .btn-new{

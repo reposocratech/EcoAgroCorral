@@ -9,7 +9,6 @@ import DatePicker, { registerLocale } from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import es from "date-fns/locale/es";
 
-
 const initialValue = {
   reservation_experience_id: null,
   reservation_hike_id: "",
@@ -30,7 +29,6 @@ export const Reservation = () => {
   const [dates, setDates] = useState([]);
   const { user } = useContext(AgroContext);
   const navigate = useNavigate();
-  
 
   const convertDate = dates.map((date) => new Date(date));
 
@@ -46,7 +44,6 @@ export const Reservation = () => {
   );
 
   useEffect(() => {
-
     registerLocale("es", es);
     const fetchExperience = async () => {
       try {
@@ -91,6 +88,7 @@ export const Reservation = () => {
     setReservation({ ...reservation, [name]: value });
   };
 
+  console.log("dateee", reservation.reservation_date);
 
   const onSubmit = async () => {
     try {
@@ -102,7 +100,7 @@ export const Reservation = () => {
       ) {
         setMsg("Debes cumplimentar todos los campos");
       } else if (
-        reservation.reservation_adult + reservation.reservation_children <
+        parseInt(reservation.reservation_adult) + parseInt(reservation.reservation_children) <
         2
       ) {
         setMsg("La reserva debe ser de un mínimo de dos personas.");
@@ -260,7 +258,11 @@ export const Reservation = () => {
                       onChange={(date) =>
                         setReservation({
                           ...reservation,
-                          reservation_date: date.toISOString().split("T")[0],
+                          reservation_date: new Date(
+                            date.getTime() - date.getTimezoneOffset() * 60000
+                          )
+                            .toISOString()
+                            .split("T")[0],
                         })
                       }
                       minDate={
@@ -272,8 +274,6 @@ export const Reservation = () => {
                       selected={reservation.reservation_date}
                       placeholderText="Selecciona una fecha"
                       locale="es"
-                      
-                      
                     />
                   </div>
 

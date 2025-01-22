@@ -83,7 +83,11 @@ export const CancelReservation = () => {
                       name="reservation_date"
                       value={newDate}
                       onChange={(date) =>
-                        setNewDate(date.toISOString().split("T")[0])
+                        setNewDate(new Date(
+                          date.getTime() - date.getTimezoneOffset() * 60000
+                        )
+                          .toISOString()
+                          .split("T")[0])
                       }
                       minDate={
                         new Date(Date.now() + 86400000)
@@ -133,7 +137,7 @@ export const CancelReservation = () => {
             <Col lg={6} md={10} xs={12} className='d-flex flex-column align-items-center'>
             <article className='d-flex flex-column align-items-center cancel-reservation text-center p-3 px-5'>
               <p className='fw-bold fs-5'>
-              Te confirmamos que hemos realizado la modificación en la fecha de tu reserva.
+              Hemos realizado la modificación en la fecha de tu reserva.
               </p>
               <p>Tu nueva fecha para 
                 "{reservation?.hike_title}" es el <span className='fw-bold'>{newDate?.slice(8,11)}/{newDate?.slice(5,7)}.</span></p>
