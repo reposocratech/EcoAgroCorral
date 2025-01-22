@@ -28,7 +28,8 @@ export const Profile = () => {
     fetchReservation();
   },[user]);
 
-
+  console.log("*****", reservations);
+  
     
   return (
     <>
