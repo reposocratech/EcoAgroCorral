@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { fetchData } from '../../../helpers/axiosHelper';
-import { Col, Container, Row } from 'react-bootstrap';
+import { Button, Col, Container, Row } from 'react-bootstrap';
 import { HikeCard } from '../../../components/HikeCard/HikeCard';
 
 import "./oneExperience.css";
@@ -14,8 +14,10 @@ export const OneExperience = () => {
   const {user} = useContext(AgroContext);
   const [experienceInfo, setExperienceInfo] = useState({});
   const {id} = useParams();
+  const navigate = useNavigate();
   console.log(user);
   console.log(experienceInfo);
+  console.log("typeee", user);
 
    useEffect(() => {
      const getExperience = async () => {
@@ -43,8 +45,11 @@ export const OneExperience = () => {
       </section>
       <section className='my-5 py-5 gray-bg'>
         <Container fluid="xxl">
-          <h2 className='text-experience'>Paseos disponibles:</h2>
-
+          <div className="d-flex gap-3">
+            <h2 className='text-experience'>Paseos disponibles:</h2>
+            {user?.user_type === 1 ? <button className='addexp-btn' onClick={()=>navigate("/paseo/nuevoPaseo")}>Anadir Paseo</button>: null}
+          </div>
+          
           <Row>
             <div className="d-flex justify-content-around flex-wrap">
               {experienceInfo?.hikes?.map((elem) => {

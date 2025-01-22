@@ -16,7 +16,7 @@ export const CreateFeatureList = ({features, setFeatures}) => {
         return(
           <div key={index} className="feature-list-elem">
             {/* <p><img src={elem.icon} alt="" /></p> */}
-            <p>{elem.feature_name}</p>
+            <p className="element-name">{elem.feature_name}</p>
             <img src={trash} onClick={()=>deleteFeatures(index)} alt="trash Icon" />
             {/* <button type="button" onClick={()=>deleteFeatures(index)}>borrar</button> */}
           </div>

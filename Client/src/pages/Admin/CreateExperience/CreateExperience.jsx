@@ -7,6 +7,7 @@ import { CreateFeatureModal } from "../../../components/CreateFeatureModal/Creat
 import { CreateFeatureList } from "../../../components/CreateFeatureList/CreateFeatureList";
 import { CreateExperienceMainImgList } from "../../../components/CreateExperienceMainImgList/CreateExperienceImgList";
 import { CreateExperienceImgList } from "../../../components/CreateExperienceImgList/CreateExperienceImgList";
+import { useNavigate } from "react-router-dom";
 
 import "./createExperience.css";
 
@@ -27,6 +28,7 @@ export const CreateExperience = () => {
   const [msg, setMsg] = useState("");
   const [msgFeature, setMsgFeature] = useState("");
   const [show, setShow] = useState(false);
+  const navigate = useNavigate();
   console.log(mainFile)
 
   const handleClose = () => setShow(false);
@@ -80,6 +82,7 @@ export const CreateExperience = () => {
         }
 
         const res = await fetchData("api/experience/addExperience", "post", newFormData);
+        navigate("/experiencias");
       }
     } catch (error) {
       console.log(error);
@@ -100,7 +103,7 @@ export const CreateExperience = () => {
             md={6}
             className="d-flex flex-column shadow my-5 create-experience"
           >
-            <img src={logoAgro} alt="LogoAgro" className="mx-auto" />
+            <img src={logoAgro} alt="LogoAgro" className="mx-auto logo" />
             <h2 className="text-center mt-2 fw-bold">CREA UNA NUEVA EXPERIENCIA</h2>
             <div className="separator"></div>
             <Form className="px-4 pt-4">
@@ -178,7 +181,7 @@ export const CreateExperience = () => {
               <div>
                 {features && <CreateFeatureList features={features} setFeatures={setFeatures} />}
                 <span>{msgFeature}</span>
-                <Button onClick={handleShow}>Añadir caracteristica</Button>
+                <div className="d-flex justify-content-center"><Button onClick={handleShow}>Añadir caracteristica</Button></div>
               </div>
               <span>{msg}</span>
               <div className="p-2 d-flex justify-content-center">

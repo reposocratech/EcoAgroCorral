@@ -8,13 +8,16 @@
 .feature-list-elem{
   border: 1px solid rgb(169, 167, 167);
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   border-radius: 5px;
 
   width: fit-content;
   
+  .element-name{
+    margin: 0;
+  }
 
   img{
-    width: 1rem;
+    width: 1.5rem;
   }
 }
