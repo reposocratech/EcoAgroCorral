@@ -107,12 +107,12 @@ export const CreateExperience = () => {
             <h2 className="text-center mt-2 fw-bold">CREA UNA NUEVA EXPERIENCIA</h2>
             <div className="separator"></div>
             <Form className="px-4 pt-4">
-            <Form.Label>Title</Form.Label>
+            <Form.Label>Titulo</Form.Label>
               <Form.Group className="mb-1">
                 <div className="d-flex gap-3">
                   <Form.Control
                     type="text"
-                    placeholder="title"
+                    placeholder="titulo"
                     value={newExperience.experience_title}
                     onChange={handleChange}
                     name="experience_title"
@@ -125,7 +125,7 @@ export const CreateExperience = () => {
                 <div className="d-flex gap-2">
                 <Form.Control
                     type="text"
-                    placeholder="descripcion"
+                    placeholder="Descripcion"
                     value={newExperience.experience_description}
                     onChange={handleChange}
                     name="experience_description"
