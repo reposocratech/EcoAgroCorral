@@ -8,6 +8,8 @@ router.get('/getDates', reservationController.getDates);
 router.get('/getOneReservation/:reservation_id', reservationController.getOneReservation);
 router.delete('/deleteReservation', reservationController.deleteReservation);
 router.put('/modifyReservation', reservationController.modifyReservation);
+router.put('/setDays', reservationController.setDays);
+router.get('/getDays', reservationController.getDays);
 
 
 
