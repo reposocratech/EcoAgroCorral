@@ -150,7 +150,6 @@ export const PendingReservations = () => {
             )}
           </div>
         </div>
-
         <Modal show={showModal} onHide={handleCloseModal}>
           <Modal.Header closeButton>
             <Modal.Title className="tituloModal">
