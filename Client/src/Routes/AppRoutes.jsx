@@ -26,6 +26,8 @@ import { PendingReservations } from "../pages/Admin/AdminReservation/PendingRese
 import { ReservationHistory } from "../pages/Admin/AdminReservation/ReservationHistory.jsx";
 import { CancelReservation } from "../pages/User/CancelReservation/CancelReservation.jsx";
 import { ReservationsDays } from "../pages/Admin/AdminReservation/ReservationsDays.jsx";
+import { Blog } from "../pages/Post/Blog/Blog.jsx";
+
 
 
 export const AppRoutes = () => {
@@ -62,6 +64,7 @@ export const AppRoutes = () => {
           <Route path="/admin/modificar-dias-disponibles" element={<ReservationsDays />} />
           <Route path='*' element={<ErrorPage />}/>
           <Route path='/reserva/cancelarReserva/:reservation_id' element={<CancelReservation/>}/>
+          <Route path='/blog' element={<Blog />}/>
         </Routes>
       </main>
       <footer>
