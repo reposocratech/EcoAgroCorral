@@ -58,6 +58,25 @@ class ReservationController {
     }
     
   }
+
+  setDays = async (req,res)=>{
+    const values = req.body;
+    try {
+      const result = await ReservationDal.setDays(values);
+      res.status(200).json({message: "Dias modificados correctamente"});
+    } catch (error) {
+      res.status(500).json({ message: "Error en el controlador al cambiar los dias" });
+    }
+  }
+
+  getDays = async (req, res) =>{
+    try {
+      const result = await ReservationDal.getDays();
+      res.status(200).json(result);
+    } catch (error) {
+      res.status(500).json({ message: "Error obtener los días" });
+    }
+  }
 }
 
 export default new ReservationController();

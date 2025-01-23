@@ -27,6 +27,8 @@ export const Reservation = () => {
   const [msg, setMsg] = useState("");
   const [msgReserv, setMsgReserv] = useState(false);
   const [dates, setDates] = useState([]);
+  const [days, setDays] = useState([]);
+  
   const { user } = useContext(AgroContext);
   const navigate = useNavigate();
 
@@ -39,8 +41,8 @@ export const Reservation = () => {
   );
 
   const reservTime = Array.from(
-    { length: 8 },
-    (value, i) => `${parseInt(i / 2) + 8}:${i % 2 === 0 ? "00" : "30"}`
+    { length: 5 },
+    (value, i) => `${parseInt(i / 2) + 9}:${i % 2 === 0 ? "00" : "30"}`
   );
 
   useEffect(() => {
@@ -55,6 +57,17 @@ export const Reservation = () => {
           "get"
         );
 
+        const reservationsDays = await fetchData(
+          "api/reservation/getDays",
+          "get"
+        );
+
+        if(days.length == 0){
+          for(let elem of reservationsDays){
+            days.push(parseInt(elem.reservation_day_value));
+          }
+        }
+    
         if (dates.length == 0) {
           for (let elem of reservationsDate) {
             dates.push(elem.reservation_date);
@@ -83,12 +96,12 @@ export const Reservation = () => {
     fetchExperience();
   }, [reservation]);
 
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setReservation({ ...reservation, [name]: value });
   };
 
-  console.log("dateee", reservation.reservation_date);
 
   const onSubmit = async () => {
     try {
@@ -100,7 +113,8 @@ export const Reservation = () => {
       ) {
         setMsg("Debes cumplimentar todos los campos");
       } else if (
-        parseInt(reservation.reservation_adult) + parseInt(reservation.reservation_children) <
+        parseInt(reservation.reservation_adult) +
+          parseInt(reservation.reservation_children) <
         2
       ) {
         setMsg("La reserva debe ser de un mínimo de dos personas.");
@@ -129,6 +143,7 @@ export const Reservation = () => {
 
   return (
     <>
+  
       {!msgReserv ? (
         <section>
           <Container fluid="xxl" className="py-5">
@@ -271,6 +286,7 @@ export const Reservation = () => {
                           .split("T")[0]
                       }
                       excludeDates={convertDate}
+                      filterDate={(date) => days?.includes(date.getDay())} 
                       selected={reservation.reservation_date}
                       placeholderText="Selecciona una fecha"
                       locale="es"
