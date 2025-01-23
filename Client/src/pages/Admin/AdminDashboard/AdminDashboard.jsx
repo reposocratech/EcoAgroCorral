@@ -25,9 +25,9 @@ export const AdminDashboard = () => {
       <section className="adminDash">
         <Container fluid>
           <Row className="d-flex flex-column justify-content-center align-items-center text-center mb-4">
-            <Col >
+            <Col>
               <div className="container">
-                <h2 className="mb-3 mt-5">Mi panel de administrador</h2>
+                <h2 className="mb-3 mt-4">Mi panel de administrador</h2>
                 <div className="separator"></div>
                 <p className="text-muted">
                   Bienvenido al panel de administración. Usa las opciones a
@@ -59,7 +59,9 @@ export const AdminDashboard = () => {
                     realizadas en la plataforma.
                   </Card.Text>
                   <div className="d-flex gap-2 justify-content-center">
-                    <Button onClick={() => navigate("/admin/historial-reservas")}>
+                    <Button
+                      onClick={() => navigate("/admin/historial-reservas")}
+                    >
                       Ver Historial de Reservas
                     </Button>
                     <Button
@@ -79,7 +81,9 @@ export const AdminDashboard = () => {
                     Crea, modifica o elimina experiencias para ofrecer a los
                     usuarios.
                   </Card.Text>
-                  <Button onClick={() => navigate("/experiencias/createExperience")}>
+                  <Button
+                    onClick={() => navigate("/experiencias/createExperience")}
+                  >
                     Ir a Crear nueva Experiencia
                   </Button>
                 </Card.Body>
@@ -90,15 +94,41 @@ export const AdminDashboard = () => {
                 <Card.Body>
                   <Card.Title>Gestión de Rutas</Card.Title>
                   <Card.Text>
-                    Crea, modifica o elimina rutas para ofrecer a los
-                    usuarios.
+                    Crea, modifica o elimina rutas para ofrecer a los usuarios.
                   </Card.Text>
-                  <Button onClick={() => navigate("/paseo/nuevoPaseo")}>
-                    Ir a Crear nueva Ruta
-                  </Button>
+                  <div className="d-flex gap-2 justify-content-center">
+                    <Button onClick={() => navigate("/paseo/nuevoPaseo")}>
+                      Ir a Crear nueva Ruta
+                    </Button>
+                    <Button onClick={() => navigate("/paseo/borrados")}>
+                      Ir a Paseos Borrados
+                    </Button>
+                  </div>
                 </Card.Body>
               </Card>
             </Col>
+            <div className="d-flex justify-content-center align-content-center">
+              <Col xs={12} md={6} lg={6}>
+                <Card className="mb-4 shadow-sm">
+                  <Card.Body>
+                    <Card.Title>Gestión de días</Card.Title>
+                    <Card.Text>
+                      Configura los días disponibles para reservas según las
+                      necesidades del calendario.
+                    </Card.Text>
+                    <div className="d-flex gap-2 justify-content-center">
+                      <Button
+                        onClick={() =>
+                          navigate("/admin/modificar-dias-disponibles")
+                        }
+                      >
+                        Ir a Modificar Días
+                      </Button>
+                    </div>
+                  </Card.Body>
+                </Card>
+              </Col>
+            </div>
           </Row>
         </Container>
       </section>
