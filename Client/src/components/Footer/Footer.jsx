@@ -24,7 +24,7 @@ export const Footer = () => {
             <Link to="/sobreNosotros" className="textVarios">
               <FaUsers className="fs-5 mx-2 " /> Sobre nosotros
             </Link>
-            <Link to="/" className="textVarios">
+            <Link to="/blog" className="textVarios">
               <FaPenNib className="fs-5 mx-2" /> Blog
             </Link>
             <Link to="/contacto" className="textVarios">
@@ -38,7 +38,7 @@ export const Footer = () => {
         <Col md={4} className="px-5">
           <div className="d-flex flex-column align-items-center">
             <Link to="/">
-              <img src={logo} alt="Logo de la empresa" />
+              <img src={logo} alt="Logo de la empresa" className="logoEmpresa" />
             </Link>
             <p className="text-logo text-center">
               Vive una experiencia inolvidable
@@ -46,7 +46,7 @@ export const Footer = () => {
           </div>
         </Col>
         <Col md={4} className="px-5">
-          <div className="d-flex flex-column div-height gap-2 mb-3">
+          <div className="d-flex flex-column gap-2 mb-3">
             <a
               href="https://www.google.com/maps/search/?api=1&query=Calle+La+Fuente+1,+12420,+Barracas,+Castellón"
               target="_blank"
@@ -78,7 +78,7 @@ export const Footer = () => {
           </div>
         </Col>
         <Col md={4} className="px-2">
-          <div className="d-flex d-flex align-items-center justify-content-center div-height">
+          <div className="d-flex d-flex align-items-center justify-content-center">
             <p className="text-center">
               <a
                 href="https://www.instagram.com/ecoagrocorral/"
