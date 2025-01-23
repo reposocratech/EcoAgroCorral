@@ -1,0 +1,27 @@
+.blog-section{
+  .title-blog{
+    color: #3a1a1d;
+    text-shadow: 1px 1px 1px rgb(151, 149, 147);
+  }
+
+  @media(width <= 770px){
+    .sect-title{
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  .select-order{
+    background-color: #c6c2c3;
+    color:  #3a1a1d;
+  }
+
+  .select-order:focus {
+    outline: none; 
+    border: none; 
+    box-shadow: 0 0 5px #3a1a1d;
+  }
+
+  
+
+}

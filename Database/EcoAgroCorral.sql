@@ -269,6 +269,30 @@ CONSTRAINT fk_hike_3 FOREIGN KEY (reservation_hike_id)
 	REFERENCES hike(hike_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
+CREATE TABLE reservation_day(
+reservation_day_id SMALLINT UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
+reservation_day_name VARCHAR(250) NOT NULL,
+reservation_day_value NUMERIC(1) NOT NULL,
+reservation_day_is_active BOOLEAN NOT NULL DEFAULT 0 
+);
+
+DROP table reservation_day;
+SELECT * FROM reservation_day;
+
+
+INSERT INTO `ecoagrocorral`.`reservation_day` (`reservation_day_name`, `reservation_day_value`) VALUES ('domingo', '0');
+INSERT INTO `ecoagrocorral`.`reservation_day` (`reservation_day_name`, `reservation_day_value`) VALUES ('lunes', '1');
+INSERT INTO `ecoagrocorral`.`reservation_day` (`reservation_day_name`, `reservation_day_value`) VALUES ('martes', '2');
+INSERT INTO `ecoagrocorral`.`reservation_day` (`reservation_day_name`, `reservation_day_value`) VALUES ('miércoles', '3');
+INSERT INTO `ecoagrocorral`.`reservation_day` (`reservation_day_name`, `reservation_day_value`) VALUES ('jueves', '4');
+INSERT INTO `ecoagrocorral`.`reservation_day` (`reservation_day_name`, `reservation_day_value`) VALUES ('viernes', '5');
+INSERT INTO `ecoagrocorral`.`reservation_day` (`reservation_day_name`, `reservation_day_value`) VALUES ('sábado', '6');
+
+
+
+
+
+
 ALTER TABLE ecoagrocorral.reservation 
 ADD COLUMN reservation_total_price DECIMAL(5,2) NULL DEFAULT NULL AFTER reservation_children;
 
@@ -297,6 +321,20 @@ CONSTRAINT fk_category_1 FOREIGN KEY (post_category_id)
 CONSTRAINT fk_experience_5 FOREIGN KEY (post_experience_id)
 	REFERENCES experience(experience_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+SELECT 
+    post.*, 
+    category.*, 
+    post_picture.post_picture_file AS post_file 
+FROM 
+    post
+LEFT JOIN 
+    category ON post.post_category_id = category.category_id
+LEFT JOIN 
+    post_picture ON post.post_id = post_picture.post_picture_post_id 
+    AND post_picture.is_main = 1;
+    
+selet * from post;
 
 -- Primer post: Mi primer stand en la Carrera por montaña de Barracas
 INSERT INTO post (
@@ -397,3 +435,40 @@ CREATE TABLE post_picture (
 	CONSTRAINT fk_post_1 FOREIGN KEY (post_picture_post_id)
 		REFERENCES post(post_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+select * from hike_pictures;
+
+select * from user;
+
+SELECT 
+    reservation.*, 
+    hike_pictures.hike_pictures_file AS reservation_file, 
+    hike.hike_title AS reservation_hike_title, 
+    experience.experience_title AS reservation_experience_title 
+FROM reservation
+LEFT JOIN hike_pictures 
+    ON reservation.reservation_hike_id = hike_pictures.hike_pictures_hike_id 
+    AND hike_pictures.is_main = 1
+LEFT JOIN hike 
+    ON reservation.reservation_hike_id = hike.hike_id 
+LEFT JOIN experience 
+    ON reservation.reservation_experience_id = experience.experience_id
+WHERE reservation.reservation_user_id = 1 
+ORDER BY reservation.reservation_date;
+
+select * from feature;
+
+
+
+INSERT INTO user (user_name, user_lastname, user_email, user_password, user_type, user_address, user_avatar, user_phone, user_dni, user_birthdate, user_is_deleted, user_is_verified, user_is_disabled) 
+VALUES 
+('Juan', 'Pérez', 'juan.perez@example.com', 'hashed_password_1', 0, 'Calle 123, Ciudad A', 'avatar1.jpg', '555-1234', '12345678', '1990-05-15', 0, 1, 0),
+('María', 'Gómez', 'maria.gomez@example.com', 'hashed_password_2', 0, 'Avenida 456, Ciudad B', 'avatar2.jpg', '555-5678', '87654321', '1985-08-22', 0, 1, 0),
+('Carlos', 'López', 'carlos.lopez@example.com', 'hashed_password_3', 0, 'Carrera 789, Ciudad C', 'avatar3.jpg', '555-9876', '11223344', '1992-03-10', 0, 0, 0),
+('Ana', 'Martínez', 'ana.martinez@example.com', 'hashed_password_4', 0, 'Boulevard 101, Ciudad D', NULL, '555-1122', '44332211', '1988-11-30', 0, 1, 0),
+('Pedro', 'Ramírez', 'pedro.ramirez@example.com', 'hashed_password_5', 0, 'Callejón 202, Ciudad E', 'avatar5.jpg', '555-3344', '55667788', '1995-07-05', 0, 0, 0),
+('Laura', 'Fernández', 'laura.fernandez@example.com', 'hashed_password_6', 0, 'Pasaje 303, Ciudad F', NULL, '555-5566', '99887766', '1991-02-17', 0, 1, 0),
+('Diego', 'Torres', 'diego.torres@example.com', 'hashed_password_7', 0, 'Vía 404, Ciudad G', 'avatar7.jpg', '555-7788', '66778899', '1986-06-25', 0, 0, 1),
+('Sofía', 'Ruiz', 'sofia.ruiz@example.com', 'hashed_password_8', 0, 'Camino 505, Ciudad H', NULL, '555-9900', '33445566', '1993-09-12', 0, 1, 0),
+('Javier', 'Hernández', 'javier.hernandez@example.com', 'hashed_password_9', 0, 'Carretera 606, Ciudad I', 'avatar9.jpg', '555-2233', '88990011', '1989-04-08', 0, 0, 0),
+('Elena', 'Castro', 'elena.castro@example.com', 'hashed_password_10', 0, 'Autopista 707, Ciudad J', 'avatar10.jpg', '555-4455', '11002233', '1994-12-20', 0, 1, 0);
