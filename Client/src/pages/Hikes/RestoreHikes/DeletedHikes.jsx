@@ -1,5 +1,5 @@
 import  { useEffect, useState } from "react";
-import { Table, Button, Alert } from "react-bootstrap";
+import { Table, Button, Alert,Container } from "react-bootstrap";
 import './DeletedHikes.css';
 export const DeletedHikes = () => {
   const [hikes, setHikes] = useState([]);
@@ -37,9 +37,10 @@ export const DeletedHikes = () => {
       }
       const updatedHike = await response.json();
       setHikes(hikes.filter((hike) => hike.hike_id !== id)); // Eliminar el hike recuperado de la lista
-      alert(`Hike ${updatedHike.hike_title} recuperado con éxito`);
+      
     } catch (error) {
-      alert(`Error al recuperar el hike: ${error.message}`);
+      console.log("Error al recuperar el hike:", error);
+      
     }
   };
 
@@ -47,41 +48,43 @@ export const DeletedHikes = () => {
   if (error) return <Alert variant="danger">Error: {error}</Alert>;
 
   return (
-    <div className="d-flex flex-column mt-5 align-items-center">
-      <div className="my-4">
-        <h2>Hikes Borrados</h2>
-        {hikes.length === 0 ? (
-          <p>No hay hikes borrados.</p>
-        ) : (
-          <Table striped bordered hover>
-            <thead>
-              <tr>
-                <th>Título</th>
-                <th>Descripción</th>
-                <th>Acción</th>
-              </tr>
-            </thead>
-            <tbody>
-              {hikes.map((hike) => (
-                <tr key={hike.hike_id}>
-                  <td>{hike.hike_title}</td>
-                  <td>{hike.hike_description}</td>
-                  <td>
-                    <Button
-                      variant="success"
-                      onClick={() => recoverHike(hike.hike_id)}
-                      className="button-nuevo-paseo"
-                    >
-                      Recuperar
-                    </Button>
-                  </td>
+    <Container fluid="xxl">
+      <div className="d-flex flex-column mt-5 align-items-center">
+        <div className="my-4">
+          <h2>Paseos Borrados</h2>
+          {hikes.length === 0 ? (
+            <p>No hay hikes borrados.</p>
+          ) : (
+            <Table striped bordered hover>
+              <thead>
+                <tr>
+                  <th>Título</th>
+                  <th>Descripción</th>
+                  <th>Acción</th>
                 </tr>
-              ))}
-            </tbody>
-          </Table>
-        )}
+              </thead>
+              <tbody>
+                {hikes.map((hike) => (
+                  <tr key={hike.hike_id}>
+                    <td>{hike.hike_title}</td>
+                    <td>{hike.hike_description}</td>
+                    <td>
+                      <Button
+                        variant="success"
+                        onClick={() => recoverHike(hike.hike_id)}
+                        className="button-nuevo-paseo"
+                      >
+                        Recuperar
+                      </Button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          )}
+        </div>
       </div>
-    </div>
+    </Container >
   );
 };
 

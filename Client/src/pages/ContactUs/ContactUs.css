@@ -9,7 +9,7 @@
       url('../../../../public/assets/images/contactUs/amapolas.jpg');
     background-position: center;
     background-size: cover;
-    min-height: 50vh;
+    min-height: 45vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -27,30 +27,58 @@
     border: 2px solid black;
     border-radius: 2rem;
     background: linear-gradient(
-      rgba(232, 146, 146, 0.5),
-      rgba(223, 125, 125, 0.3)
+      rgba(232, 146, 146, 0.8),
+      rgba(223, 125, 125, 0.6)
     );
     padding: 30px;
     color: white;
     box-shadow: 40px 40px 0 rgba(0, 0, 0, 0.5);
   }
 
+  h2 {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  }
+  p{
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+  }
+
   h2,
   p {
     font-family: 'Merriweather';
     color: white;
+    
   }
 
 }
 
-.icon{
-  .home,
-  .whatsapp{
+
+.icon-contactUs {
+  .icon-contactUs-icon {
     color: #837363;
     font-size: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    height: 80px;
+    width: 80px;
   }
-  .logo{
+
+  .logo {
     text-decoration: none;
     color: inherit;
+  }
+
+  a.text,
+  .logo {
+    text-decoration: none;
+    color: black;
+    display: inline-block;
+    transition: transform 0.3s, color 0.3s;
+  }
+
+  a.text:hover,
+  .logo:hover {
+    transform: scale(1.2);
   }
 }

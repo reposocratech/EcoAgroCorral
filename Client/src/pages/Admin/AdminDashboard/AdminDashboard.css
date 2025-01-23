@@ -1,0 +1,14 @@
+.adminDash{
+  Button {
+    background-color: #C3AC76;
+    border: none;
+    color: #ffffff;
+    transition: background-color 0.3s, color 0.3s;
+    font-weight: bold;
+  }
+
+  Button:hover {
+    background-color: #be9a47;
+    color: #ffffff;
+  }
+}

@@ -17,7 +17,7 @@
     background-color: #3a1a1d;
     border: none;
     color: #f2ece2;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition: background-color 0.3s, color 0.3s ease;
     
   }
 
@@ -34,5 +34,54 @@
   background-size: cover;
   border-radius: 20px;
   text-shadow: 1px 1px 1px black;
+  min-height: 300px;
+
+  .btn{
+    background-color: rgb(221, 162, 94);
+    border: none;
+    color:#5a2a2d;
+    transition: background-color 0.3s, color 0.3s ease;
+    
+  }
+
+  .btn:hover {
+    background-color: #5a2a2d;
+    color: #ffffff;
+  }
+}
+
+.reservation-section{
+  background-color: rgba(221, 162, 94, 0.742);
+
+  .link{
+    color:  #f4f0e9;
+  }
+
+  .btn-new{
+    background-color: #3a1a1d;
+    border: none;
+    color: #f2ece2;
+    transition: background-color 0.3s, color 0.3s ease;
+    
+  }
+
+  .btn-new:hover {
+    background-color: #5a2a2d;
+    color: #ffffff;
+  }
 
 }
+
+.reservation-title{
+  color: #ffffff;
+  text-shadow: 1px 1px 1px black;
+  width: fit-content;
+  border-block: 1px solid rgb(251, 246, 246);
+}
+
+.pas-reserv {
+  opacity: 0.5;
+  color: rgb(248, 243, 243);
+  text-shadow: 1px 1px 1px rgb(3, 3, 3);
+}
+

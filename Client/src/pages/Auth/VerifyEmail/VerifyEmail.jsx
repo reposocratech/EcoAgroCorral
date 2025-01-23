@@ -60,7 +60,7 @@ export const VerifyEmail = () => {
                       onClick={()=>navigate('/user/login')}
                       className="btn mb-5 mt-3"
                     >
-                      Ir al login
+                      Inicia sesión
                     </button>
                   </div>
                 </Col>

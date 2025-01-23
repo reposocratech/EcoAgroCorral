@@ -1,74 +1,110 @@
-
-import {Container, Row, Col} from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import whatsappIcon from "../../../public/assets/icons/whatsapp-icon.svg";
-import mailIcon from "../../../public/assets/icons/mail.svg";
-import facebookIcon from "../../../public/assets/icons/facebook.svg";
-import instagramIcon from "../../../public/assets/icons/instagram.svg";
-import tiktokIcon from "../../../public/assets/icons/tiktok.svg";
 import logo from "../../../public/assets/images/LogoAgro.png";
-
 import "./footer.css";
+import {
+  FaFacebook,
+  FaInstagram,
+  FaMailBulk,
+  FaMapMarkedAlt,
+  FaPenNib,
+  FaPhoneAlt,
+  FaShieldAlt,
+  FaUsers,
+  FaWhatsapp,
+} from "react-icons/fa";
 
 export const Footer = () => {
   return (
     <Container fluid className="footer-cont">
-      <Row className="px-5 pt-5">
-        <Col md={4} className="px-5">
-          <div className="d-flex flex-column align-items-center div-height">
-            <p>Contactanos:</p>
-            <div className="d-flex flex-column">
-              <div className="d-flex gap-2 align-items-end">
-                <img className="icon-size" src={whatsappIcon} alt="Icon of Whatsapp" />
-                <p>+34 644 80 30 31</p>
-              </div>
-              <div className="d-flex gap-2 align-items-end">
-                <img className="icon-size" src={mailIcon} alt="Email icon" />
-                <p>ecoagrocorral@gmail.com</p>
-              </div>
-            </div>
-          </div>
-        </Col>
-        <Col md={4}>
-          <div className="d-flex flex-column align-items-center div-height">
-            <Link to="/">
-              <img src={logo} alt="Logo de la empresa" />
+      <Row className="px-5 pt-4">
+        <Col md={2}></Col>
+        <Col md={2}>
+          <div className="d-flex flex-column text-center mb-3 ps-md-5 ps-5">
+            <Link to="/sobreNosotros" className="textVarios">
+              <FaUsers className="fs-5 mx-2 " /> Sobre nosotros
             </Link>
-            <p className="text-logo">Vive una experiencia inolvidable</p>
+            <Link to="/blog" className="textVarios">
+              <FaPenNib className="fs-5 mx-2" /> Blog
+            </Link>
+            <Link to="/contacto" className="textVarios">
+              <FaPhoneAlt className="fs-5 mx-2" /> Contacto
+            </Link>
+            <Link className="textVarios">
+              <FaShieldAlt className="fs-5 mx-2" /> Política de privacidad
+            </Link>
           </div>
         </Col>
         <Col md={4} className="px-5">
-          <div className="d-flex flex-column align-items-center div-height">
-            <p>Donde estamos:</p>
-            <p>Calle La Fuente 1, Barracas (Castellón) 12420 España</p>
+          <div className="d-flex flex-column align-items-center">
+            <Link to="/">
+              <img src={logo} alt="Logo de la empresa" className="logoEmpresa" />
+            </Link>
+            <p className="text-logo text-center">
+              Vive una experiencia inolvidable
+            </p>
+          </div>
+        </Col>
+        <Col md={4} className="px-5">
+          <div className="d-flex flex-column gap-2 mb-3">
+            <a
+              href="https://www.google.com/maps/search/?api=1&query=Calle+La+Fuente+1,+12420,+Barracas,+Castellón"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="textContact"
+            >
+              <FaMapMarkedAlt className="fs-4 mx-2" /> Calle La Fuente 1, 12420,
+              Barracas, Castellón
+            </a>
+            <a href="" className="text-decoration-none text-dark textContact">
+              <FaWhatsapp className="fs-4 mx-2" /> +34 644 80 30 31
+            </a>
+            <a
+              href="mailto:ecoagrocorral@gmail.com"
+              className="text-decoration-none text-dark textContact"
+            >
+              <FaMailBulk className="fs-4 mx-2" /> ecoagrocorral@gmail.com
+            </a>
           </div>
         </Col>
       </Row>
-      <Row className="px-5 pb-5">
-        <Col md={4} className="px-5">
-          <div className="d-flex d-flex align-items-end justify-content-center div-height">
-            <p>Ecoagrotour © 2025. Todos los Derechos Reservados</p>
+
+      <Row className="px-5 pb-2 subfoot text-white">
+        <Col md={4} className="px-2">
+          <div className="d-flex d-flex justify-content-center">
+            <p className="text-center">
+              Ecoagrocorral © 2025. Todos los Derechos Reservados
+            </p>
           </div>
         </Col>
-        <Col md={4}>
-          <div className="d-flex gap-2 align-items-end justify-content-center div-height">
-            <Link to="https://www.tiktok.com/@ecoagrocorral_">
-              <img className="icon-size" src={tiktokIcon} alt="Email icon" />
-            </Link>
-            <Link to="https://www.instagram.com/ecoagrocorral/">
-              <img className="icon-size" src={instagramIcon} alt="Email icon" />
-            </Link>
-            <Link to="https://www.facebook.com/people/Ecoagrocorral/61561636066521/">
-              <img className="icon-size" src={facebookIcon} alt="Email icon" />
-            </Link>
+        <Col md={4} className="px-2">
+          <div className="d-flex d-flex align-items-center justify-content-center">
+            <p className="text-center">
+              <a
+                href="https://www.instagram.com/ecoagrocorral/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="logoRRSS"
+              >
+                <FaInstagram className="mx-2 fs-4" />
+              </a>
+              <a
+                href="https://www.facebook.com/people/Ecoagrocorral/61561636066521/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="logoRRSS"
+              >
+                <FaFacebook className="mx-2 fs-4" />
+              </a>
+            </p>
           </div>
         </Col>
-        <Col md={4} className="px-5">
-          <div className="d-flex align-items-end justify-content-center div-height">
-            <p>Política de privacidad  |  Cookies  |  Aviso Legal</p>
-          </div>
+        <Col md={4} className="px-2">
+          <p className="fw-semibold d-flex d-flex justify-content-center">
+            Cookies | Aviso Legal
+          </p>
         </Col>
       </Row>
     </Container>
-  )
-}
+  );
+};

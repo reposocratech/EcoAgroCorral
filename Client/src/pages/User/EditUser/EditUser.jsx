@@ -37,32 +37,44 @@ export const EditUser = () => {
     setFile(e.target.files[0]);
 };
 
-  const onSubmit = async () => {
-    try {
-      setMsg("");
+const onSubmit = async () => {
+  try {
+    setMsg("");
 
-      if (!edit.user_name || !edit.user_lastname || !edit.user_address || !edit.user_phone || !edit.user_birthdate) {
-        setMsg("Debes cumplimentar todos los datos");
-        return;
-      }
-
-      const formData = new FormData();
-      formData.append("edit", JSON.stringify(edit));
-      if (file) {
-        formData.append("file", file);
-      }
-
-      console.log("Datos enviados:", [...formData]);
-
-      const res = await fetchData("api/user/editUser", "put", formData);
-
-      setUser({ ...edit, user_avatar: res.img });
-      navigate("/");
-    } catch (error) {
-      console.error("Error en la edición del usuario:", error);
-      setMsg("Error al guardar los cambios. Inténtalo de nuevo más tarde.");
+    if (
+      !edit.user_name ||
+      !edit.user_lastname ||
+      !edit.user_address ||
+      !edit.user_phone ||
+      !edit.user_birthdate
+    ) {
+      setMsg("Debes cumplimentar todos los datos");
+      return;
     }
-  };
+
+    const formData = new FormData();
+    formData.append("edit", JSON.stringify(edit));
+
+    if (file) {
+      formData.append("file", file);
+    } else {
+      formData.append("user_avatar", user.user_avatar || "");
+    }
+
+    console.log("Datos enviados:", [...formData]);
+    const res = await fetchData("api/user/editUser", "put", formData);
+
+    setUser({
+      ...edit,
+      user_avatar: file ? res.img : user.user_avatar,
+    });
+
+    navigate("/user/perfil");
+  } catch (error) {
+    console.error("Error en la edición del usuario:", error);
+    setMsg("Error al guardar los cambios. Inténtalo de nuevo más tarde.");
+  }
+};
 
   return (
     <section>

@@ -28,7 +28,8 @@ export const Profile = () => {
     fetchReservation();
   },[user]);
 
-  console.log(reservations);
+  console.log("*****", reservations);
+  
     
   return (
     <>
@@ -54,22 +55,27 @@ export const Profile = () => {
         </Row>
       </Container>
     </section>
-    <section className='py-4'>
+
+    <section className='py-4 mt-4 reservation-section'>
       <Container fluid="xxl">
+
         <Row className='d-flex flex-column'>
-          <Col className='text-center py-3'>
-          <h3>Mis reservas</h3>
+          <Col className='text-center d-flex justify-content-center'>
+          <h3 className='reservation-title p-2 fs-2'>Mis Reservas</h3>
           </Col>
           {reservations?
-          <Col className='d-flex flex-wrap justify-content-center gap-3'>
+          <Col className='d-flex flex-wrap justify-content-center'>
           {reservations?.map((elem)=>{
             return(
               <ReservationCard key={elem.reservation_id} reservation={elem} />
             )
           })}
+          <Col xs={12} className='d-flex justify-content-center mt-3'>
+           <Button className='btn-new' onClick={()=> navigate('/user/reserva')}>Nueva Reserva</Button>
+          </Col>
           </Col>:
           <Col>
-            <p>No has hecho ninguna reserva. Reserva ahora <Link to={'/user/reserva'}> aquí </Link> </p>
+            <p>No has hecho ninguna reserva aun. Reserva ahora <Link className='link fw-bold' to={'/user/reserva'}> aquí. </Link> </p>
           </Col>}
         </Row>
       </Container>

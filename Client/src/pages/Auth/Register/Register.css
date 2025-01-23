@@ -23,7 +23,7 @@
     background-color: #3a1a1d;
     border: none;
     color: #f2ece2;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition: background-color 0.3s, color 0.3s;
   }
 
   .btn:hover {
@@ -33,5 +33,9 @@
 
   .link{
     color: #5a2a2d;
+  }
+
+  .link:hover{
+    font-weight: bold;
   }
 }

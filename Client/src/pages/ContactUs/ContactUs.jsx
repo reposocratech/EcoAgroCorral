@@ -4,12 +4,10 @@ import {
   FaInstagram,
   FaMailBulk,
   FaShareAlt,
-  FaTiktok,
   FaWhatsapp,
 } from "react-icons/fa";
 import { Col, Container, Row } from "react-bootstrap";
 import "./ContactUs.css";
-import { Link } from "react-router-dom";
 
 export const ContactUs = () => {
   return (
@@ -19,7 +17,7 @@ export const ContactUs = () => {
           <Row className="bgPhoto d-flex flex-column justify-content-center align-items-center text-center">
             <Col xs={12} md={8} lg={6}>
               <div className="container">
-                <h2 className="mb-3">CONTÁCTANOS</h2>
+                <h2 className="mb-2">CONTÁCTANOS</h2>
                 <div className="separator"></div>
                 <p>
                   Si tienes cualquier duda escríbenos. Estoy encantada de hablar
@@ -31,12 +29,12 @@ export const ContactUs = () => {
         </Container>
       </section>
 
-      <section className="icon">
+      <section className="icon-contactUs">
         <Container fluid="xxl">
-          <Row className="row-gap-3 pb-5">
-            <Col className="pt-4 flex-column d-flex">
-              <div className="fs-1 align-items-center justify-content-center flex-column m-auto">
-                <FaHome className="home mt-5" />
+          <Row className="row-gap-3 pb-5 pt-5">
+            <Col xs={12} md={6} lg={3} className="flex-column d-flex">
+              <div className="icon-contactUs-icon">
+                <FaHome />
               </div>
               <div>
                 <p className="fw-bold mb-1 mx-4 align-items-center justify-content-center d-flex flex-column mt-2 fs-4">
@@ -48,13 +46,20 @@ export const ContactUs = () => {
                   tranquilidad perfecta para desconectar.
                 </p>
                 <p className="text-center mb-5 fw-bold">
-                  Calle La Fuente 1, 12420, Barracas, Castellón
+                  <a
+                    href="https://www.google.com/maps/search/?api=1&query=Calle+La+Fuente+1,+12420,+Barracas,+Castellón"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text"
+                  >
+                    Calle La Fuente 1, 12420, Barracas, Castellón
+                  </a>
                 </p>
               </div>
             </Col>
-            <Col className="pt-4 flex-column d-flex">
-              <div className="fs-1 align-items-center justify-content-center flex-column m-auto">
-                <FaWhatsapp className="whatsapp mt-5" />
+            <Col xs={12} md={6} lg={3} className="flex-column d-flex">
+              <div className="icon-contactUs-icon">
+                <FaWhatsapp />
               </div>
               <div>
                 <p className="fw-bold mb-1 mx-4 align-items-center justify-content-center d-flex flex-column mt-2 fs-4">
@@ -65,14 +70,16 @@ export const ContactUs = () => {
                   preguntas nacen ideas maravillosas! También podéis enviarnos
                   un WhatsApp. ¡Estaré encantada de atenderos!
                 </p>
-                <p className="text-center mb-5 fw-bold">
-                  +34 644 80 30 31 - Raquel
+                <p className="text-center mb-5 fw-bold text">
+                  <a href="#" className="text-decoration-none text-dark text">
+                    +34 644 80 30 31 - Raquel
+                  </a>
                 </p>
               </div>
             </Col>
-            <Col className="pt-4 flex-column d-flex">
-              <div className="fs-1 align-items-center justify-content-center flex-column m-auto">
-                <FaMailBulk className="home mt-5" />
+            <Col xs={12} md={6} lg={3} className="flex-column d-flex">
+              <div className="icon-contactUs-icon">
+                <FaMailBulk />
               </div>
               <div>
                 <p className="fw-bold mb-1 mx-4 align-items-center justify-content-center d-flex flex-column mt-2 fs-4">
@@ -84,27 +91,43 @@ export const ContactUs = () => {
                   escribirme, estoy aquí para ayudaros!
                 </p>
                 <p className="text-center mb-5 fw-bold">
-                  ecoagrocorral@gmail.com
+                  <a
+                    href="mailto:ecoagrocorral@gmail.com"
+                    className="text-decoration-none text-dark text"
+                  >
+                    ecoagrocorral@gmail.com
+                  </a>
                 </p>
               </div>
             </Col>
-            <Col className="pt-4 flex-column d-flex">
-              <div className="fs-1 align-items-center justify-content-center flex-column m-auto">
-                <FaShareAlt className="home mt-5" />
+            <Col xs={12} md={6} lg={3} className="flex-column d-flex">
+              <div className="icon-contactUs-icon">
+                <FaShareAlt />
               </div>
               <div>
                 <p className="fw-bold mb-1 mx-4 align-items-center justify-content-center d-flex flex-column mt-2 fs-4">
                   Sígueme
                 </p>
                 <p className="mx-4 m-0 align-items-center justify-content-center d-flex flex-column text-center mt-2 mb-3">
-                  ¡No te pierdas nada! Síguenos en nuestras redes sociales y
-                  mantente al día con novedades, ideas y contenido exclusivo.
-                  ¡Únete a nuestra comunidad!
+                Síguenos en redes sociales para descubrir novedades, contenido exclusivo, ideas y consejos. Únete a nuestra comunidad y comparte esta experiencia única con nosotros.
                 </p>
                 <p className="text-center mb-5">
-                  <Link to="https://www.tiktok.com/@ecoagrocorral_" className="logo"><FaTiktok className="mx-2 fs-4" /></Link>
-                  <Link to="https://www.instagram.com/ecoagrocorral/" className="logo"><FaInstagram className="mx-2 fs-4" /></Link>
-                  <Link to="https://www.facebook.com/people/Ecoagrocorral/61561636066521/"><FaFacebook className="mx-2 fs-4" /></Link>
+                  <a
+                    href="https://www.instagram.com/ecoagrocorral/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="logo"
+                  >
+                    <FaInstagram className="mx-2 fs-4" />
+                  </a>
+                  <a
+                    href="https://www.facebook.com/people/Ecoagrocorral/61561636066521/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="logo"
+                  >
+                    <FaFacebook className="mx-2 fs-4" />
+                  </a>
                 </p>
               </div>
             </Col>

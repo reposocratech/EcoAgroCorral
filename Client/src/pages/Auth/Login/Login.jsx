@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import { useContext, useState } from 'react'
 import {Col, Container, Row, Button, Form} from 'react-bootstrap'
 import { Link, useNavigate } from 'react-router-dom'
 import { AgroContext } from '../../../context/ContextProvider'
@@ -21,19 +21,12 @@ export const Login = () => {
   const {setUser, setToken} = useContext(AgroContext)
   const navigate = useNavigate()
 
-  const validateField = (name, value) =>{
-    try {
-      loginSchema.pick({[name]:true}).parse({[name]: value});
-      setValErrors({...valErrors, [name]:""})
-    } catch (error) {
-      setValErrors({...valErrors, [name]:error.errors[0].message})
-    }
-  }
-
+  
   const handleChange = (e) =>{
     const {name, value} = e.target;
     setLogin({...login, [name]: value})
-    validateField(name, value);
+    setValErrors({})
+    setMsg("")
   }
 
 
@@ -48,7 +41,12 @@ export const Login = () => {
 
       setUser(userResult);
       setToken(token);
-      navigate('/user/perfil');
+      if (userResult.user_type === 1) {
+        navigate("/admin/perfil");
+      } 
+      else {
+        navigate("/user/perfil");
+      }
     } catch (error) {
       const fieldErrors = {};
       if(error instanceof ZodError){
@@ -79,7 +77,7 @@ export const Login = () => {
                 value={login.email}
                 onChange={handleChange}
               />
-              {valErrors.user_email && <span>{valErrors.user_email}</span>}
+              
               
              </Form.Group>
    
@@ -92,9 +90,12 @@ export const Login = () => {
                 value={login.password}
                 onChange={handleChange}
                 />
-                {valErrors.user_password && <span>{valErrors.user_password}</span>}
              </Form.Group>
-              <span>{msg}</span>
+              <div className='d-flex flex-column'>
+                {valErrors.user_password && <span>{valErrors.user_password}</span>}
+                {valErrors.user_email && <span>{valErrors.user_email}</span>}
+                <span>{msg}</span>
+              </div>
              <div className='p-2 d-flex justify-content-center'>
                <Button
                 onClick={onSubmit}

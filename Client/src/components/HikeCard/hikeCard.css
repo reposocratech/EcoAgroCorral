@@ -18,9 +18,4 @@
   Button:hover {
     background-color: #d58f35;
   }
-
-
-  &:hover {
-    justify-content: center;
-  }
 }

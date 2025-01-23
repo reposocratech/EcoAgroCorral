@@ -12,10 +12,11 @@
 
   .item {
     letter-spacing: 1px;
-    transition: all 0.1s ease;
+    transition: 0.1s;
     border-bottom: 0 solid #3a1a1d;
     border-top: 0 solid #3a1a1d;
     cursor: pointer;
+    margin-left: 0;
   }
   .item:hover {
     border-bottom: 3px solid #3a1a1d;
@@ -26,8 +27,7 @@
     background-color: #3a1a1d;
     border: none;
     color: #f2ece2;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    margin-right: 1.5rem;
+    transition: background-color 0.3s, color 0.3s;
   }
 
   Button:hover {

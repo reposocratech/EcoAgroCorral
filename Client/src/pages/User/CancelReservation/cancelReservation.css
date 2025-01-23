@@ -1,0 +1,36 @@
+.cancel-reservation{
+  background-color: rgb(219, 216, 216);
+  border-radius: 10px;
+  width: 100%;
+
+  .btn{
+    background-color: #a41826;
+    border: none;
+    color: #f2ece2;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .btn:hover {
+    background-color: #5a2a2d;
+    color: #ffffff;
+  }
+
+  .btn-mod{
+    background-color: #0a491a;
+    border: none;
+    color: #f2ece2;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .btn-mod:hover {
+    background-color: #0c7825;
+    color: #ffffff;
+  }
+
+  .input-date{
+    border: none;
+    border-radius: 5px;
+    width: 230px;
+  }
+  
+}
