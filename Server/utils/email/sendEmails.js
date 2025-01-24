@@ -61,33 +61,42 @@ class EmailService {
       throw error;
     }
   }
-}
 
-export default new EmailService();
-
-/*       const __filename = fileURLToPath(import.meta.url);
+  async sendRestorePasswordEmail(userData, emailToken) {
+    try {
+      const { user_name, user_email } = userData;
+      
+      const __filename = fileURLToPath(import.meta.url);
       const __dirname = dirname(__filename);
-      const templatePath = path.join(__dirname, "../email/verificationEmail.mjml");
-      const mjmlTemplate = await fs.readFile(templatePath, "utf8");
+      const templatePath = path.join(__dirname, "../email/changePassword.mjml");
 
+      const mjmlTemplate = await fs.readFile(templatePath, "utf8");
+ 
       const template = Handlebars.compile(mjmlTemplate);
       const mjmlWithData = template({
         logoUrl: "https://https://www.ecoagrocorral.com/web/image/964-3e9cbef4/logo%20ecoagrocorral.jpg.JPG",
         userName: user_name,
-        verificationUrl: `${process.env.URLFRONT}/confirmarEmail/${emailToken}`,
+        restorePasswordUrl: `${process.env.URLFRONT}/user/restablecerPass/${emailToken}`,
       });
-
+    
       const { html } = mjml2html(mjmlWithData);
 
+      console.log("Email Data:", { to: user_email, subject: "Cambia tu contraseña" });
+  
       await this.transporter.sendMail({
         from: process.env.EMAIL_USER,
         to: user_email,
-        subject: "Verifica tu cuenta",
+        subject: "Cambia tu contraseña",
         html,
       });
-
+      console.log("Correo enviado correctamente a:", user_email);
+      return true;
     } catch (error) {
       console.error("Error enviando email:", error);
+      throw error;
     }
   }
-} */
+
+}
+
+export default new EmailService();
