@@ -5,6 +5,8 @@ import UserDal from "./user.dal.js";
 import jwt from "jsonwebtoken";
 import { comparePassword } from "../../utils/hashUtils.js";
 import { generateToken, getIdFromToken } from "../../utils/tokenUtils.js";
+import EmailService from "../../utils/email/sendEmails.js"
+
 
 class UserController {
   register = async (req, res) => {
@@ -37,7 +39,7 @@ class UserController {
         throw new Error("Las contraseñas deben coincidir");
       } else {
         const hash = await hashPassword(user_password);
-        const result = await UserDal.register([
+        await UserDal.register([
           user_name,
           user_lastname,
           user_birthdate,
@@ -47,20 +49,21 @@ class UserController {
           user_dni,
           hash,
         ]);
+
         const emailToken = jwt.sign({ user_email }, process.env.TOKEN_KEY, {
           expiresIn: "1h",
         });
-        sendMail(
-          user_email,
-          "Verifica tu cuenta",
-          `Hola ${user_name}, por favor verifica tu cuenta mediante el siguiente enlace: ${process.env.URLFRONT}/confirmarEmail/${emailToken}`
-        );
-        res.status(200).json({ msg: "Todo OK!" });
+
+        await EmailService.sendRegistrationEmail({ user_name, user_email }, emailToken);
+
+
+        res.status(200).json({ msg: "Registro exitoso, verifica tu correo" });
       }
     } catch (error) {
       res.status(400).json({ msg: error.message });
     }
   };
+
 
   verifyEmail = async (req, res) => {
     const { emailToken } = req.params;
