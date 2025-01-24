@@ -11,7 +11,6 @@ export const AllExperiences = () => {
     const getExperiences = async () => {
       try {
         const res = await fetchData("api/experience/getAllExperiences", "get");
-        console.log(res);
         setExperiences(res);
       } catch (error) {
         console.log(error);

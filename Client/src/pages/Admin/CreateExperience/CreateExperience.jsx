@@ -5,7 +5,7 @@ import logoAgro from "/assets/images/LogoAgro.png";
 import { fetchData } from "../../../helpers/axiosHelper";
 import { CreateFeatureModal } from "../../../components/CreateFeatureModal/CreateFeatureModal";
 import { CreateFeatureList } from "../../../components/CreateFeatureList/CreateFeatureList";
-import { CreateExperienceMainImgList } from "../../../components/CreateExperienceMainImgList/CreateExperienceImgList";
+import { CreateExperienceMainImgList } from "../../../components/CreateExperienceMainImgList/CreateExperienceMainImgList";
 import { CreateExperienceImgList } from "../../../components/CreateExperienceImgList/CreateExperienceImgList";
 import { useNavigate } from "react-router-dom";
 

@@ -4,11 +4,12 @@
     background-color: rgb(225, 221, 221);
     border-radius: 10px;
   }
+  
   .logo{
     width: 50px;
   }
   
-  img{
+  .perfil-img{
     width: clamp(150px, 20vw, 280px);
     border-radius: 50%;
   }

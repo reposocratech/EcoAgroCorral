@@ -25,9 +25,9 @@ import { AdminUsers } from "../pages/Admin/AdminUsers/AdminUsers.jsx";
 import { PendingReservations } from "../pages/Admin/AdminReservation/PendingReservations.jsx";
 import { ReservationHistory } from "../pages/Admin/AdminReservation/ReservationHistory.jsx";
 import { CancelReservation } from "../pages/User/CancelReservation/CancelReservation.jsx";
+import { EditExperience } from "../pages/Admin/EditExperience/EditExperience.jsx";
 import { ReservationsDays } from "../pages/Admin/AdminReservation/ReservationsDays.jsx";
 import { Blog } from "../pages/Post/Blog/Blog.jsx";
-
 
 
 export const AppRoutes = () => {
@@ -50,6 +50,7 @@ export const AppRoutes = () => {
           <Route path='/experiencias' element={<AllExperiences />} />
           <Route path='/experiencias/:id' element={<OneExperience />} />
           <Route path='/experiencias/createExperience' element={<CreateExperience />} />
+          <Route path='/experiencias/editExperience/:id' element={<EditExperience />} />
           <Route path="/paseo/:id" element={<OneHike/>}/>
           <Route path="/paseo/nuevoPaseo" element={<CreateHike />} />          
           <Route path="/paseo/editar/:hikeId" element={<EditHike />} />

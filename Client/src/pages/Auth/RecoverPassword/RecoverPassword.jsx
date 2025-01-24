@@ -40,7 +40,7 @@ export const RecoverPassword = () => {
       setValSendEmail(false)
       recoverPassSchema.parse(recover)
        const res = await fetchData("api/user/recoverPassword", "post", recover);
-        if(res.message == "Email enviado"){
+        if(res.message === "Correo de recuperación enviado."){
           setValSendEmail(true)
         }
        
@@ -53,7 +53,7 @@ export const RecoverPassword = () => {
        setValErrors(fieldErrors);
      } else {
        console.log("Error en el servidor:", error);
-       setMsg(error.response.data.message)
+       setMsg(error.response?.data?.message || "Error al enviar el correo");
      }
     }
   }
@@ -70,7 +70,7 @@ export const RecoverPassword = () => {
                 type="email" 
                 placeholder="Introduce tu email" 
                 name='user_email'
-                value={recover.email}
+                value={recover.user_email}
                 onChange={handleChange}
               />
                {valErrors.user_email && <span>{valErrors.user_email}</span>} 
@@ -91,7 +91,7 @@ export const RecoverPassword = () => {
                  </Button>
              </div>
              <div className='divisor mt-4'></div>
-            {valSendEmail && 
+             {valSendEmail && 
               <p className='text-center p-4 mt-3 fw-bold'>Hemos enviado un enlace a {recover.user_email} para que puedas restablecer tu contraseña.</p>} 
             </Form>
           </Col>

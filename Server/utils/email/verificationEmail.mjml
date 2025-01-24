@@ -1,0 +1,52 @@
+<mjml>
+  <mj-head>
+    <mj-font name="Merriweather" href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&display=swap" />
+    <mj-attributes>
+      <mj-all font-family="Merriweather, serif" />
+    </mj-attributes>
+  </mj-head>
+  <mj-body background-color="#f4f4f4">
+    <mj-section background-color="#ECEADB" padding="0 0">
+      <mj-column>
+        <mj-image width="250px" src="https://www.ecoagrocorral.com/web/image/964-3e9cbef4/logo%20ecoagrocorral.jpg.JPG" alt="EcoAgroCorral Logo"></mj-image>
+      </mj-column>
+    </mj-section>
+    <mj-section background-color="#ECEADB" padding="0 0">
+      <mj-column>
+        <mj-text font-size="24px" color="#3a1a1d" font-weight="bold" align="center">
+          ¡Bienvenido a EcoAgroCorral!
+        </mj-text>
+        <mj-text font-size="16px" color="#3a1a1d" line-height="24px">
+          ¡Hola <strong>{{userName}}</strong>!
+        </mj-text>
+        <mj-text font-size="16px" color="#3a1a1d" line-height="24px">
+          ¡Estamos muy felices de que te unas a nuestra comunidad! 🥳 Para que puedas empezar a disfrutar de todo lo que tenemos para ti, solo falta un pequeño paso: <strong>verifica tu cuenta</strong> haciendo clic en el botón de abajo.
+        </mj-text>
+        <mj-button
+          background-color="#3a1a1d"
+          color="white"
+          href="{{verificationUrl}}"
+          border-radius="16px"
+          font-weight="bold"
+          padding="16px 24px">
+          Verificar cuenta
+        </mj-button>
+        <mj-text font-size="16px" color="#3a1a1d" line-height="24px">
+          Si no puedes hacer clic en el botón, copia y pega el siguiente enlace en tu navegador:
+        </mj-text>
+        <mj-section background-color="#ffffff" padding="16px" border-radius="8px" border="1px solid #ddd">
+          <mj-text font-size="14px" color="#3a1a1d" align="center">
+            {{verificationUrl}}
+          </mj-text>
+        </mj-section>
+        <mj-divider border-color="#ddd" border-width="1px" />
+        <mj-text font-size="12px" color="#999" line-height="10px" align="center">
+          Este enlace expira en 1 hora. Si no realizaste esta solicitud, puedes ignorar este correo.
+        </mj-text>
+        <mj-text font-size="12px" color="#999" line-height="10px" align="center">
+          EcoAgroCorral &copy; 2025
+        </mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>
