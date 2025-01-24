@@ -69,7 +69,7 @@ export const NavbarApp = () => {
               <Nav.Link as={Link} className="item m-0" to="/experiencias">
                 Experiencias rurales
               </Nav.Link>
-              <Nav.Link as={Link} className="item m-0" to="/">
+              <Nav.Link as={Link} className="item m-0" to="/blog">
                 Blog
               </Nav.Link>
               <Nav.Link as={Link} className="item m-0" to="/contacto">

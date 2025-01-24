@@ -41,6 +41,34 @@ class ReservationDal {
       throw error;
     }
   }
+
+  setDays = async (values) =>{
+    console.log(values);
+    
+    try {
+      let sql = `UPDATE reservation_day
+      SET reservation_day_is_active = 
+          CASE 
+              WHEN reservation_day_value IN (?) THEN 1
+              ELSE 0
+          END
+      WHERE reservation_day_value IN (0,1, 2, 3, 4, 5, 6)`
+      const result = await executeQuery(sql, [values]);
+
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  getDays = async ()=>{
+    try {
+      let sql = 'SELECT reservation_day_name, reservation_day_value FROM reservation_day WHERE reservation_day_is_active = 1'
+      const result = await executeQuery(sql);
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 export default new ReservationDal();

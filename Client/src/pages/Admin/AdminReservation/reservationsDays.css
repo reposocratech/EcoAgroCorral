@@ -1,0 +1,29 @@
+.reservation-days{
+  .days{
+    color: black;
+  }
+
+  .form-days{
+    background-color: rgb(216, 215, 215);
+    border-radius: 10px;
+  }
+
+  .btn{
+    background-color: #0b541d;
+    border: none;
+    color: #f2ece2;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .btn:hover {
+    background-color: #0c7825;
+    color: #ffffff;
+  }
+
+  .msg-days{
+    background-color: #d0f7d9;
+    border-radius: 5px;
+  }
+  
+
+}

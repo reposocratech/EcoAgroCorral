@@ -1,0 +1,26 @@
+.card-post{
+  height: 300px;
+  border-radius: 10px;
+  background-position: center;
+  background-size: cover;
+  color: white;
+  text-shadow: 1px 1px 1px black;
+
+  .cat-name{
+    color: #5a2a2d;
+    text-shadow: 1px 1px 1px rgb(214, 206, 206);
+  }
+
+  .btn-post{
+    background-color: rgb(221, 162, 94);
+    border: none;
+    color:#5a2a2d;
+    transition: background-color 0.3s, color 0.3s ease;
+    
+  }
+
+  .btn-post:hover {
+    background-color: #6c3236;
+    color: #ffffff;
+  }
+}

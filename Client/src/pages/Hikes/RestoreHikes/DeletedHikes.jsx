@@ -51,7 +51,7 @@ export const DeletedHikes = () => {
     <Container fluid="xxl">
       <div className="d-flex flex-column mt-5 align-items-center">
         <div className="my-4">
-          <h2>Hikes Borrados</h2>
+          <h2>Paseos Borrados</h2>
           {hikes.length === 0 ? (
             <p>No hay hikes borrados.</p>
           ) : (

@@ -1,13 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState ,useContext} from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Container,  Button, Row, Alert } from "react-bootstrap";
 import "./OneHike.css";
+import { AgroContext } from "../../../context/ContextProvider";
 export const OneHike = () => {
   const { id } = useParams();
   const [hike, setHike] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const { user } = useContext(AgroContext);
 
   useEffect(() => {
     const fetchHikeData = async () => {
@@ -159,28 +161,28 @@ export const OneHike = () => {
             </div>
           </div>
         </section>
-        <section className="mt-5 d-flex justify-content-around align-items-center flex-wrap gap-5" >
-          <div className="d-flex gap-3">
+        <section className="mt-5 d-flex justify-content-around  flex-wrap gap-5" >
+        <div className="d-flex gap-3 align-items-center itinerario">
               <img
                 src={`/assets/images/hike/itinerario.png`} 
                 
                 className="icon-hike"
               />
-              <div className="max-width text-start">
+              <div className="  itinerario-txt text-start">
                 <h3 className="text-center">Itinerario</h3>
                 <p>
                 {hike.hike_itinerary}
                 </p>
               </div>
           </div>
-          <div className="d-flex gap-3">
+          <div className="d-flex gap-3 align-items-center datos-div">
               <img
                 src={`/assets/images/hike/datos.png`} 
                 
                 className="icon-hike datos"
               />
               <div className="max-width text-start">
-              <h3 className="text-center">Datos</h3>
+              <h3 className="text-center ">Datos</h3>
                 <p>
                 <strong>Distancia:</strong> {hike.hike_distance} km
                 </p>
@@ -196,6 +198,7 @@ export const OneHike = () => {
         </div>
       </div>
 
+      {user?.user_type === 1 && (
       <div className="mt-4 d-flex justify-content-center flex-wrap gap-1">
         <Button
           className="button-nuevo-paseo"
@@ -214,10 +217,15 @@ export const OneHike = () => {
         <Button className="button-eliminar-paseo" onClick={handleDelete}>
           Eliminar Paseo
         </Button>
-        <Button className="button-eliminar-paseo2" onClick={()=>navigate("/paseo/borrados")}>
+
+        <Button
+          className="button-eliminar-paseo2"
+          onClick={() => navigate("/admin/perfil")}
+        >
           Ver paseos eliminados
         </Button>
       </div>
+    )}
     </Container>
   );
 };

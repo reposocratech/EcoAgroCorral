@@ -107,6 +107,11 @@ button.button-modificar-paseo:hover {
 .datos{
   border: 1px solid black;
 }
+.datos-div{
+  border: 1px solid black;
+  padding-inline: 1rem;
+  border-radius: 20px;
+}
 /* Estilo para el botón "Eliminar Paseo" */
 button.button-eliminar-paseo {
   background-color: #c1271b;
@@ -114,7 +119,12 @@ button.button-eliminar-paseo {
     border: none;
     transition: background-color 0.3s ease;
 }
-
+.itinerario{
+  width: 700px;
+}
+.itinerario-txt{
+  width:100%;
+}
 button.button-eliminar-paseo:hover {
   background-color: #841f10;
 }
