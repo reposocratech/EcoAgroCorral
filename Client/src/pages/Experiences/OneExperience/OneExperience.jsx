@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { fetchData } from '../../../helpers/axiosHelper';
-import { Button, Col, Container, Row } from 'react-bootstrap';
+import { Col, Container, Row } from 'react-bootstrap';
 import { HikeCard } from '../../../components/HikeCard/HikeCard';
 
 import "./oneExperience.css";
@@ -38,8 +38,8 @@ export const OneExperience = () => {
       <section className='pt-5'>
         <Container fluid="xxl" >
           <div className="text-center px-5 text-experience">
-            <h1>{experienceInfo?.experience?.title}</h1>
-            <p>{experienceInfo?.experience?.description}</p>
+            <h1>{experienceInfo?.experience?.experience_title}</h1>
+            <p>{experienceInfo?.experience?.experience_description}</p>
           </div>
         </Container>
       </section>

@@ -1,0 +1,23 @@
+.feature-list-container{
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 10px;
+  margin-block: 10px;
+}
+
+.feature-list-elem{
+  border: 1px solid rgb(169, 167, 167);
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+
+  width: fit-content;
+  
+  .element-name{
+    margin: 0;
+  }
+
+  img{
+    width: 1.5rem;
+  }
+}
