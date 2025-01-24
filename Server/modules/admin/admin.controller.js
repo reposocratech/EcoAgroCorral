@@ -51,8 +51,11 @@ class AdminController {
 
   cancelReservation = async (req, res) => {
     const { id } = req.body;
+  
     try {
       const reservation = await AdminDal.getReservationById(id);
+      console.log(reservation);
+      
       if (!reservation) {
         return res.status(404).json({ message: "Reserva no encontrada" });
       }
@@ -60,12 +63,7 @@ class AdminController {
       sendMail(
         reservation.user_email,
         "Reserva cancelada",
-        `Hola ${reservation.user_name}, tu reserva "${
-          reservation.hike_title
-        }" prevista para el ${reservation.reservation_date.slice(
-          8,
-          11
-        )}/${reservation.reservation_date.slice(5, 7)} ha sido cancelada`
+        `Hola ${reservation.user_name}, tu reserva "${reservation.hike_title}" prevista para el día ${reservation.reservation_date.slice(8,11)}/${reservation.reservation_date.slice(5,7)} ha sido cancelada. Si en el futuro deseas volver a reservar o necesitas asistencia, estaremos encantados de ayudarte. No dudes en contactarnos para cualquier consulta.`
       );
       res.status(200).json({ message: "Reserva cancelada correctamente" });
     } catch (error) {
