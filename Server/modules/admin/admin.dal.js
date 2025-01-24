@@ -4,7 +4,7 @@ class AdminDal {
   getAllUsers = async (page = 1, limit = 15) => {
     try {
       const offset = (page - 1) * limit;
-  
+
       const sql = `
         SELECT * 
         FROM user 
@@ -14,16 +14,16 @@ class AdminDal {
           user.user_lastname ASC
         LIMIT ? OFFSET ?;
       `;
-  
+
       const countSql = `
         SELECT COUNT(*) AS total 
         FROM user 
         WHERE user_type = 0;
       `;
-  
+
       const users = await executeQuery(sql, [limit, offset]);
       const totalResult = await executeQuery(countSql);
-  
+
       return {
         users,
         totalPages: Math.ceil(totalResult[0].total / limit),
@@ -56,11 +56,11 @@ class AdminDal {
     try {
       const offset = (page - 1) * limit;
       const today = new Date().toISOString().split("T")[0];
-  
+
       const whereCondition = pastOnly
-      ? `WHERE reservation.reservation_date < '${today}'`
-      : `WHERE reservation.reservation_date >= '${today}'`;
-  
+        ? `WHERE reservation.reservation_date < '${today}'`
+        : `WHERE reservation.reservation_date >= '${today}'`;
+
       const sql = `
         SELECT 
           reservation.*,
@@ -80,16 +80,16 @@ class AdminDal {
           reservation.reservation_time ASC
         LIMIT ? OFFSET ?;
       `;
-  
+
       const countSql = `
         SELECT COUNT(*) AS total 
         FROM reservation
         ${whereCondition};
       `;
-  
+
       const reservations = await executeQuery(sql, [limit, offset]);
       const totalResult = await executeQuery(countSql);
-  
+
       return {
         reservations,
         totalPages: Math.ceil(totalResult[0].total / limit),
@@ -99,12 +99,23 @@ class AdminDal {
       throw error;
     }
   };
-  
+
+  getReservationById = async (id) => {
+    try {
+      let sql = `SELECT reservation.reservation_date, hike.hike_title, user.user_email,  user.user_name 
+      FROM reservation, user, hike 
+      WHERE reservation_id = ? AND reservation.reservation_user_id = user.user_id AND reservation.reservation_hike_id = hike.hike_id`;
+      const result = await executeQuery(sql, [id]);
+      return result[0];
+    } catch (error) {
+      throw error;
+    }
+  };
+
   cancelReservation = async (id) => {
     try {
       const sql = "DELETE FROM reservation WHERE reservation_id = ?";
       await executeQuery(sql, [id]);
-
     } catch (error) {
       console.error("Error al cancelar la reserva:", error);
       throw error;

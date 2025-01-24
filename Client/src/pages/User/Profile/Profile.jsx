@@ -42,7 +42,7 @@ export const Profile = () => {
           <div className='divisor'></div>
           </Col>
           <Col className='d-flex justify-content-center pb-4' lg={6}>
-            <img src={user?.user_avatar?`http://localhost:4000/images/users/${user.user_avatar}`: perfil} alt="" />
+            <img className='perfil-img' src={user?.user_avatar?`http://localhost:4000/images/users/${user.user_avatar}`: perfil} alt="" />
           </Col>
           <Col lg={6} className='d-flex flex-column justify-content-center align-items-center mb-3'>
             <p>Correo electrónico: {user?.user_email}</p>
