@@ -1,0 +1,62 @@
+<mjml>
+  <mj-head>
+    <mj-font name="Merriweather" href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&display=swap" />
+    <mj-attributes>
+      <mj-all font-family="Merriweather, serif" />
+      <mj-button background-color="#3a1a1d" color="#f2ece2" font-size="16px" border-radius="5px" font-weight="bold" />
+    </mj-attributes>
+    <mj-style>
+      .email-container {
+        max-width: 600px;
+        margin: 0 auto;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+    </mj-style>
+  </mj-head>
+  <mj-body background-color="#f4f4f4">
+    <mj-section background-color="#ffffff" padding="20px" class="email-container">
+      <mj-column>
+        <mj-image width="150px" src="https://www.ecoagrocorral.com/web/image/964-3e9cbef4/logo%20ecoagrocorral.jpg.JPG" alt="EcoAgroCorral Logo" padding-bottom="20px" />
+      </mj-column>
+      <mj-column>
+        <mj-text font-size="24px" color="#3a1a1d" font-weight="bold" align="center">
+          ¡Bienvenido a EcoAgroCorral!
+        </mj-text>
+      </mj-column>
+      <mj-column>
+        <mj-text font-size="16px" color="#3a1a1d" line-height="1.5" padding="10px 0">
+          Hola <strong>{{userName}}</strong>,
+        </mj-text>
+        <mj-text font-size="16px" color="#3a1a1d" line-height="1.5" padding="10px 0">
+          Gracias por registrarte en nuestra plataforma. Para completar tu registro, por favor verifica tu cuenta haciendo clic en el siguiente botón:
+        </mj-text>
+      </mj-column>
+      <mj-column>
+        <mj-button href="{{verificationUrl}}" padding="15px">
+          Verificar mi cuenta
+        </mj-button>
+      </mj-column>
+      <mj-column>
+        <mj-text font-size="16px" color="#3a1a1d" line-height="1.5" padding="10px 0">
+          Si no puedes hacer clic en el botón, copia y pega el siguiente enlace en tu navegador:
+        </mj-text>
+        <mj-text font-size="14px" color="#3a1a1d" background-color="#f9f9f9" padding="10px" border="1px solid #ddd" border-radius="5px">
+          {{verificationUrl}}
+        </mj-text>
+      </mj-column>
+      <mj-column>
+        <mj-divider border-color="#ddd" border-width="1px" />
+      </mj-column>
+      <mj-column>
+        <mj-text font-size="12px" color="#999" line-height="1.5">
+          Este enlace expira en 1 hora. Si no realizaste esta solicitud, puedes ignorar este correo.
+        </mj-text>
+        <mj-text font-size="12px" color="#999" line-height="1.5">
+          EcoAgroCorral &copy; 2025
+        </mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>
