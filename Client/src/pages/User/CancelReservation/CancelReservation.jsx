@@ -16,6 +16,7 @@ export const CancelReservation = () => {
   const [delReservation, setDelReservation] = useState(false);
   const [modReservation, setModReservation] = useState(false);
   const [msg, setMsg] = useState("");
+  const [days, setDays] = useState([]);
   const {user} = useContext(AgroContext);
 
 
@@ -37,6 +38,17 @@ export const CancelReservation = () => {
           const convertDate = dates.map((date) => new Date(date));
           setDates(convertDate)
         }
+
+        const reservationsDays = await fetchData(
+          "api/reservation/getDays",
+          "get"
+        );
+
+        if(days.length == 0){
+          for(let elem of reservationsDays){
+            days.push(parseInt(elem.reservation_day_value));
+          }
+        }
         
       } catch (error) {
         console.log(error);
@@ -48,7 +60,9 @@ export const CancelReservation = () => {
   
   const onSubmitDelete = async ()=>{
     try {
-      const result = await fetchData('api/reservation/deleteReservation', 'delete', {user, reservation});
+      await fetchData("api/admin/cancelReservation", "delete", {
+        id: reservation_id
+      });
       setDelReservation(true);
     } catch (error) {
       console.log(error);
@@ -95,6 +109,7 @@ export const CancelReservation = () => {
                           .split("T")[0]
                       }
                       excludeDates={dates}
+                      filterDate={(date) => days?.includes(date.getDay())}
                       selected={newDate}
                       placeholderText="Selecciona una nueva fecha"
                       locale="es"
