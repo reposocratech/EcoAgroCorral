@@ -77,6 +77,15 @@ class ExperienceDal {
     }
   }
 
+  disableExperience = async (experience_id) => {
+    try {
+      const sql = `UPDATE experience SET experience_is_deleted = 1 WHERE experience_id = ?`;
+      await executeQuery(sql, [experience_id]);
+    } catch (error) {
+      throw error;
+    }
+  };
+
   editFeature = async (featureId, featureInfo, icon) => {
     //console.log("featureInfo", featureInfo);
     try {

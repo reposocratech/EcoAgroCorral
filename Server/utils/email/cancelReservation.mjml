@@ -1,0 +1,35 @@
+<mjml>
+  <mj-head>
+    <mj-font name="Merriweather" href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&display=swap" />
+    <mj-attributes>
+      <mj-all font-family="Merriweather, serif" />
+    </mj-attributes>
+  </mj-head>
+  <mj-body background-color="#f4f4f4">
+    <mj-section background-color="#ECEADB" padding="0 0">
+      <mj-column>
+        <mj-image width="250px" src="{{logoUrl}}" alt="EcoAgroCorral Logo"></mj-image>
+      </mj-column>
+    </mj-section>
+    <mj-section background-color="#ECEADB" padding="0 0">
+      <mj-column>
+        <mj-text font-size="24px" color="#3a1a1d" font-weight="bold" align="center">
+          ¡Reserva cancelada!
+        </mj-text>
+        <mj-text font-size="16px" color="#3a1a1d" line-height="24px">
+          Hola <strong>{{userName}}</strong>,
+        </mj-text>
+        <mj-text font-size="16px" color="#3a1a1d" line-height="24px">
+          Queremos informarte que tu reserva para la actividad <strong>{{hikeTitle}}</strong>, prevista para el día <strong>{{reservationDate}}</strong>, ha sido cancelada.
+        </mj-text>
+        <mj-text font-size="16px" color="#3a1a1d" line-height="24px">
+          Si necesitas ayuda o deseas realizar una nueva reserva, no dudes en ponerte en contacto con nosotros.
+        </mj-text>
+        <mj-divider border-color="#ddd" border-width="1px" />
+        <mj-text font-size="12px" color="#999" line-height="10px" align="center">
+          EcoAgroCorral &copy; 2025
+        </mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>

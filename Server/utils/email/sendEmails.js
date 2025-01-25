@@ -33,20 +33,27 @@ class EmailService {
 
       const __filename = fileURLToPath(import.meta.url);
       const __dirname = dirname(__filename);
-      const templatePath = path.join(__dirname, "../email/verificationEmail.mjml");
+      const templatePath = path.join(
+        __dirname,
+        "../email/verificationEmail.mjml"
+      );
 
       const mjmlTemplate = await fs.readFile(templatePath, "utf8");
 
       const template = Handlebars.compile(mjmlTemplate);
       const mjmlWithData = template({
-        logoUrl: "https://https://www.ecoagrocorral.com/web/image/964-3e9cbef4/logo%20ecoagrocorral.jpg.JPG",
+        logoUrl:
+          "https://https://www.ecoagrocorral.com/web/image/964-3e9cbef4/logo%20ecoagrocorral.jpg.JPG",
         userName: user_name,
         verificationUrl: `${process.env.URLFRONT}/confirmarEmail/${emailToken}`,
       });
 
       const { html } = mjml2html(mjmlWithData);
 
-      console.log("Email Data:", { to: user_email, subject: "Verifica tu cuenta" });
+      console.log("Email Data:", {
+        to: user_email,
+        subject: "Verifica tu cuenta",
+      });
       await this.transporter.sendMail({
         from: process.env.EMAIL_USER,
         to: user_email,
@@ -65,24 +72,28 @@ class EmailService {
   async sendRestorePasswordEmail(userData, emailToken) {
     try {
       const { user_name, user_email } = userData;
-      
+
       const __filename = fileURLToPath(import.meta.url);
       const __dirname = dirname(__filename);
       const templatePath = path.join(__dirname, "../email/changePassword.mjml");
 
       const mjmlTemplate = await fs.readFile(templatePath, "utf8");
- 
+
       const template = Handlebars.compile(mjmlTemplate);
       const mjmlWithData = template({
-        logoUrl: "https://https://www.ecoagrocorral.com/web/image/964-3e9cbef4/logo%20ecoagrocorral.jpg.JPG",
+        logoUrl:
+          "https://https://www.ecoagrocorral.com/web/image/964-3e9cbef4/logo%20ecoagrocorral.jpg.JPG",
         userName: user_name,
         restorePasswordUrl: `${process.env.URLFRONT}/user/restablecerPass/${emailToken}`,
       });
-    
+
       const { html } = mjml2html(mjmlWithData);
 
-      console.log("Email Data:", { to: user_email, subject: "Cambia tu contraseña" });
-  
+      console.log("Email Data:", {
+        to: user_email,
+        subject: "Cambia tu contraseña",
+      });
+
       await this.transporter.sendMail({
         from: process.env.EMAIL_USER,
         to: user_email,
@@ -97,6 +108,52 @@ class EmailService {
     }
   }
 
+  async sendReservationCancellationEmail(userData, reservationData) {
+    try {
+      const { user_name, user_email } = userData;
+      const { hike_title, reservation_date } = reservationData;
+
+      const __filename = fileURLToPath(import.meta.url);
+      const __dirname = dirname(__filename);
+      const templatePath = path.join(
+        __dirname,
+        "../email/cancelReservation.mjml"
+      );
+
+      const mjmlTemplate = await fs.readFile(templatePath, "utf8");
+
+      const template = Handlebars.compile(mjmlTemplate);
+      const mjmlWithData = template({
+        logoUrl:
+          "https://www.ecoagrocorral.com/web/image/964-3e9cbef4/logo%20ecoagrocorral.jpg.JPG",
+        userName: user_name,
+        hikeTitle: hike_title,
+        reservationDate: `${reservation_date.slice(
+          8,
+          10
+        )}/${reservation_date.slice(5, 7)}/${reservation_date.slice(0, 4)}`,
+      });
+
+      const { html } = mjml2html(mjmlWithData);
+
+      console.log("Email Data:", {
+        to: user_email,
+        subject: "Reserva cancelada",
+      });
+      await this.transporter.sendMail({
+        from: process.env.EMAIL_USER,
+        to: user_email,
+        subject: "Reserva cancelada",
+        html,
+      });
+
+      console.log("Correo enviado correctamente a:", user_email);
+      return true;
+    } catch (error) {
+      console.error("Error enviando email:", error);
+      throw error;
+    }
+  }
 }
 
 export default new EmailService();

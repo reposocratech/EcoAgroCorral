@@ -38,7 +38,11 @@ export const Footer = () => {
         <Col md={4} className="px-5">
           <div className="d-flex flex-column align-items-center">
             <Link to="/">
-              <img src={logo} alt="Logo de la empresa" className="logoEmpresa" />
+              <img
+                src={logo}
+                alt="Logo de la empresa"
+                className="logoEmpresa"
+              />
             </Link>
             <p className="text-logo text-center">
               Vive una experiencia inolvidable
@@ -56,7 +60,12 @@ export const Footer = () => {
               <FaMapMarkedAlt className="fs-4 mx-2" /> Calle La Fuente 1, 12420,
               Barracas, Castellón
             </a>
-            <a href="" className="text-decoration-none text-dark textContact">
+            <a
+              href="https://wa.me/34691560150?text=Hola%20EcoAgroCorral,%20tengo%20una%20consulta." //CAMBIAR EL TLFN PARA QUE LE LLEGUE A RAQUEL
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-decoration-none text-dark text textContact"
+            >
               <FaWhatsapp className="fs-4 mx-2" /> +34 644 80 30 31
             </a>
             <a
@@ -68,17 +77,16 @@ export const Footer = () => {
           </div>
         </Col>
       </Row>
-
-      <Row className="px-5 pb-2 subfoot text-white">
+      <Row className="px-5 subfoot text-white d-flex justify-content-center align-items-center">
         <Col md={4} className="px-2">
-          <div className="d-flex d-flex justify-content-center">
+          <div className="d-flex justify-content-center">
             <p className="text-center">
               Ecoagrocorral © 2025. Todos los Derechos Reservados
             </p>
           </div>
         </Col>
         <Col md={4} className="px-2">
-          <div className="d-flex d-flex align-items-center justify-content-center">
+          <div className="d-flex align-items-center justify-content-center">
             <p className="text-center">
               <a
                 href="https://www.instagram.com/ecoagrocorral/"
@@ -100,7 +108,7 @@ export const Footer = () => {
           </div>
         </Col>
         <Col md={4} className="px-2">
-          <p className="fw-semibold d-flex d-flex justify-content-center">
+          <p className="fw-semibold d-flex justify-content-center">
             Cookies | Aviso Legal
           </p>
         </Col>
