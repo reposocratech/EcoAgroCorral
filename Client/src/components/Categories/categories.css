@@ -9,10 +9,12 @@
   .select-cat{
     font-weight: bold;
     border-bottom: 1px solid;
+    cursor: pointer;
   }
 
   .category-name{
     color: #3a1a1d;
+    cursor: pointer;
   }
 
   .category-name:hover{
