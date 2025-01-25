@@ -28,6 +28,7 @@ import { CancelReservation } from "../pages/User/CancelReservation/CancelReserva
 import { EditExperience } from "../pages/Admin/EditExperience/EditExperience.jsx";
 import { ReservationsDays } from "../pages/Admin/AdminReservation/ReservationsDays.jsx";
 import { Blog } from "../pages/Post/Blog/Blog.jsx";
+import { EditPost } from "../pages/Post/EditPost/EditPost.jsx";
 
 
 export const AppRoutes = () => {
@@ -66,6 +67,7 @@ export const AppRoutes = () => {
           <Route path='*' element={<ErrorPage />}/>
           <Route path='/reserva/cancelarReserva/:reservation_id' element={<CancelReservation/>}/>
           <Route path='/blog' element={<Blog />}/>
+          <Route path='/blog/editPost/:post_id' element={<EditPost />}/>
         </Routes>
       </main>
       <footer>
