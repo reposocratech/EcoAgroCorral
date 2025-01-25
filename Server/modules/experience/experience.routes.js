@@ -16,5 +16,6 @@ router.put("/editFeature/:featureId", uploadImage("features"), experienceControl
 router.delete("/deleteFeature/:featureId", experienceController.deleteFeature);
 router.get("/getAllExperiences", experienceController.getAllExperiences);
 router.get("/getOneExperience/:id", experienceController.getOneExperience);
+router.put("/disableExperience/:id", experienceController.disableExperience);
 
 export default router;

@@ -77,17 +77,16 @@ export const Footer = () => {
           </div>
         </Col>
       </Row>
-
-      <Row className="px-5 pb-2 subfoot text-white">
+      <Row className="px-5 subfoot text-white d-flex justify-content-center align-items-center">
         <Col md={4} className="px-2">
-          <div className="d-flex d-flex justify-content-center">
+          <div className="d-flex justify-content-center">
             <p className="text-center">
               Ecoagrocorral © 2025. Todos los Derechos Reservados
             </p>
           </div>
         </Col>
         <Col md={4} className="px-2">
-          <div className="d-flex d-flex align-items-center justify-content-center">
+          <div className="d-flex align-items-center justify-content-center">
             <p className="text-center">
               <a
                 href="https://www.instagram.com/ecoagrocorral/"
@@ -109,7 +108,7 @@ export const Footer = () => {
           </div>
         </Col>
         <Col md={4} className="px-2">
-          <p className="fw-semibold d-flex d-flex justify-content-center">
+          <p className="fw-semibold d-flex justify-content-center">
             Cookies | Aviso Legal
           </p>
         </Col>

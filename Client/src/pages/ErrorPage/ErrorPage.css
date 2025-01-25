@@ -1,8 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&display=swap");
+
 .paginaError {
   height: 65vh;
   background-color: #fffcf1;
   color: #3a1a1d;
-  font-family: "Arial", sans-serif;
+  font-family: "Merriweather", serif;
 
   h1 {
     font-size: 6rem;

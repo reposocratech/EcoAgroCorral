@@ -1,0 +1,37 @@
+.AdminExperiencias{
+  .table-responsive {
+    overflow-x: visible;
+    overflow-y: hidden;
+    margin-left: 0;
+    margin-right: 0;
+
+    table {
+      border-radius: 10px;
+      overflow: hidden;
+      width: 100%;
+      margin: 20px 0;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+
+      th.headTable {
+        background-color: #c3ac76;
+        color: black;
+        text-align: center;
+        font-weight: bold;
+        padding: 10px;
+      }
+
+      th,
+      td {
+        border: 1px solid #000000;
+      }
+
+      .tablaAncho {
+        width: 100%;
+
+        @media (max-width: 768px) {
+          min-width: 120%;
+        }
+      }
+    }
+  }
+}

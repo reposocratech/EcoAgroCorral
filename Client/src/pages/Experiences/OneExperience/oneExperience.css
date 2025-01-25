@@ -1,25 +1,32 @@
-.card-cols{
-  height: 30vh;
+.text-experience {
+  color: #3a1a1d;
 }
 
-.text-experience{
-  color: #3A1A1D;
-}
-
-.gray-bg{
+.hikeAvailable {
   background-color: lightgrey;
-}
 
-.addexp-btn {
-  margin: 5px;
-  border-radius: 5px;
-  background-color: #3a1a1d;
-  border: none;
-  color: #f2ece2;
-  transition: background-color 0.3s, color 0.3s;
-}
+  .card-cols {
+    height: 30vh;
+  }
 
-.addexp-btn:hover {
-  background-color: #5a2a2d;
-  color: #ffffff;
+  .centered-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10vh;
+
+    .addexp-btn {
+      border-radius: 5px;
+      background-color: #3a1a1d;
+      border: none;
+      color: #f2ece2;
+      transition: background-color 0.3s, color 0.3s;
+      padding: 10px;
+    }
+
+    .addexp-btn:hover {
+      background-color: #5a2a2d;
+      color: #ffffff;
+    }
+  }
 }
