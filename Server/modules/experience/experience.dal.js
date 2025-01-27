@@ -29,7 +29,6 @@ class ExperienceDal {
         }
       }
 
-      console.log("feature", features);
       for (const feature of features){
         let iconFilename = iconFiles.find((e)=> e.originalname === feature.feature_icon).filename;
         let sqlFeatures = `INSERT INTO feature (feature_experience_id, feature_name, feature_description, feature_icon)
@@ -54,7 +53,7 @@ class ExperienceDal {
                         SET experience_title = ?, experience_description = ?, experience_price_adult = ?, experience_price_child = ?
                         WHERE experience_id = ?`;
       let updateValues = [data.experience_title, data.experience_description, data.experience_price_adult, data.experience_price_child, experience_id];
-      let res = await executeQuery(sqlUpdate, updateValues);
+      await executeQuery(sqlUpdate, updateValues);
     } catch (error) {
       console.log(error);
       throw error;
@@ -126,7 +125,6 @@ class ExperienceDal {
                     ON experience_pictures.experience_pictures_experience_id = experience.experience_id AND experience_pictures.is_main = 1
                   WHERE experience.experience_is_deleted = 0;`;
       let result = await executeQuery(sql);
-      console.log(result);
       return result;
     } catch (error) {
       throw error;
@@ -203,6 +201,47 @@ class ExperienceDal {
       let res = await executeQuery(sql, values);
       return res;
     } catch (error) {
+      throw error;
+    }
+  }
+
+  getAllOtherHikes = async (experienceId) => {
+    try {
+      let sql = `SELECT hike_id, hike_title
+                  FROM hike WHERE hike_is_deleted = 0 AND hike_id in (SELECT hike_id 
+                                                                      FROM hike_experience
+                                                                      WHERE experience_id != ?)
+                                                      AND hike_id NOT IN (SELECT hike_id 
+                                                                      FROM hike_experience
+                                                                      WHERE experience_id = ?)`;
+                                                                      
+      let result = await executeQuery(sql, [experienceId, experienceId]);
+      return result;
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  }
+
+  assignHike = async (expId, hikeId) => {
+    try {
+      let sql = `INSERT INTO hike_experience (experience_id, hike_id)
+                VALUES (?, ?)`;
+      let values = [expId, hikeId];
+      await executeQuery(sql, values);
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  }
+
+  unassignHike = async (expId, hikeId) => {
+    try {
+      let sql = `DELETE FROM hike_experience WHERE experience_id = ? AND  hike_id = ?`;
+      let values = [expId, hikeId];
+      await executeQuery(sql, values);
+    } catch (error) {
+      console.log(error);
       throw error;
     }
   }
