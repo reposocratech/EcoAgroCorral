@@ -97,14 +97,14 @@ export const EditExperience = () => {
     }
   }
 
-  const deletePicture = async (picture_id, is_main, index=null) => {
+  const deletePicture = async (picture_id, is_main, filename, index=null) => {
     try {
       if(is_main){
-        fetchData(`api/experience/deletePicture/${picture_id}`, "delete");
+        fetchData(`api/experience/deletePicture/${picture_id}`, "delete", {filename});
         setMainFile();
       }
       else {
-        await fetchData(`api/experience/deletePicture/${picture_id}`, "delete");
+        await fetchData(`api/experience/deletePicture/${picture_id}`, "delete", {filename});
         setFiles([...files].filter((e, i)=>{
           return i !== index;
         }));

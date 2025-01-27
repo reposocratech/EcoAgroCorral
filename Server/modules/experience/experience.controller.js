@@ -112,9 +112,10 @@ class ExperienceController {
 
   deleteFeature = async (req, res) => {
     const {featureId} = req.params;
+    const {icon} = req.body;
     
     try{
-      await experienceDal.deleteFeature(featureId);
+      await experienceDal.deleteFeature(featureId, icon);
       res.status(200).json("done");
     } catch (error) {
       console.log(error);
@@ -238,8 +239,9 @@ class ExperienceController {
 
   deletePicture = async (req, res) => {
     const {id} = req.params;
+    const {filename} = req.body;
     try {
-      const result = await experienceDal.deletePicture(id);
+      const result = await experienceDal.deletePicture(id, filename);
       res.status(200).json(result);
     } catch (error) {
       console.log(error);

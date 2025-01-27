@@ -9,9 +9,6 @@ const featureInitialValue = {
 
 export const CreateFeatureModal = ({show, handleClose, features, setFeatures}) => {
   const [feature, setFeature] = useState(featureInitialValue);
-  const [featureFile, setFeatureFile] = useState();
-  
-
 
   const handleChangeFeature = (e) => {
     const {name, value} = e.target;
@@ -19,21 +16,13 @@ export const CreateFeatureModal = ({show, handleClose, features, setFeatures}) =
   }
 
   const handleFeatureFile = (e) => {
-    //setFeatureFile(e.target.files[0]);
-    //console.log(e.target.files[0]);
     setFeature({...feature, feature_icon : e.target.files[0]});
   }
-  console.log("featuresss", features);
-  console.log("featuresss File", featureFile);
-  console.log("feature", feature);
 
   const onSubmitFeature = () => {
     setFeatures ([...features, feature]);
-    //setFeature(featureInitialValue);
-    //setFeatureFile();
     handleClose();
   }
-  //console.log("featureFiles: ", featureFiles);
 
   return (
     <Modal
@@ -41,7 +30,7 @@ export const CreateFeatureModal = ({show, handleClose, features, setFeatures}) =
         onHide={handleClose}
         backdrop="static"
         keyboard={false}
-      >
+    >
         <Modal.Header closeButton>
           <Modal.Title>Modal title</Modal.Title>
         </Modal.Header>

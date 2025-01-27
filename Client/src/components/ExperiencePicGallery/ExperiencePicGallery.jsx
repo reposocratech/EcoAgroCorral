@@ -3,7 +3,6 @@ import { Col } from 'react-bootstrap';
 import "./experiencePicGallery.css"
 
 export const ExperiencePicGallery = ({pictures}) => {
-  console.log(pictures);
   return (
     <>
       {pictures?.map((elem) => {
@@ -16,22 +15,3 @@ export const ExperiencePicGallery = ({pictures}) => {
     </>
   )
 }
-
-
-/*
-<div className="pic-gallery">
-        <Col xs={12} md={6} xl={4} className='pic-cols'>
-          <img src={`/assets/images/about/fondo1.png`} alt="" />
-        </Col>
-        <Col xs={12} md={6} xl={4} className='pic-cols'>
-          <img src="/assets/images/about/fondo1.png" alt="" />
-        </Col>
-        <Col xs={12} md={6} xl={4} className='pic-cols'>
-          <img src="/assets/images/about/fondo1.png" alt="" />
-        </Col>
-        <Col xs={12} md={6} xl={4} className='pic-cols'>
-          <img src="/assets/images/about/fondo1.png" alt="" />
-        </Col>
-      </div>
- 
-})} */

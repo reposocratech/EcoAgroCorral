@@ -5,14 +5,17 @@ import { fetchData } from "../../helpers/axiosHelper";
 
 export const EditFeatureList = ({features, setFeatures}) => {
 
-  const deleteFeatures = async (id) => {
-    const res = await fetchData(`api/experience/deleteFeature/${id}`, "delete");
-    console.log(res);
+  const deleteFeatures = async (id, icon=null) => {
+    if(icon){
+      await fetchData(`api/experience/deleteFeature/${id}`, "delete", {icon});
+    }
+    else{
+      await fetchData(`api/experience/deleteFeature/${id}`, "delete");
+    }
 
     setFeatures(features.filter((e)=>{
       return e.feature_id !== id;
-    }))
-
+    }));
   }
 
   return (
@@ -21,7 +24,7 @@ export const EditFeatureList = ({features, setFeatures}) => {
         return(
           <div key={index} className="feature-list-elem">
             <p className="element-name">{elem.feature_name}</p>
-            <img className="trash-icon" src={trash} onClick={()=>deleteFeatures(elem.feature_id)} alt="trash Icon" />
+            <img className="trash-icon" src={trash} onClick={()=>deleteFeatures(elem.feature_id, elem.feature_icon)} alt="trash Icon" />
           </div>
         )
       })
