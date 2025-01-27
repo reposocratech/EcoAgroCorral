@@ -15,9 +15,6 @@ export const OneExperience = () => {
   const [experienceInfo, setExperienceInfo] = useState({});
   const {id} = useParams();
   const navigate = useNavigate();
-  console.log(user);
-  console.log(experienceInfo);
-  console.log("typeee", user);
 
    useEffect(() => {
      const getExperience = async () => {

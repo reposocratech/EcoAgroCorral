@@ -38,7 +38,7 @@ export const Footer = () => {
         <Col md={4} className="px-5">
           <div className="d-flex flex-column align-items-center">
             <Link to="/">
-              <img src={logo} alt="Logo de la empresa" />
+              <img className="img-footer" src={logo} alt="Logo de la empresa" />
             </Link>
             <p className="text-logo text-center">
               Vive una experiencia inolvidable

@@ -1,7 +1,6 @@
 import trash from "../../../public/assets/icons/trash.svg";
 
 export const CreateExperienceMainImgList = ({mainFile, setMainFile}) => {
-  console.log(mainFile);
 
   const deleteMainFile = async () => {
     setMainFile(); 

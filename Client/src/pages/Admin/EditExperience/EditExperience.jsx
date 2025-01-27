@@ -8,6 +8,7 @@ import { EditFeatureList } from "../../../components/EditFeatureList/EditFeature
 import { EditExperienceMainImgList } from "../../../components/EditExperienceMainImgList/EditExperienceMainImgList";
 import { EditExperienceImgList } from "../../../components/EditExperienceImgList/EditExperienceImgList";
 import { useNavigate, useParams } from "react-router-dom";
+import { AssignHikeToExperience } from "../../../components/AssignHiketoExperience/AssignHikeToExperience";
 
 const initialValue = {
   experience_title: "",
@@ -26,15 +27,14 @@ export const EditExperience = () => {
   const [msg, setMsg] = useState("");
   const [msgExpSaved, setMsgExpSaved] = useState("");
   const [msgFeature, setMsgFeature] = useState("");
+  const [msgHikes, setMsgHikes] = useState("");
   const [show, setShow] = useState(false);
+  const [hikes, setHikes] = useState([]);
+  const [otherHikes, setOtherHikes] = useState([]);
   const navigate = useNavigate();
   const {id} = useParams();
-  console.log("iddd", id);
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
-  console.log("files",files)
 
   const getExperience = async () => {
     try {
@@ -43,6 +43,9 @@ export const EditExperience = () => {
       setMainFile(res.experiencePictures.find((img) => img.is_main) || null);
       setFiles(res.experiencePictures.slice(1));
       setFeatures(res.features);
+      setHikes(res.hikes);
+      const res2 = await fetchData(`api/experience/getAllOtherHikes/${id}`, "get");
+      setOtherHikes(res2);
       
     } catch (error) {
       console.log(error);
@@ -68,7 +71,6 @@ export const EditExperience = () => {
     newFormData.append("file", newImg);
     try {
       let response = await fetchData(`api/experience/addMainPicture/${id}`, "post", newFormData);
-      console.log(response);
       setMainFile(response);
       getExperience();
     } catch (error) {
@@ -89,7 +91,6 @@ export const EditExperience = () => {
         let response = await fetchData(`api/experience/addImagesByExperiences/${id}`, "post", newFormData);
         setFiles(response);
         getExperience();
-        console.log(response);
       } catch (error) {
         console.log(error);
       }
@@ -99,11 +100,11 @@ export const EditExperience = () => {
   const deletePicture = async (picture_id, is_main, index=null) => {
     try {
       if(is_main){
-        const res = await fetchData(`api/experience/deletePicture/${picture_id}`, "delete");
+        fetchData(`api/experience/deletePicture/${picture_id}`, "delete");
         setMainFile();
       }
       else {
-        const res = await fetchData(`api/experience/deletePicture/${picture_id}`, "delete");
+        await fetchData(`api/experience/deletePicture/${picture_id}`, "delete");
         setFiles([...files].filter((e, i)=>{
           return i !== index;
         }));
@@ -122,7 +123,7 @@ export const EditExperience = () => {
       else{
         let data = {...experienceInfo}
 
-        const res = await fetchData(`api/experience/editExperience/${id}`, "put", data);
+        await fetchData(`api/experience/editExperience/${id}`, "put", data);
         setMsgExpSaved("Cambios Guardados!");
       }
     } catch (error) {
@@ -144,6 +145,9 @@ export const EditExperience = () => {
       else if(!files.length){
         setMsgFeature("Añade Imagenes");
       }
+      else if (!hikes.length){
+        setMsgHikes("Asocia al menos un paseo");
+      }
       else{
         navigate("/experiencias");
       }
@@ -151,23 +155,18 @@ export const EditExperience = () => {
       console.log(error);
     }
   }
-
-  //console.log("pictures:", mainFiles);
-  //console.log("newExperience", newExperience);
-  //console.log("feature", feature);
-  //console.log("features", features);
   
   return (
     <section>
       <Container fluid="xxl">
         <Row className="d-flex justify-content-center">
           <Col
-            lg={4}
-            md={6}
+            lg={6}
+            md={8}
             className="d-flex flex-column shadow my-5 create-experience"
           >
             <img src={logoAgro} alt="LogoAgro" className="mx-auto" />
-            <h2 className="text-center mt-2 fw-bold">EDITA LA  EXPERIENCIA</h2>
+            <h2 className="text-center mt-2 fw-bold">EDITA "{experienceInfo.experience_title}"</h2>
             <div className="separator"></div>
             <Form className="px-4 pt-4">
             <Form.Label>Title</Form.Label>
@@ -248,9 +247,14 @@ export const EditExperience = () => {
                 </div>
               </Form.Group>
               <div>
+                <Button onClick={handleShow}>Añadir caracteristica</Button>
                 {features && <EditFeatureList features={features} setFeatures={setFeatures} />}
                 <span>{msgFeature}</span>
-                <Button onClick={handleShow}>Añadir caracteristica</Button>
+              </div>
+              <div>
+                <p>Paseos disponibles</p>
+                <AssignHikeToExperience expId={id} hikes={hikes} otherHikes={otherHikes} getExperience={getExperience} />
+                <span>{msgHikes}</span>
               </div>
               <span>{msg}</span>
               <div className="p-2 d-flex justify-content-center">

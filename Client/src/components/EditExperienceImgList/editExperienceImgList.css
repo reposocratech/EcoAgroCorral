@@ -11,14 +11,14 @@
   align-items: center;
   border-radius: 5px;
   width: fit-content;
-  height: 1.6rem;
+  height: fit-content;
   
   .element-name{
     margin: 0;
-    padding: 0;
   }
 
   .trash-icon{
+    margin: 0;
     width: 1.5rem;
   }
 }

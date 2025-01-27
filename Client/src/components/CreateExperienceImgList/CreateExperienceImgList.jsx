@@ -2,7 +2,6 @@ import trash from "../../../public/assets/icons/trash.svg";
 
 export const CreateExperienceImgList = ({files, setFiles}) => {
   
-  console.log("filessss",files);
 
   const deleteFile = (index) => {
     setFiles([...files].filter((e, i)=>{

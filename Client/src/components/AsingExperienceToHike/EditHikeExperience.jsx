@@ -184,7 +184,11 @@ export const HikeExperiences = ({ hikeId }) => {
         {/* Lado derecho: experiencias asignadas */}
         <div className="d-flex flex-column jusfy-content-center align-items-center gap-2">
           <Form.Label>Experiencias asignadas</Form.Label>
-          <Form.Control as="select" id="assignedExperiences" multiple size="lg">
+          <Form.Control 
+            as="select" 
+            id="assignedExperiences" 
+            multiple
+            size="lg">
             {assignedExperiences.length > 0 ? (
               assignedExperiences.map((exp) => (
                 <option key={exp.experience_id} value={exp.experience_id}>

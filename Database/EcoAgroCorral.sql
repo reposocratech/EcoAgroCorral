@@ -250,6 +250,7 @@ INSERT INTO hike_experience (experience_id, hike_id) VALUES
     (3, 11),
     (3, 12);
     
+select * from hike_experience;
 
 CREATE TABLE reservation (
 reservation_id INT UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
