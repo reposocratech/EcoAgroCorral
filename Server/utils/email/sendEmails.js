@@ -17,14 +17,6 @@ class EmailService {
         pass: process.env.EMAIL_PASS,
       },
     });
-
-    this.transporter.verify((error, success) => {
-      if (error) {
-        console.error("SMTP Config Error:", error);
-      } else {
-        console.log("SMTP Ready:", success);
-      }
-    });
   }
 
   async sendRegistrationEmail(userData, emailToken) {
@@ -154,6 +146,61 @@ class EmailService {
       throw error;
     }
   }
+
+  async sendReservationConfirmationEmail(userData, reservationData) {
+    try {
+      const { user_name, user_email } = userData;
+      const {
+        hike_title,
+        reservation_date,
+        reservation_time,
+        reservation_adult,
+        reservation_children,
+        reservation_total_price,
+      } = reservationData;
+  
+      const __filename = fileURLToPath(import.meta.url);
+      const __dirname = dirname(__filename);
+      const templatePath = path.join(__dirname, "../email/reservationDone.mjml");
+  
+      const mjmlTemplate = await fs.readFile(templatePath, "utf8");
+  
+      const template = Handlebars.compile(mjmlTemplate);
+      const mjmlWithData = template({
+        logoUrl:
+          "https://www.ecoagrocorral.com/web/image/964-3e9cbef4/logo%20ecoagrocorral.jpg.JPG",
+        userName: user_name,
+        hikeTitle: hike_title,
+        reservationDate: `${reservation_date.slice(8, 10)}/${reservation_date.slice(
+          5,
+          7
+        )}/${reservation_date.slice(0, 4)}`,
+        reservationTime: reservation_time,
+        adultCount: reservation_adult,
+        childrenCount: reservation_children,
+        totalPrice: `${reservation_total_price} €`,
+      });
+  
+      const { html } = mjml2html(mjmlWithData);
+  
+      console.log("Email Data:", {
+        to: user_email,
+        subject: "Detalles de tu reserva",
+      });
+      await this.transporter.sendMail({
+        from: process.env.EMAIL_USER,
+        to: user_email,
+        subject: "Detalles de tu reserva",
+        html,
+      });
+  
+      console.log("Correo de confirmación enviado correctamente a:", user_email);
+      return true;
+    } catch (error) {
+      console.error("Error enviando email de confirmación:", error);
+      throw error;
+    }
+  }  
 }
 
 export default new EmailService();
