@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { Button, Spinner, Alert, Container, Image } from "react-bootstrap";
 import "./OnePost.css";
 import { AgroContext } from "../../../context/ContextProvider";
+
 export const OnePost = () => {
   const { postId } = useParams(); // Capturar el ID del post desde la URL
   const [post, setPost] = useState(null);
@@ -31,6 +32,29 @@ export const OnePost = () => {
 
     fetchPost();
   }, [postId]);
+
+  const handleDeletePost = async () => {
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_SERVER_URL}api/post/deletePost/${postId}`,
+        {
+          method: "DELETE",
+        }
+      );
+
+      if (response.ok) {
+        alert("La publicación ha sido eliminada exitosamente.");
+        navigate("/blog"); // Redirigir al componente Blog
+      } else {
+        const errorResult = await response.json();
+        console.error("Error deleting post:", errorResult);
+        alert("Hubo un error al intentar borrar la publicación.");
+      }
+    } catch (err) {
+      console.error("Error:", err);
+      alert("Hubo un error al intentar borrar la publicación.");
+    }
+  };
 
   if (loading) {
     return (
@@ -130,7 +154,7 @@ export const OnePost = () => {
             <Button
               variant="danger"
               className="button-nuevo-post"
-              onClick={() => navigate("/blog/crearPost")}
+              onClick={handleDeletePost} // Llamar a la función para borrar el post
             >
               Borrar publicacion
             </Button>
