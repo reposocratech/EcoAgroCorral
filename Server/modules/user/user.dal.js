@@ -56,6 +56,28 @@ class UserDal {
     }
   };
 
+  getHikeById = async (hike_id) => {
+    try {
+      const sql = `
+        SELECT 
+          hike_id, 
+          hike_title, 
+          hike_description, 
+          hike_distance, 
+          hike_duration, 
+          hike_itinerary, 
+          hike_is_deleted 
+        FROM hike 
+        WHERE hike_id = ? AND hike_is_deleted = 0
+      `;
+      const result = await executeQuery(sql, [hike_id]);
+      return result;
+    } catch (error) {
+      console.error("Error al obtener los datos de la ruta:", error);
+      throw error;
+    }
+  };
+
   changePassword = async (hash, user_id) => {
     console.log("passss new", hash);
 

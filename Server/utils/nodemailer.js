@@ -12,14 +12,6 @@ const transporter = nodemailer.createTransport({
     }
 });
 
-transporter.verify((error, success) => {
-    if (error) {
-        console.error("SMTP Config Error:", error);
-    } else {
-        console.log("SMTP Ready:", success);
-    }
-});
-
 export const sendMail = (email, subject, text, html = "") =>{
     transporter.sendMail({
         from: process.env.EMAIL_USER,
