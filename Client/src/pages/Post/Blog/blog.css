@@ -24,4 +24,16 @@
     border: none;
     box-shadow: 0 0 5px #3a1a1d;
   }
+
+  button.button-eliminar-paseo2 {
+    background-color: #c11b50;
+    color: white;
+    border: none;
+    transition: background-color 0.3s;
+  }
+  
+  button.button-eliminar-paseo2:hover {
+    background-color: #581121;
+  }
+  
 }

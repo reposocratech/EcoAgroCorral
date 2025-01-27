@@ -55,7 +55,6 @@ export const Blog = () => {
     }
   }
 
-
   return (
     <>
       <Categories
@@ -93,9 +92,9 @@ export const Blog = () => {
             })}
           </Row>
         </Container>
-        <section className="text-center mt-4 pb-4">
+        <section className="text-center mt-4 pb-4 gap-3">
         {user?.user_type === 1 && (
-          <>
+          <div className="d-flex gap-2 justify-content-center">
             <Button
               variant="success"
               className="button-nuevo-post"
@@ -103,7 +102,14 @@ export const Blog = () => {
             >
               Crear nueva publicación
             </Button>
-          </>
+
+            <Button
+              className="button-eliminar-paseo2"
+              onClick={() => navigate("/admin/blog/categorias")}
+            >
+              Administrar Categorías
+            </Button>
+          </div>
         )}
       </section>
       </section>
