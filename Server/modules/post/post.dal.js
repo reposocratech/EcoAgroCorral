@@ -1,4 +1,5 @@
 import { executeQuery } from "../../config/db.js";
+import deleteFile from "../../utils/deleteFile.js";
 
 
 class PostDal {
@@ -103,6 +104,27 @@ class PostDal {
     }
   }
 
+  deletePost = async (post_id)=>{
+    try {
+      let sqlImg = `select GROUP_CONCAT(post_picture_file SEPARATOR ',') AS images
+      FROM post_picture 
+      WHERE post_picture_post_id = ?`;
+      const resImg = await executeQuery(sqlImg, [post_id]);
+      let postImages = [];
+      if (resImg[0].images) {
+        postImages = resImg[0].images.split(",");
+        for (const elem of postImages) {
+          deleteFile(elem, "post");
+        }
+      }
+      let sql = 'DELETE FROM post WHERE post_id = ?'
+      const result = await executeQuery(sql, [post_id]);
+      return true;
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  }
   
 }
 
