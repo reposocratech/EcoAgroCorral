@@ -2,7 +2,7 @@
 
 main{
   font-family: "Merriweather", serif;
-  min-height: calc(100vh - 399px);
+  min-height: calc(100vh - 292px);
   margin-top: 66px;
   background-color: rgb(255 252 241);
 }

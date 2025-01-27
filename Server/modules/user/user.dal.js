@@ -56,6 +56,28 @@ class UserDal {
     }
   };
 
+  getHikeById = async (hike_id) => {
+    try {
+      const sql = `
+        SELECT 
+          hike_id, 
+          hike_title, 
+          hike_description, 
+          hike_distance, 
+          hike_duration, 
+          hike_itinerary, 
+          hike_is_deleted 
+        FROM hike 
+        WHERE hike_id = ? AND hike_is_deleted = 0
+      `;
+      const result = await executeQuery(sql, [hike_id]);
+      return result;
+    } catch (error) {
+      console.error("Error al obtener los datos de la ruta:", error);
+      throw error;
+    }
+  };
+
   changePassword = async (hash, user_id) => {
     console.log("passss new", hash);
 
@@ -71,21 +93,22 @@ class UserDal {
 
   getReservations = async (user_id) => {
     try {
-      let sql = `SELECT 
-      reservation.*, 
-      hike_pictures.hike_pictures_file AS reservation_file, 
-      hike.hike_title AS reservation_hike_title, 
-      experience.experience_title AS reservation_experience_title 
-  FROM reservation
-  LEFT JOIN hike_pictures 
-      ON reservation.reservation_hike_id = hike_pictures.hike_pictures_hike_id 
-      AND hike_pictures.is_main = 1
-  LEFT JOIN hike 
-      ON reservation.reservation_hike_id = hike.hike_id 
-  LEFT JOIN experience 
-      ON reservation.reservation_experience_id = experience.experience_id
-  WHERE reservation.reservation_user_id = ? 
-  ORDER BY reservation.reservation_date`
+      let sql = `
+      SELECT 
+        reservation.*, 
+        hike_pictures.hike_pictures_file AS reservation_file, 
+        hike.hike_title AS reservation_hike_title, 
+        experience.experience_title AS reservation_experience_title 
+      FROM reservation
+      LEFT JOIN hike_pictures 
+          ON reservation.reservation_hike_id = hike_pictures.hike_pictures_hike_id 
+          AND hike_pictures.is_main = 1
+      LEFT JOIN hike 
+          ON reservation.reservation_hike_id = hike.hike_id 
+      LEFT JOIN experience 
+          ON reservation.reservation_experience_id = experience.experience_id
+      WHERE reservation.reservation_user_id = ? 
+      ORDER BY reservation.reservation_date`;
       const result = await executeQuery(sql, [user_id]);
       return result;
     } catch (error) {
@@ -157,7 +180,12 @@ class UserDal {
   getExperience = async () => {
     try {
       let sql = `
-        SELECT experience.experience_id, experience.experience_title, experience.experience_price_adult,experience.experience_price_child, hike.hike_id, hike.hike_title
+        SELECT 
+          experience.experience_id, 
+          experience.experience_title, 
+          experience.experience_price_adult,
+          experience.experience_price_child, 
+          hike.hike_id, hike.hike_title
         FROM experience, hike, hike_experience
         WHERE hike.hike_id = hike_experience.hike_id
         AND experience.experience_id =  hike_experience.experience_id`;

@@ -63,12 +63,14 @@ export const CreateFeatureModal = ({show, handleClose, features, setFeatures}) =
                       type="text"
                       placeholder="Nombre"
                       onChange={handleChangeFeature}
+                      value={feature.feature_name}
                       name="feature_name"
                     />
                     <Form.Control
                       type="text"
                       placeholder="Descripcion"
                       onChange={handleChangeFeature}
+                      value={feature.feature_description}
                       name="feature_description"
                     />
                   </div>

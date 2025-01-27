@@ -309,7 +309,7 @@ export const Register = () => {
             <p className="text-center pt-2 mb-4">
               ¿Ya tienes una cuenta?
               <Link to="/user/login" className="ms-2 link">
-                Logueate aquí
+                Inicia sesión
               </Link>
             </p>
           </Col>

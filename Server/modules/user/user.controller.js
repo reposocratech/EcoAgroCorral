@@ -5,6 +5,7 @@ import UserDal from "./user.dal.js";
 import jwt from "jsonwebtoken";
 import { comparePassword } from "../../utils/hashUtils.js";
 import { generateToken, getIdFromToken } from "../../utils/tokenUtils.js";
+import EmailService from "../../utils/email/sendEmails.js";
 
 class UserController {
   register = async (req, res) => {
@@ -37,7 +38,7 @@ class UserController {
         throw new Error("Las contraseñas deben coincidir");
       } else {
         const hash = await hashPassword(user_password);
-        const result = await UserDal.register([
+        await UserDal.register([
           user_name,
           user_lastname,
           user_birthdate,
@@ -47,15 +48,17 @@ class UserController {
           user_dni,
           hash,
         ]);
+
         const emailToken = jwt.sign({ user_email }, process.env.TOKEN_KEY, {
           expiresIn: "1h",
         });
-        sendMail(
-          user_email,
-          "Verifica tu cuenta",
-          `Hola ${user_name}, por favor verifica tu cuenta mediante el siguiente enlace: ${process.env.URLFRONT}/confirmarEmail/${emailToken}`
+
+        await EmailService.sendRegistrationEmail(
+          { user_name, user_email },
+          emailToken
         );
-        res.status(200).json({ msg: "Todo OK!" });
+
+        res.status(200).json({ msg: "Registro exitoso, verifica tu correo" });
       }
     } catch (error) {
       res.status(400).json({ msg: error.message });
@@ -186,16 +189,20 @@ class UserController {
           const emailToken = jwt.sign({ user_email }, process.env.TOKEN_KEY, {
             expiresIn: "1h",
           });
-          sendMail(
-            user_email,
-            "Cambia tu contraseña",
-            `Hola ${userResult[0].user_name}, puedes restablecer tu contraseña a traves del siguiente enlace: ${process.env.URLFRONT}/user/restablecerPass/${emailToken}`
+          await EmailService.sendRestorePasswordEmail(
+            { user_name: userResult[0].user_name, user_email },
+            emailToken
           );
-          res.status(200).json({ message: "Email enviado" });
         }
       }
+      return res
+        .status(200)
+        .json({ message: "Correo de recuperación enviado." });
     } catch (error) {
-      res.status(500).json({ message: "Error de server recoverPass" });
+      console.error("Error en recoverPass:", error);
+      return res
+        .status(500)
+        .json({ message: "Error al procesar la solicitud." });
     }
   };
 
@@ -294,8 +301,7 @@ class UserController {
       reservation_total_price,
       reservation_user_id,
     } = req.body[0];
-    console.log(req.body);
-    
+
     try {
       if (
         !reservation_experience_id ||
@@ -307,27 +313,56 @@ class UserController {
         !reservation_total_price ||
         !reservation_user_id
       ) {
-        res.status(401).json({ message: "Debe cumplimentar todos los campos" });
-      } else {
-        const result = await UserDal.createReservation(
-          reservation_experience_id,
-          reservation_hike_id,
-          reservation_text,
+        return res
+          .status(401)
+          .json({ message: "Debe cumplimentar todos los campos" });
+      }
+
+      const user = await UserDal.getUserById(reservation_user_id);
+      const hike = await UserDal.getHikeById(reservation_hike_id);
+
+      if (!user.length) {
+        return res.status(404).json({ message: "Usuario no encontrado" });
+      }
+  
+      if (!hike.length) {
+        return res.status(404).json({ message: "Ruta no encontrada" });
+      }
+  
+
+      const result = await UserDal.createReservation(
+        reservation_experience_id,
+        reservation_hike_id,
+        reservation_text,
+        reservation_date,
+        reservation_time,
+        reservation_adult,
+        reservation_children,
+        reservation_total_price,
+        reservation_user_id
+      );
+
+      await EmailService.sendReservationConfirmationEmail(
+        {
+          user_name: user[0].user_name,
+          user_email: user[0].user_email,
+        },
+        {
+          hike_title: hike[0].hike_title,
           reservation_date,
           reservation_time,
           reservation_adult,
           reservation_children,
           reservation_total_price,
-          reservation_user_id
-        );
-        res.status(200).json({ message: "Reserva hecha ok" });
-      }
-    } catch (error) {
-      if(error){
-        if(error.errno == 1062){
-          res.status(401).json({ message: "Este dia no esta disponible. Por favor seleccione otra fecha" });
         }
-      }
+      );
+
+      return res.status(200).json({ message: "Reserva hecha ok" });
+    } catch (error) {
+      console.error("Error al crear la reserva:", error);
+      return res
+        .status(500)
+        .json({ message: "Error al procesar la solicitud." });
     }
   };
 }

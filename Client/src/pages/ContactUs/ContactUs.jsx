@@ -4,7 +4,6 @@ import {
   FaInstagram,
   FaMailBulk,
   FaShareAlt,
-  FaTiktok,
   FaWhatsapp,
 } from "react-icons/fa";
 import { Col, Container, Row } from "react-bootstrap";
@@ -72,7 +71,12 @@ export const ContactUs = () => {
                   un WhatsApp. ¡Estaré encantada de atenderos!
                 </p>
                 <p className="text-center mb-5 fw-bold text">
-                  <a href="#" className="text-decoration-none text-dark text">
+                  <a
+                    href="https://wa.me/34691560150?text=Hola%20EcoAgroCorral,%20tengo%20una%20consulta." //CAMBIAR EL TLFN PARA QUE LE LLEGUE A RAQUEL
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-decoration-none text-dark text"
+                  >
                     +34 644 80 30 31 - Raquel
                   </a>
                 </p>
@@ -110,17 +114,11 @@ export const ContactUs = () => {
                   Sígueme
                 </p>
                 <p className="mx-4 m-0 align-items-center justify-content-center d-flex flex-column text-center mt-2 mb-3">
-                Síguenos en redes sociales para descubrir novedades, contenido exclusivo, ideas y consejos. Únete a nuestra comunidad y comparte esta experiencia única con nosotros.
+                  Síguenos en redes sociales para descubrir novedades, contenido
+                  exclusivo, ideas y consejos. Únete a nuestra comunidad y
+                  comparte esta experiencia única con nosotros.
                 </p>
                 <p className="text-center mb-5">
-                  <a
-                    href="https://www.tiktok.com/@ecoagrocorral_"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="logo"
-                  >
-                    <FaTiktok className="mx-2 fs-4" />
-                  </a>
                   <a
                     href="https://www.instagram.com/ecoagrocorral/"
                     target="_blank"

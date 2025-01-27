@@ -1,0 +1,28 @@
+@import url("https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&display=swap");
+
+.paginaError {
+  height: 65vh;
+  background-color: #fffcf1;
+  color: #3a1a1d;
+  font-family: "Merriweather", serif;
+
+  h1 {
+    font-size: 6rem;
+  }
+  
+  p {
+    font-size: 1.5rem;
+  }
+
+  .error-btn {
+    background-color: #3a1a1d;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .error-btn:hover {
+    background-color: #5a2a2d;
+  }
+}

@@ -25,11 +25,18 @@ import { AdminUsers } from "../pages/Admin/AdminUsers/AdminUsers.jsx";
 import { PendingReservations } from "../pages/Admin/AdminReservation/PendingReservations.jsx";
 import { ReservationHistory } from "../pages/Admin/AdminReservation/ReservationHistory.jsx";
 import { CancelReservation } from "../pages/User/CancelReservation/CancelReservation.jsx";
+import { EditExperience } from "../pages/Admin/EditExperience/EditExperience.jsx";
 import { ReservationsDays } from "../pages/Admin/AdminReservation/ReservationsDays.jsx";
 import { Blog } from "../pages/Post/Blog/Blog.jsx";
+
 import { OnePost } from "../pages/Post/OnePost/OnePost.jsx";
 import { CreatePost } from "../pages/Post/CreatePost/CreatePost.jsx";
 import { AdminCategory } from "../pages/Post/AdminCategory/AdminCategory.jsx";
+
+import { AdminExperience } from "../pages/Admin/CreateExperience/AdminExperience.jsx";
+import { EditPost } from "../pages/Post/EditPost/EditPost.jsx";
+
+
 export const AppRoutes = () => {
   return (
 
@@ -50,6 +57,7 @@ export const AppRoutes = () => {
           <Route path='/experiencias' element={<AllExperiences />} />
           <Route path='/experiencias/:id' element={<OneExperience />} />
           <Route path='/experiencias/createExperience' element={<CreateExperience />} />
+          <Route path='/experiencias/editExperience/:id' element={<EditExperience />} />
           <Route path="/paseo/:id" element={<OneHike/>}/>
           <Route path="/paseo/nuevoPaseo" element={<CreateHike />} />          
           <Route path="/paseo/editar/:hikeId" element={<EditHike />} />
@@ -59,15 +67,20 @@ export const AppRoutes = () => {
           <Route path='/user/reserva' element={<Reservation/>}/>
           <Route path='/admin/perfil' element={<AdminDashboard/>}/>
           <Route path='/admin/usuarios' element={<AdminUsers />} />
+          <Route path='/admin/experiencias' element={<AdminExperience />}/>
           <Route path="/admin/reservas-pendientes" element={<PendingReservations />} />
           <Route path="/admin/historial-reservas" element={<ReservationHistory />} />
           <Route path="/admin/modificar-dias-disponibles" element={<ReservationsDays />} />
           <Route path='*' element={<ErrorPage />}/>
           <Route path='/reserva/cancelarReserva/:reservation_id' element={<CancelReservation/>}/>
           <Route path='/blog' element={<Blog />}/>
+
           <Route path="/blog/:postId" element={<OnePost />} />
           <Route path="/blog/crearPost" element={<CreatePost />} />
           <Route path="/blog/categorias" element={<AdminCategory />} />
+
+          <Route path='/blog/editPost/:post_id' element={<EditPost />}/>
+
         </Routes>
       </main>
       <footer>

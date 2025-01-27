@@ -1,0 +1,43 @@
+.edit-post{
+  
+  .img-ppl-post{
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+  }
+
+
+  .form-edit-post{
+    background-color: rgb(218, 216, 216);
+    border-radius: 10px;
+  }
+
+  .btn-edit-post{
+    background-color: #3a1a1d;
+    border: none;
+    color: #f2ece2;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .btn-edit-post:hover {
+    background-color: #5a2a2d;
+    color: #ffffff;
+  }
+
+  .btn-sec{
+    margin-inline: auto;
+    background-color: rgb(162, 14, 14);
+    margin-top: -1rem;
+    font-size: 0.7rem;
+  }
+
+  .img-post-sec{
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 1px solid #5a2a2d;
+  }
+
+
+}
