@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Form, Button, Container, Row, Col, Image } from "react-bootstrap";
 import "./NewHike.css";
@@ -19,7 +19,9 @@ export const CreateHike = () => {
   const [experiences, setExperiences] = useState([]);
   const [unassignedExperiences, setUnassignedExperiences] = useState([]);
   const [assignedExperiences, setAssignedExperiences] = useState([]);
-
+  const [selectedExperienceToAdd, setSelectedExperienceToAdd] = useState(null);
+  const [selectedExperienceToRemove, setSelectedExperienceToRemove] =
+    useState(null);
   // Cargar las experiencias desde la API
   useEffect(() => {
     const fetchExperiences = async () => {
@@ -261,11 +263,19 @@ export const CreateHike = () => {
           </Form.Group>
 
           {/* Selector de Experiencias */}
-          <div className="mb-3 d-flex justify-content-around">
+          <Form.Group className="mb-3 d-flex justify-content-around">
             {/* Experiencias no asignadas */}
             <div className="d-flex flex-column justify-content-around align-items-center">
               <Form.Label>Experiencias No Asignadas</Form.Label>
-              <Form.Control as="select" size="lg" multiple>
+              <Form.Control
+                as="select"
+                size="lg"
+                multiple
+                onChange={(e) => {
+                  const selectedId = e.target.value;
+                  setSelectedExperienceToAdd(selectedId);
+                }}
+              >
                 {unassignedExperiences.length > 0 ? (
                   unassignedExperiences.map((experience) => (
                     <option
@@ -281,15 +291,17 @@ export const CreateHike = () => {
               </Form.Control>
               <Button
                 className="mt-2 button-primary"
-                onClick={(e) => {
-                  const selectedExperienceId =
-                    e.target.previousElementSibling.value;
+                onClick={() => {
                   const experience = unassignedExperiences.find(
                     (exp) =>
-                      exp.experience_id === parseInt(selectedExperienceId)
+                      exp.experience_id === parseInt(selectedExperienceToAdd)
                   );
-                  handleAddExperience(experience);
+                  if (experience) {
+                    handleAddExperience(experience);
+                    setSelectedExperienceToAdd(null); // Reset after adding
+                  }
                 }}
+                disabled={!selectedExperienceToAdd}
               >
                 Añadir
               </Button>
@@ -298,7 +310,15 @@ export const CreateHike = () => {
             {/* Experiencias asignadas */}
             <div className="d-flex flex-column justify-content-around align-items-center">
               <Form.Label>Experiencias Asignadas</Form.Label>
-              <Form.Control as="select" size="lg" multiple>
+              <Form.Control
+                as="select"
+                size="lg"
+                multiple
+                onChange={(e) => {
+                  const selectedId = e.target.value;
+                  setSelectedExperienceToRemove(selectedId);
+                }}
+              >
                 {assignedExperiences.length > 0 ? (
                   assignedExperiences.map((experience) => (
                     <option
@@ -314,20 +334,22 @@ export const CreateHike = () => {
               </Form.Control>
               <Button
                 className="mt-2 button-danger"
-                onClick={(e) => {
-                  const selectedExperienceId =
-                    e.target.previousElementSibling.value;
+                onClick={() => {
                   const experience = assignedExperiences.find(
                     (exp) =>
-                      exp.experience_id === parseInt(selectedExperienceId)
+                      exp.experience_id === parseInt(selectedExperienceToRemove)
                   );
-                  handleRemoveExperience(experience);
+                  if (experience) {
+                    handleRemoveExperience(experience);
+                    setSelectedExperienceToRemove(null); // Reset after removing
+                  }
                 }}
+                disabled={!selectedExperienceToRemove}
               >
                 Quitar
               </Button>
             </div>
-          </div>
+          </Form.Group>
 
           <div className="d-flex align-items-center justify-content-center mt-4">
             <Button type="submit" className="button text-center">
