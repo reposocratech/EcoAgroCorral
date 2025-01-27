@@ -27,9 +27,9 @@ import { ReservationHistory } from "../pages/Admin/AdminReservation/ReservationH
 import { CancelReservation } from "../pages/User/CancelReservation/CancelReservation.jsx";
 import { ReservationsDays } from "../pages/Admin/AdminReservation/ReservationsDays.jsx";
 import { Blog } from "../pages/Post/Blog/Blog.jsx";
-
-
-
+import { OnePost } from "../pages/Post/OnePost/OnePost.jsx";
+import { CreatePost } from "../pages/Post/CreatePost/CreatePost.jsx";
+import { AdminCategory } from "../pages/Post/AdminCategory/AdminCategory.jsx";
 export const AppRoutes = () => {
   return (
 
@@ -65,6 +65,9 @@ export const AppRoutes = () => {
           <Route path='*' element={<ErrorPage />}/>
           <Route path='/reserva/cancelarReserva/:reservation_id' element={<CancelReservation/>}/>
           <Route path='/blog' element={<Blog />}/>
+          <Route path="/blog/:postId" element={<OnePost />} />
+          <Route path="/blog/crearPost" element={<CreatePost />} />
+          <Route path="/blog/categorias" element={<AdminCategory />} />
         </Routes>
       </main>
       <footer>
