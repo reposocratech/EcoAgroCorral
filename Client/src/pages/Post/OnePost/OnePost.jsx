@@ -145,6 +145,13 @@ export const OnePost = () => {
         {user?.user_type === 1 && (
           <>
             <Button
+              variant="success"
+              className="button-nuevo-post me-2"
+              onClick={()=> navigate(`/blog/editPost/${postId}`)}
+            >
+              Editar publicacion
+            </Button>
+            <Button
               variant="danger"
               className="button-nuevo-post"
               onClick={handleDeletePost} // Llamar a la función para borrar el post

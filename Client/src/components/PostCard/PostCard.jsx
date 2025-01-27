@@ -8,7 +8,7 @@ export const PostCard = ({post}) => {
   const navigate = useNavigate()
  
  useEffect(() => {
-      background.current.style.backgroundImage = "linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.35)), url(" + `http://localhost:4000/images/post/${post.post_file}` + ")";
+      background.current.style.backgroundImage = "linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.35)), url(" + `http://localhost:4000/images/posts/${post.post_file}` + ")";
       
   }, []); 
 
