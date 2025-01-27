@@ -79,6 +79,11 @@ class PostDal {
 
   deleteImg = async (id) =>{
     try {
+      let sqlImg = 'SELECT post_picture_file from post_picture WHERE post_picture_id = ?'
+      const resImg = await executeQuery(sqlImg, [id]);
+      if(resImg[0].post_picture_file){
+        deleteFile(resImg[0].post_picture_file, "post");
+      }
       let sql = 'DELETE FROM post_picture WHERE post_picture_id = ? '
       await executeQuery(sql, [id]);
     } catch (error) {
