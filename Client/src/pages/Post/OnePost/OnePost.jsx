@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Button, Spinner, Alert, Container, Image } from "react-bootstrap";
 import "./OnePost.css";
+import { AgroContext } from "../../../context/ContextProvider";
 export const OnePost = () => {
   const { postId } = useParams(); // Capturar el ID del post desde la URL
   const [post, setPost] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  const { user } = useContext(AgroContext);
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -116,13 +118,24 @@ export const OnePost = () => {
         )}
       </section>
       <footer className="text-center mt-4">
-        <Button
-          variant="success"
-          className="button-nuevo-post"
-          onClick={() => navigate("/blog/crearPost")}
-        >
-          Crear un nuevo Post
-        </Button>
+        {user?.user_type === 1 && (
+          <>
+            <Button
+              variant="success"
+              className="button-nuevo-post"
+              onClick={() => navigate("/blog/crearPost")}
+            >
+              Crear nueva publicacion
+            </Button>
+            <Button
+              variant="danger"
+              className="button-nuevo-post"
+              onClick={() => navigate("/blog/crearPost")}
+            >
+              Borrar publicacion
+            </Button>
+          </>
+        )}
       </footer>
     </Container>
   );
