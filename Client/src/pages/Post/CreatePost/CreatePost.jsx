@@ -106,6 +106,7 @@ export const CreatePost = () => {
       if (response.ok) {
         const result = await response.json();
         console.log("Post created successfully:", result);
+        navigate('/blog')
       } else {
         const errorResult = await response.json();
         console.error("Error creating post:", errorResult);
@@ -163,13 +164,7 @@ export const CreatePost = () => {
             ))}
             
           </Form.Control>
-          <Button
-              variant="outline-primary mt-3"
-              size="sm"
-              onClick={() => navigate("/blog/categorias")}
-            >
-              Administrar Categorías
-            </Button>
+
           <Form.Group className="mb-3 mt-3">
             <Form.Check
               type="checkbox"
@@ -258,7 +253,7 @@ export const CreatePost = () => {
           </Form.Group>
 
           <div className="d-flex align-items-center justify-content-center mt-4">
-            <Button type="submit" className="button text-center">
+            <Button type="submit" className="button text-center" >
               Crear Post
             </Button>
           </div>

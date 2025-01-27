@@ -28,9 +28,9 @@ import multerArray from '../../middlewares/multerArray.js'
 
 router.get('/getAllPost', postController.getAllPost);
 router.get('/getDataPost/:post_id', postController.getDataPost);
-router.put('/editPost',multerSingle("post"), postController.editPost);
+router.put('/editPost',multerSingle("posts"), postController.editPost);
 router.delete('/deleteImg/:id', postController.deleteImg);
-router.post('/addFiles/:post_id', multerArray("post"), postController.addFiles);
+router.post('/addFiles/:post_id', multerArray("posts"), postController.addFiles);
 router.delete('/deletePost/:post_id', postController.deletePost);
 
 

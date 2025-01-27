@@ -1,4 +1,5 @@
 import { dbPool, executeQuery } from "../../config/db.js";
+import deleteFile from "../../utils/deleteFile.js";
 
 class ExperienceDal {
 
@@ -86,16 +87,17 @@ class ExperienceDal {
   };
 
   editFeature = async (featureId, featureInfo, icon) => {
-    //console.log("featureInfo", featureInfo);
     try {
       let sqlFeatures = `UPDATE feature SET feature_name = ?, feature_description = ? WHERE feature_id = ?`;
       let featuresValues = [...featureInfo, featureId];
       if (icon){
+        let sqlPrevIcon = `SELECT feature_icon FROM feature WHERE feature_id = ?`;
+        let resIconName = await executeQuery(sqlPrevIcon, [featureId]);
+        deleteFile(resIconName[0].feature_icon, "features"); 
         sqlFeatures = `UPDATE feature SET feature_name = ?, feature_description = ?, feature_icon = ? WHERE feature_id = ?`;
          featuresValues = [...featureInfo, icon.filename, featureId];
       }
       
-      //console.log(featureInfo);
       let resFeatures = await executeQuery(sqlFeatures, featuresValues);
       return resFeatures;
     } catch (error) {
@@ -104,11 +106,12 @@ class ExperienceDal {
     }
   }
 
-  deleteFeature = async (featureId) => {
+  deleteFeature = async (featureId, icon) => {
     try {
       let sql = `DELETE FROM feature WHERE feature_id = ?`;
       let values = [featureId];
       await executeQuery(sql, values);
+      deleteFile(icon, "features");
     } catch (error) {
       throw error;
     }
@@ -194,11 +197,12 @@ class ExperienceDal {
     }
   }
 
-  deletePicture = async (picture_id) => {
+  deletePicture = async (picture_id, filename) => {
     try {
       let sql = `DELETE FROM experience_pictures WHERE experience_pictures_id = ?`;
       let values = [picture_id];
       let res = await executeQuery(sql, values);
+      deleteFile(filename, "experiences");
       return res;
     } catch (error) {
       throw error;

@@ -118,15 +118,23 @@ export const AdminDashboard = () => {
                   <Card.Body>
                     <Card.Title>Gestión del Blog</Card.Title>
                     <Card.Text>
-                      Crea un nuevo post del blog para ofrecer a los usuarios. 
+                    Crea, habilita o deshabilita post según sea necesario.
+
                     </Card.Text>
                     <div className="d-flex gap-2 justify-content-center">
                       <Button
                         onClick={() =>
-                          navigate("/blog")
+                          navigate("/blog/crearPost")
                         }
                       >
                         Ir a Crear nuevo Post
+                      </Button>
+                      <Button
+                        onClick={() =>
+                          navigate("/admin/blog/categorias")
+                        }
+                      >
+                        Ir a Gestión de Categorías
                       </Button>
                     </div>
                   </Card.Body>

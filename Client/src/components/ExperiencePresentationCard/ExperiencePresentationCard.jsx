@@ -9,8 +9,6 @@ export const ExperiencePresentationCard = ({experience, index}) => {
 
   useEffect(() => {
     backgroundRef1.current.style.backgroundImage = "linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url(" + `${import.meta.env.VITE_SERVER_URL}images/experiences/${experience.experience_pictures_file}` + ")";
-    console.log(experience);
-    console.log(backgroundRef1.current.style.backgroundImage);
   }, [experience]);
   
 

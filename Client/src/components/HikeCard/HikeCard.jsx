@@ -8,9 +8,10 @@ export const HikeCard = ({hike}) => {
   const cardRef = useRef();
   const navigate = useNavigate();
   const {title, picture_file, hike_id } = hike;
+  console.log(`${import.meta.env.VITE_SERVER_URL}images/hikes/${picture_file}`);
 
   useEffect(() => {
-    cardRef.current.style.backgroundImage = "linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url(" + `/assets/images/hikes/${picture_file}` + ")";
+    cardRef.current.style.backgroundImage = "linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url(" + `${import.meta.env.VITE_SERVER_URL}images/hikes/${picture_file}` + ")";
   
   }, [])
   
