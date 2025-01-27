@@ -93,6 +93,8 @@ export const OnePost = () => {
                   style={{
                     maxWidth: "600px",
                     minWidth: "300px",
+                    maxHeight: "600px",
+                    minHeight: "300px",
                     width: "100%",
                     objectFit: "cover",
                     borderRadius: "10px",
@@ -103,11 +105,10 @@ export const OnePost = () => {
           {/* Contenedor del texto */}
           <div className="d-flex align-items-center justify-content-center flex-column flex-grow-1">
             <div className="header-text">
-              <h1>{post.post_title}</h1>
               <p className="text-muted">
-                {post.category_name} |{" "}
-                {new Date(post.post_date).toLocaleString()}
+                {post.category_name.toUpperCase()}   
               </p>
+              <h2>{post.post_title}</h2>
             </div>
           </div>
         </div>
@@ -115,6 +116,7 @@ export const OnePost = () => {
       <div className="container-fluid divisor-post"></div>
       <section className="mb-4 post-content">
         <p className="text-center">{post.post_description}</p>
+        <p className="text-center">{new Date(post.post_date).toLocaleString()}</p>
       </section>
 
       <section className="mb-4">
@@ -131,8 +133,8 @@ export const OnePost = () => {
                     alt={`Post Image ${index + 1}`}
                     thumbnail
                     style={{
-                      height: "200px",
-                      width: "300px",
+                      height: "300px",
+                      width: "400px",
                       objectFit: "cover",
                     }}
                   />
