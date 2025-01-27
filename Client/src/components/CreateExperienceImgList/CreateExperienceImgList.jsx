@@ -2,7 +2,7 @@ import trash from "../../../public/assets/icons/trash.svg";
 
 export const CreateExperienceImgList = ({files, setFiles}) => {
   
-
+  
   const deleteFile = (index) => {
     setFiles([...files].filter((e, i)=>{
       return i !== index;
@@ -15,7 +15,7 @@ export const CreateExperienceImgList = ({files, setFiles}) => {
         return(
           <div key={index} className="feature-list-elem">
             {/* <p><img src={elem.icon} alt="" /></p> */}
-            <p className="element-name">{elem.experience_pictures_file}</p>
+            <p className="element-name">{elem.name}</p>
             <img src={trash} onClick={()=>deleteFile(index)} alt="trash Icon" />
             {/* <button type="button" onClick={()=>deleteFeatures(index)}>borrar</button> */}
           </div>
