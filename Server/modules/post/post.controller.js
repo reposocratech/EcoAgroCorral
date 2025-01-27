@@ -69,6 +69,18 @@ class PostController {
     }
   }
 
+  deletePost = async (req, res)=>{
+    const {post_id} = req.params;
+    try {
+      const result = await postDal.deletePost(post_id);
+      res.status(200).json({ message: "Post eliminado" });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ message: "Error al eliminar el post" });
+    }
+  }
+
+
 }
 
 export default new PostController();

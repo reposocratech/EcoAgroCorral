@@ -10,6 +10,7 @@ router.get('/getDataPost/:post_id', postController.getDataPost);
 router.put('/editPost',multerSingle("post"), postController.editPost);
 router.delete('/deleteImg/:id', postController.deleteImg);
 router.post('/addFiles/:post_id', multerArray("post"), postController.addFiles);
+router.delete('/deletePost/:post_id', postController.deletePost);
 
 
 export default router;
