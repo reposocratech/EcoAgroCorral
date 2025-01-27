@@ -51,6 +51,17 @@ class ExperienceController {
     }
   }
 
+  disableExperience = async (req, res) => {
+    const { id } = req.params;
+    try {
+      await experienceDal.disableExperience(id);
+      res.status(200).json({ message: "Experiencia deshabilitada exitosamente." });
+    } catch (error) {
+      console.error("Error al deshabilitar experiencia:", error);
+      res.status(500).json({ message: "Error al deshabilitar la experiencia." });
+    }
+  };
+
   addFeatures = async (req, res) => {
     const {expId} = req.params;
     try {

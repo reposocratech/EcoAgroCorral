@@ -13,9 +13,11 @@
 
   Button{
     background-color: #D19B56;
+    border: 1px solid #D19B56;
   }
 
   Button:hover {
     background-color: #d58f35;
+    border: 1px solid #D19B56;
   }
 }

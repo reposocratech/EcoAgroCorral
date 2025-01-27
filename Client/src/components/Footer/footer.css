@@ -1,51 +1,45 @@
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+.footer-cont {
+  background-color: #cdc7bc;
 
 
-.footer-cont{
-  background-color: #CDC7BC;
-}
+  .textVarios {
+    text-align: left;
+  }
 
-.subfoot{
-  background-color: #7a7771;
-  padding-top: 10px;
-}
-
-.icon-size{
-  width: 48px;
-  height: 48px;
-}
-
-.img-footer{
-  height: 100px;
-  width: 100px;
-}
-
-.text-logo{
-  color: #837361;
-  font-family: "Instrument Serif", serif;
-  font-size: 1.4rem;
-}
-
-.textVarios{
   
-    text-align: left; 
-  
-}
+  .logoEmpresa {
+    height: 100px;
+    width: 100px;
+  }
 
-.logoRRSS,
-.textVarios,
-.textContact{
-  text-decoration: none;
-  color: inherit;
-  display: inline-block;
-  transition: transform 0.3s, color 0.3s;
-}
+  .text-logo {
+    color: #837361;
+    font-family: "Instrument Serif", serif;
+    font-size: 1.4rem;
+  }
 
-.textContact:hover,
-.textVarios:hover{
-  font-weight: bold;
-}
+  .logoRRSS,
+  .textVarios,
+  .textContact {
+    text-decoration: none;
+    color: inherit;
+    display: inline-block;
+    transition: transform 0.3s, color 0.3s;
+  }
 
-.logoRRSS:hover {
-  transform: scale(1.2);
+  .textContact:hover,
+  .textVarios:hover {
+    font-weight: bold;
+  }
+
+  .logoRRSS:hover {
+    transform: scale(1.2);
+  }
+
+  .subfoot {
+    background-color: #7a7771;
+    padding-top: 10px;
+  }
 }

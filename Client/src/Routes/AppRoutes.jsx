@@ -28,7 +28,8 @@ import { CancelReservation } from "../pages/User/CancelReservation/CancelReserva
 import { EditExperience } from "../pages/Admin/EditExperience/EditExperience.jsx";
 import { ReservationsDays } from "../pages/Admin/AdminReservation/ReservationsDays.jsx";
 import { Blog } from "../pages/Post/Blog/Blog.jsx";
-
+import { AdminExperience } from "../pages/Admin/CreateExperience/AdminExperience.jsx";
+import { EditPost } from "../pages/Post/EditPost/EditPost.jsx";
 
 export const AppRoutes = () => {
   return (
@@ -60,12 +61,14 @@ export const AppRoutes = () => {
           <Route path='/user/reserva' element={<Reservation/>}/>
           <Route path='/admin/perfil' element={<AdminDashboard/>}/>
           <Route path='/admin/usuarios' element={<AdminUsers />} />
+          <Route path='/admin/experiencias' element={<AdminExperience />}/>
           <Route path="/admin/reservas-pendientes" element={<PendingReservations />} />
           <Route path="/admin/historial-reservas" element={<ReservationHistory />} />
           <Route path="/admin/modificar-dias-disponibles" element={<ReservationsDays />} />
           <Route path='*' element={<ErrorPage />}/>
           <Route path='/reserva/cancelarReserva/:reservation_id' element={<CancelReservation/>}/>
           <Route path='/blog' element={<Blog />}/>
+          <Route path='/blog/editPost/:post_id' element={<EditPost />}/>
         </Routes>
       </main>
       <footer>

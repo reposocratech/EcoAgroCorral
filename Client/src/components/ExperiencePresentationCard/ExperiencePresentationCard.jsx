@@ -20,7 +20,7 @@ export const ExperiencePresentationCard = ({experience, index}) => {
         <div className="py-5 d-flex flex-column align-items-center justify-content-center">
           <h2>{experience.experience_title}</h2>
           <p className="text-center">{experience.experience_description}</p>
-          <Button onClick={() => navigate(`/experiencias/${experience.experience_id}`)}> Saber mas</Button>
+          <Button onClick={() => navigate(`/experiencias/${experience.experience_id}`)}> Saber más</Button>
         </div>
       </Col>
     </div>
