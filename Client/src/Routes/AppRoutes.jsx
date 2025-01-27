@@ -28,13 +28,11 @@ import { CancelReservation } from "../pages/User/CancelReservation/CancelReserva
 import { EditExperience } from "../pages/Admin/EditExperience/EditExperience.jsx";
 import { ReservationsDays } from "../pages/Admin/AdminReservation/ReservationsDays.jsx";
 import { Blog } from "../pages/Post/Blog/Blog.jsx";
-
 import { OnePost } from "../pages/Post/OnePost/OnePost.jsx";
 import { CreatePost } from "../pages/Post/CreatePost/CreatePost.jsx";
-import { AdminCategory } from "../pages/Post/AdminCategory/AdminCategory.jsx";
-
 import { AdminExperience } from "../pages/Admin/CreateExperience/AdminExperience.jsx";
 import { EditPost } from "../pages/Post/EditPost/EditPost.jsx";
+import { AdminCategory } from "../pages/Admin/AdminCategory/AdminCategory.jsx";
 
 
 export const AppRoutes = () => {
@@ -74,11 +72,9 @@ export const AppRoutes = () => {
           <Route path='*' element={<ErrorPage />}/>
           <Route path='/reserva/cancelarReserva/:reservation_id' element={<CancelReservation/>}/>
           <Route path='/blog' element={<Blog />}/>
-
           <Route path="/blog/:postId" element={<OnePost />} />
           <Route path="/blog/crearPost" element={<CreatePost />} />
-          <Route path="/blog/categorias" element={<AdminCategory />} />
-
+          <Route path="/admin/blog/categorias" element={<AdminCategory />} />
           <Route path='/blog/editPost/:post_id' element={<EditPost />}/>
 
         </Routes>

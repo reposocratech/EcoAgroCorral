@@ -163,13 +163,7 @@ export const CreatePost = () => {
             ))}
             
           </Form.Control>
-          <Button
-              variant="outline-primary mt-3"
-              size="sm"
-              onClick={() => navigate("/blog/categorias")}
-            >
-              Administrar Categorías
-            </Button>
+
           <Form.Group className="mb-3 mt-3">
             <Form.Check
               type="checkbox"
