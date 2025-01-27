@@ -141,16 +141,9 @@ export const OnePost = () => {
           </div>
         )}
       </section>
-      <footer className="text-center mt-4">
+      <section className="text-center mt-4">
         {user?.user_type === 1 && (
           <>
-            <Button
-              variant="success"
-              className="button-nuevo-post"
-              onClick={() => navigate("/blog/crearPost")}
-            >
-              Crear nueva publicacion
-            </Button>
             <Button
               variant="danger"
               className="button-nuevo-post"
@@ -160,7 +153,7 @@ export const OnePost = () => {
             </Button>
           </>
         )}
-      </footer>
+      </section>
     </Container>
   );
 };

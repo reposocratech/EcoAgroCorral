@@ -123,6 +123,13 @@ export const AdminDashboard = () => {
                     <div className="d-flex gap-2 justify-content-center">
                       <Button
                         onClick={() =>
+                          navigate("/blog/crearPost")
+                        }
+                      >
+                        Ir a Crear nuevo Post
+                      </Button>
+                      <Button
+                        onClick={() =>
                           navigate("/blog")
                         }
                       >
