@@ -1,4 +1,5 @@
 import { executeQuery, dbPool } from "../../config/db.js";
+import deleteFile from "../../utils/deleteFile.js";
 
 class PostDal {
   // Crear un nuevo post con imágenes
@@ -222,6 +223,11 @@ class PostDal {
 
   editFileMain = async (img, post_id) => {
     try {
+      let sqlImg = 'SELECT post_picture_file FROM post_picture WHERE post_picture_post_id = ? AND is_main = 1'
+      const resImg = await executeQuery(sqlImg, [post_id]);
+      if(resImg[0].post_picture_file){
+        deleteFile(resImg[0].post_picture_file, "posts");
+      }
       let sql =
         "UPDATE post_picture SET post_picture_file = ? WHERE post_picture_post_id = ? AND is_main = 1";
       await executeQuery(sql, [img, post_id]);
@@ -258,7 +264,7 @@ class PostDal {
       let sqlImg = 'SELECT post_picture_file from post_picture WHERE post_picture_id = ?'
       const resImg = await executeQuery(sqlImg, [id]);
       if(resImg[0].post_picture_file){
-        deleteFile(resImg[0].post_picture_file, "post");
+        deleteFile(resImg[0].post_picture_file, "posts");
       }
       let sql = "DELETE FROM post_picture WHERE post_picture_id = ? ";
       await executeQuery(sql, [id]);
@@ -295,7 +301,7 @@ class PostDal {
       if (resImg[0].images) {
         postImages = resImg[0].images.split(",");
         for (const elem of postImages) {
-          deleteFile(elem, "post");
+          deleteFile(elem, "posts");
         }
       }
       let sql = "DELETE FROM post WHERE post_id = ?";

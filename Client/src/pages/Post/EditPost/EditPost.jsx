@@ -139,7 +139,7 @@ export const EditPost = () => {
                   <div>
                     <p className='fw-bold'>Esta es tu foto principal del Post.</p>
                    
-                    <img className='img-ppl-post' src={`http://localhost:4000/images/post/${post?.main_post_file}`} alt="" /> 
+                    <img className='img-ppl-post' src={`http://localhost:4000/images/posts/${post?.main_post_file}`} alt="" /> 
                     
                     <Form.Group className="mb-3" controlId="formBasicAvatar">
               <Form.Label className="fw-bold">Si quieres modificarla, selecciona una nueva imagen.</Form.Label>
@@ -164,7 +164,7 @@ export const EditPost = () => {
                     {post?.all_pictures?.map((elem)=>{
                       return(
                         <div key={elem.id} className='d-flex flex-column align-items-center'>
-                          <img className='img-post-sec'  src={`http://localhost:4000/images/post/${elem.file}`} alt="" />
+                          <img className='img-post-sec'  src={`http://localhost:4000/images/posts/${elem.file}`} alt="" />
                           <Button className='btn-edit-post btn-sec' onClick={()=>{deleteImg(elem.id)}}>Eliminar</Button>
                         </div>
                       )
@@ -174,7 +174,7 @@ export const EditPost = () => {
 
                   <span>{msg}</span>
             
-               <div className='p-2 d-flex justify-content-center py-4'>
+               <div className='p-2 d-flex justify-content-center py-4 '>
                  <Button
                   onClick={onSubmit}
                   className='btn-edit-post'>
