@@ -212,14 +212,11 @@ class ExperienceDal {
   getAllOtherHikes = async (experienceId) => {
     try {
       let sql = `SELECT hike_id, hike_title
-                  FROM hike WHERE hike_is_deleted = 0 AND hike_id in (SELECT hike_id 
-                                                                      FROM hike_experience
-                                                                      WHERE experience_id != ?)
-                                                      AND hike_id NOT IN (SELECT hike_id 
+                  FROM hike WHERE hike_is_deleted = 0 AND hike_id NOT IN (SELECT hike_id 
                                                                       FROM hike_experience
                                                                       WHERE experience_id = ?)`;
                                                                       
-      let result = await executeQuery(sql, [experienceId, experienceId]);
+      let result = await executeQuery(sql, [experienceId]);
       return result;
     } catch (error) {
       console.log(error);

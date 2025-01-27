@@ -21,6 +21,9 @@ CREATE TABLE user (
 ALTER TABLE `ecoagrocorral`.`user`
 ADD COLUMN `user_birthdate` DATE NOT NULL AFTER `user_is_disabled`;
 
+select * from user;
+delete from user where user_id = 4;
+
 CREATE TABLE experience (
 	experience_id SMALLINT UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
 	experience_title VARCHAR (150) NOT NULL,
@@ -144,6 +147,8 @@ hike_intinerary TEXT NOT NULL,
 hike_is_deleted BOOLEAN NOT NULL DEFAULT 0 
 );
 
+drop table hike;
+
 ALTER TABLE `ecoagrocorral`.`hike` 
 CHANGE COLUMN `hike_intinerary` `hike_itinerary` TEXT NOT NULL ;
 
@@ -225,6 +230,8 @@ CONSTRAINT fk_hike_1 FOREIGN KEY (hike_pictures_hike_id)
 	REFERENCES hike(hike_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
+drop table hike_pictures;
+
 CREATE TABLE hike_experience (
 hike_experience_id MEDIUMINT UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
 experience_id SMALLINT UNSIGNED NOT NULL,
@@ -235,7 +242,7 @@ CONSTRAINT fk_hike_2 FOREIGN KEY (hike_id)
 	REFERENCES hike(hike_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-
+drop table hike_experience;
 INSERT INTO hike_experience (experience_id, hike_id) VALUES
 	(1, 1),
     (1, 2),
@@ -335,7 +342,7 @@ LEFT JOIN
     post_picture ON post.post_id = post_picture.post_picture_post_id 
     AND post_picture.is_main = 1;
     
-selet * from post;
+select * from post;
 
 -- Primer post: Mi primer stand en la Carrera por montaña de Barracas
 INSERT INTO post (
