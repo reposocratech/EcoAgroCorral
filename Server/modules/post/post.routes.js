@@ -24,7 +24,7 @@ router.post("/posts/:postId/pictures", postController.addPostImages); // Add pic
 import multerSingle from '../../middlewares/multerSingle.js'
 import multerArray from '../../middlewares/multerArray.js'
 
-const router = express.Router();
+
 
 router.get('/getAllPost', postController.getAllPost);
 router.get('/getDataPost/:post_id', postController.getDataPost);

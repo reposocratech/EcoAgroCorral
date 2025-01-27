@@ -1,10 +1,15 @@
-
 import { executeQuery, dbPool } from "../../config/db.js";
 
 class PostDal {
   // Crear un nuevo post con imágenes
   createPostWithImages = async (data) => {
-    const { post_category_id, post_experience_id, post_description, post_title, files } = data;
+    const {
+      post_category_id,
+      post_experience_id,
+      post_description,
+      post_title,
+      files,
+    } = data;
 
     const connection = await dbPool.getConnection();
     try {
@@ -62,34 +67,28 @@ class PostDal {
         JOIN category c ON p.post_category_id = c.category_id
         WHERE p.post_id = ?`;
       const postResult = await executeQuery(sqlPost, [postId]);
-  
+
       if (postResult.length === 0) {
         return null; // No se encontró el post
       }
-  
+
       // Obtener las imágenes asociadas al post
       const sqlImages = `
         SELECT post_picture_file, is_main 
         FROM post_picture 
         WHERE post_picture_post_id = ?`;
       const imagesResult = await executeQuery(sqlImages, [postId]);
-  
+
       // Asignar las imágenes al post
       const post = postResult[0];
       post.images = imagesResult;
-  
+
       return post; // Devolver el post con la categoría y las imágenes
-  
     } catch (error) {
       console.error(`Error fetching post by ID ${postId}:`, error);
       throw new Error("Failed to fetch post");
     }
   };
-  
-
-
-
-  
 
   // Obtener todos los posts
   getAllPosts = async () => {
@@ -135,8 +134,6 @@ class PostDal {
     }
   };
 
-
-
   // Obtener todas las categorías
   getAllCategories = async () => {
     try {
@@ -148,21 +145,23 @@ class PostDal {
       throw new Error("Failed to fetch categories");
     }
   };
- 
 
   // Crear una nueva categoría
   createCategory = async (categoryName) => {
     try {
       const sql = "INSERT INTO category (category_name) VALUES (?)";
       const result = await executeQuery(sql, [categoryName]);
-      return { message: "Category created successfully", categoryId: result.insertId };
+      return {
+        message: "Category created successfully",
+        categoryId: result.insertId,
+      };
     } catch (error) {
       console.error("Error creating category:", error);
       throw new Error("Failed to create category");
     }
   };
- 
-   deleteCategoryById = async (categoryId) => {
+
+  deleteCategoryById = async (categoryId) => {
     try {
       const query = "DELETE FROM category WHERE category_id = ?";
       const result = await executeQuery(query, [categoryId]);
@@ -173,11 +172,6 @@ class PostDal {
     }
   };
 
-import { executeQuery } from "../../config/db.js";
-import deleteFile from "../../utils/deleteFile.js";
-
-
-class PostDal {
   getAllPost = async () => {
     try {
       let sql = `
@@ -198,7 +192,7 @@ class PostDal {
     }
   };
 
-  getDataPost = async (post_id) =>{
+  getDataPost = async (post_id) => {
     try {
       let sql = `SELECT 
       post.*, 
@@ -217,51 +211,57 @@ class PostDal {
       post_picture AS main_picture ON post.post_id = main_picture.post_picture_post_id 
       AND main_picture.is_main = 1
       WHERE 
-      post.post_id = ?`
+      post.post_id = ?`;
       const result = await executeQuery(sql, [post_id]);
       return result;
     } catch (error) {
       console.log(error);
       throw error;
     }
-  }
+  };
 
-  editFileMain = async (img, post_id) =>{
+  editFileMain = async (img, post_id) => {
     try {
-      let sql = 'UPDATE post_picture SET post_picture_file = ? WHERE post_picture_post_id = ? AND is_main = 1'
+      let sql =
+        "UPDATE post_picture SET post_picture_file = ? WHERE post_picture_post_id = ? AND is_main = 1";
       await executeQuery(sql, [img, post_id]);
       return true;
     } catch (error) {
       throw error;
-    } 
-  }
+    }
+  };
 
-  editInfoPost = async (data) =>{
-    const {post_id, post_category_id, post_description, post_title} = data;
-    
+  editInfoPost = async (data) => {
+    const { post_id, post_category_id, post_description, post_title } = data;
+
     try {
       let sql = `UPDATE post SET 
       post_category_id = ?, 
       post_description = ?,
       post_title = ? 
-      WHERE post_id = ?`
-      await executeQuery(sql, [post_category_id, post_description, post_title, post_id]);
+      WHERE post_id = ?`;
+      await executeQuery(sql, [
+        post_category_id,
+        post_description,
+        post_title,
+        post_id,
+      ]);
       return true;
     } catch (error) {
       throw error;
     }
-  }
+  };
 
-  deleteImg = async (id) =>{
+  deleteImg = async (id) => {
     try {
-      let sql = 'DELETE FROM post_picture WHERE post_picture_id = ? '
+      let sql = "DELETE FROM post_picture WHERE post_picture_id = ? ";
       await executeQuery(sql, [id]);
     } catch (error) {
       throw error;
     }
-  }
+  };
 
-  addFiles = async (post_id, files)=>{
+  addFiles = async (post_id, files) => {
     try {
       for (const file of files) {
         if (!file.filename) {
@@ -269,7 +269,7 @@ class PostDal {
         }
         const fileName = file.filename;
         console.log(fileName);
-        
+
         const sql = `INSERT INTO post_picture (post_picture_post_id, post_picture_file) 
                         VALUES (?, ?)`;
         await executeQuery(sql, [post_id, fileName]);
@@ -277,9 +277,9 @@ class PostDal {
     } catch (error) {
       throw error;
     }
-  }
+  };
 
-  deletePost = async (post_id)=>{
+  deletePost = async (post_id) => {
     try {
       let sqlImg = `select GROUP_CONCAT(post_picture_file SEPARATOR ',') AS images
       FROM post_picture 
@@ -292,15 +292,14 @@ class PostDal {
           deleteFile(elem, "post");
         }
       }
-      let sql = 'DELETE FROM post WHERE post_id = ?'
+      let sql = "DELETE FROM post WHERE post_id = ?";
       const result = await executeQuery(sql, [post_id]);
       return true;
     } catch (error) {
       console.log(error);
       throw error;
     }
-  }
-
+  };
 }
 
 export default new PostDal();
