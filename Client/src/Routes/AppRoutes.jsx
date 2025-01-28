@@ -56,10 +56,10 @@ export const AppRoutes = () => {
           <Route path='/contacto' element={<ContactUs/>} />
           <Route path='/experiencias' element={<AllExperiences />} />
           <Route path='/experiencias/:id' element={<OneExperience />} />
-          <Route path="/paseo/:id" element={<OneHike/>}/>
+          <Route path="/paseo/unPaseo/:id" element={<OneHike/>}/>
           <Route path='/confirmarEmail/:token' element={<VerifyEmail/>}/>
           <Route path='/blog' element={<Blog />}/>
-          <Route path="/blog/:postId" element={<OnePost />} />
+          <Route path="/blog/unPost/:postId" element={<OnePost />} />
 
           {user && user.user_type === 0 &&
           <>

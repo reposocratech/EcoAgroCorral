@@ -79,8 +79,9 @@ export const CreateHike = () => {
     );
     setUnassignedExperiences((prev) => [...prev, experience]);
   };
-
+  
   const handleSubmit = async (e) => {
+    console.log("submit");
     e.preventDefault();
 
     const data = new FormData();
@@ -144,7 +145,8 @@ export const CreateHike = () => {
       console.log("Experiences assigned successfully:", assignResult);
 
       // Redirigir al detalle del paseo
-      navigate(`/paseo/${hikeId}`);
+      
+      navigate(`/paseo/unPaseo/${hikeId}`);
     } catch (error) {
       console.error("Error creando el paseo:", error);
     }

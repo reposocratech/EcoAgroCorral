@@ -103,7 +103,7 @@ export const AdminDashboard = () => {
                     Crea, modifica o elimina rutas para ofrecer a los usuarios.
                   </Card.Text>
                   <div className="d-flex gap-2 justify-content-center">
-                    <Button onClick={() => navigate("/paseo/nuevoPaseo")}>
+                    <Button onClick={() => navigate("/paseo/NuevoPaseo")}>
                       Ir a Crear nueva Ruta
                     </Button>
                     <Button onClick={() => navigate("/paseo/borrados")}>

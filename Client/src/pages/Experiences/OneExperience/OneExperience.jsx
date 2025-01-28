@@ -87,7 +87,7 @@ export const OneExperience = () => {
             {user?.user_type === 1 && (
               <button
                 className="addexp-btn"
-                onClick={() => navigate("/paseo/nuevoPaseo")}
+                onClick={() => navigate("/paseo/NuevoPaseo")}
               >
                 Añadir Paseo
               </button>

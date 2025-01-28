@@ -56,7 +56,6 @@ export const EditFeatureModal = ({show, handleClose, features, getExperience, ex
       }
       newFormData.append("data", JSON.stringify(feature_data));
 
-      console.log(modifOrCreate);
       if(modifOrCreate === 0){
         await fetchData(`api/experience/addFeature/${experience_id}`, "post", newFormData);
       }
