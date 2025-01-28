@@ -36,8 +36,6 @@ export const EditExperience = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  console.log(otherHikes)
-
   const getExperience = async () => {
     try {
       const res = await fetchData(`api/experience/getOneExperience/${id}`, "get");
@@ -48,7 +46,6 @@ export const EditExperience = () => {
       setHikes(res.hikes);
       const res2 = await fetchData(`api/experience/getAllOtherHikes/${id}`, "get");
       setOtherHikes(res2);
-      
     } catch (error) {
       console.log(error);
     }

@@ -70,7 +70,7 @@ export const EditPost = () => {
           const result = await fetchData(`api/post/addFiles/${post.post_id}`, 'post', formDataFiles);
           console.log(result);
         }
-        navigate(`/blog/${post.post_id}`);
+        navigate(`/blog/unPost/${post.post_id}`);
       }
 
     } catch (error) {

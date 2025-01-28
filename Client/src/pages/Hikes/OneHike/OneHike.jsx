@@ -202,7 +202,7 @@ export const OneHike = () => {
       <div className="mt-4 d-flex justify-content-center flex-wrap gap-1">
         <Button
           className="button-nuevo-paseo"
-          onClick={() => navigate("/paseo/nuevoPaseo")}
+          onClick={() => navigate("/paseo/NuevoPaseo")}
         >
           Crear un nuevo Paseo
         </Button>

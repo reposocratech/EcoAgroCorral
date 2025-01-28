@@ -221,7 +221,7 @@ export const EditHike = () => {
 
       // Si la respuesta es exitosa, redirige o actualiza el estado
       console.log("Paseo actualizado correctamente");
-      navigate(`/paseo/${hikeId}`);
+      navigate(`/paseo/unPaseo/${hikeId}`);
     } catch (error) {
       console.error("Error en el envío del formulario:", error);
       setShowAlert(true);
