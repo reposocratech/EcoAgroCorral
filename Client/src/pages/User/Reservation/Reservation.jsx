@@ -152,6 +152,7 @@ export const Reservation = () => {
                 <h2 className="text-center pb-2 pt-4">
                   Reserva tu experiencia
                 </h2>
+                {user?.user_type === 1 && <p className="text-center text-danger fw-bold fs-5 mark">REVISA Y AJUSTA LOS CAMPOS DEL FORMULARIO PARA SEGURARTE DE QUE TODO ESTÉ COMO LO NECESITAS.</p>}
                 <div className="divisor mb-4"></div>
               </Col>
               <Col lg={6} className="d-flex flex-column align-items-center">

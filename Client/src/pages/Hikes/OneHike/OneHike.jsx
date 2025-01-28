@@ -49,7 +49,7 @@ export const OneHike = () => {
 
       const result = await response.json();
       console.log("Paseo eliminado:", result);
-      navigate("/");
+      navigate("/paseo/borrados");
     } catch (error) {
       console.error("Error eliminando el paseo:", error);
     }
@@ -220,7 +220,7 @@ export const OneHike = () => {
 
         <Button
           className="button-eliminar-paseo2"
-          onClick={() => navigate("/admin/perfil")}
+          onClick={() => navigate("/paseo/borrados")}
         >
           Ver paseos eliminados
         </Button>
