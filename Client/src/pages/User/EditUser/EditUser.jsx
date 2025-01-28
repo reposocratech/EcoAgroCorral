@@ -33,7 +33,6 @@ export const EditUser = () => {
   };
 
   const handleFile = (e) => {
-    console.log("Archivo seleccionado:", e.target.files[0]);
     setFile(e.target.files[0]);
 };
 

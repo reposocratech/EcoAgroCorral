@@ -35,10 +35,8 @@ export const EditPost = () => {
   }
 
   const deleteImg = async (id) =>{
-    console.log(id);
     try {
       const result = await fetchData(`api/post/deleteImg/${id}`, 'delete');
-      console.log(result);
       fetchPost();
     } catch (error) {
       console.log(error);
@@ -60,19 +58,15 @@ export const EditPost = () => {
           formData.append("file", fileMain);
         }
         const res = await fetchData('api/post/editPost', 'put', formData);
-        console.log(res);
-
         if(filesPic){
           const formDataFiles = new FormData();
           Array.from(filesPic).forEach((file) => {
             formDataFiles.append("file", file);
           });
           const result = await fetchData(`api/post/addFiles/${post.post_id}`, 'post', formDataFiles);
-          console.log(result);
         }
         navigate(`/blog/${post.post_id}`);
       }
-
     } catch (error) {
       console.log("errrrrr", error);
     }
