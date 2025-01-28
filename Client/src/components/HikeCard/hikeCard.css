@@ -11,6 +11,11 @@
   padding-block: 1rem;
   transition: justify-content 0.3s ease;
 
+  .title-hike{
+    color: white;
+    text-shadow: 1px 1px 1px black;
+  }
+
   Button{
     background-color: #D19B56;
     border: 1px solid #D19B56;

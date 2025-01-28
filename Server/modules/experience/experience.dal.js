@@ -93,7 +93,9 @@ class ExperienceDal {
       if (icon){
         let sqlPrevIcon = `SELECT feature_icon FROM feature WHERE feature_id = ?`;
         let resIconName = await executeQuery(sqlPrevIcon, [featureId]);
-        deleteFile(resIconName[0].feature_icon, "features"); 
+        if(resIconName[0].feature_icon){
+          deleteFile(resIconName[0].feature_icon, "features"); 
+        }
         sqlFeatures = `UPDATE feature SET feature_name = ?, feature_description = ?, feature_icon = ? WHERE feature_id = ?`;
          featuresValues = [...featureInfo, icon.filename, featureId];
       }

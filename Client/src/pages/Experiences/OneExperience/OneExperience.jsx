@@ -134,7 +134,7 @@ export const OneExperience = () => {
       <section className="mt-5 gray-bg">
         <Container fluid="xxl">
           <Row>
-            <div className="d-flex justify-content-around flex-wrap">
+            <div className="d-flex justify-content-center flex-wrap">
               <ExperiencePicGallery
                 pictures={experienceInfo?.experiencePictures}
               />

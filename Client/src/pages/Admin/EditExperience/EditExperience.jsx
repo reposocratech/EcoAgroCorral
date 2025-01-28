@@ -41,7 +41,7 @@ export const EditExperience = () => {
       const res = await fetchData(`api/experience/getOneExperience/${id}`, "get");
       setExperienceInfo(res.experience);
       setMainFile(res.experiencePictures.find((img) => img.is_main) || null);
-      setFiles(res.experiencePictures.slice(1));
+      setFiles(res.experiencePictures.filter((img) => !img.is_main));
       setFeatures(res.features);
       setHikes(res.hikes);
       const res2 = await fetchData(`api/experience/getAllOtherHikes/${id}`, "get");
