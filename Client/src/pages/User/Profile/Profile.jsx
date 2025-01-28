@@ -20,7 +20,6 @@ export const Profile = () => {
         if(resultRes.length != 0){
           setReservations(resultRes);
         }
-        
       } catch (error) {
         
       }

@@ -16,7 +16,7 @@ export const HikeCard = ({hike}) => {
 
   return (
     <div ref={cardRef} className="hike-card text-center mx-2">
-      <h3>{title}</h3>
+      <h3 className="title-hike">{title}</h3>
       <Button onClick={()=>navigate(`/paseo/unPaseo/${hike_id}`)}>Saber más</Button>
     </div>
   )

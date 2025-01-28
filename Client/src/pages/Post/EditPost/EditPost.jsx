@@ -72,7 +72,6 @@ export const EditPost = () => {
         }
         navigate(`/blog/unPost/${post.post_id}`);
       }
-
     } catch (error) {
       
     }

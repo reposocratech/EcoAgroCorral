@@ -72,7 +72,7 @@ export const ContactUs = () => {
                 </p>
                 <p className="text-center mb-5 fw-bold text">
                   <a
-                    href="https://wa.me/34691560150?text=Hola%20EcoAgroCorral,%20tengo%20una%20consulta." //CAMBIAR EL TLFN PARA QUE LE LLEGUE A RAQUEL
+                    href="https://wa.me/34644803031?text=Hola%20EcoAgroCorral,%20tengo%20una%20consulta." 
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-decoration-none text-dark text"

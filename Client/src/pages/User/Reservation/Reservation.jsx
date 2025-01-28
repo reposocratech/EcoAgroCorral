@@ -10,7 +10,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import es from "date-fns/locale/es";
 
 const initialValue = {
-  reservation_experience_id: null,
+  reservation_experience_id: "",
   reservation_hike_id: "",
   reservation_text: "",
   reservation_date: null,
@@ -143,7 +143,6 @@ export const Reservation = () => {
 
   return (
     <>
-  
       {!msgReserv ? (
         <section>
           <Container fluid="xxl" className="py-5">
@@ -152,7 +151,7 @@ export const Reservation = () => {
                 <h2 className="text-center pb-2 pt-4">
                   Reserva tu experiencia
                 </h2>
-                {user?.user_type === 1 && <p className="text-center text-danger fw-bold fs-5 mark">REVISA Y AJUSTA LOS CAMPOS DEL FORMULARIO PARA SEGURARTE DE QUE TODO ESTÉ COMO LO NECESITAS.</p>}
+                {user?.user_type === 1 && <p className="text-center text-danger fw-bold fs-5 mark">REVISA Y AJUSTA LOS CAMPOS DEL FORMULARIO PARA ASEGURARTE DE QUE TODO ESTÉ COMO LO NECESITAS.</p>}
                 <div className="divisor mb-4"></div>
               </Col>
               <Col lg={6} className="d-flex flex-column align-items-center">
@@ -196,7 +195,7 @@ export const Reservation = () => {
                     <Form.Label>Experiencia</Form.Label>
                     <Form.Select
                       name="reservation_experience_id"
-                      value={reservation.reservation_experience_id}
+                      value={reservation.reservation_experience_id || ""}
                       onChange={handleChange}
                       id="formBasicExperience"
                     >
@@ -215,7 +214,7 @@ export const Reservation = () => {
                     <Form.Label>Ruta</Form.Label>
 
                     <Form.Select
-                      value={reservation.reservation_hike_id}
+                      value={reservation.reservation_hike_id || ""}
                       name="reservation_hike_id"
                       onChange={handleChange}
                       id="formBasicHike"
@@ -236,7 +235,7 @@ export const Reservation = () => {
                     <Form.Label>Número de adultos</Form.Label>
 
                     <Form.Select
-                      value={reservation.reservation_adult}
+                      value={reservation.reservation_adult || ""}
                       name="reservation_adult"
                       onChange={handleChange}
                       id="formBasicAdult"
@@ -252,7 +251,7 @@ export const Reservation = () => {
                     <Form.Label>Número de niños</Form.Label>
 
                     <Form.Select
-                      value={reservation.reservation_children}
+                      value={reservation.reservation_children || ""}
                       name="reservation_children"
                       onChange={handleChange}
                       id="formBasicChild"
@@ -270,7 +269,7 @@ export const Reservation = () => {
                     <DatePicker
                       className="input-date mb-3 p-2"
                       name="reservation_date"
-                      value={reservation.reservation_date}
+                      value={reservation.reservation_date || ""}
                       onChange={(date) =>
                         setReservation({
                           ...reservation,
@@ -298,7 +297,7 @@ export const Reservation = () => {
                     <Form.Label>Hora de inicio</Form.Label>
 
                     <Form.Select
-                      value={reservation.reservation_time}
+                      value={reservation.reservation_time || ""}
                       name="reservation_time"
                       onChange={handleChange}
                       id="formBasicTime"
@@ -319,7 +318,7 @@ export const Reservation = () => {
                     <Form.Control
                       as="textarea"
                       rows={3}
-                      value={reservation.reservation_text}
+                      value={reservation.reservation_text || ""}
                       name="reservation_text"
                       onChange={handleChange}
                       id="formBasicText"
