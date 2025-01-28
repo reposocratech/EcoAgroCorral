@@ -13,16 +13,12 @@ CREATE TABLE user (
 	user_avatar VARCHAR (250),
 	user_phone VARCHAR (25) NOT NULL,
 	user_dni VARCHAR (25) NOT NULL,
+    user_birthdate DATE NOT NULL,
 	user_is_deleted BOOLEAN NOT NULL DEFAULT 0,
 	user_is_verified BOOLEAN NOT NULL DEFAULT 0,
 	user_is_disabled BOOLEAN NOT NULL DEFAULT 0
 );
 
-ALTER TABLE `ecoagrocorral`.`user`
-ADD COLUMN `user_birthdate` DATE NOT NULL AFTER `user_is_disabled`;
-
-select * from user;
-delete from user where user_id = 4;
 
 CREATE TABLE experience (
 	experience_id SMALLINT UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -33,24 +29,6 @@ CREATE TABLE experience (
 	experience_price_adult DECIMAL (6, 2) NOT NULL   -- 9999.99
 );
 
-INSERT INTO experience (experience_title, experience_description, experience_price_child, experience_price_adult) VALUES 
-	("Sabores y tradición",
-    "Disfruta de un paseo autónomo siguiendo el camino que recorrían los pastores de ovejas hasta llegar a nuestros corrales, edificaciones de gran valor etnográfico. A tu llegada te habremos preparado un picnic para degustar nuestra gastronomía típica. Revive la tradición ganadera, parte importante del legado de nuestros antepasados. Admira estás edificaciones ligadas históricamente a la trashumancia, declarada Patrimonio Inmaterial de la Humanidad en 2023.",
-    8.00,
-    18.00);
-    
-INSERT INTO experience (experience_title, experience_description, experience_price_child, experience_price_adult) VALUES 
-	("Sabores y naturaleza",
-    "Disfruta de un paseo por el entorno rural y descubre parajes de gran belleza en contacto directo con la naturaleza. Observa la fauna y la flora autóctona. Disfruta de un picnic al aire libre sin prisas.",
-    10.00,
-    25.00),
-    ("Sabores y rutas",
-    "Disfruta de un paseo por el entorno cercano y descubre los parajes más destacados. Observa la fauna y la flora autóctona. Disfruta de un picnic al aire libre sin prisas.",
-    12.00,
-    30.00);
-    
-DELETE FROM experience WHERE experience_id = 13;
-SELECT * FROM experience;
 
 CREATE TABLE experience_pictures (
 experience_pictures_id MEDIUMINT UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -61,7 +39,6 @@ CONSTRAINT fk_experience_1 FOREIGN KEY (experience_pictures_experience_id)
 	REFERENCES experience(experience_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-SELECT * FROM experience_pictures;
 
 CREATE TABLE feature (
 feature_id SMALLINT UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -73,55 +50,312 @@ CONSTRAINT fk_experience_2 FOREIGN KEY (feature_experience_id)
 	REFERENCES experience(experience_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-UPDATE feature
-SET feature_icon = "heart.png"
-WHERE feature_id = 3;
-
-UPDATE feature
-SET feature_icon = "heart.png"
-WHERE feature_id = 7;
-
-UPDATE feature
-SET feature_icon = "heart.png"
-WHERE feature_id = 11;
-
-UPDATE feature
-SET feature_icon = "hat.png"
-WHERE feature_id = 1;
-
-UPDATE feature
-SET feature_icon = "hat.png"
-WHERE feature_id = 5;
-
-UPDATE feature
-SET feature_icon = "hat.png"
-WHERE feature_id = 9;
-
-UPDATE feature
-SET feature_icon = "picnic.png"
-WHERE feature_id = 4;
-
-UPDATE feature
-SET feature_icon = "picnic.png"
-WHERE feature_id = 8;
-
-UPDATE feature
-SET feature_icon = "picnic.png"
-WHERE feature_id = 12;
-
-UPDATE feature
-SET feature_icon = "restaurant.png"
-WHERE feature_id = 2;
-
-UPDATE feature
-SET feature_icon = "restaurant.png"
-WHERE feature_id = 6;
-
-UPDATE feature
-SET feature_icon = "restaurant.png"
-WHERE feature_id = 10;
+CREATE TABLE hike (
+hike_id MEDIUMINT UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
+hike_title VARCHAR(100) NOT NULL,
+hike_description TEXT NOT NULL,
+hike_distance DECIMAL(4, 2) NOT NULL, -- 99.99
+hike_duration DECIMAL(4, 2) NOT NULL, -- 99.99
+hike_itinerary TEXT NOT NULL,
+hike_is_deleted BOOLEAN NOT NULL DEFAULT 0 
+);
 
 
+CREATE TABLE hike_pictures (
+hike_pictures_id MEDIUMINT UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
+hike_pictures_hike_id MEDIUMINT UNSIGNED NOT NULL,
+hike_pictures_file VARCHAR(250),
+is_main BOOLEAN NOT NULL DEFAULT 0,
+CONSTRAINT fk_hike_1 FOREIGN KEY (hike_pictures_hike_id)
+	REFERENCES hike(hike_id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE hike_experience (
+hike_experience_id MEDIUMINT UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
+experience_id SMALLINT UNSIGNED NOT NULL,
+hike_id MEDIUMINT UNSIGNED NOT NULL,
+CONSTRAINT fk_experience_3 FOREIGN KEY (experience_id)
+	REFERENCES experience(experience_id) ON DELETE CASCADE ON UPDATE CASCADE,
+CONSTRAINT fk_hike_2 FOREIGN KEY (hike_id)
+	REFERENCES hike(hike_id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+
+CREATE TABLE reservation (
+reservation_id INT UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
+reservation_user_id INT UNSIGNED NOT NULL,
+reservation_experience_id SMALLINT UNSIGNED NOT NULL,
+reservation_hike_id MEDIUMINT UNSIGNED NOT NULL,
+reservation_text TEXT,
+reservation_date DATE NOT NULL UNIQUE,  -- error de que esa fecha ya existe -> no se puede hacer esa reserva
+reservation_time TIME NOT NULL,
+reservation_adult NUMERIC(2), -- 99
+reservation_children NUMERIC(2), -- 99
+reservation_total_price DECIMAL(5,2) NULL DEFAULT NULL,
+CONSTRAINT fk_user_2 FOREIGN KEY (reservation_user_id) 
+	REFERENCES user(user_id) ON DELETE CASCADE ON UPDATE CASCADE, 
+CONSTRAINT fk_experience_4 FOREIGN KEY (reservation_experience_id)
+	REFERENCES experience(experience_id) ON DELETE CASCADE ON UPDATE CASCADE,
+CONSTRAINT fk_hike_3 FOREIGN KEY (reservation_hike_id)
+	REFERENCES hike(hike_id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE reservation_day(
+reservation_day_id SMALLINT UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
+reservation_day_name VARCHAR(250) NOT NULL,
+reservation_day_value NUMERIC(1) NOT NULL,
+reservation_day_is_active BOOLEAN NOT NULL DEFAULT 0 
+);
+
+INSERT INTO `ecoagrocorral`.`reservation_day` (`reservation_day_name`, `reservation_day_value`) VALUES ('domingo', '0');
+INSERT INTO `ecoagrocorral`.`reservation_day` (`reservation_day_name`, `reservation_day_value`) VALUES ('lunes', '1');
+INSERT INTO `ecoagrocorral`.`reservation_day` (`reservation_day_name`, `reservation_day_value`) VALUES ('martes', '2');
+INSERT INTO `ecoagrocorral`.`reservation_day` (`reservation_day_name`, `reservation_day_value`) VALUES ('miércoles', '3');
+INSERT INTO `ecoagrocorral`.`reservation_day` (`reservation_day_name`, `reservation_day_value`) VALUES ('jueves', '4');
+INSERT INTO `ecoagrocorral`.`reservation_day` (`reservation_day_name`, `reservation_day_value`) VALUES ('viernes', '5');
+INSERT INTO `ecoagrocorral`.`reservation_day` (`reservation_day_name`, `reservation_day_value`) VALUES ('sábado', '6');
+
+
+CREATE TABLE category (
+    category_id MEDIUMINT UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    category_name VARCHAR(150) UNIQUE NOT NULL
+);
+
+INSERT INTO category (category_name) VALUES 
+('Ferias'), 
+('Deporte'), 
+('Fauna'), 
+('Hongos'), 
+('Agricultura'), 
+('Ganadería');
+
+
+CREATE TABLE post (
+post_id MEDIUMINT UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
+post_category_id MEDIUMINT UNSIGNED NOT NULL,
+post_experience_id SMALLINT UNSIGNED,
+post_description TEXT,
+post_title VARCHAR (150) NOT NULL,
+post_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+CONSTRAINT fk_category_1 FOREIGN KEY (post_category_id) 
+	REFERENCES category(category_id) ON DELETE CASCADE ON UPDATE CASCADE,
+CONSTRAINT fk_experience_5 FOREIGN KEY (post_experience_id)
+	REFERENCES experience(experience_id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+
+CREATE TABLE post_picture (
+	post_picture_id MEDIUMINT UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	post_picture_post_id MEDIUMINT UNSIGNED NOT NULL,
+	post_picture_file VARCHAR(250),
+	is_main BOOLEAN NOT NULL DEFAULT 0,
+	CONSTRAINT fk_post_1 FOREIGN KEY (post_picture_post_id)
+		REFERENCES post(post_id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+-- Primer post: Mi primer stand en la Carrera por montaña de Barracas
+INSERT INTO post (
+    post_category_id, 
+    post_experience_id, 
+    post_description, 
+    post_title
+) VALUES (
+    1,  -- Ferias
+    NULL, 
+    'Con mi stand tuve la posibilidad de dar a conocer mis experiencias rurales. Hoy 28 de septiembre de 2024 quiero compartir con vosotros una experiencia única y enriquecedora que tuve el placer de organizar: 
+
+	Mi primera exposición de experiencias rurales, gastronómicas, visitas, paseos y picnics, en colaboración con la emocionante carrera por montaña de Barracas.Un encuentro con la Naturaleza y la Gastronomía Local.
+
+	La exposición fue una celebración de la riqueza y diversidad de nuestro pueblo. Los visitantes pudieron disfrutar de una variedad de actividades diseñadas para conectar con la naturaleza y la cultura local.
+
+	Desde paseos tranquilos por senderos pintorescos hasta una vivencia in situ de cómo serán los picnics, mostrando las diferentes opciones de decoración, totalmente personalizables e imaginar como serían en el monte, rodeados de naturaleza.
+
+	Cada momento estuvo lleno de descubrimientos y aprendizajes.
+
+	Sabores auténticos y tradicionales que les transportaron a los sabores de la infancia donde sus abuelas les preparaban con tanto cariño esta gastronomía casera.
+
+	Uno de los puntos destacados fue, sin duda, la oferta gastronómica. Los asistentes tuvieron la oportunidad de degustar productos caseros, recién hechos y deliciosos, preparados con recetas tradicionales.
+
+	Los picnics al aire libre fueron una delicia, una puesta en escena que despertó los sentidos de todos los que mostraron interés por descubrir nuestras experienicias.
+
+	!Una verdadera fiesta para los sentidos!
+
+	Aventura y paseos inolvidables. 
+
+	Además tuvieron la posibilidad de conocer nuestra gastronomía, el entorno donde organizaremos los paseos y una puesta en escena de las diferentes tipologías de picnics totalmente personalizados que permitirán a los participantes explorar la belleza natural de Barracas y su cultura rural.
+
+	Durante el trayecto de la carrera los senderos de montaña ofrecieron vistas espectaculares y momentos de paz y reflexión. La carrera por montaña añadió un toque de adrenalina y emoción, atrayendo a corredores de todas partes que vinieron a desafiarse a sí mismos en este entorno impresionante.
+
+	Agradecimientos y reflexiones
+
+	Quiero agradecer a todos los que participaron y apoyaron esta iniciativa. Vuestro entusiasmo y energía hicieron de esta exposición un evento memorable. Espero que las personas que mostraron interés por conocernos pudieran disfrutar tanto como yo al organizarlo.
+
+	Os invito a seguir acompañándome en futuras experiencias y poder mostraros los rincones más maravillosos de nuestro entorno rural. Hasta la próxima! Muchas gracias.',
+    'Mi primer stand en la Carrera por montaña de Barracas'
+);
+
+-- Imagen principal del post
+INSERT INTO post_picture (post_picture_post_id, post_picture_file, is_main)  
+VALUES (1, 'feria.jpeg', 1);
+
+-- Imagenes del post
+INSERT INTO post_picture (post_picture_post_id, post_picture_file, is_main)  
+VALUES 
+    (1, 'feria1.jpg', 0),
+    (1, 'feria2.jpg', 0),
+    (1, 'feria3.jpg', 0),
+    (1, 'feria4.jpg', 0),
+    (1, 'feria5.jpg', 0),
+    (1, 'feria6.jpg', 0),
+    (1, 'feria7.jpg', 0),
+    (1, 'feria8.jpg', 0),
+    (1, 'feria9.jpg', 0),
+    (1, 'feria10.jpg', 0),
+    (1, 'feria11.jpg', 0),
+    (1, 'feria12.jpg', 0),
+    (1, 'feria13.jpg', 0);
+    
+
+-- Segundo post: Feria Sostenible Alto Palancia
+INSERT INTO post (
+    post_category_id, 
+    post_experience_id, 
+    post_description, 
+    post_title
+) VALUES (
+    1,  -- Ferias
+    NULL, 
+    'El sábado 19 de octubre de 2024 tuvimos la oportunidad de darnos a conocer en la Comarca con nuestro stand en la I Feria Sostenible del Alto Palancia. 
+
+	Ecoagrocorral apuesta por utilizar de manera sostenible los recursos naturales, patrimoniales y culturales de nuestra cultura rural. Así mismo busca contribuir a su conservación y divulgación. 
+
+	Fomenta el respeto por las tradiciones y la naturaleza, preservando la historia y dándole un nuevo propósito. Evitando así que la cultura rural caiga en el olvido.
+
+	Cabe destacar la calidad y proximidad de los productos de todos los stands que acudieron a la feria desde pueblos de la Comarca y alrededores de la Sierra de Espadán. 
+
+	Así como destacar la charla "La nueva vida para los pueblos" protagonizada por Jaime Izquierdo (autor de los libros sobre temáticas rurales y de desarrollo territorial en entornos con dificultades estructurales). 
+
+	Fue super interesante y enriquecedora. Entre sus comentarios puedo mencionar: "Para saber a donde se va, hay que saber de donde se viene" En referencia a nuestros orígenes rurales. 
+
+	Destacar que la relación entre el campo y la ciudad históricamente siempre fue estable hasta los años 50 del pasado siglo que todo cambió. Nombró la necesidad que tienen las ciudades de que exista el campo para poder subsistir. El objetivo de que volvamos a la situación que hubo antes de los años 50 y que siempre fue así durante miles de años. Sin campo no hay ciudad. 
+
+	La mención que hizo a una anécdota de uno de sus libros: "En un pueblo había un cartel que ponía: Se vende BINO. Planteó la pregunta: ¿Quién crees que es más inculto el que no sabe escribir vino con V, o el que no sabe hacer vino? En referencia a la importancia de la cultura rural que no se conoce porque no está escrita, pero cuyo valor es incalculable...
+
+	En definitiva, la primera feria Sostenible del Alto Palancia fue una iniciativa con gran éxito, esperamos que sea el inicio de muchas más. Agradecer a los organizadores y colaboradores todo su esfuerzo por hacerla posible.' ,
+    'Feria Sostenible Alto Palancia'
+);
+
+-- Imagen principal del post
+INSERT INTO post_picture (post_picture_post_id, post_picture_file, is_main)  
+VALUES (2, 'otraferia.jpg', 1);
+
+-- Imagenes del post
+INSERT INTO post_picture (post_picture_post_id, post_picture_file, is_main)  
+VALUES 
+    (2, 'otraferia1.jpg', 0),
+    (2, 'otraferia2.jpg', 0),
+    (2, 'otraferia3.jpg', 0);
+
+-- Tercer post: Vía Verde Ojos Negros
+INSERT INTO post (
+    post_category_id, 
+    post_experience_id, 
+    post_description, 
+    post_title
+) VALUES (
+    2,  -- Deporte
+    NULL, 
+    'Nuestra ubicación privilegiada al lado de la Vía Verde de Ojos Negros le facilita el acceso a los próximos alojamientos de agroturismo para descansar y continuar la ruta al día siguiente. Así como aprovechar la estancia para visitar la localidad de Barracas dada su proximidad. Con nuestra oferta de experiencias rurales, podrás degustar la gastronomía típica con nuestras elaboraciones en cualquier punto del trayecto de la Vía Verde, desde nuestro corral del Cura hasta nuestro corral de la Jaquesa, donde te podremos preparar un picnic.',
+    'Vía Verde Ojos Negros'
+);
+
+-- Imagen principal del post
+INSERT INTO post_picture (post_picture_post_id, post_picture_file, is_main)  
+VALUES (3, 'deporte.jpeg', 1);
+
+-- Cuarto post: Corzos
+INSERT INTO post (
+    post_category_id, 
+    post_experience_id, 
+    post_description, 
+    post_title
+) VALUES (
+    3,  -- Fauna
+    NULL, 
+    'Observa la fauna autóctona en tus paseos por la naturaleza. El corzo es denominado como "el duende del monte". En nuestros paseos por la naturaleza, es común encontrarnos con el elegante corzo (Capreolus capreolus). Este pequeño cérvido ha experimentado una expansión en su distribución y abundancia en las últimas décadas. ¿Qué factores han influido en su aumento? El abandono del medio rural y de las prácticas ganaderas han jugado un papel importante. Los corzos, con sus sentidos agudos, nos desafían a observarlos sin perturbar su tranquilidad. Su presencia en bosques y campos nos conecta con la biodiversidad y la belleza natural.',
+    'Corzos'
+);
+
+-- Imagen principal del post
+INSERT INTO post_picture (post_picture_post_id, post_picture_file, is_main)  
+VALUES (4, 'corzos.jpg', 1);
+
+-- Quinto post: Rebollón
+INSERT INTO post (
+    post_category_id, 
+    post_experience_id, 
+    post_description, 
+    post_title
+) VALUES (
+    4,  -- Hongos
+    NULL, 
+    'En el corazón de los pinares que rodean el entorno cercano, nos adentramos para encontrar uno de los manjares más deliciosos del otoño: el rebollón. Desde su recolección hasta la cocina, acompáñanos en esta aventura micológica con este hongo tan especial.',
+    'Rebollón'
+);
+
+-- Imagen principal del post
+INSERT INTO post_picture (post_picture_post_id, post_picture_file, is_main)  
+VALUES (5, 'rebollon.jpg', 1);
+
+-- Sexto post: Trigo
+INSERT INTO post (
+    post_category_id, 
+    post_experience_id, 
+    post_description, 
+    post_title
+) VALUES (
+    5,  -- Agricultura
+    NULL, 
+    'Valor de la cultura rural. En el corazón del mundo rural, donde el sol se funde con los campos dorados, celebramos el valor del trabajo en el campo. Cada espiga de trigo cosechada es un testimonio del esfuerzo y la dedicación como agricultores, guardianes de una tradición milenaria que mantiene viva nuestra cultura rural. Valoramos y preservamos el conocimiento y las prácticas que han pasado de generación en generación, asegurando que la esencia del campo perdure y florezca. En cada jornada de trabajo, en cada atardecer, honramos la conexión profunda con la tierra y el compromiso con un futuro donde la cultura rural siga siendo el pilar de nuestras vidas.',
+    'Trigo'
+);
+
+-- Imagen principal del post
+INSERT INTO post_picture (post_picture_post_id, post_picture_file, is_main)  
+VALUES (6, 'trigo.jpeg', 1);
+
+-- Séptimo post: Ovejas
+INSERT INTO post (
+    post_category_id, 
+    post_experience_id, 
+    post_description, 
+    post_title
+) VALUES (
+    6,  -- Ganadería
+    NULL, 
+    'La trashumancia declarada patrimonio inmaterial de la humanidad en 2023. Fue la base de la economía de Barracas, junto con el cultivo de cereales, patatas y pipirigallo, que servía como heno para alimentar a las caballería y el ganado de ovejas y cabras de pequeños ganaderos que no iban a invernar. La actividad ganadera alcanzaba, una especial relevancia. Había dos dehesas, una para pasto de ganado de abasto y otra el de labor. Otro hecho para rememorar era el paso de los ganados de todo tipo, adquirido por los tratantes de Levante en la celebre feria de ganados de Cedrillas (Teruel), en los primeros días de Octubre, por la vereda general de Aragón. Era la alegría de la gente del pueblo quienes acompañaban largo trecho el paso, sobre todo, de toros; de igual modo, pasaba con los ganados trashumantes de Aragón que pasaban para ir a extremar (pasar el invierno) al reino de Valencia, con el tradicional sonar de sus esquilas. La ganadería tradicional en Barracas constaba de ovejas, cabras, vacas de labranza, vacas, machos, burros, caballos y vacas bravas. La existencia de más de cuarenta corrales de ganado, evidencia la gran actividad ganadera que antiguamente hubo en el pueblo de Barracas y su gran valor etnográfico para la cultura del pueblo de Barracas. En la actualidad no existe ningún pastor del pueblo, debido a las dificultades económicas para el relevo generacional. Siendo los pastores existentes de localidades cercanas.',
+    'Ovejas' );
+    
+-- Imagen principal del post
+INSERT INTO post_picture (post_picture_post_id, post_picture_file, is_main)  
+VALUES (7, 'ovejas.jpg', 1);
+
+-- Experiencias
+INSERT INTO experience (experience_title, experience_description, experience_price_child, experience_price_adult) VALUES 
+	("Sabores y tradición",
+    "Disfruta de un paseo autónomo siguiendo el camino que recorrían los pastores de ovejas hasta llegar a nuestros corrales, edificaciones de gran valor etnográfico. A tu llegada te habremos preparado un picnic para degustar nuestra gastronomía típica. Revive la tradición ganadera, parte importante del legado de nuestros antepasados. Admira estás edificaciones ligadas históricamente a la trashumancia, declarada Patrimonio Inmaterial de la Humanidad en 2023.",
+    8.00,
+    18.00),
+	("Sabores y naturaleza",
+    "Disfruta de un paseo por el entorno rural y descubre parajes de gran belleza en contacto directo con la naturaleza. Observa la fauna y la flora autóctona. Disfruta de un picnic al aire libre sin prisas.",
+    10.00,
+    25.00),
+    ("Sabores y rutas",
+    "Disfruta de un paseo por el entorno cercano y descubre los parajes más destacados. Observa la fauna y la flora autóctona. Disfruta de un picnic al aire libre sin prisas.",
+    12.00,
+    30.00);
+
+-- Caracteristicas de las experiencias
 INSERT INTO feature (feature_experience_id, feature_name, feature_description) VALUES
 	(1, "Cultura y tradición", "Aprende sobre las tradiciones y la historia de los pastores de ovejas, valorando la rica herencia de la cultura rural"),
     (1, "Gastronomía", "Disfruta de productos frescos y caseros, elaborados de forma casera, recién hecha con ingredientes de alta calidad, de proximidad, km 0 Recetas de nuestras abuelas recuperadas. Nuestras magdalenas, tortas de tajadas y longanizas,..."),
@@ -136,27 +370,7 @@ INSERT INTO feature (feature_experience_id, feature_name, feature_description) V
     (3, "Compartida", "Perfecto para crear recuerdos con seres queridos en un entorno natural"),
     (3, "Picnic", "Nos ocupamos de todo para que solo tengas que preocuparte de disfrutar del entorno y la compañía de familia y amigos.");
 
-SELECT * FROM feature;
-
-CREATE TABLE hike (
-hike_id MEDIUMINT UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
-hike_description TEXT NOT NULL,
-hike_distance DECIMAL(4, 2) NOT NULL, -- 99.99
-hike_duration DECIMAL(4, 2) NOT NULL, -- 99.99
-hike_intinerary TEXT NOT NULL,
-hike_is_deleted BOOLEAN NOT NULL DEFAULT 0 
-);
-
-drop table hike;
-
-ALTER TABLE `ecoagrocorral`.`hike` 
-CHANGE COLUMN `hike_intinerary` `hike_itinerary` TEXT NOT NULL ;
-
-ALTER TABLE `ecoagrocorral`.`hike` 
-ADD COLUMN `hike_title` VARCHAR(100) NOT NULL AFTER `hike_is_deleted`;
-
-select * from hike;
-
+-- Paseos y rutas
 INSERT INTO hike (hike_title, hike_description, hike_distance, hike_duration, hike_itinerary) VALUES 
 	("Corral del Cura",
     "Corral que perteneció a nuestra familia. Nuestros abuelos eran pastores de ovejas, sin relevo generacional, dejaron sus huellas en los corrales. Edificaciones de gran valor etnográfico, construidas con materiales nobles como piedra, madera y cañizo. Situado en medio del altiplano de Barracas, paraje de gran belleza rodeado de campos de cereal.",
@@ -219,30 +433,8 @@ INSERT INTO hike (hike_title, hike_description, hike_distance, hike_duration, hi
     2,
     "Nos dirigimos en nuestro coche hasta los Cloticos en Bejis. Dejamos alli el coche. Iniciamos la ruta hacia el nacimiento del Río Palancia, siguiendo el sendero PR-V 275, con sus marcas en el suelo de color blancas y amarillas en paralelo.");
 
-SELECT * FROM hike;
 
-CREATE TABLE hike_pictures (
-hike_pictures_id MEDIUMINT UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
-hike_pictures_hike_id MEDIUMINT UNSIGNED NOT NULL,
-hike_pictures_file VARCHAR(250),
-is_main BOOLEAN NOT NULL DEFAULT 0,
-CONSTRAINT fk_hike_1 FOREIGN KEY (hike_pictures_hike_id)
-	REFERENCES hike(hike_id) ON DELETE CASCADE ON UPDATE CASCADE
-);
-
-drop table hike_pictures;
-
-CREATE TABLE hike_experience (
-hike_experience_id MEDIUMINT UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
-experience_id SMALLINT UNSIGNED NOT NULL,
-hike_id MEDIUMINT UNSIGNED NOT NULL,
-CONSTRAINT fk_experience_3 FOREIGN KEY (experience_id)
-	REFERENCES experience(experience_id) ON DELETE CASCADE ON UPDATE CASCADE,
-CONSTRAINT fk_hike_2 FOREIGN KEY (hike_id)
-	REFERENCES hike(hike_id) ON DELETE CASCADE ON UPDATE CASCADE
-);
-
-drop table hike_experience;
+-- Relacion experiencias y rutas
 INSERT INTO hike_experience (experience_id, hike_id) VALUES
 	(1, 1),
     (1, 2),
@@ -257,226 +449,3 @@ INSERT INTO hike_experience (experience_id, hike_id) VALUES
     (3, 11),
     (3, 12);
     
-select * from hike_experience;
-
-CREATE TABLE reservation (
-reservation_id INT UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
-reservation_user_id INT UNSIGNED NOT NULL,
-reservation_experience_id SMALLINT UNSIGNED NOT NULL,
-reservation_hike_id MEDIUMINT UNSIGNED NOT NULL,
-reservation_text TEXT,
-reservation_date DATE NOT NULL UNIQUE,  -- error de que esa fecha ya existe -> no se puede hacer esa reserva
-reservation_time TIME NOT NULL,
-reservation_adult NUMERIC(2), -- 99
-reservation_children NUMERIC(2), -- 99
-CONSTRAINT fk_user_2 FOREIGN KEY (reservation_user_id) 
-	REFERENCES user(user_id) ON DELETE CASCADE ON UPDATE CASCADE, 
-CONSTRAINT fk_experience_4 FOREIGN KEY (reservation_experience_id)
-	REFERENCES experience(experience_id) ON DELETE CASCADE ON UPDATE CASCADE,
-CONSTRAINT fk_hike_3 FOREIGN KEY (reservation_hike_id)
-	REFERENCES hike(hike_id) ON DELETE CASCADE ON UPDATE CASCADE
-);
-
-CREATE TABLE reservation_day(
-reservation_day_id SMALLINT UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
-reservation_day_name VARCHAR(250) NOT NULL,
-reservation_day_value NUMERIC(1) NOT NULL,
-reservation_day_is_active BOOLEAN NOT NULL DEFAULT 0 
-);
-
-DROP table reservation_day;
-SELECT * FROM reservation_day;
-
-
-INSERT INTO `ecoagrocorral`.`reservation_day` (`reservation_day_name`, `reservation_day_value`) VALUES ('domingo', '0');
-INSERT INTO `ecoagrocorral`.`reservation_day` (`reservation_day_name`, `reservation_day_value`) VALUES ('lunes', '1');
-INSERT INTO `ecoagrocorral`.`reservation_day` (`reservation_day_name`, `reservation_day_value`) VALUES ('martes', '2');
-INSERT INTO `ecoagrocorral`.`reservation_day` (`reservation_day_name`, `reservation_day_value`) VALUES ('miércoles', '3');
-INSERT INTO `ecoagrocorral`.`reservation_day` (`reservation_day_name`, `reservation_day_value`) VALUES ('jueves', '4');
-INSERT INTO `ecoagrocorral`.`reservation_day` (`reservation_day_name`, `reservation_day_value`) VALUES ('viernes', '5');
-INSERT INTO `ecoagrocorral`.`reservation_day` (`reservation_day_name`, `reservation_day_value`) VALUES ('sábado', '6');
-
-
-
-
-
-
-ALTER TABLE ecoagrocorral.reservation 
-ADD COLUMN reservation_total_price DECIMAL(5,2) NULL DEFAULT NULL AFTER reservation_children;
-
-CREATE TABLE category (
-    category_id MEDIUMINT UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    category_name VARCHAR(150) UNIQUE NOT NULL
-);
-
-INSERT INTO category (category_name) VALUES 
-('Ferias'), 
-('Deporte'), 
-('Fauna'), 
-('Hongos'), 
-('Agricultura'), 
-('Ganadería');
-
-CREATE TABLE post (
-post_id MEDIUMINT UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
-post_category_id MEDIUMINT UNSIGNED NOT NULL,
-post_experience_id SMALLINT UNSIGNED,
-post_description TEXT,
-post_title VARCHAR (150) NOT NULL,
-post_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-CONSTRAINT fk_category_1 FOREIGN KEY (post_category_id) 
-	REFERENCES category(category_id) ON DELETE CASCADE ON UPDATE CASCADE,
-CONSTRAINT fk_experience_5 FOREIGN KEY (post_experience_id)
-	REFERENCES experience(experience_id) ON DELETE CASCADE ON UPDATE CASCADE
-);
-
-SELECT 
-    post.*, 
-    category.*, 
-    post_picture.post_picture_file AS post_file 
-FROM 
-    post
-LEFT JOIN 
-    category ON post.post_category_id = category.category_id
-LEFT JOIN 
-    post_picture ON post.post_id = post_picture.post_picture_post_id 
-    AND post_picture.is_main = 1;
-    
-select * from post;
-
--- Primer post: Mi primer stand en la Carrera por montaña de Barracas
-INSERT INTO post (
-    post_category_id, 
-    post_experience_id, 
-    post_description, 
-    post_title
-) VALUES (
-    1,  -- Ferias
-    NULL, 
-    'Con mi stand tuve la posibilidad de dar a conocer mis experiencias rurales. Hoy 28 de septiembre de 2024 quiero compartir con vosotros una experiencia única y enriquecedora que tuve el placer de organizar: Mi primera exposición de experiencias rurales, gastronómicas, visitas, paseos y picnics, en colaboración con la emocionante carrera por montaña de Barracas. La exposición fue una celebración de la riqueza y diversidad de nuestro pueblo...',
-    'Mi primer stand en la Carrera por montaña de Barracas'
-);
-
--- Segundo post: Feria Sostenible Alto Palancia
-INSERT INTO post (
-    post_category_id, 
-    post_experience_id, 
-    post_description, 
-    post_title
-) VALUES (
-    1,  -- Ferias
-    NULL, 
-    'El sábado 19 de octubre de 2024 tuvimos la oportunidad de darnos a conocer en la Comarca con nuestro stand en la I Feria Sostenible del Alto Palancia. Ecoagrocorral apuesta por utilizar de manera sostenible los recursos naturales, patrimoniales y culturales de nuestra cultura rural. Así mismo busca contribuir a su conservación y divulgación. Fomenta el respeto por las tradiciones y la naturaleza...',
-    'Feria Sostenible Alto Palancia'
-);
-
--- Tercer post: Vía Verde Ojos Negros
-INSERT INTO post (
-    post_category_id, 
-    post_experience_id, 
-    post_description, 
-    post_title
-) VALUES (
-    2,  -- Deporte
-    NULL, 
-    'Nuestra ubicación privilegiada al lado de la Vía Verde de Ojos Negros le facilita el acceso a los próximos alojamientos de agroturismo para descansar y continuar la ruta al día siguiente. Así como aprovechar la estancia para visitar la localidad de Barracas dada su proximidad. Con nuestra oferta de experiencias rurales, podrás degustar la gastronomía típica con nuestras elaboraciones en cualquier punto del trayecto de la Vía Verde, desde nuestro corral del Cura hasta nuestro corral de la Jaquesa, donde te podremos preparar un picnic.',
-    'Vía Verde Ojos Negros'
-);
-
--- Cuarto post: Corzos
-INSERT INTO post (
-    post_category_id, 
-    post_experience_id, 
-    post_description, 
-    post_title
-) VALUES (
-    3,  -- Fauna
-    NULL, 
-    'Observa la fauna autóctona en tus paseos por la naturaleza. El corzo es denominado como "el duende del monte". En nuestros paseos por la naturaleza, es común encontrarnos con el elegante corzo (Capreolus capreolus). Este pequeño cérvido ha experimentado una expansión en su distribución y abundancia en las últimas décadas. ¿Qué factores han influido en su aumento? El abandono del medio rural y de las prácticas ganaderas han jugado un papel importante. Los corzos, con sus sentidos agudos, nos desafían a observarlos sin perturbar su tranquilidad. Su presencia en bosques y campos nos conecta con la biodiversidad y la belleza natural.',
-    'Corzos'
-);
-
--- Quinto post: Rebollón
-INSERT INTO post (
-    post_category_id, 
-    post_experience_id, 
-    post_description, 
-    post_title
-) VALUES (
-    4,  -- Hongos
-    NULL, 
-    'En el corazón de los pinares que rodean el entorno cercano, nos adentramos para encontrar uno de los manjares más deliciosos del otoño: el rebollón. Desde su recolección hasta la cocina, acompáñanos en esta aventura micológica con este hongo tan especial.',
-    'Rebollón'
-);
-
--- Sexto post: Trigo
-INSERT INTO post (
-    post_category_id, 
-    post_experience_id, 
-    post_description, 
-    post_title
-) VALUES (
-    5,  -- Agricultura
-    NULL, 
-    'Valor de la cultura rural. En el corazón del mundo rural, donde el sol se funde con los campos dorados, celebramos el valor del trabajo en el campo. Cada espiga de trigo cosechada es un testimonio del esfuerzo y la dedicación como agricultores, guardianes de una tradición milenaria que mantiene viva nuestra cultura rural. Valoramos y preservamos el conocimiento y las prácticas que han pasado de generación en generación, asegurando que la esencia del campo perdure y florezca. En cada jornada de trabajo, en cada atardecer, honramos la conexión profunda con la tierra y el compromiso con un futuro donde la cultura rural siga siendo el pilar de nuestras vidas.',
-    'Trigo'
-);
-
--- Séptimo post: Ovejas
-INSERT INTO post (
-    post_category_id, 
-    post_experience_id, 
-    post_description, 
-    post_title
-) VALUES (
-    6,  -- Ganadería
-    NULL, 
-    'La trashumancia declarada patrimonio inmaterial de la humanidad en 2023. Fue la base de la economía de Barracas, junto con el cultivo de cereales, patatas y pipirigallo, que servía como heno para alimentar a las caballería y el ganado de ovejas y cabras de pequeños ganaderos que no iban a invernar. La actividad ganadera alcanzaba, una especial relevancia. Había dos dehesas, una para pasto de ganado de abasto y otra el de labor. Otro hecho para rememorar era el paso de los ganados de todo tipo, adquirido por los tratantes de Levante en la celebre feria de ganados de Cedrillas (Teruel), en los primeros días de Octubre, por la vereda general de Aragón. Era la alegría de la gente del pueblo quienes acompañaban largo trecho el paso, sobre todo, de toros; de igual modo, pasaba con los ganados trashumantes de Aragón que pasaban para ir a extremar (pasar el invierno) al reino de Valencia, con el tradicional sonar de sus esquilas. La ganadería tradicional en Barracas constaba de ovejas, cabras, vacas de labranza, vacas, machos, burros, caballos y vacas bravas. La existencia de más de cuarenta corrales de ganado, evidencia la gran actividad ganadera que antiguamente hubo en el pueblo de Barracas y su gran valor etnográfico para la cultura del pueblo de Barracas. En la actualidad no existe ningún pastor del pueblo, debido a las dificultades económicas para el relevo generacional. Siendo los pastores existentes de localidades cercanas.',
-    'Ovejas'
-);
-
-CREATE TABLE post_picture (
-	post_picture_id MEDIUMINT UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
-	post_picture_post_id MEDIUMINT UNSIGNED NOT NULL,
-	post_picture_file VARCHAR(250),
-	is_main BOOLEAN NOT NULL DEFAULT 0,
-	CONSTRAINT fk_post_1 FOREIGN KEY (post_picture_post_id)
-		REFERENCES post(post_id) ON DELETE CASCADE ON UPDATE CASCADE
-);
-
-select * from hike_pictures;
-
-select * from user;
-
-SELECT 
-    reservation.*, 
-    hike_pictures.hike_pictures_file AS reservation_file, 
-    hike.hike_title AS reservation_hike_title, 
-    experience.experience_title AS reservation_experience_title 
-FROM reservation
-LEFT JOIN hike_pictures 
-    ON reservation.reservation_hike_id = hike_pictures.hike_pictures_hike_id 
-    AND hike_pictures.is_main = 1
-LEFT JOIN hike 
-    ON reservation.reservation_hike_id = hike.hike_id 
-LEFT JOIN experience 
-    ON reservation.reservation_experience_id = experience.experience_id
-WHERE reservation.reservation_user_id = 1 
-ORDER BY reservation.reservation_date;
-
-select * from feature;
-
-
-
-INSERT INTO user (user_name, user_lastname, user_email, user_password, user_type, user_address, user_avatar, user_phone, user_dni, user_birthdate, user_is_deleted, user_is_verified, user_is_disabled) 
-VALUES 
-('Juan', 'Pérez', 'juan.perez@example.com', 'hashed_password_1', 0, 'Calle 123, Ciudad A', 'avatar1.jpg', '555-1234', '12345678', '1990-05-15', 0, 1, 0),
-('María', 'Gómez', 'maria.gomez@example.com', 'hashed_password_2', 0, 'Avenida 456, Ciudad B', 'avatar2.jpg', '555-5678', '87654321', '1985-08-22', 0, 1, 0),
-('Carlos', 'López', 'carlos.lopez@example.com', 'hashed_password_3', 0, 'Carrera 789, Ciudad C', 'avatar3.jpg', '555-9876', '11223344', '1992-03-10', 0, 0, 0),
-('Ana', 'Martínez', 'ana.martinez@example.com', 'hashed_password_4', 0, 'Boulevard 101, Ciudad D', NULL, '555-1122', '44332211', '1988-11-30', 0, 1, 0),
-('Pedro', 'Ramírez', 'pedro.ramirez@example.com', 'hashed_password_5', 0, 'Callejón 202, Ciudad E', 'avatar5.jpg', '555-3344', '55667788', '1995-07-05', 0, 0, 0),
-('Laura', 'Fernández', 'laura.fernandez@example.com', 'hashed_password_6', 0, 'Pasaje 303, Ciudad F', NULL, '555-5566', '99887766', '1991-02-17', 0, 1, 0),
-('Diego', 'Torres', 'diego.torres@example.com', 'hashed_password_7', 0, 'Vía 404, Ciudad G', 'avatar7.jpg', '555-7788', '66778899', '1986-06-25', 0, 0, 1),
-('Sofía', 'Ruiz', 'sofia.ruiz@example.com', 'hashed_password_8', 0, 'Camino 505, Ciudad H', NULL, '555-9900', '33445566', '1993-09-12', 0, 1, 0),
-('Javier', 'Hernández', 'javier.hernandez@example.com', 'hashed_password_9', 0, 'Carretera 606, Ciudad I', 'avatar9.jpg', '555-2233', '88990011', '1989-04-08', 0, 0, 0),
-('Elena', 'Castro', 'elena.castro@example.com', 'hashed_password_10', 0, 'Autopista 707, Ciudad J', 'avatar10.jpg', '555-4455', '11002233', '1994-12-20', 0, 1, 0);
