@@ -3,8 +3,8 @@ import HikeDal from "./hike.dal.js";
 class HikeController {
   createHike = async (req, res) => {
     try {
-      console.log("Body:", req.body);
-      console.log("File:", req.files);
+      
+      
 
       const {
         hike_title,
@@ -14,8 +14,8 @@ class HikeController {
         hike_itinerary,
       } = req.body;
       const files = req.files;
-      console.log("Archivos recibidos:", files);
-      console.log(files.length);
+      
+      
       if (!files || files.length === 0) {
         throw new Error("At least one image must be uploaded");
       }
@@ -41,7 +41,7 @@ class HikeController {
       // Validamos que al menos una imagen haya sido subida
 
       const result = await HikeDal.createHikeWithImages(dataToDal);
-      console.log("Resultado:", result);
+      
 
       res
         .status(200)
@@ -97,7 +97,7 @@ class HikeController {
         throw new Error("At least one image must be uploaded");
       }
       await HikeDal.addHikeImages(id, files);
-      console.log("Images added to hike with ID:", id);
+      
       res.status(200).json({ message: "Images added successfully" });
     } catch (error) {
       console.error("Error adding images:", error);
@@ -112,7 +112,7 @@ class HikeController {
         throw new Error("At least one image must be uploaded");
       }
       await HikeDal.addHikeMainImage(id, files);
-      console.log("Images added to hike with ID:", id);
+      
       res.status(200).json({ message: "Images added successfully" });
     } catch (error) {
       console.error("Error adding images:", error);
@@ -124,7 +124,7 @@ class HikeController {
     try {
       const { imageId } = req.params;
       await HikeDal.deleteHikeImageById(imageId);
-      console.log("Image deleted with ID:", imageId);
+      
       res.json({ message: "Image deleted successfully" });
     } catch (error) {
       console.error("Error deleting image:", error);
@@ -134,7 +134,7 @@ class HikeController {
 
   updateHike = async (req, res) => {
     try {
-      console.log("Updating hike with ID:", req.params.id);
+      
       const { id } = req.params;
       const {
         hike_title,
@@ -162,7 +162,7 @@ class HikeController {
         files,
       };
       await HikeDal.updateHike(id, dataToDal);
-      console.log("Hike updated successfully:", id);
+      
       res.status(200).json({ message: "Hike updated successfully" });
     } catch (error) {
       console.error("Error updating hike:", error);
@@ -210,7 +210,7 @@ class HikeController {
   assignExperienceToHike = async (req, res) => {
     const { hikeId, experienceId } = req.params; // Obtener los IDs de los parámetros
 
-    console.log("Assigning experience to hike:", { hikeId, experienceId });
+    
 
     // Validar los parámetros
     if (!hikeId || !experienceId) {
@@ -261,8 +261,8 @@ class HikeController {
     const { hikeId } = req.params;
     const { experienceIds } = req.body; // Esperamos un array de IDs de experiencias
 
-    console.log("Body:", req.body);
-    console.log("Assigning experiences to hike with ID:", hikeId);
+    
+    
 
     // Verificar que 'experienceIds' sea un array
     if (!Array.isArray(experienceIds)) {
@@ -288,8 +288,8 @@ class HikeController {
     const { hikeId } = req.params;
     const { experienceIds } = req.body; // Esperamos un array de IDs de experiencias a eliminar
 
-    console.log("Body:", req.body);
-    console.log("Removing experiences from hike with ID:", hikeId);
+    
+    
 
     // Verificar que 'experienceIds' sea un array
     if (!Array.isArray(experienceIds)) {

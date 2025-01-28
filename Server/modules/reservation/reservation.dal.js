@@ -27,7 +27,7 @@ class ReservationDal {
       const result = await executeQuery(sql, [reservation_id]);
       return true;
     } catch (error) {
-      console.log(error);
+      
       throw error;
     }
   }
@@ -43,7 +43,7 @@ class ReservationDal {
   }
 
   setDays = async (values) =>{
-    console.log(values);
+    
     
     try {
       let sql = `UPDATE reservation_day

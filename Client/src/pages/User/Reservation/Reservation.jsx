@@ -84,7 +84,7 @@ export const Reservation = () => {
         let experiencesSinDup = Array.from(set).map(JSON.parse);
         setExperiences(experiencesSinDup);
       } catch (error) {
-        console.log(error);
+        
       }
     };
 

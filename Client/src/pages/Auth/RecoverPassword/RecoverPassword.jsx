@@ -52,7 +52,7 @@ export const RecoverPassword = () => {
        });
        setValErrors(fieldErrors);
      } else {
-       console.log("Error en el servidor:", error);
+       
        setMsg(error.response?.data?.message || "Error al enviar el correo");
      }
     }

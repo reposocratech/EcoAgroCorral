@@ -39,7 +39,7 @@ export const DeletedHikes = () => {
       setHikes(hikes.filter((hike) => hike.hike_id !== id)); // Eliminar el hike recuperado de la lista
       
     } catch (error) {
-      console.log("Error al recuperar el hike:", error);
+      
       
     }
   };

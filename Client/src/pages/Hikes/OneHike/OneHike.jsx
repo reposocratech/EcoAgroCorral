@@ -48,7 +48,7 @@ export const OneHike = () => {
       }
 
       const result = await response.json();
-      console.log("Paseo eliminado:", result);
+      
       navigate("/paseo/borrados");
     } catch (error) {
       console.error("Error eliminando el paseo:", error);

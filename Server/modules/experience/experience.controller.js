@@ -3,10 +3,10 @@ import experienceDal from "./experience.dal.js";
 class ExperienceController {
 
   addExperience = async (req, res) => {
-    //console.log("main File", req.files.singleFile);
-    //console.log("other Files", req.files.multipleFiles);
-    //console.log("feature_icon", req.files.feature_icon);
-    //console.log("Bodyyyy", req.body);
+    //
+    //
+    //
+    //
 
     try {
       const {
@@ -25,7 +25,7 @@ class ExperienceController {
       await experienceDal.addExperience(data, images, feature_icon, features);
       res.status(200).json("experience added");
     } catch (error) {
-      console.log(error);
+      
       res.status(500).json(error);
     }
   }
@@ -46,7 +46,7 @@ class ExperienceController {
       await experienceDal.editExperience(id, req.body);
       res.status(200).json("experience edited");
     } catch (error) {
-      console.log(error);
+      
       res.status(500).json({ error: error.message });
     }
   }
@@ -81,7 +81,7 @@ class ExperienceController {
       await experienceDal.addFeature(expId, dataToDal, file);
       res.status(200).json("feature added");
     } catch (error) {
-      console.log(error);
+      
       res.status(500).json(error);
     }
   }
@@ -105,7 +105,7 @@ class ExperienceController {
       await experienceDal.editFeature(featureId, dataToDal, file);
       res.status(200).json("feature edited");
     } catch (error) {
-      console.log(error);
+      
       res.status(500).json(error);
     }
   }
@@ -118,7 +118,7 @@ class ExperienceController {
       await experienceDal.deleteFeature(featureId, icon);
       res.status(200).json("done");
     } catch (error) {
-      console.log(error);
+      
       res.status(500).json(error);
     }
   }
@@ -126,7 +126,7 @@ class ExperienceController {
   getAllExperiences = async (req, res) => {
     try {
       let experiences = await experienceDal.getAllExperiences();
-      //console.log(experiences);
+      //
       res.status(200).json(experiences);
     } catch (error) {
       res.status(500).json(error);
@@ -202,7 +202,7 @@ class ExperienceController {
       })
       res.status(200).json(experienceData);
     } catch (error) {
-      console.log(error);
+      
       res.status(500).json(error);
     }
   }
@@ -217,7 +217,7 @@ class ExperienceController {
       }
       res.status(200).json(response);
     } catch (error) {
-      console.log(error);
+      
       res.status(500).json(error);
     }
   }
@@ -232,7 +232,7 @@ class ExperienceController {
       } */
       res.status(200).json(result[0]);
     } catch (error) {
-      console.log(error);
+      
       res.status(500).json(error);
     }
   }
@@ -244,7 +244,7 @@ class ExperienceController {
       const result = await experienceDal.deletePicture(id, filename);
       res.status(200).json(result);
     } catch (error) {
-      console.log(error);
+      
       res.status(500).json(error);
     }
   }
@@ -255,7 +255,7 @@ class ExperienceController {
       const result = await experienceDal.getAllOtherHikes(expId);
       res.status(200).json(result);
     } catch (error) {
-      console.log(error);
+      
       res.status(500).json(error);
     }
   }
@@ -267,7 +267,7 @@ class ExperienceController {
       let result = await experienceDal.assignHike(expId, hikeId);
       res.status(200).json(result);
     } catch (error) {
-      console.log(error);
+      
       res.status(500).json(error);
     }
   }
@@ -279,7 +279,7 @@ class ExperienceController {
       let result = await experienceDal.unassignHike(expId, hikeId);
       res.status(200).json(result);
     } catch (error) {
-      console.log(error);
+      
       res.status(500).json(error);
     }
   }

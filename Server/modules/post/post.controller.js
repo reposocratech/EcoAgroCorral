@@ -35,9 +35,9 @@ class PostController {
   createPost = async (req, res) => {
     const { post_category_id, post_experience_id, post_description, post_title } = req.body;
     const files = req.files; // Multer guardará los archivos en req.files
-    console.log(req.body); // Verifica si los datos del formulario están llegando correctamente
+     // Verifica si los datos del formulario están llegando correctamente
     
-    console.log(files); // Verifica si los archivos están llegando correctamente
+     // Verifica si los archivos están llegando correctamente
   
     if (!files || files.length === 0) {
       return res.status(400).json({ message: "At least one image must be uploaded." });
@@ -125,7 +125,7 @@ class PostController {
       const result = await postDal.getAllPost();
       res.status(200).json(result);
     } catch (error) {
-      console.log(error);
+      
       res.status(500).json({ message: "Error al obtener los post" });
     }
   }
@@ -146,7 +146,7 @@ class PostController {
     const data = JSON.parse(req.body.post);
 
     try {
-      console.log("****", req.file);
+      
       if(req.file){
         await postDal.editFileMain(req.file.filename, data.post_id);
       }
@@ -172,7 +172,7 @@ class PostController {
   addFiles = async (req, res) =>{
     const {post_id} = req.params;
     const files = req.files;
-    console.log(files);
+    
     
     try {
       if (!files || files.length === 0) {
@@ -191,7 +191,7 @@ class PostController {
       const result = await postDal.deletePost(post_id);
       res.status(200).json({ message: "Post eliminado" });
     } catch (error) {
-      console.log(error);
+      
       res.status(500).json({ message: "Error al eliminar el post" });
     }
   }

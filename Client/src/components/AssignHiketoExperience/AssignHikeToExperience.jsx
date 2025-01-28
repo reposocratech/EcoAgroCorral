@@ -20,7 +20,7 @@ export const AssignHikeToExperience = ({expId, hikes, otherHikes, getExperience}
         await fetchData(`api/experience/assignHike/${expId}`, "post", {hikeId :toAssign});
         getExperience();
       } catch (error) {
-        console.log(error);
+        
       }
     }
 
@@ -32,7 +32,7 @@ export const AssignHikeToExperience = ({expId, hikes, otherHikes, getExperience}
         await fetchData(`api/experience/unassignHike/${expId}`, "delete", {hikeId :toUnassign});
         getExperience();
       } catch (error) {
-        console.log(error);
+        
       }
     }
   }

@@ -43,7 +43,7 @@ export const Register = () => {
       const formattedDay = String(day).padStart(2, "0");
       const formattedMonth = String(month).padStart(2, "0");
       const birthdate = `${year}-${formattedMonth}-${formattedDay}`;
-      console.log("Fecha construida:", birthdate);
+      
       setRegister((prev) => ({ ...prev, user_birthdate: birthdate }));
       validateField("user_birthdate", birthdate);
     }
@@ -60,13 +60,13 @@ export const Register = () => {
   };
 
   const onSubmit = async () => {
-    console.log("Fecha de nacimiento:", register.user_birthdate);
+    
     try {
       setMsg("");
       setEmailSent(false);
 
       registerSchema.parse(register);
-      console.log("Pasa por el parseo de schema");
+      
 
       if (register.user_password !== register.repPassword) {
         setValErrors({
@@ -77,7 +77,7 @@ export const Register = () => {
       }
 
       const res = await fetchData("api/user/register", "post", register);
-      console.log("Respuesta del servidor:", res);
+      
 
       setEmailSent(true);
       setMsg(
@@ -167,7 +167,7 @@ export const Register = () => {
                     value={day}
                     onChange={(e) => {
                       setDay(e.target.value);
-                      console.log("Día:", e.target.value);
+                      
                     }}
                     id="formBasicDay"
                   >
@@ -186,7 +186,7 @@ export const Register = () => {
                     value={month}
                     onChange={(e) => {
                       setMonth(e.target.value);
-                      console.log("Mes:", e.target.value);
+                      
                     }}
                     id="formBasicMonth"
                   >
@@ -205,7 +205,7 @@ export const Register = () => {
                     value={year}
                     onChange={(e) => {
                       setYear(e.target.value);
-                      console.log("Año:", e.target.value);
+                      
                     }}
                     id="formBasicYear"
                   >

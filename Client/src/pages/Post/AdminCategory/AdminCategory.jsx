@@ -32,7 +32,7 @@ export const AdminCategory = () => {
 
       if (response.ok) {
         const result = await response.json();
-        console.log("Category created:", result);
+        
         setNewCategoryName(""); // Limpiar el input
         fetchCategories(); // Actualizar la lista de categorías
       } else {
@@ -53,7 +53,7 @@ export const AdminCategory = () => {
       });
 
       if (response.ok) {
-        console.log("Category deleted successfully");
+        
         fetchCategories(); // Actualizar la lista de categorías
       } else {
         const errorResult = await response.json();

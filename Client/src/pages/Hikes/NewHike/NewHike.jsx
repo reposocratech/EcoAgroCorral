@@ -81,7 +81,7 @@ export const CreateHike = () => {
   };
   
   const handleSubmit = async (e) => {
-    console.log("submit");
+    
     e.preventDefault();
 
     const data = new FormData();
@@ -142,7 +142,7 @@ export const CreateHike = () => {
       }
 
       const assignResult = await assignExperiencesResponse.json();
-      console.log("Experiences assigned successfully:", assignResult);
+      
 
       // Redirigir al detalle del paseo
       

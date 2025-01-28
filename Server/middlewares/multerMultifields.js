@@ -25,7 +25,7 @@ function uploadImage() {
   
     return upload;
   } catch (error) {
-    console.log(error);
+    
   }
   
 }

@@ -81,7 +81,7 @@ export const CreateExperience = () => {
         navigate("/experiencias");
       }
     } catch (error) {
-      console.log(error);
+      
     }
   }
 

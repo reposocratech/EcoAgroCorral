@@ -56,7 +56,7 @@ export const ChangePassword = () => {
       }else{
         const res = await fetchData(`api/user/changePassword/${userId}`, "put", newPass);
         setVerifToken("password changed");
-        console.log("REEEEEEEES", res);
+        
       }
     } catch (error) {
       setMsg(error.response.data.message);

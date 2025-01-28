@@ -36,7 +36,7 @@ export const Blog = () => {
         setAllPost(result);
         setActualPost(result);
       } catch (error) {
-        console.log(error);
+        
       }
     };
     fetchPost();

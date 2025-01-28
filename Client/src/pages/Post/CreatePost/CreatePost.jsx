@@ -78,7 +78,7 @@ export const CreatePost = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
+    
     const data = new FormData();
     data.append("post_category_id", formData.post_category_id);
     data.append("post_description", formData.post_description);
@@ -94,7 +94,7 @@ export const CreatePost = () => {
     });
 
     try {
-      console.log("Creating post...");
+      
       const response = await fetch(
         `${import.meta.env.VITE_SERVER_URL}api/post/createPost`,
         {
@@ -105,7 +105,7 @@ export const CreatePost = () => {
 
       if (response.ok) {
         const result = await response.json();
-        console.log("Post created successfully:", result);
+        
         navigate('/blog')
       } else {
         const errorResult = await response.json();

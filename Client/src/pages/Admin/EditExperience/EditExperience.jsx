@@ -47,7 +47,7 @@ export const EditExperience = () => {
       const res2 = await fetchData(`api/experience/getAllOtherHikes/${id}`, "get");
       setOtherHikes(res2);
     } catch (error) {
-      console.log(error);
+      
     }
    }
 
@@ -73,7 +73,7 @@ export const EditExperience = () => {
       setMainFile(response);
       getExperience();
     } catch (error) {
-      console.log(error);
+      
     }
   }
   
@@ -91,7 +91,7 @@ export const EditExperience = () => {
         setFiles(response);
         getExperience();
       } catch (error) {
-        console.log(error);
+        
       }
     }
   }
@@ -110,7 +110,7 @@ export const EditExperience = () => {
       }
       getExperience();
     } catch (error) {
-      console.log(error);
+      
     }
   }
 
@@ -126,7 +126,7 @@ export const EditExperience = () => {
         setMsgExpSaved("Cambios Guardados!");
       }
     } catch (error) {
-      console.log(error);
+      
     }
   }
 
@@ -151,7 +151,7 @@ export const EditExperience = () => {
         navigate("/experiencias");
       }
     } catch (error) {
-      console.log(error);
+      
     }
   }
   

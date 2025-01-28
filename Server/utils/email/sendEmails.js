@@ -53,7 +53,7 @@ class EmailService {
         html,
       });
 
-      console.log("Correo enviado correctamente a:", user_email);
+      
       return true;
     } catch (error) {
       console.error("Error enviando email:", error);
@@ -92,7 +92,7 @@ class EmailService {
         subject: "Cambia tu contraseña",
         html,
       });
-      console.log("Correo enviado correctamente a:", user_email);
+      
       return true;
     } catch (error) {
       console.error("Error enviando email:", error);
@@ -139,7 +139,7 @@ class EmailService {
         html,
       });
 
-      console.log("Correo enviado correctamente a:", user_email);
+      
       return true;
     } catch (error) {
       console.error("Error enviando email:", error);
@@ -194,7 +194,7 @@ class EmailService {
         html,
       });
   
-      console.log("Correo de confirmación enviado correctamente a:", user_email);
+      
       return true;
     } catch (error) {
       console.error("Error enviando email de confirmación:", error);

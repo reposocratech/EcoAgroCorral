@@ -17,7 +17,7 @@ export const AllExperiences = () => {
         const res = await fetchData("api/experience/getAllExperiences", "get");
         setExperiences(res);
       } catch (error) {
-        console.log(error);
+        
       }
     };
 

@@ -35,7 +35,7 @@ export const EditFeatureModal = ({show, handleClose, features, getExperience, ex
 
   const handleFeatureFile = (e) => {
     //setFeatureFile(e.target.files[0]);
-    //console.log(e.target.files[0]);
+    //
     setFeature({...feature, feature_icon : e.target.files[0]});
     setNewFile(1);
   }

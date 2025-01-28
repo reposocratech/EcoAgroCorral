@@ -15,7 +15,7 @@ export const ReservationsDays = () => {
         const result = await fetchData('api/reservation/getDays', 'get');
         setAvailableDays(result);
       } catch (error) {
-        console.log(error);
+        
       }
     }
     fetchDays()
@@ -41,7 +41,7 @@ export const ReservationsDays = () => {
         setNewDays(days);
       }
     } catch (error) {
-      console.log(error); 
+       
     }
   }
 

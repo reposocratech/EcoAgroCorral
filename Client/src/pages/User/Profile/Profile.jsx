@@ -22,13 +22,13 @@ export const Profile = () => {
         }
         
       } catch (error) {
-        console.log(error);
+        
       }
     }
     fetchReservation();
   },[user]);
 
-  console.log("*****", reservations);
+  
   
     
   return (

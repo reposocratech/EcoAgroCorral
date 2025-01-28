@@ -41,7 +41,7 @@ class UserDal {
       const result = await executeQuery(sql, [email]);
       return result;
     } catch (error) {
-      console.log(error);
+      
     }
   };
 
@@ -79,7 +79,7 @@ class UserDal {
   };
 
   changePassword = async (hash, user_id) => {
-    console.log("passss new", hash);
+    
 
     try {
       let sql =
@@ -112,7 +112,7 @@ class UserDal {
       const result = await executeQuery(sql, [user_id]);
       return result;
     } catch (error) {
-      console.log(error);
+      
       throw error;
     }
   };
@@ -169,7 +169,7 @@ class UserDal {
       }
 
       const result = await executeQuery(sql, values);
-      console.log("Resultado de la consulta en DAL:", result);
+      
       return result;
     } catch (error) {
       console.error("Error en el DAL editUser:", error);

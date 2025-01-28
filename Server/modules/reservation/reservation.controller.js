@@ -13,12 +13,12 @@ class ReservationController {
 
   getOneReservation = async (req, res) => {
     const { reservation_id } = req.params;
-    console.log(reservation_id);
+    
     try {
       const result = await ReservationDal.getOneReservation(reservation_id);
       res.status(200).json(result[0]);
     } catch (error) {
-      console.log(error);
+      
       res.status(500).json({ message: "Error al obtener la reserva" });
     }
   };

@@ -78,7 +78,7 @@ class UserController {
       await UserDal.validateUser(decode.user_email);
       res.json({ msg: "Registro confirmado" });
     } catch (error) {
-      console.log(error);
+      
       res.status(400).json({ msg: "Token inválido o expirado" });
     }
   };
@@ -264,8 +264,8 @@ class UserController {
       const data = JSON.parse(req.body.edit);
       const file = req.file;
 
-      console.log("Datos parseados en el controlador:", data);
-      console.log("Archivo recibido en el controlador:", file);
+      
+      
 
       const result = await UserDal.editUser(data, file);
 

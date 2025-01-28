@@ -14,7 +14,7 @@ export const AdminDashboard = () => {
         let response = await fetchData("api/admin/getAllUsers", "get");
         setAllUser(response);
       } catch (error) {
-        console.log(error);
+        
       }
     };
     getData();

@@ -33,7 +33,7 @@ export const EditUser = () => {
   };
 
   const handleFile = (e) => {
-    console.log("Archivo seleccionado:", e.target.files[0]);
+    
     setFile(e.target.files[0]);
 };
 
@@ -61,7 +61,7 @@ const onSubmit = async () => {
       formData.append("user_avatar", user.user_avatar || "");
     }
 
-    console.log("Datos enviados:", [...formData]);
+    
     const res = await fetchData("api/user/editUser", "put", formData);
 
     setUser({

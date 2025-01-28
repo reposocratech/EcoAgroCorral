@@ -12,7 +12,7 @@ class ExperienceDal {
       let sqlExperience = `INSERT INTO experience (experience_title, experience_description, experience_price_adult, experience_price_child)
                             VALUES (?, ?, ?, ?)`;
       let result =  await connexion.execute(sqlExperience, data);
-      //console.log(result);
+      //
       let experience_id = result[0].insertId;
       for (const img of images){
         let sqlMainImg = `INSERT INTO experience_pictures (experience_pictures_experience_id, experience_pictures_file, is_main)
@@ -41,7 +41,7 @@ class ExperienceDal {
 
       await connexion.commit();
     } catch (error) {
-      console.log(error);
+      
       await connexion.rollback();
     } finally{
       connexion.release();
@@ -56,23 +56,23 @@ class ExperienceDal {
       let updateValues = [data.experience_title, data.experience_description, data.experience_price_adult, data.experience_price_child, experience_id];
       await executeQuery(sqlUpdate, updateValues);
     } catch (error) {
-      console.log(error);
+      
       throw error;
     }
   }
 
   addFeature = async (experienceId, featureInfo, icon) => {
-    //console.log("featureInfo", featureInfo);
+    //
     try {
       let sqlFeatures = `INSERT INTO feature 
                           (feature_experience_id, feature_name, feature_description, feature_icon) 
                           VALUES (?, ?, ?, ?)`;
       let featuresValues = [experienceId, ...featureInfo, icon.filename];
-      //console.log(featureInfo);
+      //
       let resFeatures = await executeQuery(sqlFeatures, featuresValues);
       return resFeatures;
     } catch (error) {
-      console.log(error);
+      
       throw error;
     }
   }
@@ -101,7 +101,7 @@ class ExperienceDal {
       let resFeatures = await executeQuery(sqlFeatures, featuresValues);
       return resFeatures;
     } catch (error) {
-      console.log(error);
+      
       throw error;
     }
   }
@@ -174,7 +174,7 @@ class ExperienceDal {
     try {
       await connexion.beginTransaction();
 
-      //console.log(result);
+      //
       for (const img of images){
 
         let sqlNormalImg = `INSERT INTO experience_pictures (experience_pictures_experience_id, experience_pictures_file)
@@ -190,7 +190,7 @@ class ExperienceDal {
       await connexion.commit();
       return result;
     } catch (error) {
-      console.log(error);
+      
       await connexion.rollback();
     } finally{
       connexion.release();
@@ -219,7 +219,7 @@ class ExperienceDal {
       let result = await executeQuery(sql, [experienceId]);
       return result;
     } catch (error) {
-      console.log(error);
+      
       throw error;
     }
   }
@@ -231,7 +231,7 @@ class ExperienceDal {
       let values = [expId, hikeId];
       await executeQuery(sql, values);
     } catch (error) {
-      console.log(error);
+      
       throw error;
     }
   }
@@ -242,7 +242,7 @@ class ExperienceDal {
       let values = [expId, hikeId];
       await executeQuery(sql, values);
     } catch (error) {
-      console.log(error);
+      
       throw error;
     }
   }

@@ -51,7 +51,7 @@ export const CancelReservation = () => {
         }
         
       } catch (error) {
-        console.log(error);
+        
       }
     }
     fetchReservation();
@@ -65,7 +65,7 @@ export const CancelReservation = () => {
       });
       setDelReservation(true);
     } catch (error) {
-      console.log(error);
+      
     }
   }
 
@@ -77,7 +77,7 @@ export const CancelReservation = () => {
       const result = await fetchData('api/reservation/modifyReservation', 'put', {newDate, user, reservation});
       setModReservation(true);
     } catch (error) {
-      console.log(error);
+      
     }
   }
 

@@ -153,7 +153,7 @@ export const EditHike = () => {
         imageUrls: prev.imageUrls.filter((url) => !url.includes(image_id)),
       }));
 
-      console.log(`Image with id ${image_id} deleted successfully`);
+      
     } catch (error) {
       console.error("Error deleting image:", error);
       setShowAlert(true);
@@ -220,7 +220,7 @@ export const EditHike = () => {
       }
 
       // Si la respuesta es exitosa, redirige o actualiza el estado
-      console.log("Paseo actualizado correctamente");
+      
       navigate(`/paseo/unPaseo/${hikeId}`);
     } catch (error) {
       console.error("Error en el envío del formulario:", error);

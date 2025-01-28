@@ -188,7 +188,7 @@ class PostDal {
       const result = await executeQuery(sql);
       return result;
     } catch (error) {
-      console.log(error);
+      
       throw error;
     }
   };
@@ -216,7 +216,7 @@ class PostDal {
       const result = await executeQuery(sql, [post_id]);
       return result;
     } catch (error) {
-      console.log(error);
+      
       throw error;
     }
   };
@@ -280,7 +280,7 @@ class PostDal {
           throw new Error("El archivo no tiene un nombre válido.");
         }
         const fileName = file.filename;
-        console.log(fileName);
+        
 
         const sql = `INSERT INTO post_picture (post_picture_post_id, post_picture_file) 
                         VALUES (?, ?)`;
@@ -308,7 +308,7 @@ class PostDal {
       const result = await executeQuery(sql, [post_id]);
       return true;
     } catch (error) {
-      console.log(error);
+      
       throw error;
     }
   };

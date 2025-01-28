@@ -10,7 +10,7 @@ class HikeDal {
       hike_itinerary,
       files,
     } = data;
-    console.log("DATA", data);
+    
 
     const connection = await dbPool.getConnection();
     try {
@@ -344,7 +344,7 @@ class HikeDal {
     const query = `INSERT INTO hike_experience (hike_id, experience_id) VALUES (?, ?)`;
     try {
       await executeQuery(query, [hikeId, experienceId]);
-      console.log(`Experience ID ${experienceId} assigned to Hike ID ${hikeId}`);
+      
       return { message: "Experience assigned successfully" };
     } catch (error) {
       console.error(`Error assigning experience ID ${experienceId} to hike ID ${hikeId}:`, error.message);

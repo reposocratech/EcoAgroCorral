@@ -40,7 +40,7 @@ export const OneExperience = () => {
         `api/experience/disableExperience/${id}`,
         "put"
       );
-      console.log("Experiencia deshabilitada:", response);
+      
       setShowModal(false);
       navigate("/admin/experiencias");
     } catch (error) {

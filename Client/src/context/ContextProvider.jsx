@@ -13,7 +13,7 @@ export const ContextProvider = ({children}) => {
         const userResult = await fetchData("api/user/findUserById", "get", null,{Authorization:`Bearer ${token}`});
         setUser(userResult);
       } catch (error) {
-        console.log(error);
+        
       }
     }
     const tokenLocal = localStorage.getItem("token");

@@ -114,7 +114,7 @@ class AdminDal {
         WHERE reservation_id = ?;
       `;
       const result = await executeQuery(sql, [id]);
-      console.log("Datos de la reserva obtenidos:", result);
+      
       return result[0];
     } catch (error) {
       console.error("Error al obtener datos de la reserva:", error);
