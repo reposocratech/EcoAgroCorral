@@ -20,7 +20,6 @@ export const Profile = () => {
         if(resultRes.length != 0){
           setReservations(resultRes);
         }
-        
       } catch (error) {
         console.log(error);
       }
@@ -28,9 +27,6 @@ export const Profile = () => {
     fetchReservation();
   },[user]);
 
-  console.log("*****", reservations);
-  
-    
   return (
     <>
     <section className='profile'>
