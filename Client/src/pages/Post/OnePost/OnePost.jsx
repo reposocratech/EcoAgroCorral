@@ -1,14 +1,15 @@
 import { useEffect, useState, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { Button, Spinner, Alert, Container, Image } from "react-bootstrap";
+import { Button, Spinner, Alert, Container, Image, Modal } from "react-bootstrap";
 import "./OnePost.css";
 import { AgroContext } from "../../../context/ContextProvider";
 
 export const OnePost = () => {
-  const { postId } = useParams(); // Capturar el ID del post desde la URL
+  const { postId } = useParams();
   const [post, setPost] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
   const { user } = useContext(AgroContext);
 
@@ -25,7 +26,7 @@ export const OnePost = () => {
         setPost(data);
         setLoading(false);
       } catch (err) {
-        setError(err.message); // Guardar el mensaje de error
+        setError(err.message);
         setLoading(false);
       }
     };
@@ -43,17 +44,24 @@ export const OnePost = () => {
       );
 
       if (response.ok) {
-        alert("La publicación ha sido eliminada exitosamente.");
-        navigate("/blog"); // Redirigir al componente Blog
+        navigate("/blog");
       } else {
         const errorResult = await response.json();
         console.error("Error deleting post:", errorResult);
-        alert("Hubo un error al intentar borrar la publicación.");
       }
     } catch (err) {
       console.error("Error:", err);
-      alert("Hubo un error al intentar borrar la publicación.");
+    } finally {
+      setShowModal(false);
     }
+  };
+
+  const handleShowModal = () => {
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
   };
 
   if (loading) {
@@ -78,7 +86,6 @@ export const OnePost = () => {
     <Container fluid="xxl" className="pt-5 pb-5 mt-5">
       <header className="text-center post-head mb-4">
         <div className="d-flex flex-column flex-md-row align-items-center gap-4">
-          {/* Mostrar la imagen principal si está disponible */}
           {post.images &&
             post.images.length > 0 &&
             post.images.some((image) => image.is_main === 1) && (
@@ -102,7 +109,6 @@ export const OnePost = () => {
                 />
               </div>
             )}
-          {/* Contenedor del texto */}
           <div className="d-flex align-items-center justify-content-center flex-column flex-grow-1">
             <div className="header-text">
               <p className="text-muted">
@@ -123,7 +129,7 @@ export const OnePost = () => {
         {post.images && post.images.length > 0 && (
           <div className="d-flex flex-wrap justify-content-center gap-5">
             {post.images
-              .filter((image) => image.is_main === 0) // Filtrar imágenes con is_main === 0
+              .filter((image) => image.is_main === 0)
               .map((image, index) => (
                 <div key={index} className="flex-item">
                   <Image
@@ -149,20 +155,39 @@ export const OnePost = () => {
             <Button
               variant="success"
               className="button-nuevo-post me-2"
-              onClick={()=> navigate(`/blog/editPost/${postId}`)}
+              onClick={() => navigate(`/blog/editPost/${postId}`)}
             >
-              Editar publicacion
+              Editar publicación
             </Button>
             <Button
               variant="danger"
               className="button-nuevo-post"
-              onClick={handleDeletePost} // Llamar a la función para borrar el post
+              onClick={handleShowModal}
             >
-              Borrar publicacion
+              Borrar publicación
             </Button>
           </>
         )}
       </section>
+
+      <Modal show={showModal} onHide={handleCloseModal}>
+        <Modal.Header closeButton>
+          <Modal.Title className="tituloModal">Confirmar Eliminación</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p className="text-center">
+            ¿Estás seguro de que deseas eliminar esta publicación? Esta acción no se puede deshacer.
+          </p>
+        </Modal.Body>
+        <Modal.Footer className="d-flex justify-content-center">
+          <Button variant="secondary" onClick={handleCloseModal}>
+            Cerrar
+          </Button>
+          <Button variant="danger" onClick={handleDeletePost}>
+            Eliminar Publicación
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </Container>
   );
 };

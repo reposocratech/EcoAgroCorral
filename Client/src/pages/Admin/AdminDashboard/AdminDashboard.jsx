@@ -156,6 +156,13 @@ export const AdminDashboard = () => {
                       >
                         Ir a Modificar Días
                       </Button>
+                      <Button
+                        onClick={() =>
+                          navigate("/user/reserva")
+                        }
+                      >
+                        Ir a Formulario Reservas
+                      </Button>
                     </div>
                   </Card.Body>
                 </Card>
