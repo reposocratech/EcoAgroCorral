@@ -1,4 +1,3 @@
-
 .header-text {
   font-size: 1.5rem;
   font-weight: 600;
@@ -32,4 +31,9 @@
   margin-inline: 2rem;
   background-color: #707c67;
   padding: 2rem;
+}
+
+.fechaBlog{
+  font-size: 12px;
+  
 }

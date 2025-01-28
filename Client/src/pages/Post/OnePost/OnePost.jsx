@@ -122,7 +122,7 @@ export const OnePost = () => {
       <div className="container-fluid divisor-post"></div>
       <section className="mb-4 post-content">
         <p className="text-center">{post.post_description}</p>
-        <p className="text-center">{new Date(post.post_date).toLocaleString()}</p>
+        <p className="text-end fechaBlog mb-0">{new Date(post.post_date).toLocaleString()}</p>
       </section>
 
       <section className="mb-4">
