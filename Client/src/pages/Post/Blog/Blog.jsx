@@ -79,9 +79,8 @@ export const Blog = () => {
                 <Form.Select 
                 aria-label="Ordenar por"
                 onChange={handleChange}
-                value={orderBy}
                 className="select-order" >
-                  <option>Ordenar por</option>
+                  <option disabled>Ordenar por</option>
                   <option className="option-sel" value="1">Mas recientes</option>
                   <option className="option-sel" value="2">Mas antiguos</option>
                 </Form.Select>

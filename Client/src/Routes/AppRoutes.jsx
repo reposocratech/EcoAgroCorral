@@ -33,9 +33,12 @@ import { CreatePost } from "../pages/Post/CreatePost/CreatePost.jsx";
 import { AdminExperience } from "../pages/Admin/CreateExperience/AdminExperience.jsx";
 import { EditPost } from "../pages/Post/EditPost/EditPost.jsx";
 import { AdminCategory } from "../pages/Admin/AdminCategory/AdminCategory.jsx";
+import { useContext } from "react";
+import { AgroContext } from "../context/ContextProvider.jsx";
 
 
 export const AppRoutes = () => {
+  const {user} = useContext(AgroContext);
   return (
 
     <BrowserRouter>
@@ -45,7 +48,6 @@ export const AppRoutes = () => {
       <main>
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/user/perfil' element={<Profile />} />
           <Route path='/user/register' element={<Register/>} />
           <Route path='/user/login' element={<Login />} />
           <Route path='/user/recoverPassword' element={<RecoverPassword />} />
@@ -54,28 +56,43 @@ export const AppRoutes = () => {
           <Route path='/contacto' element={<ContactUs/>} />
           <Route path='/experiencias' element={<AllExperiences />} />
           <Route path='/experiencias/:id' element={<OneExperience />} />
+          <Route path="/paseo/:id" element={<OneHike/>}/>
+          <Route path='/confirmarEmail/:token' element={<VerifyEmail/>}/>
+          <Route path='/blog' element={<Blog />}/>
+          <Route path="/blog/:postId" element={<OnePost />} />
+
+          {user && user.user_type === 0 &&
+          <>
+          <Route path='/user/perfil' element={<Profile />} />
+          <Route path='/user/perfil/editUser' element={<EditUser/>}/>
+          <Route path='/reserva/cancelarReserva/:reservation_id' element={<CancelReservation/>}/>
+
+          </>}
+
+          {user &&
+            <Route path='/user/reserva' element={<Reservation/>}/>
+          }
+
+          {user && user.user_type === 1 &&
+          <>
           <Route path='/experiencias/createExperience' element={<CreateExperience />} />
           <Route path='/experiencias/editExperience/:id' element={<EditExperience />} />
-          <Route path="/paseo/:id" element={<OneHike/>}/>
           <Route path="/paseo/nuevoPaseo" element={<CreateHike />} />          
           <Route path="/paseo/editar/:hikeId" element={<EditHike />} />
-          <Route path='/confirmarEmail/:token' element={<VerifyEmail/>}/>
           <Route path="/paseo/borrados" element={<DeletedHikes/>} />
-          <Route path='/user/perfil/editUser' element={<EditUser/>}/>
-          <Route path='/user/reserva' element={<Reservation/>}/>
           <Route path='/admin/perfil' element={<AdminDashboard/>}/>
           <Route path='/admin/usuarios' element={<AdminUsers />} />
           <Route path='/admin/experiencias' element={<AdminExperience />}/>
           <Route path="/admin/reservas-pendientes" element={<PendingReservations />} />
           <Route path="/admin/historial-reservas" element={<ReservationHistory />} />
           <Route path="/admin/modificar-dias-disponibles" element={<ReservationsDays />} />
-          <Route path='*' element={<ErrorPage />}/>
-          <Route path='/reserva/cancelarReserva/:reservation_id' element={<CancelReservation/>}/>
-          <Route path='/blog' element={<Blog />}/>
-          <Route path="/blog/:postId" element={<OnePost />} />
           <Route path="/blog/crearPost" element={<CreatePost />} />
           <Route path="/admin/blog/categorias" element={<AdminCategory />} />
           <Route path='/blog/editPost/:post_id' element={<EditPost />}/>
+          </>}
+
+          <Route path='*' element={<ErrorPage />}/>
+          
 
         </Routes>
       </main>
