@@ -35,6 +35,8 @@ import { EditPost } from "../pages/Post/EditPost/EditPost.jsx";
 import { AdminCategory } from "../pages/Admin/AdminCategory/AdminCategory.jsx";
 import { useContext } from "react";
 import { AgroContext } from "../context/ContextProvider.jsx";
+import { Payment } from "../pages/Payment/Payment.jsx";
+import { PaymentSuccess } from "../pages/Payment/PaymentSuccess/PaymentSuccess.jsx";
 
 
 export const AppRoutes = () => {
@@ -60,13 +62,14 @@ export const AppRoutes = () => {
           <Route path='/confirmarEmail/:token' element={<VerifyEmail/>}/>
           <Route path='/blog' element={<Blog />}/>
           <Route path="/blog/unPost/:postId" element={<OnePost />} />
+          <Route path="/payment" element={<Payment amount={50} />} />
 
           {user && user.user_type === 0 &&
           <>
           <Route path='/user/perfil' element={<Profile />} />
           <Route path='/user/perfil/editUser' element={<EditUser/>}/>
           <Route path='/reserva/cancelarReserva/:reservation_id' element={<CancelReservation/>}/>
-
+          {localStorage.getItem("reservationData") && <Route path='/reserva/confirmarReserva' element={<PaymentSuccess />}/>}
           </>}
 
           {user &&
