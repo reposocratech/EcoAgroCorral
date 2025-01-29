@@ -4,10 +4,12 @@ export const loginSchema = z.object({
   user_email: z.string().email("El email no es válido"),
   user_password: z
     .string()
-    .regex(
-      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-z\d!@#$%^&*(),.?":{}|<>]{6,}$/,
-      "Contraseña no válida"
-    ),
+    .regex(/[A-Z]/, { message: "Debe incluir al menos una letra mayúscula" })
+    .regex(/[a-z]/, { message: "Debe incluir al menos una letra minúscula" })
+    .regex(/\d/, { message: "Debe incluir al menos un número" })
+    .regex(/[@$!%*?&_-]/, {
+      message: "Debe incluir al menos un carácter especial (@$!%*?&_-)",
+    }),
 });
 
 export const recoverPassSchema = z.object({
