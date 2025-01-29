@@ -48,7 +48,7 @@ class UserController {
           user_dni,
           hash,
         ]);
-
+        
         const emailToken = jwt.sign({ user_email }, process.env.TOKEN_KEY, {
           expiresIn: "1h",
         });

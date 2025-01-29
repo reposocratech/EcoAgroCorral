@@ -7,14 +7,17 @@ export const fetchData = async (url, method, data = null, headers = {}) => {
   try {
     const config = {
       method,
-      url: apiUrl+url,
+      url: apiUrl + url,
       headers,
-      data
-    }
+      data,
+    };
     const response = await axios(config);
     return response.data;
-  } 
-  catch (error) {
-    throw error;
+  } catch (error) {
+    if (error.response) {
+      throw error.response.data;
+    } else {
+      throw { msg: "Error de conexión con el servidor" };
+    }
   }
-}
+};
