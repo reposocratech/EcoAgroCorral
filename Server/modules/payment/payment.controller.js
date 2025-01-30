@@ -29,7 +29,6 @@ class PaymentController {
             let result = await paymentDal.getNames(reservation_experience_id, reservation_hike_id);
             const {experience_title, hike_title} = result[0];
             const priceId = await createPrice(experience_title, hike_title, reservation_total_price * 100, stripe);
-            console.log("priceIDDDD", priceId);
             const session = await stripe.checkout.sessions.create({
               line_items: [
                 {
@@ -39,7 +38,7 @@ class PaymentController {
                 },
               ],
               mode: 'payment',
-              success_url: `${YOUR_DOMAIN}/reserva/confirmarReserva`,
+              success_url: `${YOUR_DOMAIN}/reserva/confirmarReserva/:${priceId}`,
               cancel_url: `${YOUR_DOMAIN}/user/reserva`,
           })
           

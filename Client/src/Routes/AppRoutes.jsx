@@ -69,7 +69,7 @@ export const AppRoutes = () => {
           <Route path='/user/perfil' element={<Profile />} />
           <Route path='/user/perfil/editUser' element={<EditUser/>}/>
           <Route path='/reserva/cancelarReserva/:reservation_id' element={<CancelReservation/>}/>
-          {localStorage.getItem("reservationData") && <Route path='/reserva/confirmarReserva' element={<PaymentSuccess />}/>}
+          {localStorage.getItem("reservationData") && <Route path='/reserva/confirmarReserva/:priceId' element={<PaymentSuccess />}/>}
           </>}
 
           {user &&
