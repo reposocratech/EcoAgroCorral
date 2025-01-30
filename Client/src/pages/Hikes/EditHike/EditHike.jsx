@@ -303,6 +303,7 @@ export const EditHike = () => {
                   setFormData({ ...formData, hike_distance: e.target.value })
                 }
                 required
+                min="0"
               />
             </Form.Group>
           </Row>
@@ -318,6 +319,7 @@ export const EditHike = () => {
                   setFormData({ ...formData, hike_duration: e.target.value })
                 }
                 required
+                min="0"
               />
             </Form.Group>
           </Row>
