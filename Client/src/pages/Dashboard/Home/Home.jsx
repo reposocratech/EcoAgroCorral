@@ -24,7 +24,7 @@ export const Home = () => {
         <Container fluid="xxl">
           <Row>
             <Col>
-              <div className="flexDiv">
+              <div className="d-flex flex-wrap  flexDiv">
                 <div className="div-1">
                   <h3 className="text-center">Tranquilidad y tradición</h3>
                   <p className="text-center">
@@ -46,7 +46,7 @@ export const Home = () => {
         <Container fluid="xxl">
           <Row>
             <Col>
-              <div className="flexDiv">
+              <div className="d-flex flex-wrap gap-3 flexDiv">
                 <div className="div-1">
                   <h3 className="text-center">
                     ¿Cuál es tu destino <br /> soñado para una <br /> escapada?
