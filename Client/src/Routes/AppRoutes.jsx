@@ -66,10 +66,10 @@ export const AppRoutes = () => {
 
           {user && user.user_type === 0 &&
           <>
-          <Route path='/user/perfil' element={<Profile />} />
-          <Route path='/user/perfil/editUser' element={<EditUser/>}/>
-          <Route path='/reserva/cancelarReserva/:reservation_id' element={<CancelReservation/>}/>
-          {localStorage.getItem("reservationData") && <Route path='/reserva/confirmarReserva/:priceId' element={<PaymentSuccess />}/>}
+            <Route path='/user/perfil' element={<Profile />} />
+            <Route path='/user/perfil/editUser' element={<EditUser/>}/>
+            <Route path='/reserva/cancelarReserva/:reservation_id' element={<CancelReservation/>}/>
+            {localStorage.getItem("reservationData") && <Route path='/reserva/confirmarReserva/:priceId' element={<PaymentSuccess />}/>}
           </>}
 
           {user &&
@@ -78,20 +78,20 @@ export const AppRoutes = () => {
 
           {user && user.user_type === 1 &&
           <>
-          <Route path='/experiencias/createExperience' element={<CreateExperience />} />
-          <Route path='/experiencias/editExperience/:id' element={<EditExperience />} />
-          <Route path="/paseo/nuevoPaseo" element={<CreateHike />} />          
-          <Route path="/paseo/editar/:hikeId" element={<EditHike />} />
-          <Route path="/paseo/borrados" element={<DeletedHikes/>} />
-          <Route path='/admin/perfil' element={<AdminDashboard/>}/>
-          <Route path='/admin/usuarios' element={<AdminUsers />} />
-          <Route path='/admin/experiencias' element={<AdminExperience />}/>
-          <Route path="/admin/reservas-pendientes" element={<PendingReservations />} />
-          <Route path="/admin/historial-reservas" element={<ReservationHistory />} />
-          <Route path="/admin/modificar-dias-disponibles" element={<ReservationsDays />} />
-          <Route path="/blog/crearPost" element={<CreatePost />} />
-          <Route path="/admin/blog/categorias" element={<AdminCategory />} />
-          <Route path='/blog/editPost/:post_id' element={<EditPost />}/>
+            <Route path='/experiencias/createExperience' element={<CreateExperience />} />
+            <Route path='/experiencias/editExperience/:id' element={<EditExperience />} />
+            <Route path="/paseo/nuevoPaseo" element={<CreateHike />} />          
+            <Route path="/paseo/editar/:hikeId" element={<EditHike />} />
+            <Route path="/paseo/borrados" element={<DeletedHikes/>} />
+            <Route path='/admin/perfil' element={<AdminDashboard/>}/>
+            <Route path='/admin/usuarios' element={<AdminUsers />} />
+            <Route path='/admin/experiencias' element={<AdminExperience />}/>
+            <Route path="/admin/reservas-pendientes" element={<PendingReservations />} />
+            <Route path="/admin/historial-reservas" element={<ReservationHistory />} />
+            <Route path="/admin/modificar-dias-disponibles" element={<ReservationsDays />} />
+            <Route path="/blog/crearPost" element={<CreatePost />} />
+            <Route path="/admin/blog/categorias" element={<AdminCategory />} />
+            <Route path='/blog/editPost/:post_id' element={<EditPost />}/>
           </>}
 
           <Route path='*' element={<ErrorPage />}/>

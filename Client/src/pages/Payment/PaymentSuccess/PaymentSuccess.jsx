@@ -18,8 +18,11 @@ export const PaymentSuccess = () => {
       }
     };
 
-    reservationToDb();
-    localStorage.removeItem("reservationData");
+    let prueba = localStorage.getItem("reservationData");
+    if(prueba){
+      reservationToDb();
+      localStorage.removeItem("reservationData");
+    }
   }, []);
 
   return (
