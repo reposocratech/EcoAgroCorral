@@ -13,7 +13,6 @@ export const OneExperience = () => {
   const { user } = useContext(AgroContext);
   const [experienceInfo, setExperienceInfo] = useState({});
   const [error, setError] = useState(null);
-  const [showModal, setShowModal] = useState(false);
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -41,16 +40,12 @@ export const OneExperience = () => {
         "put"
       );
       console.log("Experiencia deshabilitada:", response);
-      setShowModal(false);
       navigate("/admin/experiencias");
     } catch (error) {
       console.error("Error al deshabilitar la experiencia:", error);
       setError("Error al intentar deshabilitar la experiencia.");
     }
   };
-
-  const handleShowModal = () => setShowModal(true);
-  const handleCloseModal = () => setShowModal(false);
 
   return (
     <>
@@ -124,7 +119,7 @@ export const OneExperience = () => {
                 Modificar experiencia
               </Button>
 
-              <Button className="button-eliminar-paseo" onClick={handleShowModal}>
+              <Button className="button-eliminar-paseo" onClick={handleDisable}>
                 Deshabilitar experiencia
               </Button>
             </div>
@@ -142,27 +137,6 @@ export const OneExperience = () => {
           </Row>
         </Container>
       </section>
-
-      <Modal show={showModal} onHide={handleCloseModal}>
-        <Modal.Header closeButton>
-          <Modal.Title>Confirmar deshabilitar</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          ¿Estás seguro de que deseas deshabilitar esta experiencia? Esta acción
-          no se puede deshacer.
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseModal}>
-            Cancelar
-          </Button>
-          <Button
-            variant="danger"
-            onClick={handleDisable}
-          >
-            Deshabilitar
-          </Button>
-        </Modal.Footer>
-      </Modal>
     </>
   );
 };
