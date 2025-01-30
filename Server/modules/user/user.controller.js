@@ -48,7 +48,7 @@ class UserController {
           user_dni,
           hash,
         ]);
-
+        
         const emailToken = jwt.sign({ user_email }, process.env.TOKEN_KEY, {
           expiresIn: "1h",
         });
@@ -300,7 +300,7 @@ class UserController {
       reservation_children,
       reservation_total_price,
       reservation_user_id,
-    } = req.body[0];
+    } = req.body;
 
     try {
       if (

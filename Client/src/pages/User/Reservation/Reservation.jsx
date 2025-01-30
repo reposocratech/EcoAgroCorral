@@ -129,15 +129,16 @@ export const Reservation = () => {
             reservation_user_id: user.user_id,
           },
         ];
-        const result = await fetchData(
-          "api/user/createReservation",
-          "post",
-          data
-        );
-        setMsgReserv(true);
+
+        localStorage.setItem("reservationData", JSON.stringify(data[0]));
+        const payment = await fetchData("api/payment/create-payment-intent", "post", data[0]);
+        console.log(payment);
+        window.location.href = payment;
+        
       }
     } catch (error) {
-      setMsg(error.response.data.message);
+      console.log(error);
+      //setMsg(error.response.data.message);
     }
   };
 
