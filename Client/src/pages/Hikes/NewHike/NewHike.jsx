@@ -190,6 +190,7 @@ export const CreateHike = () => {
               value={formData.hike_distance}
               onChange={handleChange}
               required
+              min="0"
             />
           </Form.Group>
           <Form.Group className="mb-3">
@@ -200,6 +201,7 @@ export const CreateHike = () => {
               value={formData.hike_duration}
               onChange={handleChange}
               required
+              min="0"
             />
           </Form.Group>
           <Form.Group className="mb-3">
@@ -335,7 +337,7 @@ export const CreateHike = () => {
                 )}
               </Form.Control>
               <Button
-                className="mt-2 button-danger"
+                className="mt-2 delete"
                 onClick={() => {
                   const experience = assignedExperiences.find(
                     (exp) =>
