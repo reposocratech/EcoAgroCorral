@@ -43,10 +43,15 @@ class ReservationDal {
   }
 
   setDays = async (values) =>{
-    console.log(values);
+    console.log("****", values);
     
     try {
-      let sql = `UPDATE reservation_day
+      let sql;
+      if(values[0] == 7){
+        sql = `UPDATE reservation_day
+        SET reservation_day_is_active = 0`
+      }
+      sql = `UPDATE reservation_day
       SET reservation_day_is_active = 
           CASE 
               WHEN reservation_day_value IN (?) THEN 1
