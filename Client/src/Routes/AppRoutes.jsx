@@ -1,4 +1,4 @@
-import {BrowserRouter, Route, Routes} from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Home } from "../pages/Dashboard/Home/Home";
 import { NavbarApp } from "../components/Navbar/NavbarApp";
 import { Footer } from "../components/Footer/Footer";
@@ -13,7 +13,7 @@ import { CreateExperience } from "../pages/Admin/CreateExperience/CreateExperien
 import { OneHike } from "../pages/Hikes/OneHike/OneHike.jsx";
 import { CreateHike } from "../pages/Hikes/NewHike/NewHike";
 import { EditHike } from "../pages/Hikes/EditHike/EditHike";
-import {DeletedHikes} from "../pages/Hikes/RestoreHikes/DeletedHikes";
+import { DeletedHikes } from "../pages/Hikes/RestoreHikes/DeletedHikes";
 import { ChangePassword } from "../pages/Auth/RecoverPassword/ChangePassword.jsx";
 import { Profile } from "../pages/User/Profile/Profile.jsx";
 import { EditUser } from "../pages/User/EditUser/EditUser.jsx";
