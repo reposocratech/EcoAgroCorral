@@ -51,19 +51,28 @@ npm i
 ## En /Client
 
 Inicia Sesion en stripe y pega en el .env la clave publica
+
 VITE_STRIPE_PUBLIC_KEY= *tu clave*
 
 ## En /Server
 
 PORT=4000
+
 URLFRONT= *url del front*
+
 DB_USER=*tu usuario*
+
 DB_PASSWORD=*tu contraseña*
 
+
 TOKEN_KEY=*tu palabra secreta*
+
 EMAIL_HOST=*host del email admin*
+
 EMAIL_PORT=*puerto del email admin*
+
 EMAIL_USER=*email del admin*
+
 EMAIL_PASS= *pegar la que te da el email*
 
 Inicia Sesion en stripe y pega en el .env la clave secreta
