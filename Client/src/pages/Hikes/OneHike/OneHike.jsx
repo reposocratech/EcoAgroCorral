@@ -1,6 +1,6 @@
-import { useEffect, useState ,useContext} from "react";
+import { useEffect, useState, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { Container,  Button, Row, Alert } from "react-bootstrap";
+import { Container, Button, Row, Alert } from "react-bootstrap";
 import "./OneHike.css";
 import { AgroContext } from "../../../context/ContextProvider";
 export const OneHike = () => {
@@ -161,71 +161,76 @@ export const OneHike = () => {
             </div>
           </div>
         </section>
-        <section className="mt-5 d-flex justify-content-around  flex-wrap gap-5" >
-        <div className="d-flex gap-3 align-items-center itinerario">
-              <img
-                src={`/assets/images/hike/itinerario.png`} 
-                
-                className="icon-hike"
-              />
-              <div className="  itinerario-txt text-start">
-                <h3 className="text-center">Itinerario</h3>
-                <p>
-                {hike.hike_itinerary}
-                </p>
-              </div>
+        <section className="mt-5 d-flex justify-content-around  flex-wrap gap-5">
+          <div className="d-flex gap-3 align-items-center itinerario">
+            <img
+              src={`/assets/images/hike/itinerario.png`}
+              className="icon-hike"
+            />
+            <div className="  itinerario-txt text-start">
+              <h3 className="text-center">Itinerario</h3>
+              <p>{hike.hike_itinerary}</p>
+            </div>
           </div>
           <div className="d-flex gap-3 align-items-center datos-div">
-              <img
-                src={`/assets/images/hike/datos.png`} 
-                
-                className="icon-hike datos"
-              />
-              <div className="max-width text-start">
+            <img
+              src={`/assets/images/hike/datos.png`}
+              className="icon-hike datos"
+            />
+            <div className="max-width text-start">
               <h3 className="text-center ">Datos</h3>
-                <p>
+              <p>
                 <strong>Distancia:</strong> {hike.hike_distance} km
-                </p>
-                <p>
+              </p>
+              <p>
                 <strong>Duración:</strong> {hike.hike_duration} horas
-                </p>
-              </div>
+              </p>
+            </div>
           </div>
         </section>
-       
+
         <div className="text-center mt-4 p-2">
-          <Button className="button" onClick={()=>navigate("/user/reserva")}>Reservar</Button>
+          <Button
+            className="button"
+            onClick={() =>
+              navigate(
+                user && user.user_type === 0 ? "/user/reserva" : "/user/register"
+              )
+            }
+          >
+            {user && user.user_type === 0 ? "Reservar" : "Registrarse"}
+          </Button>
         </div>
       </div>
 
       {user?.user_type === 1 && (
-      <div className="mt-4 d-flex justify-content-center flex-wrap gap-1">
-        <Button
-          className="button-nuevo-paseo"
-          onClick={() => navigate("/paseo/NuevoPaseo")}
-        >
-          Crear un nuevo Paseo
-        </Button>
+        <div className="mt-4 d-flex justify-content-center flex-wrap gap-1">
+          <Button
+            className="button-nuevo-paseo"
+            onClick={() => navigate("/paseo/NuevoPaseo")}
+          >
+            Crear un nuevo Paseo
+          </Button>
 
-        <Button
-          className="button-modificar-paseo"
-          onClick={() => navigate(`/paseo/editar/${id}`)}
-        >
-          Modificar Paseo
-        </Button>
+          <Button
+            className="button-modificar-paseo"
+            onClick={() => navigate(`/paseo/editar/${id}`)}
+          >
+            Modificar Paseo
+          </Button>
 
-        <Button className="button-eliminar-paseo" onClick={handleDelete}>
-          Eliminar Paseo
-        </Button>
+          <Button className="button-eliminar-paseo" onClick={handleDelete}>
+            Eliminar Paseo
+          </Button>
 
-        <Button
-          className="button-eliminar-paseo2"
-          onClick={() => navigate("/paseo/borrados")}
-        >
-          Ver paseos eliminados
-        </Button>
-      </div>
-    )}
+          <Button
+            className="button-eliminar-paseo2"
+            onClick={() => navigate("/paseo/borrados")}
+          >
+            Ver paseos eliminados
+          </Button>
+        </div>
+      )}
     </Container>
   );
 };

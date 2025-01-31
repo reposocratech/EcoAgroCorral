@@ -71,7 +71,7 @@ export const Profile = () => {
           </Col>
           </Col>:
           <Col>
-            <p>No has hecho ninguna reserva aun. Reserva ahora <Link className='link fw-bold' to={'/user/reserva'}> aquí. </Link> </p>
+            <p>No has hecho ninguna reserva aún. Reserva ahora <Link className='link fw-bold' to={'/user/reserva'}> aquí. </Link> </p>
           </Col>}
         </Row>
       </Container>
