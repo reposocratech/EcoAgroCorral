@@ -17,10 +17,9 @@ import {
 export const Footer = () => {
   return (
     <Container fluid className="footer-cont">
-      <Row className="px-5 pt-4">
-        <Col md={2}></Col>
-        <Col md={2}>
-          <div className="d-flex flex-column text-center mb-3 ps-md-5 ps-5">
+      <Row className="pt-4">
+        <Col md={4}>
+          <div className="d-flex flex-column text-center align-items-center mb-3">
             <Link to="/sobreNosotros" className="textVarios">
               <FaUsers className="fs-5 mx-2 " /> Sobre nosotros
             </Link>
@@ -50,7 +49,7 @@ export const Footer = () => {
           </div>
         </Col>
         <Col md={4} className="px-5">
-          <div className="d-flex flex-column gap-2 mb-3">
+          <div className="d-flex flex-column gap-2 mb-3 text-center align-items-center">
             <a
               href="https://www.google.com/maps/search/?api=1&query=Calle+La+Fuente+1,+12420,+Barracas,+Castellón"
               target="_blank"

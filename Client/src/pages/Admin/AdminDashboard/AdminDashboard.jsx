@@ -40,7 +40,7 @@ export const AdminDashboard = () => {
             <Col xs={12} md={6} lg={6}>
               <Card className="mb-4 shadow-sm">
                 <Card.Body>
-                  <Card.Title>Gestión de Usuarios</Card.Title>
+                  <Card.Title className="fw-bold">Gestión de Usuarios</Card.Title>
                   <Card.Text>
                     Habilita o deshabilita usuarios según sea necesario.
                   </Card.Text>
@@ -53,7 +53,7 @@ export const AdminDashboard = () => {
             <Col xs={12} md={6} lg={6}>
               <Card className="mb-4 shadow-sm">
                 <Card.Body>
-                  <Card.Title>Gestión de Reservas</Card.Title>
+                  <Card.Title className="fw-bold">Gestión de Reservas</Card.Title>
                   <Card.Text>
                     Consulta y gestiona el historial y las reservas actuales
                     realizadas en la plataforma.
@@ -76,7 +76,7 @@ export const AdminDashboard = () => {
             <Col xs={12} md={6} lg={6}>
               <Card className="mb-4 shadow-sm">
                 <Card.Body>
-                  <Card.Title>Gestión de Experiencias</Card.Title>
+                  <Card.Title className="fw-bold">Gestión de Experiencias</Card.Title>
                   <Card.Text>
                     Crea, habilita o deshabilita experiencias según sea necesario.
                   </Card.Text>
@@ -89,7 +89,7 @@ export const AdminDashboard = () => {
                   <Button
                     onClick={() => navigate("/admin/experiencias")}
                   >
-                    Ir a Experiencias
+                    Ir a Experiencias Borradas
                   </Button>
                   </div>
                 </Card.Body>
@@ -98,7 +98,7 @@ export const AdminDashboard = () => {
             <Col xs={12} md={6} lg={6}>
               <Card className="mb-4 shadow-sm">
                 <Card.Body>
-                  <Card.Title>Gestión de Rutas</Card.Title>
+                  <Card.Title className="fw-bold">Gestión de Rutas</Card.Title>
                   <Card.Text>
                     Crea, modifica o elimina rutas para ofrecer a los usuarios.
                   </Card.Text>
@@ -116,7 +116,7 @@ export const AdminDashboard = () => {
               <Col xs={12} md={6} lg={6}>
                 <Card className="mb-4 shadow-sm">
                   <Card.Body>
-                    <Card.Title>Gestión del Blog</Card.Title>
+                    <Card.Title className="fw-bold">Gestión del Blog</Card.Title>
                     <Card.Text>
                     Crea, habilita o deshabilita post según sea necesario.
 
@@ -143,7 +143,7 @@ export const AdminDashboard = () => {
               <Col xs={12} md={6} lg={6}>
                 <Card className="mb-4 shadow-sm">
                   <Card.Body>
-                    <Card.Title>Gestión de Días</Card.Title>
+                    <Card.Title className="fw-bold">Gestión de Días</Card.Title>
                     <Card.Text>
                       Configura los días disponibles para reservas según las
                       necesidades del calendario.
