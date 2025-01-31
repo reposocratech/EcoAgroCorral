@@ -76,6 +76,7 @@ EMAIL_USER=*email del admin*
 EMAIL_PASS= *pegar la que te da el email*
 
 Inicia Sesion en stripe y pega en el .env la clave secreta
+
 STRIPE_SECRET_KEY= *tu clave*
 
 
