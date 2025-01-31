@@ -42,7 +42,7 @@ import { PaymentSuccess } from "../pages/Payment/PaymentSuccess/PaymentSuccess.j
 export const AppRoutes = () => {
   const { user } = useContext(AgroContext);
 
-  // Mostrar pantalla de carga solo mientras el usuario se está cargando
+  
   if (user === undefined) {
     return <LoadingScreen />;
   }
@@ -69,7 +69,7 @@ export const AppRoutes = () => {
           <Route path="/blog/unPost/:postId" element={<OnePost />} />
           <Route path="/payment" element={<Payment amount={50} />} />
 
-          {/* Rutas protegidas para usuario normal */}
+         
           {user && user.user_type === 0 && (
             <>
               <Route path='/user/perfil' element={<Profile />} />
@@ -81,10 +81,8 @@ export const AppRoutes = () => {
             </>
           )}
 
-          {/* Ruta protegida: Reservar solo si hay usuario */}
           {user && <Route path='/user/reserva' element={<Reservation />} />}
 
-          {/* Rutas protegidas para administrador */}
           {user && user.user_type === 1 && (
             <>
               <Route path='/experiencias/createExperience' element={<CreateExperience />} />

@@ -24,7 +24,7 @@ export const ContextProvider = ({children}) => {
     }else {
       setUser(null); 
     }
-  }, [])
+  }, []);
 
   return (
     <AgroContext.Provider value={{user, setUser, token, setToken}}>

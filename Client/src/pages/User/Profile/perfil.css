@@ -10,7 +10,9 @@
   }
   
   .perfil-img{
-    width: clamp(150px, 20vw, 280px);
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
     border-radius: 50%;
   }
 
