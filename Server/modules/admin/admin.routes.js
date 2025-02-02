@@ -1,6 +1,4 @@
 import express from "express";
-import multerArray from "../../middlewares/multerArray.js";
-import multerSingle from "../../middlewares/multerSingle.js";
 import adminController from "./admin.controller.js";
 const router = express.Router();
 

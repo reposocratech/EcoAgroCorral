@@ -1,4 +1,4 @@
-import { executeQuery, dbPool } from "../../config/db.js";
+import { executeQuery } from "../../config/db.js";
 
 class AdminDal {
   getAllUsers = async (page = 1, limit = 15) => {
@@ -76,8 +76,7 @@ class AdminDal {
         JOIN user ON reservation.reservation_user_id = user.user_id
         ${whereCondition}
         ORDER BY 
-          reservation.reservation_date ASC, 
-          reservation.reservation_time ASC
+          reservation.reservation_date ASC
         LIMIT ? OFFSET ?;
       `;
 
