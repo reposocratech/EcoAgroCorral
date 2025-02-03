@@ -267,7 +267,7 @@ export const CreateHike = () => {
           </Form.Group>
 
           {/* Selector de Experiencias */}
-          <Form.Group className="mb-3 d-flex justify-content-around">
+          <Form.Group className="mb-3 d-flex flex-wrap gap-3 justify-content-around">
             {/* Experiencias no asignadas */}
             <div className="d-flex flex-column justify-content-around align-items-center">
               <Form.Label>Experiencias No Asignadas</Form.Label>
