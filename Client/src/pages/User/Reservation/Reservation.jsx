@@ -127,7 +127,7 @@ export const Reservation = () => {
             reservation_user_id: user.user_id,
           };
 
-        localStorage.setItem("reservationData", JSON.stringify(data[0]));
+        localStorage.setItem("reservationData", JSON.stringify(data));
         const payment = await fetchData("api/payment/create-payment-intent", "post", data);
         window.location.href = payment;
         
