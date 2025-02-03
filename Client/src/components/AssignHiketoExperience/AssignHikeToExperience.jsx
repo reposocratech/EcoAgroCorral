@@ -39,7 +39,7 @@ export const AssignHikeToExperience = ({expId, hikes, otherHikes, getExperience}
 
   return (
     <div className="">
-      <div className="mb-3 d-flex justify-content-around align-items-center">
+      <div className="mb-3 d-flex flex-wrap justify-content-around align-items-center">
         {/* Lado izquierdo: experiencias no asignadas */}
         <div className="d-flex flex-column justify-content-center align-items-center gap-2">
           <Form.Label>Paseos por asignar</Form.Label>
