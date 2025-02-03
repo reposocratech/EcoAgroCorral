@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { fetchData } from "../../../helpers/axiosHelper.js";
 import { AgroContext } from "../../../context/ContextProvider.jsx";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import reservationImg from "../../../../public/assets/images/reservation/reservation.png";
 import "./reservation.css";
 import DatePicker, { registerLocale } from "react-datepicker";
@@ -25,12 +25,10 @@ export const Reservation = () => {
   const [data, setData] = useState([]);
   const [reservation, setReservation] = useState(initialValue);
   const [msg, setMsg] = useState("");
-  const [msgReserv, setMsgReserv] = useState(false);
   const [dates, setDates] = useState([]);
   const [days, setDays] = useState([]);
-  
-  const { user } = useContext(AgroContext);
   const navigate = useNavigate();
+  const { user } = useContext(AgroContext);
 
   const convertDate = dates.map((date) => new Date(date));
 
@@ -119,7 +117,7 @@ export const Reservation = () => {
       ) {
         setMsg("La reserva debe ser de un mínimo de dos personas.");
       } else {
-        const data = [
+        const data = 
           {
             ...reservation,
             reservation_total_price:
@@ -127,24 +125,20 @@ export const Reservation = () => {
               hikes[0]?.experience_price_child *
                 reservation.reservation_children,
             reservation_user_id: user.user_id,
-          },
-        ];
+          };
 
         localStorage.setItem("reservationData", JSON.stringify(data[0]));
-        const payment = await fetchData("api/payment/create-payment-intent", "post", data[0]);
-        console.log(payment);
+        const payment = await fetchData("api/payment/create-payment-intent", "post", data);
         window.location.href = payment;
         
       }
     } catch (error) {
-      console.log(error);
-      //setMsg(error.response.data.message);
+      setMsg(error.response.data.message);
     }
   };
 
   return (
     <>
-      {!msgReserv ? (
         <section>
           <Container fluid="xxl" className="py-5">
             <Row className="reservation mx-1">
@@ -345,23 +339,8 @@ export const Reservation = () => {
             </Row>
           </Container>
         </section>
-      ) : (
-        <section className="message">
-          <Container>
-            <Row>
-              <Col className="d-flex justify-content-center">
-                <p className="fw-bold p-4">
-                  Su reserva se realizó correctamente. Puedes ver todas tus
-                  reservas{" "}
-                  <Link className="link" to={"/user/perfil"}>
-                    aquí.
-                  </Link>{" "}
-                </p>
-              </Col>
-            </Row>
-          </Container>
-        </section>
-      )}
+      
+     
     </>
   );
 };
