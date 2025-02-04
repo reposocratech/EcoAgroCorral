@@ -160,11 +160,6 @@ export const EditExperience = () => {
     }
   }
 
-  //console.log("pictures:", mainFiles);
-  //console.log("newExperience", newExperience);
-  //console.log("feature", feature);
-  //console.log("features", features);
-  
   return (
     <section>
       <Container fluid="xxl">

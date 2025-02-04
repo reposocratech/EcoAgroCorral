@@ -3,11 +3,6 @@ import experienceDal from "./experience.dal.js";
 class ExperienceController {
 
   addExperience = async (req, res) => {
-    //console.log("main File", req.files.singleFile);
-    //console.log("other Files", req.files.multipleFiles);
-    //console.log("feature_icon", req.files.feature_icon);
-    //console.log("Bodyyyy", req.body);
-
     try {
       const {
         experience_title,
@@ -226,10 +221,6 @@ class ExperienceController {
     const {id} = req.params;
     try {
       const result = await experienceDal.addImagesByExperience(id, req.files);
-      /* let response = {
-        filename: req.file.filename,
-        file_id : result.insertId
-      } */
       res.status(200).json(result[0]);
     } catch (error) {
       console.log(error);

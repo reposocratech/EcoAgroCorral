@@ -12,7 +12,6 @@ class ExperienceDal {
       let sqlExperience = `INSERT INTO experience (experience_title, experience_description, experience_price_adult, experience_price_child)
                             VALUES (?, ?, ?, ?)`;
       let result =  await connexion.execute(sqlExperience, data);
-      //console.log(result);
       let experience_id = result[0].insertId;
       for (const img of images){
         let sqlMainImg = `INSERT INTO experience_pictures (experience_pictures_experience_id, experience_pictures_file, is_main)
