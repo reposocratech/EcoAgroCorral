@@ -1,4 +1,3 @@
-import { sendMail } from "../../utils/nodemailer.js";
 import AdminDal from "./admin.dal.js";
 import EmailService from "../../utils/email/sendEmails.js";
 
