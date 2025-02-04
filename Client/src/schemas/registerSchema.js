@@ -51,7 +51,7 @@ export const registerSchema = z
       .regex(/[a-z]/, { message: "Debe incluir al menos una letra minúscula" })
       .regex(/\d/, { message: "Debe incluir al menos un número" })
       .regex(/[@$!%*?&_-]/, {
-        message: "Debe incluir al menos un carácter especial (@$!%*?&_-)",
+        message: "Debe incluir al menos un carácter especial, un número, una mayúscula y una minúscula",
       }),
     repPassword: z.string(),
   })
