@@ -3,13 +3,16 @@ import { executeQuery, dbPool } from "../../config/db.js";
 class UserDal {
   register = async (values) => {
     try {
-      let sql =
-        "INSERT INTO user (user_name, user_lastname, user_birthdate, user_email, user_address, user_phone, user_dni, user_password) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-      const result = await executeQuery(sql, values);
+        let sql =
+            "INSERT INTO user (user_name, user_lastname, user_birthdate, user_email, user_address, user_phone, user_dni, user_password) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        const result = await executeQuery(sql, values);
     } catch (error) {
-      throw error;
+        if (error.errno === 1062) {
+            throw new Error("El correo electrónico ya está registrado");
+        }
+        throw error;
     }
-  };
+};
 
   findUserByEmail = async (email) => {
     try {
@@ -52,6 +55,28 @@ class UserDal {
       const user = await executeQuery(sql, [user_id]);
       return user;
     } catch (error) {
+      throw error;
+    }
+  };
+
+  getHikeById = async (hike_id) => {
+    try {
+      const sql = `
+        SELECT 
+          hike_id, 
+          hike_title, 
+          hike_description, 
+          hike_distance, 
+          hike_duration, 
+          hike_itinerary, 
+          hike_is_deleted 
+        FROM hike 
+        WHERE hike_id = ? AND hike_is_deleted = 0
+      `;
+      const result = await executeQuery(sql, [hike_id]);
+      return result;
+    } catch (error) {
+      console.error("Error al obtener los datos de la ruta:", error);
       throw error;
     }
   };

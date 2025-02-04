@@ -3,11 +3,6 @@ import experienceDal from "./experience.dal.js";
 class ExperienceController {
 
   addExperience = async (req, res) => {
-    //console.log("main File", req.files.singleFile);
-    //console.log("other Files", req.files.multipleFiles);
-    //console.log("feature_icon", req.files.feature_icon);
-    //console.log("Bodyyyy", req.body);
-
     try {
       const {
         experience_title,
@@ -23,7 +18,7 @@ class ExperienceController {
       
   
       await experienceDal.addExperience(data, images, feature_icon, features);
-      res.status(200).json("response");
+      res.status(200).json("experience added");
     } catch (error) {
       console.log(error);
       res.status(500).json(error);
@@ -32,7 +27,6 @@ class ExperienceController {
 
   editExperience = async (req, res) => {
     const {id} = req.params;
-    console.log(req.body);
     try {
       const {
         experience_title,
@@ -44,14 +38,24 @@ class ExperienceController {
         throw new Error("Todos los campos de textos deben ser cumplimentados");
       }
 
-      let response = await experienceDal.editExperience(id, req.body);
-      console.log(response);
-      res.status(200).json("response");
+      await experienceDal.editExperience(id, req.body);
+      res.status(200).json("experience edited");
     } catch (error) {
       console.log(error);
       res.status(500).json({ error: error.message });
     }
   }
+
+  disableExperience = async (req, res) => {
+    const { id } = req.params;
+    try {
+      await experienceDal.disableExperience(id);
+      res.status(200).json({ message: "Experiencia deshabilitada exitosamente." });
+    } catch (error) {
+      console.error("Error al deshabilitar experiencia:", error);
+      res.status(500).json({ message: "Error al deshabilitar la experiencia." });
+    }
+  };
 
   addFeatures = async (req, res) => {
     const {expId} = req.params;
@@ -69,9 +73,8 @@ class ExperienceController {
         throw new Error("Debes cumplimentar todos los campos");
       }
       const file = req.file;
-      let response = await experienceDal.addFeature(expId, dataToDal, file);
-      console.log(response)
-      res.status(200).json("response");
+      await experienceDal.addFeature(expId, dataToDal, file);
+      res.status(200).json("feature added");
     } catch (error) {
       console.log(error);
       res.status(500).json(error);
@@ -94,9 +97,8 @@ class ExperienceController {
         throw new Error("Debes cumplimentar todos los campos");
       }
       const file = req.file;
-      let response = await experienceDal.editFeature(featureId, dataToDal, file);
-      console.log(response)
-      res.status(200).json("response");
+      await experienceDal.editFeature(featureId, dataToDal, file);
+      res.status(200).json("feature edited");
     } catch (error) {
       console.log(error);
       res.status(500).json(error);
@@ -105,9 +107,10 @@ class ExperienceController {
 
   deleteFeature = async (req, res) => {
     const {featureId} = req.params;
+    const {icon} = req.body;
     
     try{
-      await experienceDal.deleteFeature(featureId);
+      await experienceDal.deleteFeature(featureId, icon);
       res.status(200).json("done");
     } catch (error) {
       console.log(error);
@@ -218,11 +221,6 @@ class ExperienceController {
     const {id} = req.params;
     try {
       const result = await experienceDal.addImagesByExperience(id, req.files);
-      /* let response = {
-        filename: req.file.filename,
-        file_id : result.insertId
-      } */
-      console.log(result);
       res.status(200).json(result[0]);
     } catch (error) {
       console.log(error);
@@ -232,8 +230,44 @@ class ExperienceController {
 
   deletePicture = async (req, res) => {
     const {id} = req.params;
+    const {filename} = req.body;
     try {
-      const result = await experienceDal.deletePicture(id);
+      const result = await experienceDal.deletePicture(id, filename);
+      res.status(200).json(result);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json(error);
+    }
+  }
+
+  getAllOtherHikes = async (req, res) => {
+    const {expId} = req.params;
+    try {
+      const result = await experienceDal.getAllOtherHikes(expId);
+      res.status(200).json(result);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json(error);
+    }
+  }
+
+  assignHike = async (req, res) => {
+    const {expId} = req.params;
+    const {hikeId} = req.body;
+    try {
+      let result = await experienceDal.assignHike(expId, hikeId);
+      res.status(200).json(result);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json(error);
+    }
+  }
+
+  unassignHike = async (req, res) => {
+    const {expId} = req.params;
+    const {hikeId} = req.body;
+    try {
+      let result = await experienceDal.unassignHike(expId, hikeId);
       res.status(200).json(result);
     } catch (error) {
       console.log(error);

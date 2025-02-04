@@ -1,0 +1,39 @@
+.header-text {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  background-color: #707c67;
+  padding: 2rem;
+  margin-left: -20rem; /* Se mantiene para pantallas grandes */
+  border-radius: 1rem;
+  color: white;
+  width: 100%;
+  min-width: 400px;
+}
+
+@media (max-width: 768px) {
+  .header-text {
+    margin-left: 0; /* Elimina el margen negativo en pantallas pequeñas */
+    padding: 1.5rem; /* Reduce el padding para que sea más compacto */
+    font-size: 1.2rem; /* Ajusta el tamaño de la fuente */
+  }
+}
+.divisor-post{
+ 
+  width: 100%;
+  background-color: #707c67;
+  height: 1rem;
+}
+.post-content{
+  
+  
+  color: white;
+  margin-inline: 2rem;
+  background-color: #707c67;
+  padding: 2rem;
+}
+
+.fechaBlog{
+  font-size: 12px;
+  
+}

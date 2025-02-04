@@ -1,4 +1,4 @@
-import { executeQuery, dbPool } from "../../config/db.js";
+import { executeQuery } from "../../config/db.js";
 
 class AdminDal {
   getAllUsers = async (page = 1, limit = 15) => {
@@ -76,8 +76,7 @@ class AdminDal {
         JOIN user ON reservation.reservation_user_id = user.user_id
         ${whereCondition}
         ORDER BY 
-          reservation.reservation_date ASC, 
-          reservation.reservation_time ASC
+          reservation.reservation_date ASC
         LIMIT ? OFFSET ?;
       `;
 
@@ -102,15 +101,25 @@ class AdminDal {
 
   getReservationById = async (id) => {
     try {
-      let sql = `SELECT reservation.reservation_date, hike.hike_title, user.user_email,  user.user_name 
-      FROM reservation, user, hike 
-      WHERE reservation_id = ? AND reservation.reservation_user_id = user.user_id AND reservation.reservation_hike_id = hike.hike_id`;
+      let sql = `
+        SELECT 
+          reservation.reservation_date, 
+          hike.hike_title, 
+          user.user_email, 
+          user.user_name 
+        FROM reservation
+        JOIN user ON reservation.reservation_user_id = user.user_id
+        JOIN hike ON reservation.reservation_hike_id = hike.hike_id
+        WHERE reservation_id = ?;
+      `;
       const result = await executeQuery(sql, [id]);
+      console.log("Datos de la reserva obtenidos:", result);
       return result[0];
     } catch (error) {
+      console.error("Error al obtener datos de la reserva:", error);
       throw error;
     }
-  };
+  };  
 
   cancelReservation = async (id) => {
     try {
@@ -120,6 +129,39 @@ class AdminDal {
       console.error("Error al cancelar la reserva:", error);
       throw error;
     }
+  };
+
+  getAllExperiences = async (page = 1, limit = 15) => {
+    const offset = (page - 1) * limit;
+
+    const sql = `
+      SELECT * 
+      FROM experience 
+      ORDER BY experience_title ASC
+      LIMIT ? OFFSET ?;
+    `;
+    const countSql = `
+      SELECT COUNT(*) AS total 
+      FROM experience;
+    `;
+
+    const experiences = await executeQuery(sql, [limit, offset]);
+    const totalResult = await executeQuery(countSql);
+
+    return {
+      experiences,
+      totalPages: Math.ceil(totalResult[0].total / limit),
+    };
+  };
+
+  enableExperience = async (id) => {
+    const sql = "UPDATE experience SET experience_is_deleted = 0 WHERE experience_id = ?";
+    await executeQuery(sql, [id]);
+  };
+
+  disableExperience = async (id) => {
+    const sql = "UPDATE experience SET experience_is_deleted = 1 WHERE experience_id = ?";
+    await executeQuery(sql, [id]);
   };
 }
 

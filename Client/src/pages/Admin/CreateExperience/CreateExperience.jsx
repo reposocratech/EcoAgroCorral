@@ -29,7 +29,6 @@ export const CreateExperience = () => {
   const [msgFeature, setMsgFeature] = useState("");
   const [show, setShow] = useState(false);
   const navigate = useNavigate();
-  console.log(mainFile)
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -42,12 +41,10 @@ export const CreateExperience = () => {
 
   const handleMainFile = (e) => {
     setMainFile(e.target.files[0]);
-    //setNewExperience({...newExperience, [e.target.name]: e.target.files[0].name});
   }
   
 
   const handleFiles = (e) => {
-      //console.log(e.target.files);
       setFiles(e.target.files);
   }
 
@@ -63,7 +60,6 @@ export const CreateExperience = () => {
         const newFormData = new FormData();
         let featureTemp = features.map(e=>({...e, feature_icon: e.feature_icon.name}));
 
-        //console.log(featureTemp);
         let data = {...newExperience, features: featureTemp}
         newFormData.append("data", JSON.stringify(data));
 
@@ -81,7 +77,7 @@ export const CreateExperience = () => {
           }
         }
 
-        const res = await fetchData("api/experience/addExperience", "post", newFormData);
+        await fetchData("api/experience/addExperience", "post", newFormData);
         navigate("/experiencias");
       }
     } catch (error) {
@@ -89,10 +85,6 @@ export const CreateExperience = () => {
     }
   }
 
-  //console.log("pictures:", mainFiles);
-  //console.log("newExperience", newExperience);
-  //console.log("feature", feature);
-  //console.log("features", features);
   
   return (
     <section>

@@ -1,8 +1,8 @@
 .feature-list-container{
   border: 1px solid black;
   border-radius: 5px;
-  padding: 10px;
-  margin-block: 10px;
+  /* padding: 10px; */
+  /* margin-block: 10px; */
 }
 
 .feature-list-elem{
@@ -17,7 +17,8 @@
     margin: 0;
   }
 
-  img{
+  .trash-icon{
+    margin: 0;
     width: 1.5rem;
   }
 }

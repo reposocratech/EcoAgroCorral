@@ -48,7 +48,7 @@ class UserController {
           user_dni,
           hash,
         ]);
-
+        
         const emailToken = jwt.sign({ user_email }, process.env.TOKEN_KEY, {
           expiresIn: "1h",
         });
@@ -300,8 +300,7 @@ class UserController {
       reservation_children,
       reservation_total_price,
       reservation_user_id,
-    } = req.body[0];
-    console.log(req.body);
+    } = req.body;
 
     try {
       if (
@@ -314,32 +313,56 @@ class UserController {
         !reservation_total_price ||
         !reservation_user_id
       ) {
-        res.status(401).json({ message: "Debe cumplimentar todos los campos" });
-      } else {
-        const result = await UserDal.createReservation(
-          reservation_experience_id,
-          reservation_hike_id,
-          reservation_text,
+        return res
+          .status(401)
+          .json({ message: "Debe cumplimentar todos los campos" });
+      }
+
+      const user = await UserDal.getUserById(reservation_user_id);
+      const hike = await UserDal.getHikeById(reservation_hike_id);
+
+      if (!user.length) {
+        return res.status(404).json({ message: "Usuario no encontrado" });
+      }
+  
+      if (!hike.length) {
+        return res.status(404).json({ message: "Ruta no encontrada" });
+      }
+  
+
+      const result = await UserDal.createReservation(
+        reservation_experience_id,
+        reservation_hike_id,
+        reservation_text,
+        reservation_date,
+        reservation_time,
+        reservation_adult,
+        reservation_children,
+        reservation_total_price,
+        reservation_user_id
+      );
+
+      await EmailService.sendReservationConfirmationEmail(
+        {
+          user_name: user[0].user_name,
+          user_email: user[0].user_email,
+        },
+        {
+          hike_title: hike[0].hike_title,
           reservation_date,
           reservation_time,
           reservation_adult,
           reservation_children,
           reservation_total_price,
-          reservation_user_id
-        );
-        res.status(200).json({ message: "Reserva hecha ok" });
-      }
-    } catch (error) {
-      if (error) {
-        if (error.errno == 1062) {
-          res
-            .status(401)
-            .json({
-              message:
-                "Este dia no esta disponible. Por favor seleccione otra fecha",
-            });
         }
-      }
+      );
+
+      return res.status(200).json({ message: "Reserva hecha ok" });
+    } catch (error) {
+      console.error("Error al crear la reserva:", error);
+      return res
+        .status(500)
+        .json({ message: "Error al procesar la solicitud." });
     }
   };
 }

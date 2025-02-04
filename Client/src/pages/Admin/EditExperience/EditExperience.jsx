@@ -7,6 +7,7 @@ import { EditFeatureModal } from "../../../components/EditFeatureModal/EditFeatu
 import { EditFeatureList } from "../../../components/EditFeatureList/EditFeatureList";
 import { EditExperienceMainImgList } from "../../../components/EditExperienceMainImgList/EditExperienceMainImgList";
 import { EditExperienceImgList } from "../../../components/EditExperienceImgList/EditExperienceImgList";
+import { AssignHikeToExperience } from "../../../components/AssignHiketoExperience/AssignHikeToExperience";
 import { useNavigate, useParams } from "react-router-dom";
 
 const initialValue = {
@@ -24,25 +25,29 @@ export const EditExperience = () => {
   const [mainFile, setMainFile] = useState();
   const [features, setFeatures] = useState([]);
   const [msg, setMsg] = useState("");
+  const [msgHikes, setMsgHikes] = useState("");
   const [msgExpSaved, setMsgExpSaved] = useState("");
   const [msgFeature, setMsgFeature] = useState("");
+  const [hikes, setHikes] = useState([]);
+  const [otherHikes, setOtherHikes] = useState([]);
   const [show, setShow] = useState(false);
   const navigate = useNavigate();
   const {id} = useParams();
-  console.log("iddd", id);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  console.log("files",files)
 
   const getExperience = async () => {
     try {
       const res = await fetchData(`api/experience/getOneExperience/${id}`, "get");
       setExperienceInfo(res.experience);
       setMainFile(res.experiencePictures.find((img) => img.is_main) || null);
-      setFiles(res.experiencePictures.slice(1));
+      setFiles(res.experiencePictures.filter((img) => !img.is_main));
       setFeatures(res.features);
+      setHikes(res.hikes);
+      const res2 = await fetchData(`api/experience/getAllOtherHikes/${id}`, "get");
+      setOtherHikes(res2);
       
     } catch (error) {
       console.log(error);
@@ -96,14 +101,14 @@ export const EditExperience = () => {
     }
   }
 
-  const deletePicture = async (picture_id, is_main, index=null) => {
+  const deletePicture = async (picture_id, is_main, filename, index=null) => {
     try {
       if(is_main){
-        const res = await fetchData(`api/experience/deletePicture/${picture_id}`, "delete");
+        fetchData(`api/experience/deletePicture/${picture_id}`, "delete", {filename});
         setMainFile();
       }
       else {
-        const res = await fetchData(`api/experience/deletePicture/${picture_id}`, "delete");
+        await fetchData(`api/experience/deletePicture/${picture_id}`, "delete", {filename});
         setFiles([...files].filter((e, i)=>{
           return i !== index;
         }));
@@ -122,7 +127,7 @@ export const EditExperience = () => {
       else{
         let data = {...experienceInfo}
 
-        const res = await fetchData(`api/experience/editExperience/${id}`, "put", data);
+        await fetchData(`api/experience/editExperience/${id}`, "put", data);
         setMsgExpSaved("Cambios Guardados!");
       }
     } catch (error) {
@@ -144,6 +149,9 @@ export const EditExperience = () => {
       else if(!files.length){
         setMsgFeature("Añade Imagenes");
       }
+      else if (!hikes.length){
+        setMsgHikes("Asocia al menos un paseo");
+      }
       else{
         navigate("/experiencias");
       }
@@ -152,22 +160,17 @@ export const EditExperience = () => {
     }
   }
 
-  //console.log("pictures:", mainFiles);
-  //console.log("newExperience", newExperience);
-  //console.log("feature", feature);
-  //console.log("features", features);
-  
   return (
     <section>
       <Container fluid="xxl">
         <Row className="d-flex justify-content-center">
           <Col
-            lg={4}
-            md={6}
+            lg={6}
+            md={8}
             className="d-flex flex-column shadow my-5 create-experience"
           >
             <img src={logoAgro} alt="LogoAgro" className="mx-auto" />
-            <h2 className="text-center mt-2 fw-bold">EDITA LA  EXPERIENCIA</h2>
+            <h2 className="text-center mt-2 fw-bold">EDITA "{experienceInfo.experience_title}"</h2>
             <div className="separator"></div>
             <Form className="px-4 pt-4">
             <Form.Label>Title</Form.Label>
@@ -248,9 +251,16 @@ export const EditExperience = () => {
                 </div>
               </Form.Group>
               <div>
+                <div className="d-flex justify-content-center">
+                  <Button onClick={handleShow}>Añadir caracteristica</Button>
+                </div>
                 {features && <EditFeatureList features={features} setFeatures={setFeatures} />}
                 <span>{msgFeature}</span>
-                <Button onClick={handleShow}>Añadir caracteristica</Button>
+              </div>
+              <div>
+                <p>Paseos disponibles</p>
+                <AssignHikeToExperience expId={id} hikes={hikes} otherHikes={otherHikes} getExperience={getExperience} />
+                <span>{msgHikes}</span>
               </div>
               <span>{msg}</span>
               <div className="p-2 d-flex justify-content-center">

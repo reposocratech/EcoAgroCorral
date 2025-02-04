@@ -1,6 +1,8 @@
 import "./style.css";
 import { Button, Container, Row, Col } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 export const Home = () => {
+  const navigate = useNavigate();
   return (
     <>
       <section className="section-1 mt">
@@ -22,7 +24,7 @@ export const Home = () => {
         <Container fluid="xxl">
           <Row>
             <Col>
-              <div className="flexDiv">
+              <div className="d-flex flex-wrap  flexDiv">
                 <div className="div-1">
                   <h3 className="text-center">Tranquilidad y tradición</h3>
                   <p className="text-center">
@@ -44,7 +46,7 @@ export const Home = () => {
         <Container fluid="xxl">
           <Row>
             <Col>
-              <div className="flexDiv">
+              <div className="d-flex flex-wrap gap-3 flexDiv">
                 <div className="div-1">
                   <h3 className="text-center">
                     ¿Cuál es tu destino <br /> soñado para una <br /> escapada?
@@ -55,7 +57,7 @@ export const Home = () => {
                     Te ofrecemos una inmersión en la <br /> vida rural con los
                     tuyos en contacto <br /> directo con la naturaleza
                   </p>
-                  <Button className="button">Escoge tu experiencia</Button>
+                  <Button className="button" onClick={()=> navigate('/experiencias')}>Escoge tu experiencia</Button>
                 </div>
               </div>
             </Col>

@@ -23,7 +23,7 @@ export const EditFeatureModal = ({show, handleClose, features, getExperience, ex
       setFeature(featuretemp);
     }
     else{
-      setModifOrCreate(1);
+      setModifOrCreate(0);
       setFeature(featureInitialValue);
     }
   }
@@ -39,9 +39,6 @@ export const EditFeatureModal = ({show, handleClose, features, getExperience, ex
     setFeature({...feature, feature_icon : e.target.files[0]});
     setNewFile(1);
   }
-  console.log("featuresss", features);
-  //console.log("featuresss File", featureFile);
-  console.log("feature", feature);
 
   const onSubmitFeature = async () => {
     if (!feature.feature_icon || !feature.feature_name || !feature.feature_description){
@@ -60,10 +57,10 @@ export const EditFeatureModal = ({show, handleClose, features, getExperience, ex
       newFormData.append("data", JSON.stringify(feature_data));
 
       if(modifOrCreate === 0){
-        const res = await fetchData(`api/experience/addFeature/${experience_id}`, "post", newFormData);
+        await fetchData(`api/experience/addFeature/${experience_id}`, "post", newFormData);
       }
       else{
-        const res = await fetchData(`api/experience/editFeature/${feature.feature_id}`, "put", newFormData);
+        await fetchData(`api/experience/editFeature/${feature.feature_id}`, "put", newFormData);
 
       }
       getExperience();
@@ -71,11 +68,7 @@ export const EditFeatureModal = ({show, handleClose, features, getExperience, ex
       handleClose();
 
     }
-    //setFeatures ([...features, feature]);
-    //setFeature(featureInitialValue);
-    //setFeatureFile();
   }
-  //console.log("featureFiles: ", featureFiles);
 
   return (
     <Modal

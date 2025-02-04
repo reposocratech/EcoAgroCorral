@@ -1,6 +1,4 @@
 import express from "express";
-import multerArray from "../../middlewares/multerArray.js";
-import multerSingle from "../../middlewares/multerSingle.js";
 import adminController from "./admin.controller.js";
 const router = express.Router();
 
@@ -9,6 +7,9 @@ router.put("/enableUser", adminController.enableUser);
 router.put("/disableUser", adminController.disableUser);
 router.get('/getAllReservations', adminController.getAllReservations);
 router.delete("/cancelReservation", adminController.cancelReservation);
+router.get("/getAllExperiences", adminController.getAllExperiences);
+router.put("/enableExperience", adminController.enableExperience);
+router.put("/disableExperience", adminController.disableExperience);
 
 
 export default router;

@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { fetchData } from "../../../helpers/axiosHelper.js";
 import { AgroContext } from "../../../context/ContextProvider.jsx";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import reservationImg from "../../../../public/assets/images/reservation/reservation.png";
 import "./reservation.css";
 import DatePicker, { registerLocale } from "react-datepicker";
@@ -10,7 +10,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import es from "date-fns/locale/es";
 
 const initialValue = {
-  reservation_experience_id: null,
+  reservation_experience_id: "",
   reservation_hike_id: "",
   reservation_text: "",
   reservation_date: null,
@@ -25,12 +25,10 @@ export const Reservation = () => {
   const [data, setData] = useState([]);
   const [reservation, setReservation] = useState(initialValue);
   const [msg, setMsg] = useState("");
-  const [msgReserv, setMsgReserv] = useState(false);
   const [dates, setDates] = useState([]);
   const [days, setDays] = useState([]);
-  
-  const { user } = useContext(AgroContext);
   const navigate = useNavigate();
+  const { user } = useContext(AgroContext);
 
   const convertDate = dates.map((date) => new Date(date));
 
@@ -119,7 +117,7 @@ export const Reservation = () => {
       ) {
         setMsg("La reserva debe ser de un mínimo de dos personas.");
       } else {
-        const data = [
+        const data = 
           {
             ...reservation,
             reservation_total_price:
@@ -127,14 +125,12 @@ export const Reservation = () => {
               hikes[0]?.experience_price_child *
                 reservation.reservation_children,
             reservation_user_id: user.user_id,
-          },
-        ];
-        const result = await fetchData(
-          "api/user/createReservation",
-          "post",
-          data
-        );
-        setMsgReserv(true);
+          };
+
+        localStorage.setItem("reservationData", JSON.stringify(data));
+        const payment = await fetchData("api/payment/create-payment-intent", "post", data);
+        window.location.href = payment;
+        
       }
     } catch (error) {
       setMsg(error.response.data.message);
@@ -143,8 +139,6 @@ export const Reservation = () => {
 
   return (
     <>
-  
-      {!msgReserv ? (
         <section>
           <Container fluid="xxl" className="py-5">
             <Row className="reservation mx-1">
@@ -152,6 +146,7 @@ export const Reservation = () => {
                 <h2 className="text-center pb-2 pt-4">
                   Reserva tu experiencia
                 </h2>
+                {user?.user_type === 1 && <p className="text-center text-danger fw-bold fs-5 mark">REVISA Y AJUSTA LOS CAMPOS DEL FORMULARIO PARA ASEGURARTE DE QUE TODO ESTÉ COMO LO NECESITAS.</p>}
                 <div className="divisor mb-4"></div>
               </Col>
               <Col lg={6} className="d-flex flex-column align-items-center">
@@ -195,7 +190,7 @@ export const Reservation = () => {
                     <Form.Label>Experiencia</Form.Label>
                     <Form.Select
                       name="reservation_experience_id"
-                      value={reservation.reservation_experience_id}
+                      value={reservation.reservation_experience_id || ""}
                       onChange={handleChange}
                       id="formBasicExperience"
                     >
@@ -214,7 +209,7 @@ export const Reservation = () => {
                     <Form.Label>Ruta</Form.Label>
 
                     <Form.Select
-                      value={reservation.reservation_hike_id}
+                      value={reservation.reservation_hike_id || ""}
                       name="reservation_hike_id"
                       onChange={handleChange}
                       id="formBasicHike"
@@ -235,7 +230,7 @@ export const Reservation = () => {
                     <Form.Label>Número de adultos</Form.Label>
 
                     <Form.Select
-                      value={reservation.reservation_adult}
+                      value={reservation.reservation_adult || ""}
                       name="reservation_adult"
                       onChange={handleChange}
                       id="formBasicAdult"
@@ -251,7 +246,7 @@ export const Reservation = () => {
                     <Form.Label>Número de niños</Form.Label>
 
                     <Form.Select
-                      value={reservation.reservation_children}
+                      value={reservation.reservation_children || ""}
                       name="reservation_children"
                       onChange={handleChange}
                       id="formBasicChild"
@@ -269,7 +264,7 @@ export const Reservation = () => {
                     <DatePicker
                       className="input-date mb-3 p-2"
                       name="reservation_date"
-                      value={reservation.reservation_date}
+                      value={reservation.reservation_date || ""}
                       onChange={(date) =>
                         setReservation({
                           ...reservation,
@@ -297,7 +292,7 @@ export const Reservation = () => {
                     <Form.Label>Hora de inicio</Form.Label>
 
                     <Form.Select
-                      value={reservation.reservation_time}
+                      value={reservation.reservation_time || ""}
                       name="reservation_time"
                       onChange={handleChange}
                       id="formBasicTime"
@@ -318,7 +313,7 @@ export const Reservation = () => {
                     <Form.Control
                       as="textarea"
                       rows={3}
-                      value={reservation.reservation_text}
+                      value={reservation.reservation_text || ""}
                       name="reservation_text"
                       onChange={handleChange}
                       id="formBasicText"
@@ -344,23 +339,8 @@ export const Reservation = () => {
             </Row>
           </Container>
         </section>
-      ) : (
-        <section className="message">
-          <Container>
-            <Row>
-              <Col className="d-flex justify-content-center">
-                <p className="fw-bold p-4">
-                  Su reserva se realizó correctamente. Puedes ver todas tus
-                  reservas{" "}
-                  <Link className="link" to={"/user/perfil"}>
-                    aquí.
-                  </Link>{" "}
-                </p>
-              </Col>
-            </Row>
-          </Container>
-        </section>
-      )}
+      
+     
     </>
   );
 };

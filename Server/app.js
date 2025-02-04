@@ -11,6 +11,7 @@ import hikeRouter from './modules/hike/hike.routes.js';
 import adminRouter from './modules/admin/admin.routes.js';
 import reservationRouter from './modules/reservation/reservation.routes.js'
 import postRouter from './modules/post/post.routes.js'
+import paymentRoutes from "./modules/payment/payment.routes.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -31,7 +32,7 @@ app.use('/api/experience', experienceRouter);
 app.use('/api/admin', adminRouter);
 app.use('/api/reservation', reservationRouter);
 app.use('/api/post', postRouter);
-
+app.use("/api/payment", paymentRoutes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

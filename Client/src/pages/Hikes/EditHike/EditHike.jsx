@@ -221,7 +221,7 @@ export const EditHike = () => {
 
       // Si la respuesta es exitosa, redirige o actualiza el estado
       console.log("Paseo actualizado correctamente");
-      navigate(`/paseo/${hikeId}`);
+      navigate(`/paseo/unPaseo/${hikeId}`);
     } catch (error) {
       console.error("Error en el envío del formulario:", error);
       setShowAlert(true);
@@ -303,6 +303,7 @@ export const EditHike = () => {
                   setFormData({ ...formData, hike_distance: e.target.value })
                 }
                 required
+                min="0"
               />
             </Form.Group>
           </Row>
@@ -318,6 +319,7 @@ export const EditHike = () => {
                   setFormData({ ...formData, hike_duration: e.target.value })
                 }
                 required
+                min="0"
               />
             </Form.Group>
           </Row>

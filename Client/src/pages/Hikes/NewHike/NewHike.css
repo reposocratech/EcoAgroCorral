@@ -39,6 +39,15 @@
     background-color: #2f59f3; 
   }
 }
+.delete {
+  background-color: #c1271b;
+  color: white;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+.delete:hover {
+  background-color: #841f10; /* Un tono de rojo más oscuro cuando el usuario pasa el ratón */
+}
 .textarea{
   resize: none;
 }

@@ -12,7 +12,7 @@ export const NavbarApp = () => {
   const navigate = useNavigate();
   const logOut = () => {
     localStorage.removeItem("token");
-    setUser();
+    setUser(null); 
     setToken();
     navigate("/");
   };

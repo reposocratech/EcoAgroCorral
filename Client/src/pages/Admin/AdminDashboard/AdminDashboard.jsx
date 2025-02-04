@@ -40,7 +40,7 @@ export const AdminDashboard = () => {
             <Col xs={12} md={6} lg={6}>
               <Card className="mb-4 shadow-sm">
                 <Card.Body>
-                  <Card.Title>Gestión de Usuarios</Card.Title>
+                  <Card.Title className="fw-bold">Gestión de Usuarios</Card.Title>
                   <Card.Text>
                     Habilita o deshabilita usuarios según sea necesario.
                   </Card.Text>
@@ -53,7 +53,7 @@ export const AdminDashboard = () => {
             <Col xs={12} md={6} lg={6}>
               <Card className="mb-4 shadow-sm">
                 <Card.Body>
-                  <Card.Title>Gestión de Reservas</Card.Title>
+                  <Card.Title className="fw-bold">Gestión de Reservas</Card.Title>
                   <Card.Text>
                     Consulta y gestiona el historial y las reservas actuales
                     realizadas en la plataforma.
@@ -76,28 +76,34 @@ export const AdminDashboard = () => {
             <Col xs={12} md={6} lg={6}>
               <Card className="mb-4 shadow-sm">
                 <Card.Body>
-                  <Card.Title>Gestión de Experiencias</Card.Title>
+                  <Card.Title className="fw-bold">Gestión de Experiencias</Card.Title>
                   <Card.Text>
-                    Crea, modifica o elimina experiencias para ofrecer a los
-                    usuarios.
+                    Crea, habilita o deshabilita experiencias según sea necesario.
                   </Card.Text>
+                  <div className="d-flex gap-2 justify-content-center">
                   <Button
                     onClick={() => navigate("/experiencias/createExperience")}
                   >
                     Ir a Crear nueva Experiencia
                   </Button>
+                  <Button
+                    onClick={() => navigate("/admin/experiencias")}
+                  >
+                    Ir a Experiencias Borradas
+                  </Button>
+                  </div>
                 </Card.Body>
               </Card>
             </Col>
             <Col xs={12} md={6} lg={6}>
               <Card className="mb-4 shadow-sm">
                 <Card.Body>
-                  <Card.Title>Gestión de Rutas</Card.Title>
+                  <Card.Title className="fw-bold">Gestión de Rutas</Card.Title>
                   <Card.Text>
                     Crea, modifica o elimina rutas para ofrecer a los usuarios.
                   </Card.Text>
                   <div className="d-flex gap-2 justify-content-center">
-                    <Button onClick={() => navigate("/paseo/nuevoPaseo")}>
+                    <Button onClick={() => navigate("/paseo/NuevoPaseo")}>
                       Ir a Crear nueva Ruta
                     </Button>
                     <Button onClick={() => navigate("/paseo/borrados")}>
@@ -107,11 +113,37 @@ export const AdminDashboard = () => {
                 </Card.Body>
               </Card>
             </Col>
-            <div className="d-flex justify-content-center align-content-center">
               <Col xs={12} md={6} lg={6}>
                 <Card className="mb-4 shadow-sm">
                   <Card.Body>
-                    <Card.Title>Gestión de días</Card.Title>
+                    <Card.Title className="fw-bold">Gestión del Blog</Card.Title>
+                    <Card.Text>
+                    Crea, habilita o deshabilita post según sea necesario.
+
+                    </Card.Text>
+                    <div className="d-flex gap-2 justify-content-center">
+                      <Button
+                        onClick={() =>
+                          navigate("/blog/crearPost")
+                        }
+                      >
+                        Ir a Crear nuevo Post
+                      </Button>
+                      <Button
+                        onClick={() =>
+                          navigate("/admin/blog/categorias")
+                        }
+                      >
+                        Ir a Gestión de Categorías
+                      </Button>
+                    </div>
+                  </Card.Body>
+                </Card>
+              </Col>
+              <Col xs={12} md={6} lg={6}>
+                <Card className="mb-4 shadow-sm">
+                  <Card.Body>
+                    <Card.Title className="fw-bold">Gestión de Días</Card.Title>
                     <Card.Text>
                       Configura los días disponibles para reservas según las
                       necesidades del calendario.
@@ -124,11 +156,17 @@ export const AdminDashboard = () => {
                       >
                         Ir a Modificar Días
                       </Button>
+                      <Button
+                        onClick={() =>
+                          navigate("/user/reserva")
+                        }
+                      >
+                        Ir a Formulario Reservas
+                      </Button>
                     </div>
                   </Card.Body>
                 </Card>
               </Col>
-            </div>
           </Row>
         </Container>
       </section>

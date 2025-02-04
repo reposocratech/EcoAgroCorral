@@ -151,8 +151,8 @@ export const HikeExperiences = ({ hikeId }) => {
   };
 
   return (
-    <div className="">
-      <div className="mb-3 d-flex justify-content-around align-items-center">
+    <div  className="d-flex flex-wrap justify-content-center   align-items-center gap-3">
+      <div className="mb-3 d-flex justify-content-between flex-wrap gap-3 align-items-center">
         {/* Lado izquierdo: experiencias no asignadas */}
         <div className="d-flex flex-column jusfy-content-center align-items-center gap-2">
           <Form.Label>Experiencias por asignar</Form.Label>
@@ -160,7 +160,8 @@ export const HikeExperiences = ({ hikeId }) => {
             as="select"
             id="unassignedExperiences"
             multiple
-            size="lg"
+           
+            className="assigned-exp"
           >
             {unassignedExperiences.length > 0 ? (
               unassignedExperiences.map((exp) => (
@@ -184,7 +185,13 @@ export const HikeExperiences = ({ hikeId }) => {
         {/* Lado derecho: experiencias asignadas */}
         <div className="d-flex flex-column jusfy-content-center align-items-center gap-2">
           <Form.Label>Experiencias asignadas</Form.Label>
-          <Form.Control as="select" id="assignedExperiences" multiple size="lg">
+          <Form.Control 
+            as="select" 
+            id="assignedExperiences" 
+            multiple
+           
+            className="assigned-exp"
+            >
             {assignedExperiences.length > 0 ? (
               assignedExperiences.map((exp) => (
                 <option key={exp.experience_id} value={exp.experience_id}>

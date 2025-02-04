@@ -53,7 +53,7 @@ export const DeletedHikes = () => {
         <div className="my-4">
           <h2>Paseos Borrados</h2>
           {hikes.length === 0 ? (
-            <p>No hay hikes borrados.</p>
+            <p>No hay paseos borrados.</p>
           ) : (
             <Table striped bordered hover>
               <thead>

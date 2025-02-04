@@ -1,15 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { fetchData } from "../../../helpers/axiosHelper";
 import { Categories } from "../../../components/Categories/Categories";
-import { Col, Container, Form, Row } from "react-bootstrap";
+import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import "./blog.css";
 import { PostCard } from "../../../components/PostCard/PostCard";
+import { AgroContext } from "../../../context/ContextProvider";
+import { useNavigate } from "react-router-dom";
 
 export const Blog = () => {
   const [categories, setCategories] = useState([]);
   const [allPost, setAllPost] = useState();
   const [actualPost, setActualPost] = useState();
   const [orderBy, setOrderBy] = useState("");
+  const navigate = useNavigate();
+  const { user } = useContext(AgroContext);
+  
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -50,7 +55,6 @@ export const Blog = () => {
     }
   }
 
-
   return (
     <>
       <Categories
@@ -75,9 +79,8 @@ export const Blog = () => {
                 <Form.Select 
                 aria-label="Ordenar por"
                 onChange={handleChange}
-                value={orderBy}
                 className="select-order" >
-                  <option>Ordenar por</option>
+                  <option disabled>Ordenar por</option>
                   <option className="option-sel" value="1">Mas recientes</option>
                   <option className="option-sel" value="2">Mas antiguos</option>
                 </Form.Select>
@@ -88,6 +91,26 @@ export const Blog = () => {
             })}
           </Row>
         </Container>
+        <section className="text-center mt-4 pb-4 gap-3">
+        {user?.user_type === 1 && (
+          <div className="d-flex gap-2 justify-content-center">
+            <Button
+              variant="success"
+              className="button-nuevo-post"
+              onClick={() => navigate("/blog/crearPost")}
+            >
+              Crear nueva publicación
+            </Button>
+
+            <Button
+              className="button-eliminar-paseo2"
+              onClick={() => navigate("/admin/blog/categorias")}
+            >
+              Administrar Categorías
+            </Button>
+          </div>
+        )}
+      </section>
       </section>
     </>
   );

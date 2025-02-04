@@ -4,7 +4,7 @@
 
 .section-1 {
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url("../public/assets/images/home/section-1-bg.jpg");
+    url("../public/assets/images/home/secction1bg.jpeg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -114,7 +114,7 @@
   }
 }
 .section-4 {
-  padding-block: 2rem;
+  
 }
 
 .section-5 {

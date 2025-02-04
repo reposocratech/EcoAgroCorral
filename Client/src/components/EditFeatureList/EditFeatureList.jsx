@@ -5,25 +5,26 @@ import { fetchData } from "../../helpers/axiosHelper";
 
 export const EditFeatureList = ({features, setFeatures}) => {
 
-  const deleteFeatures = async (id) => {
-    const res = await fetchData(`api/experience/deleteFeature/${id}`, "delete");
-    console.log(res);
+  const deleteFeatures = async (id, icon=null) => {
+    if(icon){
+      await fetchData(`api/experience/deleteFeature/${id}`, "delete", {icon});
+    }
+    else{
+      await fetchData(`api/experience/deleteFeature/${id}`, "delete");
+    }
 
     setFeatures(features.filter((e)=>{
       return e.feature_id !== id;
-    }))
-
+    }));
   }
 
   return (
-    <div className="d-flex flex-wrap gap-2 py-3 feature-list-container">
+    <div className="d-flex flex-wrap gap-2 feature-list-container">
       {features.map((elem, index)=>{
         return(
           <div key={index} className="feature-list-elem">
-            {/* <p><img src={elem.icon} alt="" /></p> */}
             <p className="element-name">{elem.feature_name}</p>
-            <img src={trash} onClick={()=>deleteFeatures(elem.feature_id)} alt="trash Icon" />
-            {/* <button type="button" onClick={()=>deleteFeatures(index)}>borrar</button> */}
+            <img className="trash-icon" src={trash} onClick={()=>deleteFeatures(elem.feature_id, elem.feature_icon)} alt="trash Icon" />
           </div>
         )
       })

@@ -55,7 +55,7 @@ export const Login = () => {
           })
           setValErrors(fieldErrors)      
       }else{
-         setMsg(error.response.data.message)
+         setMsg(error.message)
       }
     }
   }

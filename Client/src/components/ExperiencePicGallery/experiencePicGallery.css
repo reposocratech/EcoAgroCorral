@@ -8,13 +8,10 @@
 .pic-cols{
   padding: 0.5rem;
   
-  img{
+  .img-experience{
     border-radius: 20px;
     width: 100%;
     height: 20rem;
-  }
-
-  &:hover{
-    padding: 0;
+    object-fit: cover;
   }
 }
